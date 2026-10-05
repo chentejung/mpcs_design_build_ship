@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A static concept gallery: 25 restyles of the Board Game Arena logged-out homepage, each judged by whether a first-time visitor wants to click the register CTA. Everything lives under `projects/` (the repo root holds only a stub README). Only styles `01` and `02` are built so far; `00-baseline` is not yet present.
+A static concept gallery: 25 restyles of the Board Game Arena logged-out homepage, each judged by whether a first-time visitor wants to click the register CTA. Everything lives under `projects/` (the repo root holds only a stub README). Styles `01`–`25` are built; `00-baseline` is not yet present.
 
 The full rules are in `projects/AGENTS.md` (stack, layout, how to build a style, checklist, assets, deploy) and the 25 style briefs, game list and conversion hooks are in `projects/DIRECTIONS.md`. Read both before adding or changing a style.
 

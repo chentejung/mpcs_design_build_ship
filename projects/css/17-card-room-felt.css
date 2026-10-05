@@ -1,0 +1,404 @@
+/* 17 · Card Room Felt: green baize, brass trim, playing-card suits, a dealt hand. */
+
+#s17 {
+  --felt: #0e4a2f;
+  --felt-dark: #082f1e;
+  --felt-light: #14653f;
+  --brass: #d4a94a;
+  --brass-dark: #8f6a1c;
+  --card: #fbf7ea;
+  --ink: #17120a;
+  --red: #b3141f;
+  --text: #f4efdc;
+  --serif: Georgia, "Times New Roman", serif;
+  --brass-grad: linear-gradient(135deg, #f3d98a 0%, #d4a94a 45%, #a67c25 70%, #e8c76c 100%);
+
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+  background-color: var(--felt);
+  background-image:
+    radial-gradient(ellipse at 50% 0%, var(--felt-light), transparent 65%),
+    radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1.4px);
+  background-size: auto, 5px 5px;
+  overflow-x: hidden;
+}
+
+#s17 :focus-visible {
+  outline: 3px solid var(--brass);
+  outline-offset: 4px;
+}
+
+#s17 h1,
+#s17 h2,
+#s17 h3 {
+  margin: 0;
+  font-family: var(--serif);
+  line-height: 1.1;
+}
+
+#s17 .s17-head {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+#s17 .s17-head p {
+  margin: 0.5rem 0 0;
+  color: #d8e6d6;
+}
+
+#s17 .s17-h2 {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-style: italic;
+  color: var(--brass);
+}
+
+#s17 .s17-h2--center {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Hero */
+
+#s17 .s17-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+#s17 .s17-eyebrow {
+  margin: 0 0 1rem;
+  color: var(--brass);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+#s17 .s17-title {
+  font-size: clamp(2.5rem, 7vw, 4.75rem);
+  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.35);
+}
+
+#s17 .s17-lede {
+  max-width: 30rem;
+  margin: 1rem 0 1.5rem;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  color: #e3ecdf;
+}
+
+#s17 .s17-cta {
+  display: inline-block;
+  padding: 1rem 2.4rem;
+  border: 2px solid var(--brass-dark);
+  border-radius: 999px;
+  background: var(--brass-grad);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  box-shadow: 0 0 0 4px var(--felt-dark), 0 0 0 6px var(--brass), 0 12px 22px rgba(0, 0, 0, 0.45);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+#s17 .s17-cta:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+#s17 .s17-cta-note {
+  margin: 1.2rem 0 0;
+  font-size: 0.9375rem;
+  color: #d8e6d6;
+}
+
+/* Fan of five cards */
+
+#s17 .s17-fan {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  position: relative;
+  width: min(100%, 460px);
+  height: 15rem;
+}
+
+#s17 .s17-fan__card {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 8.5rem;
+  margin-left: -4.25rem;
+  padding: 0.35rem 0.35rem 0.5rem;
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+  transform-origin: 50% 140%;
+}
+
+#s17 .s17-fan__card--red span { color: var(--red); }
+
+#s17 .s17-fan__card span {
+  display: block;
+  font-family: var(--serif);
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+#s17 .s17-fan__card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  margin: 0.15rem 0;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+#s17 .s17-fan__card b {
+  display: block;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+#s17 .s17-fan__card--1 { transform: rotate(-26deg); }
+#s17 .s17-fan__card--2 { transform: rotate(-13deg); }
+#s17 .s17-fan__card--3 { transform: rotate(0); }
+#s17 .s17-fan__card--4 { transform: rotate(13deg); }
+#s17 .s17-fan__card--5 { transform: rotate(26deg); }
+
+@media (min-width: 900px) {
+  #s17 .s17-hero {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 3rem;
+    padding: 3rem 2rem 4rem;
+    min-height: min(calc(100vh - var(--bar-h) - 2rem), 680px);
+  }
+
+  #s17 .s17-fan { height: 24rem; width: 100%; }
+  #s17 .s17-fan__card { width: 11.5rem; margin-left: -5.75rem; }
+  #s17 .s17-fan__card--1 { transform: rotate(-28deg) translateY(1.5rem); }
+  #s17 .s17-fan__card--5 { transform: rotate(28deg) translateY(1.5rem); }
+  #s17 .s17-fan__card span { font-size: 1.1rem; }
+  #s17 .s17-fan__card b { font-size: 0.875rem; }
+}
+
+/* The ten cards */
+
+#s17 .s17-shelf,
+#s17 .s17-how,
+#s17 .s17-proof {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem;
+}
+
+#s17 .s17-hand {
+  list-style: none;
+  margin: 0;
+  padding: 1.5rem 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem 1rem;
+  border: 3px solid var(--brass);
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.18);
+  box-shadow: inset 0 0 0 5px var(--felt-dark), inset 0 0 40px rgba(0, 0, 0, 0.35);
+}
+
+@media (min-width: 600px) {
+  #s17 .s17-hand { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (min-width: 960px) {
+  #s17 .s17-hand { grid-template-columns: repeat(5, minmax(0, 1fr)); padding: 2rem 1.5rem; gap: 1.5rem 1.25rem; }
+}
+
+#s17 .s17-card {
+  position: relative;
+  padding: 1.6rem 0.55rem 0.6rem;
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--ink);
+  text-align: center;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+  transition: transform 0.15s ease;
+}
+
+#s17 .s17-card:hover {
+  transform: translateY(-8px) rotate(-1.5deg);
+}
+
+#s17 .s17-card--red { color: var(--red); }
+
+#s17 .s17-card__idx {
+  position: absolute;
+  top: 0.35rem;
+  left: 0.55rem;
+  font-family: var(--serif);
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+}
+
+#s17 .s17-card__idx--end {
+  top: auto;
+  left: auto;
+  right: 0.55rem;
+  bottom: 0.35rem;
+  transform: rotate(180deg);
+}
+
+#s17 .s17-card__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+}
+
+#s17 .s17-card__name {
+  margin: 0.5rem 0 0;
+  padding: 0 0.9rem;
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+#s17 .s17-card__tag {
+  margin: 0.1rem 0 0.9rem;
+  color: #4a4130;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+#s17 .s17-more {
+  margin: 2rem 0 0;
+  text-align: center;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+#s17 .s17-more a {
+  color: var(--brass);
+  text-underline-offset: 0.3em;
+}
+
+/* How */
+
+#s17 .s17-rules {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 1.25rem;
+}
+
+#s17 .s17-rules li {
+  padding: 1.5rem 1.25rem;
+  border: 2px solid var(--brass);
+  border-radius: 14px;
+  background: var(--felt-dark);
+  text-align: center;
+}
+
+#s17 .s17-rules h3 {
+  margin: 0.4rem 0 0.4rem;
+  font-size: 1.3rem;
+}
+
+#s17 .s17-rules p {
+  margin: 0;
+  color: #d8e6d6;
+}
+
+#s17 .s17-suit {
+  font-size: 2.5rem;
+  line-height: 1;
+  color: var(--card);
+}
+
+#s17 .s17-suit--red {
+  color: #ff6b6b;
+}
+
+/* Chips */
+
+#s17 .s17-chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+#s17 .s17-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 9.5rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 4px dashed rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 0 5px var(--chip), 0 8px 14px rgba(0, 0, 0, 0.5);
+  background: var(--chip);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+#s17 .s17-chip strong {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  line-height: 1.1;
+}
+
+#s17 .s17-chip--red { --chip: #b3141f; }
+#s17 .s17-chip--blue { --chip: #1f4fa3; }
+#s17 .s17-chip--blk { --chip: #1b1b1b; }
+#s17 .s17-chip--ivory { --chip: #f1ead4; color: var(--ink); border-color: rgba(23, 18, 10, 0.7); }
+
+/* Final */
+
+#s17 .s17-final {
+  padding: 4rem 1.25rem 4.5rem;
+  text-align: center;
+  border-top: 4px solid var(--brass);
+  background: var(--felt-dark);
+}
+
+#s17 .s17-final__title {
+  margin-bottom: 1.75rem;
+  color: var(--brass);
+  font-size: clamp(1.9rem, 5vw, 3.25rem);
+  font-style: italic;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #s17 .s17-cta,
+  #s17 .s17-card {
+    transition: none;
+  }
+
+  #s17 .s17-cta:hover,
+  #s17 .s17-card:hover {
+    transform: none;
+  }
+}
