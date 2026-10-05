@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BGA Restyle Gallery</title>
+  <meta name="description" content="A concept gallery of landing page restyles for Board Game Arena.">
+  <script>
+    // Page modes: no query = landing grid; ?view=sNN = one style's page; &thumb = bare preview for the grid.
+    document.documentElement.classList.add(/[?&]view=s\d+/.test(location.search) ? "is-solo" : "is-home");
+    if (/[?&]thumb\b/.test(location.search)) document.documentElement.classList.add("is-thumb");
+  </script>
+  <link rel="stylesheet" href="css/gallery.css?v=5">
+  <link rel="stylesheet" href="css/01-game-night-table.css">
+  <link rel="stylesheet" href="css/02-cardboard-print.css?v=2">
+</head>
+<body>
+
+<nav class="gallery-bar" aria-label="Style gallery">
+  <a class="gallery-bar__back" href="index.html">← All styles</a>
+  <p class="gallery-bar__meta">
+    <span class="gallery-bar__name" id="gallery-name"></span>
+    <span class="gallery-bar__hook" id="gallery-hook"></span>
+  </p>
+  <div class="gallery-bar__controls">
+    <a class="gallery-bar__step" id="gallery-prev" href="index.html" aria-label="Previous style">‹</a>
+    <span class="gallery-bar__count" id="gallery-count"></span>
+    <a class="gallery-bar__step" id="gallery-next" href="index.html" aria-label="Next style">›</a>
+    <select id="gallery-select" aria-label="Jump to style"></select>
+  </div>
+</nav>
+
+<main>
+
+<section class="gallery-overview" id="overview" aria-labelledby="overview-title">
+  <h1 id="overview-title">BGA Restyle Gallery</h1>
+  <p class="gallery-overview__lede">Landing page concepts for Board Game Arena. Pick a style to open it. <span id="gallery-progress"></span></p>
+  <ul class="gallery-grid" id="gallery-grid"></ul>
+</section>
+
+<!-- ============================================================
+     01 · Game Night Table
+     ============================================================ -->
+<section class="style" id="s01" data-name="Game Night Table" data-hook="Seat at the table">
+
+  <header class="s01-hero">
+    <div class="s01-hero__text">
+      <p class="s01-eyebrow">Board Game Arena · the largest board game table in the world</p>
+      <h1 class="s01-title">Pull up a chair. <span>Your friends are already at the table.</span></h1>
+      <p class="s01-lede">1,396 board games, from Ark Nova and Wingspan to CATAN and Ticket to Ride, and 10,845,000 players to share them with. Right in your browser: free to join, nothing to download, no setup and no cleanup.</p>
+      <div class="s01-actions">
+        <a class="s01-cta" href="https://en.boardgamearena.com/account?page=newuser">
+          Take your seat
+          <small>Create your free account</small>
+        </a>
+        <a class="s01-link" href="#s01-games">See what’s on the shelf ↓</a>
+      </div>
+      <div class="s01-featured"><p>Featured at the table</p><ul><li><img class="s01-chip__img" src="img/games/ark-nova.jpg" alt="" width="320" height="240"><span>Ark Nova</span></li><li><img class="s01-chip__img" src="img/games/wingspan.jpg" alt="" width="320" height="240"><span>Wingspan</span></li><li><img class="s01-chip__img" src="img/games/catan.jpg" alt="" width="320" height="240"><span>CATAN</span></li><li><img class="s01-chip__img" src="img/games/ticket-to-ride.jpg" alt="" width="320" height="240"><span>Ticket to Ride</span></li><li><img class="s01-chip__img" src="img/games/azul.jpg" alt="" width="320" height="240"><span>Azul</span></li></ul></div>
+    </div>
+
+    <figure class="s01-hero__art">
+      <svg class="s01-table" viewBox="0 0 400 360" role="img" aria-labelledby="s01-table-title">
+        <title id="s01-table-title">A game table with three players seated and one empty seat marked “Your seat”</title>
+        <defs>
+          <symbol id="s01-meeple" viewBox="0 0 40 40">
+            <path d="M20 2a7 7 0 0 1 7 7c0 2-.8 3.8-2 5l10 4c3 1.2 3.6 4.6 1.2 6.4L30 27l4 13H24l-4-8-4 8H6l4-13-6.2-2.6C1.4 22.6 2 19.2 5 18l10-4c-1.2-1.2-2-3-2-5a7 7 0 0 1 7-7z"/>
+          </symbol>
+          <radialGradient id="s01-felt" cx="50%" cy="45%" r="65%">
+            <stop offset="0" stop-color="#2c7a60"/>
+            <stop offset="1" stop-color="#14473a"/>
+          </radialGradient>
+          <linearGradient id="s01-rim" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#8a5530"/>
+            <stop offset="1" stop-color="#5a3419"/>
+          </linearGradient>
+        </defs>
+
+        <rect x="12" y="22" width="376" height="290" rx="44" fill="url(#s01-rim)" stroke="#3e2410" stroke-width="4"/>
+        <rect x="34" y="44" width="332" height="246" rx="30" fill="url(#s01-felt)"/>
+
+        <!-- game board -->
+        <g transform="translate(140 112)">
+          <rect width="120" height="110" rx="6" fill="#efe1c0" stroke="#b99a62" stroke-width="2"/>
+          <g fill="none" stroke="#c9ad78" stroke-width="1">
+            <path d="M30 0v110M60 0v110M90 0v110M0 27.5h120M0 55h120M0 82.5h120"/>
+          </g>
+          <rect x="31" y="28.5" width="28" height="25.5" fill="#d9573b"/>
+          <rect x="61" y="56" width="28" height="25.5" fill="#3a78b5"/>
+          <rect x="1" y="83.5" width="28" height="25.5" fill="#e8b33a"/>
+          <rect x="91" y="1" width="28" height="25.5" fill="#6aa84f"/>
+          <rect x="61" y="1" width="28" height="25.5" fill="#d9573b"/>
+        </g>
+
+        <!-- cards -->
+        <g stroke="#cdbb98" stroke-width="1.5">
+          <rect x="70" y="80" width="34" height="48" rx="4" fill="#fbf4e6" transform="rotate(-14 87 104)"/>
+          <rect x="82" y="84" width="34" height="48" rx="4" fill="#fbf4e6" transform="rotate(-4 99 108)"/>
+          <rect x="296" y="200" width="34" height="48" rx="4" fill="#fbf4e6" transform="rotate(12 313 224)"/>
+          <rect x="300" y="88" width="34" height="48" rx="4" fill="#c8402b" transform="rotate(8 317 112)"/>
+        </g>
+
+        <!-- dice -->
+        <g class="s01-dice">
+          <rect x="88" y="214" width="24" height="24" rx="5" fill="#f7f1e6" transform="rotate(-12 100 226)"/>
+          <g fill="#2a1a0d" transform="rotate(-12 100 226)">
+            <circle cx="94" cy="220" r="2.4"/><circle cx="100" cy="226" r="2.4"/><circle cx="106" cy="232" r="2.4"/>
+          </g>
+          <rect x="118" y="230" width="24" height="24" rx="5" fill="#f7f1e6" transform="rotate(18 130 242)"/>
+          <g fill="#2a1a0d" transform="rotate(18 130 242)">
+            <circle cx="124" cy="236" r="2.4"/><circle cx="136" cy="236" r="2.4"/><circle cx="124" cy="248" r="2.4"/><circle cx="136" cy="248" r="2.4"/>
+          </g>
+        </g>
+
+        <!-- seated players -->
+        <g font-family="system-ui, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#fbefdc">
+          <use href="#s01-meeple" x="180" y="0" width="40" height="40" fill="#e8b33a"/>
+          <text x="200" y="16" dx="38">Mia</text>
+          <use href="#s01-meeple" x="0" y="146" width="40" height="40" fill="#d9573b"/>
+          <text x="20" y="204">Leo</text>
+          <use href="#s01-meeple" x="360" y="146" width="40" height="40" fill="#5b9bd5"/>
+          <text x="380" y="204">Sana</text>
+        </g>
+
+        <!-- the empty seat -->
+        <g class="s01-seat">
+          <circle class="s01-seat__ring" cx="200" cy="312" r="24" fill="#3e2410" stroke="#f2b33d" stroke-width="3" stroke-dasharray="6 5"/>
+          <text x="200" y="318" font-family="system-ui, sans-serif" font-size="18" font-weight="700" text-anchor="middle" fill="#f2b33d">+</text>
+          <text x="200" y="354" font-family="system-ui, sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#f2b33d">Your seat</text>
+        </g>
+      </svg>
+    </figure>
+  </header>
+
+  <section class="s01-games" id="s01-games" aria-labelledby="s01-games-title">
+    <h2 id="s01-games-title" class="s01-h2">What’s on the shelf tonight</h2>
+    <p class="s01-sub">Ten featured favourites, out of 1,396 games waiting at the table.</p>
+      <div class="s01-shelf">
+        <h3 class="s01-shelf__label" id="s01-shelf-1">Big game nights</h3>
+        <ul class="s01-boxes" tabindex="0" aria-labelledby="s01-shelf-1">
+          <li class="s01-box"><img class="s01-box__img" src="img/games/ark-nova.jpg" alt="" loading="lazy" width="320" height="240"><span class="s01-box__title">Ark Nova</span></li>
+          <li class="s01-box"><img class="s01-box__img" src="img/games/terraforming-mars.jpg" alt="" loading="lazy" width="320" height="240"><span class="s01-box__title">Terraforming Mars</span></li>
+          <li class="s01-box"><img class="s01-box__img" src="img/games/wingspan.jpg" alt="" loading="lazy" width="320" height="240"><span class="s01-box__title">Wingspan</span></li>
+          <li class="s01-box"><img class="s01-box__img" src="img/games/castles-of-burgundy.jpg" alt="" loading="lazy" width="320" height="240"><span class="s01-box__title">The Castles of Burgundy</span></li>
+          <li class="s01-box"><img class="s01-box__img" src="img/games/nemesis-retaliation.jpg" alt="" loading="lazy" width="320" height="240"><span class="s01-box__title">Nemesis: Retaliation</span></li>
+        </ul>
+      </div>
+      <div class="s01-shelf">
+        <h3 class="s01-shelf__label" id="s01-shelf-2">Easy to learn, hard to stop</h3>
+        <ul class="s01-boxes" tabindex="0" aria-labelledby="s01-shelf-2">
+          <li class="s01-box"><img class="s01-box__img" src="img/games/catan.jpg" alt="" loading="lazy" width="320" height="240"><span class="s01-box__title">CATAN</span></li>
+          <li class="s01-box"><img class="s01-box__img" src="img/games/azul.jpg" alt="" loading="lazy" width="320" height="240"><span class="s01-box__title">Azul</span></li>
+          <li class="s01-box"><img class="s01-box__img" src="img/games/ticket-to-ride.jpg" alt="" loading="lazy" width="320" height="240"><span class="s01-box__title">Ticket to Ride</span></li>
+          <li class="s01-box"><img class="s01-box__img" src="img/games/carcassonne.jpg" alt="" loading="lazy" width="320" height="240"><span class="s01-box__title">Carcassonne</span></li>
+          <li class="s01-box"><img class="s01-box__img" src="img/games/splendor.jpg" alt="" loading="lazy" width="320" height="240"><span class="s01-box__title">Splendor</span></li>
+        </ul>
+      </div>
+    <p class="s01-all"><a href="https://en.boardgamearena.com/gamelist">See all 1,396 games →</a></p>
+  </section>
+
+  <section class="s01-how" id="s01-how" aria-labelledby="s01-how-title">
+    <h2 id="s01-how-title" class="s01-h2">How game night works here</h2>
+    <ol class="s01-cards">
+      <li class="s01-card">
+        <span class="s01-card__corner" aria-hidden="true">1<br>♠</span>
+        <h3>Pick a game</h3>
+        <p>Choose from 1,396 games, from quick card games to big-box strategy.</p>
+      </li>
+      <li class="s01-card">
+        <span class="s01-card__corner s01-card__corner--red" aria-hidden="true">2<br>♥</span>
+        <h3>Fill the table</h3>
+        <p>Invite your friends, or meet some of the 10,845,000 players in 200+ countries.</p>
+      </li>
+      <li class="s01-card">
+        <span class="s01-card__corner" aria-hidden="true">3<br>♣</span>
+        <h3>Play anywhere</h3>
+        <p>Straight from your browser on PC, Mac, tablet or phone. Nothing to download.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="s01-modes" aria-labelledby="s01-modes-title">
+    <h2 id="s01-modes-title" class="s01-h2">Any table, any night</h2>
+    <div class="s01-tents">
+      <article class="s01-tent">
+        <h3>Real-time</h3>
+        <p>Sit down together and play a full game in one evening.</p>
+      </article>
+      <article class="s01-tent">
+        <h3>Turn-based</h3>
+        <p>Take your turn whenever you like, over days, between everything else.</p>
+      </article>
+      <article class="s01-tent">
+        <h3>Beginner to pro</h3>
+        <p>Learn at a friendly table, then climb the rankings and enter tournaments.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="s01-score" aria-labelledby="s01-score-title">
+    <div class="s01-pad">
+      <h2 id="s01-score-title" class="s01-pad__title">Tonight’s score sheet</h2>
+      <dl class="s01-pad__rows">
+        <div><dt>Players at the table</dt><dd>10,845,000</dd></div>
+        <div><dt>Games on the shelf</dt><dd>1,396</dd></div>
+        <div><dt>Games played each month</dt><dd>8,950,000</dd></div>
+        <div><dt>Languages spoken</dt><dd>42</dd></div>
+        <div><dt>Countries</dt><dd>200+</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <footer class="s01-final">
+    <h2 class="s01-final__title">Everyone’s here except you.</h2>
+    <a class="s01-cta" href="https://en.boardgamearena.com/account?page=newuser">
+      Take your seat
+      <small>Create your free account</small>
+    </a>
+    <p class="s01-final__fine">Free · no download · PC, Mac, tablet or phone</p>
+  </footer>
+</section>
+
+<!-- ============================================================
+     02 · Cardboard & Print
+     ============================================================ -->
+<section class="style" id="s02" data-name="Cardboard &amp; Print" data-hook="Top ten shelf">
+
+  <header class="s02-hero">
+    <div class="s02-hero__text">
+      <p class="s02-eyebrow">Board Game Arena</p>
+      <h1 class="s02-title">1,396 games.<br>Start with one.</h1>
+      <p class="s02-lede">The world’s largest board game table: Ark Nova, Wingspan, CATAN, Azul and 1,392 more, played right in your browser. Free to join, no download, on any device.</p>
+      <a class="s02-cta" href="https://en.boardgamearena.com/account?page=newuser">Start playing free</a>
+      <p class="s02-cta-note">Create your free account</p>
+      <ul class="s02-hero-games" aria-label="Featured games"><li><img class="s02-hero-games__img" src="img/games/ark-nova.jpg" alt="" width="320" height="240"><span>Ark Nova</span></li><li><img class="s02-hero-games__img" src="img/games/wingspan.jpg" alt="" width="320" height="240"><span>Wingspan</span></li><li><img class="s02-hero-games__img" src="img/games/catan.jpg" alt="" width="320" height="240"><span>CATAN</span></li><li><img class="s02-hero-games__img" src="img/games/azul.jpg" alt="" width="320" height="240"><span>Azul</span></li></ul>
+    </div>
+
+    <div class="s02-sheet" aria-label="Board Game Arena in numbers" role="group">
+      <p class="s02-sheet__label" aria-hidden="true">Punch-out sheet A</p>
+      <ul class="s02-tokens">
+        <li class="s02-token s02-token--red"><strong>10,845,000</strong> players</li>
+        <li class="s02-token s02-token--teal"><strong>1,396</strong> games</li>
+        <li class="s02-token s02-token--mustard"><strong>8,950,000</strong> games a month</li>
+        <li class="s02-token s02-token--ink"><strong>42</strong> languages</li>
+        <li class="s02-token s02-token--cream"><strong>200+</strong> countries</li>
+        <li class="s02-token s02-token--square"><strong>Free</strong> no download</li>
+      </ul>
+    </div>
+  </header>
+
+  <section class="s02-shelf" aria-labelledby="s02-shelf-title">
+    <div class="s02-section-head">
+      <h2 id="s02-shelf-title" class="s02-h2">The top ten shelf</h2>
+      <p>Ten featured favourites to start with.</p>
+    </div>
+    <ul class="s02-boxes">
+      <li class="s02-box">
+        <img class="s02-box__art" src="img/games/ark-nova.jpg" alt="" loading="lazy" width="320" height="240">
+        <h3 class="s02-box__name">Ark Nova</h3>
+        <p class="s02-box__tags">Strategy</p>
+      </li>
+      <li class="s02-box">
+        <img class="s02-box__art" src="img/games/terraforming-mars.jpg" alt="" loading="lazy" width="320" height="240">
+        <h3 class="s02-box__name">Terraforming Mars</h3>
+        <p class="s02-box__tags">Strategy</p>
+      </li>
+      <li class="s02-box">
+        <img class="s02-box__art" src="img/games/catan.jpg" alt="" loading="lazy" width="320" height="240">
+        <h3 class="s02-box__name">CATAN</h3>
+        <p class="s02-box__tags">Family</p>
+      </li>
+      <li class="s02-box">
+        <img class="s02-box__art" src="img/games/wingspan.jpg" alt="" loading="lazy" width="320" height="240">
+        <h3 class="s02-box__name">Wingspan</h3>
+        <p class="s02-box__tags">Strategy</p>
+      </li>
+      <li class="s02-box">
+        <img class="s02-box__art" src="img/games/azul.jpg" alt="" loading="lazy" width="320" height="240">
+        <h3 class="s02-box__name">Azul</h3>
+        <p class="s02-box__tags">Family</p>
+      </li>
+      <li class="s02-box">
+        <img class="s02-box__art" src="img/games/ticket-to-ride.jpg" alt="" loading="lazy" width="320" height="240">
+        <h3 class="s02-box__name">Ticket to Ride</h3>
+        <p class="s02-box__tags">Family</p>
+      </li>
+      <li class="s02-box">
+        <img class="s02-box__art" src="img/games/carcassonne.jpg" alt="" loading="lazy" width="320" height="240">
+        <h3 class="s02-box__name">Carcassonne</h3>
+        <p class="s02-box__tags">Family</p>
+      </li>
+      <li class="s02-box">
+        <img class="s02-box__art" src="img/games/castles-of-burgundy.jpg" alt="" loading="lazy" width="320" height="240">
+        <h3 class="s02-box__name">The Castles of Burgundy</h3>
+        <p class="s02-box__tags">Strategy</p>
+      </li>
+      <li class="s02-box">
+        <img class="s02-box__art" src="img/games/splendor.jpg" alt="" loading="lazy" width="320" height="240">
+        <h3 class="s02-box__name">Splendor</h3>
+        <p class="s02-box__tags">Family</p>
+      </li>
+      <li class="s02-box">
+        <img class="s02-box__art" src="img/games/nemesis-retaliation.jpg" alt="" loading="lazy" width="320" height="240">
+        <h3 class="s02-box__name">Nemesis: Retaliation</h3>
+        <p class="s02-box__tags">Co-op</p>
+      </li>
+    </ul>
+    <p class="s02-more"><a href="https://en.boardgamearena.com/gamelist">See all 1,396 games →</a></p>
+  </section>
+
+  <section class="s02-back" aria-labelledby="s02-back-title">
+    <div class="s02-panel">
+      <h2 id="s02-back-title" class="s02-h2">What’s in the box</h2>
+      <div class="s02-panel__cols">
+        <ul class="s02-contents">
+          <li>1,396 games, from card games to big-box strategy</li>
+          <li>Real-time tables for one evening, turn-based for whenever</li>
+          <li>Friendly beginner tables, rankings and tournaments</li>
+          <li>Interactive tutorials to learn as you go</li>
+        </ul>
+        <dl class="s02-specs">
+          <div><dt>Players</dt><dd>10,845,000</dd></div>
+          <div><dt>Games played</dt><dd>8,950,000 a month</dd></div>
+          <div><dt>Plays on</dt><dd>PC, Mac, iOS, Android</dd></div>
+          <div><dt>Languages</dt><dd>42</dd></div>
+          <div><dt>Price to join</dt><dd>Free</dd></div>
+        </dl>
+      </div>
+      <div class="s02-barcode" aria-hidden="true"><span>BGA · 1396 · 42</span></div>
+    </div>
+  </section>
+
+  <footer class="s02-final">
+    <h2 class="s02-final__title">Punch out your first game.</h2>
+    <a class="s02-cta" href="https://en.boardgamearena.com/account?page=newuser">Start playing free</a>
+    <p class="s02-cta-note">Free account · no download · any device</p>
+  </footer>
+</section>
+
+</main>
+
+<footer class="gallery-note">
+  <p><a class="gallery-back" href="index.html">← Back to all styles</a></p>
+  <p>Concept study by a fan. Not affiliated with Board Game Arena. Game titles belong to their publishers.</p>
+  <details class="gallery-credits">
+    <summary>Photo credits</summary>
+    <ul>
+      <li>Ark Nova: photo by El Pantera, <a href="https://commons.wikimedia.org/wiki/File:Ark_Nova_-_4c0b85ad-9d86-4491-85bc-f88def354ec3~1.jpg">CC BY-SA 4.0</a>, via Wikimedia Commons</li>
+      <li>Terraforming Mars: photo by Mshuang2, <a href="https://commons.wikimedia.org/wiki/File:Terraforming_Mars.jpg">CC0</a>, via Wikimedia Commons</li>
+      <li>CATAN: photo by Yonghokim, <a href="https://commons.wikimedia.org/wiki/File:A_game_of_Settlers_of_Catan.jpg">CC BY-SA 4.0</a>, via Wikimedia Commons</li>
+      <li>Wingspan: photo by Pongrácz Zsolt, <a href="https://commons.wikimedia.org/wiki/File:Cards_in_Wingspan_board_game.jpg">CC BY-SA 3.0</a>, via Wikimedia Commons</li>
+      <li>Azul: photo by Honza F., <a href="https://commons.wikimedia.org/wiki/File:A_game_of_Azul_in_progress.jpg">CC0</a>, via Wikimedia Commons</li>
+      <li>Ticket to Ride: photo by JIP, <a href="https://commons.wikimedia.org/wiki/File:Ticket_to_Ride_at_restaurant_Kaisla.jpg">CC BY-SA 4.0</a>, via Wikimedia Commons</li>
+      <li>Carcassonne: photo by Tom &amp; Katrien, <a href="https://commons.wikimedia.org/wiki/File:Carcassonne_game.jpg">CC BY-SA 2.0</a>, via Wikimedia Commons</li>
+      <li>The Castles of Burgundy: photo by Mshuang2, <a href="https://commons.wikimedia.org/wiki/File:Castles_of_Burgundy_(Board_Game).jpg">CC0</a>, via Wikimedia Commons</li>
+      <li>Splendor: photo by JIP, <a href="https://commons.wikimedia.org/wiki/File:Splendor_in_Tapiola.jpg">CC BY-SA 4.0</a>, via Wikimedia Commons</li>
+      <li>Nemesis: Retaliation: photo by El Pantera, <a href="https://commons.wikimedia.org/wiki/File:Playing_board_game_-_Play_213_1681550178485.jpg">CC BY-SA 4.0</a>, via Wikimedia Commons</li>
+    </ul>
+  </details>
+</footer>
+
+<script src="js/gallery.js?v=4"></script>
+</body>
+</html>
