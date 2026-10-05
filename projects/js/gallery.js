@@ -8,7 +8,7 @@
   const num = (s) => s.id.slice(1);
   const pageUrl = (s) => `index.html?view=${s.id}`;
 
-  const INITS = {s06: initS06, s08: initS08, s12: initS12, s14: initS14, s21: initS21, s23: initS23, s25: initS25};
+  const INITS = {s03: initS03, s04: initS04, s10: initS10, s14: initS14, s15: initS15, s21: initS21};
   styles.forEach((s) => INITS[s.id]?.(s));
 
   const params = new URLSearchParams(location.search);
@@ -91,223 +91,252 @@
     });
   }
 
-  function initS06(root) {
+  function initS03(root) {
+    if (!root || !root.querySelectorAll) return;
     var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var els = root.querySelectorAll("[data-count]");
-    if (reduce || !els.length || !window.requestAnimationFrame) return;
-    var fmt = function (n) { return n.toLocaleString("en-US"); };
+    // Thumbnails show the final numbers rather than a count-up caught mid-way.
+    var thumb = document.documentElement.classList.contains("is-thumb");
+    if (reduce || thumb || !("requestAnimationFrame" in window)) return;
+    var items = root.querySelectorAll("[data-count]");
+    function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
     function run(el) {
+      if (el.getAttribute("data-run")) return;
+      el.setAttribute("data-run", "1");
       var target = parseInt(el.getAttribute("data-count"), 10);
       var suffix = el.getAttribute("data-suffix") || "";
-      var dur = 1400, start = null;
+      var out = el.querySelector(".s03-n");
+      if (!out || isNaN(target)) return;
+      var dur = target > 100000 ? 1800 : 1300, t0 = null;
       function step(t) {
-        if (start === null) start = t;
-        var p = Math.min((t - start) / dur, 1);
+        if (t0 === null) t0 = t;
+        var p = Math.min(1, (t - t0) / dur);
         var e = 1 - Math.pow(1 - p, 3);
-        el.textContent = fmt(Math.round(target * e)) + (p < 1 ? "" : suffix);
+        out.textContent = fmt(Math.round(target * e)) + (p < 1 ? "" : suffix);
         if (p < 1) window.requestAnimationFrame(step);
       }
-      el.textContent = "0";
+      out.textContent = "0";
       window.requestAnimationFrame(step);
     }
     if ("IntersectionObserver" in window) {
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (en) {
-          if (en.isIntersecting) { io.unobserve(en.target); run(en.target); }
+          if (en.isIntersecting) { run(en.target); io.unobserve(en.target); }
         });
-      }, { threshold: 0.3 });
-      els.forEach(function (el) { io.observe(el); });
+      }, { threshold: 0.2 });
+      items.forEach(function (el) { io.observe(el); });
     } else {
-      els.forEach(run);
+      items.forEach(run);
     }
   }
 
-  function initS08(root) {
-    var roller = root.querySelector(".s08-roller");
-    var die = root.querySelector(".s08-die");
-    var tiles = root.querySelectorAll(".s08-tile");
-    if (!roller || !die || !tiles.length) return;
-    var face = root.querySelector(".s08-die__face");
-    var label = root.querySelector(".s08-die__label");
-    var staticMsg = root.querySelector(".s08-static");
-    var img = root.querySelector(".s08-result__img");
-    var text = root.querySelector(".s08-result__text");
-    var link = root.querySelector(".s08-result__link");
-    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var busy = false, last = -1, timer = null;
+  function initS04(root) {
+    if (!root || !root.querySelector) return;
+    var picker = root.querySelector(".s04-picker");
+    if (!picker) return;
+    var radios = picker.querySelectorAll(".s04-radio");
+    var status = picker.querySelector(".s04-status");
+    var reset = picker.querySelector(".s04-reset");
+    var panels = root.querySelectorAll(".s04-panel");
+    var idle = status ? status.textContent : "";
+    var lines = {
+      strategy: "Door I creaks open: the brain-burners. ",
+      family: "Door II creaks open: the cosy haunt. ",
+      friends: "Door III creaks open: the midnight party. "
+    };
+    function apply(v) {
+      var n = 0;
+      panels.forEach(function (p) {
+        var on = (" " + p.getAttribute("data-vibes") + " ").indexOf(" " + v + " ") > -1;
+        if (on) n++;
+      });
+      if (status) status.textContent = (lines[v] || "") + n + " of the ten are waiting for you.";
+      if (reset) reset.hidden = false;
+    }
+    radios.forEach(function (r) {
+      r.addEventListener("change", function () { if (r.checked) apply(r.value); });
+    });
+    if (reset) {
+      reset.addEventListener("click", function () {
+        radios.forEach(function (r) { r.checked = false; });
+        if (status) status.textContent = idle;
+        reset.hidden = true;
+        if (radios[0]) radios[0].focus();
+      });
+    }
+  }
 
-    roller.hidden = false;
-    if (staticMsg) staticMsg.hidden = true;
+  function initS10(root) {
+    if (!root) return;
+    var btn = root.querySelector(".s10-spin");
+    var face = root.querySelector(".s10-face");
+    var covers = root.querySelectorAll(".s10-vc");
+    var result = root.querySelector(".s10-result");
+    if (!btn || !face || !covers.length || !result) return;
+    var label = result.querySelector(".s10-result-label");
+    var img = result.querySelector(".s10-result-img");
+    var nameEl = result.querySelector(".s10-result-name");
+    var tagEl = result.querySelector(".s10-result-tag");
+    var gameEl = result.querySelector(".s10-result-game");
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var current = 0, turns = 0, timer = null, busy = false;
+    btn.hidden = false;
 
     function show(i) {
-      var t = tiles[i];
-      var name = t.getAttribute("data-name");
-      Array.prototype.forEach.call(tiles, function (x) { x.classList.remove("is-picked"); });
-      t.classList.add("is-picked");
-      face.textContent = String(i + 1);
-      label.textContent = "Roll again";
-      img.src = t.querySelector("img").getAttribute("src");
-      img.hidden = false;
-      text.textContent = "You rolled " + (i + 1) + ": " + name + " (" + t.getAttribute("data-tag") + ")";
-      link.textContent = "Play " + name + " free";
-      link.hidden = false;
-      die.classList.remove("is-rolling");
+      var c = covers[i];
+      label.textContent = "You transformed into";
+      img.src = c.getAttribute("data-img");
+      nameEl.textContent = c.getAttribute("data-name");
+      tagEl.textContent = c.getAttribute("data-tag");
+      gameEl.textContent = c.getAttribute("data-name");
+      for (var k = 0; k < covers.length; k++) covers[k].classList.toggle("s10-picked", k === i);
+      result.classList.remove("s10-flash");
+      void result.offsetWidth;
+      if (!reduce) result.classList.add("s10-flash");
+      root.classList.remove("s10-spinning");
       busy = false;
+      btn.removeAttribute("aria-disabled");
+      btn.textContent = "Spin again!";
     }
 
-    die.addEventListener("click", function () {
+    btn.addEventListener("click", function () {
       if (busy) return;
-      var n = Math.floor(Math.random() * tiles.length);
-      if (n === last) n = (n + 1 + Math.floor(Math.random() * (tiles.length - 1))) % tiles.length;
-      last = n;
-      if (reduce) { show(n); return; }
+      var n = covers.length, next;
+      do { next = Math.floor(Math.random() * n); } while (next === current && n > 1);
+      current = next;
+      clearTimeout(timer);
+      if (reduce) {
+        face.style.transform = "rotate(" + (-next * 36) + "deg)";
+        show(next);
+        return;
+      }
+      turns += 3;
+      face.style.transform = "rotate(" + (-next * 36 - turns * 360) + "deg)";
+      root.classList.add("s10-spinning");
       busy = true;
-      die.classList.add("is-rolling");
-      var ticks = 0;
-      timer = window.setInterval(function () {
-        ticks++;
-        face.textContent = String(1 + Math.floor(Math.random() * tiles.length));
-        if (ticks >= 9) { window.clearInterval(timer); show(n); }
-      }, 90);
+      btn.setAttribute("aria-disabled", "true");
+      timer = setTimeout(function () { show(next); }, 1700);
     });
   }
 
-  function initS12(root) {
-    var els = root.querySelectorAll('.s12-count[data-count]');
-    if (!els.length) return;
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    if (root.getAttribute('data-s12-ran')) return;
-    root.setAttribute('data-s12-ran', '1');
-    function run() {
-      var start = null, dur = 1600;
-      Array.prototype.forEach.call(els, function (el) {
-        el.textContent = '0';
-      });
-      function tick(t) {
-        if (start === null) start = t;
-        var p = Math.min(1, (t - start) / dur);
+  function initS14(root) {
+    if (!root || !root.querySelectorAll) return;
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Thumbnails show the final numbers rather than a count-up caught mid-way.
+    var thumb = document.documentElement.classList.contains("is-thumb");
+    if (reduce || thumb || !("requestAnimationFrame" in window)) return;
+    var items = root.querySelectorAll("[data-count]");
+    function run(el) {
+      if (el.getAttribute("data-run")) return;
+      el.setAttribute("data-run", "1");
+      var target = parseInt(el.getAttribute("data-count"), 10);
+      var suffix = el.getAttribute("data-suffix") || "";
+      var out = el.querySelector(".s14-n");
+      if (!out || isNaN(target)) return;
+      var dur = 1600, t0 = null;
+      function step(t) {
+        if (t0 === null) t0 = t;
+        var p = Math.min(1, (t - t0) / dur);
         var e = 1 - Math.pow(1 - p, 3);
-        Array.prototype.forEach.call(els, function (el) {
-          var n = parseInt(el.getAttribute('data-count'), 10);
-          el.textContent = Math.round(n * e).toLocaleString('en-US');
-        });
-        if (p < 1) requestAnimationFrame(tick);
+        out.textContent = Math.round(target * e).toLocaleString("en-US") + (p < 1 ? "" : suffix);
+        if (p < 1) window.requestAnimationFrame(step);
       }
-      requestAnimationFrame(tick);
+      out.textContent = "0";
+      window.requestAnimationFrame(step);
     }
-    if ('IntersectionObserver' in window) {
+    if ("IntersectionObserver" in window) {
       var io = new IntersectionObserver(function (entries) {
-        if (entries.some(function (x) { return x.isIntersecting; })) { io.disconnect(); run(); }
-      });
-      io.observe(els[0]);
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { run(en.target); io.unobserve(en.target); }
+        });
+      }, { threshold: 0.3 });
+      items.forEach(function (el) { io.observe(el); });
     } else {
-      run();
+      items.forEach(run);
     }
   }
 
-  function initS14(root) {
-    var radios = root.querySelectorAll('input[name="s14-vibe"]');
-    var out = root.querySelector('.s14-result');
-    if (!radios.length || !out) return;
-    var labels = { strategy: 'Strategy', family: 'Family', friends: 'With friends' };
-    root.classList.add('s14-js');
-    function update(v) {
-      root.setAttribute('data-vibe', v);
-      var names = [];
-      Array.prototype.forEach.call(root.querySelectorAll('.s14-site'), function (li) {
-        var hit = (' ' + li.getAttribute('data-vibes') + ' ').indexOf(' ' + v + ' ') > -1;
-        li.classList.toggle('is-match', hit);
-        if (hit) names.push(li.getAttribute('data-name'));
-      });
-      out.textContent = labels[v] + ': ' + names.length + ' of the ten sit on your route. ' + names.join(', ') + '.';
+  function initS15(root) {
+    if (!root) return;
+    var stage = root.querySelector(".s15-stage");
+    var btn = root.querySelector(".s15-crackbtn");
+    var items = root.querySelectorAll(".s15-grid .s15-g");
+    if (!stage || !btn || !items.length) return;
+    var reveal = stage.querySelector(".s15-reveal");
+    var img = reveal.querySelector(".s15-r-img");
+    var tag = reveal.querySelector(".s15-r-tag");
+    var nameEl = reveal.querySelector(".s15-r-name");
+    var link = reveal.querySelector(".s15-r-link");
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var last = -1, cracked = false, timer = null;
+    btn.hidden = false;
+    root.classList.add("s15-js");
+
+    function pick() {
+      var i;
+      do { i = Math.floor(Math.random() * items.length); } while (i === last && items.length > 1);
+      last = i;
+      var g = items[i];
+      img.src = g.getAttribute("data-img");
+      tag.textContent = g.getAttribute("data-tag");
+      nameEl.textContent = g.getAttribute("data-name");
+      link.textContent = "Play " + g.getAttribute("data-name") + " free";
     }
-    Array.prototype.forEach.call(radios, function (r) {
-      r.addEventListener('change', function () { if (r.checked) update(r.value); });
+    function open() {
+      pick();
+      cracked = true;
+      stage.setAttribute("data-state", "cracked");
+      btn.textContent = "Crack another candy";
+    }
+    function seal() {
+      cracked = false;
+      stage.setAttribute("data-state", "sealed");
+    }
+    function go() {
+      clearTimeout(timer);
+      if (cracked && !reduce) {
+        seal();
+        timer = setTimeout(open, 450);
+      } else {
+        open();
+      }
+    }
+    btn.addEventListener("click", go);
+    stage.addEventListener("click", function (e) {
+      if (e.target.closest && e.target.closest("a")) return;
+      if (!cracked) go();
     });
   }
 
   function initS21(root) {
-    var btn = root.querySelector('.s21-roll__btn');
-    var flip = root.querySelector('.s21-flip');
-    if (!btn || !flip) return;
-    var games = [].map.call(root.querySelectorAll('.s21-game'), function (li) {
-      return {
-        name: li.querySelector('.s21-game__name').textContent,
-        tag: li.querySelector('.s21-game__tag').textContent,
-        src: li.querySelector('.s21-game__img').getAttribute('src')
-      };
-    });
-    if (!games.length) return;
-    var img = flip.querySelector('.s21-flip__img');
-    var name = flip.querySelector('.s21-flip__name');
-    var tag = flip.querySelector('.s21-flip__tag');
-    var die = flip.querySelector('.s21-die');
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var current = 0, timer = null, busy = false;
-
-    function show(i) {
-      current = i;
-      img.setAttribute('src', games[i].src);
-      name.textContent = games[i].name;
-      tag.textContent = games[i].tag;
-    }
-    function face(n) { die.className = 's21-die s21-die--' + n; }
-
-    btn.hidden = false;
-    btn.addEventListener('click', function () {
-      if (busy) return;
-      var next = Math.floor(Math.random() * games.length);
-      if (next === current) next = (next + 1) % games.length;
-      if (reduce) { show(next); return; }
-      busy = true;
-      flip.classList.remove('is-flipped');
-      flip.classList.add('is-rolling');
-      var ticks = 0;
-      timer = setInterval(function () {
-        face(1 + Math.floor(Math.random() * 6));
-        if (++ticks > 6) {
-          clearInterval(timer);
-          flip.classList.remove('is-rolling');
-          show(next);
-          setTimeout(function () { flip.classList.add('is-flipped'); busy = false; }, 150);
-        }
-      }, 120);
-    });
-  }
-
-  function initS23(root) {
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var els = root.querySelectorAll('.s23-count[data-count]');
-    if (!els.length) return;
-    function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
-    function run() {
-      var start = null, dur = 1600;
-      function step(t) {
-        if (start === null) start = t;
-        var p = Math.min((t - start) / dur, 1), e = 1 - Math.pow(1 - p, 3);
-        for (var i = 0; i < els.length; i++) {
-          els[i].textContent = fmt(+els[i].getAttribute('data-count') * e);
-        }
-        if (p < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    }
-    run();
-  }
-
-  function initS25(root) {
-    var chips = root.querySelectorAll('.s25-chip');
-    var cards = root.querySelectorAll('.s25-card');
-    if (!chips.length) return;
-    chips.forEach(function (chip) {
-      chip.addEventListener('click', function () {
-        var f = chip.getAttribute('data-filter');
-        chips.forEach(function (c) { c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'); });
-        cards.forEach(function (card) {
-          var match = f === 'All' || card.getAttribute('data-tag') === f;
-          card.classList.toggle('is-dim', !match);
-        });
+    var grid = root.querySelector('.s21-grid');
+    var picker = root.querySelector('.s21-picker');
+    if (!grid || !picker) return;
+    var radios = picker.querySelectorAll('.s21-radio');
+    var status = picker.querySelector('.s21-status');
+    var reset = picker.querySelector('.s21-reset');
+    var names = { strategy: 'Strategy', family: 'Family', friends: 'With friends' };
+    var idle = status.textContent;
+    root.classList.add('s21-js');
+    function apply(v) {
+      var n = 0;
+      grid.setAttribute('data-vibe', v);
+      grid.querySelectorAll('.s21-card').forEach(function (c) {
+        var on = (' ' + c.getAttribute('data-vibes') + ' ').indexOf(' ' + v + ' ') > -1;
+        c.classList.toggle('s21-match', on);
+        if (on) n++;
       });
+      status.textContent = names[v] + ': ' + n + ' of the ten light up. Ready when you are.';
+      reset.hidden = false;
+    }
+    radios.forEach(function (r) {
+      r.addEventListener('change', function () { if (r.checked) apply(r.value); });
+    });
+    reset.addEventListener('click', function () {
+      grid.removeAttribute('data-vibe');
+      grid.querySelectorAll('.s21-card').forEach(function (c) { c.classList.remove('s21-match'); });
+      radios.forEach(function (r) { r.checked = false; });
+      status.textContent = idle;
+      reset.hidden = true;
     });
   }
 })();

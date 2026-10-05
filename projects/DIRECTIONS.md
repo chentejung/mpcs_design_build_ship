@@ -12,34 +12,38 @@ The 25 style briefs for the gallery, plus `00-baseline` as the control. Each pai
 
 ## Styles
 
+The set has been redone twice. **01–10** are **American comic-book art** (heavy inks, Ben-Day halftone, four-colour print, panels, captions, sound-effect lettering), one per 1990s–2000s Cartoon Network original, picked from Screen Rant, Collider and SlashFilm rankings: Dexter's Laboratory, The Powerpuff Girls, Johnny Bravo, Courage the Cowardly Dog, Ed Edd n Eddy, Samurai Jack, Codename: Kids Next Door, Foster's Home for Imaginary Friends, The Grim Adventures of Billy & Mandy, Ben 10. Show names are for our reference only and never appear on the page. **11–12** are classic hand-painted animated-feature looks, and **13–25** are early cartoon-channel comedy looks (wobbly ink lines, flat colour, scribbles, pop shapes). The retired first Disney-style 01–10 live in the git history and nowhere else.
+
+Guardrails: evoke the *technique and mood* only. No copyrighted characters, logos, character names, quotes or franchise lettering; every shape, mascot and word is original.
+
 | # | Slug | Look | Hook |
 |---|------|------|------|
 | 00 | baseline | Faithful recreation of the current page. | Start playing now |
-| 01 | game-night-table | Top-down wooden table under warm lamp light; scattered cards, dice and meeples; one empty seat marked "Your seat". | Seat at the table |
-| 02 | cardboard-print | Kraft-paper and linen textures, punch-out token shapes, chunky offset shadows, slight print misregistration. | Top ten shelf |
-| 03 | rulebook | Premium rulebook layout: serif headings, numbered sections (Setup → Your first turn → Winning). | Three-step start |
-| 04 | arena | Dark mode, neon accents, ranking ladder, ELO badges; esports energy. | Ranked play |
-| 05 | cozy-cafe | Pastel palette, hand-drawn friends around a café table, rounded type. | Invite your friends |
-| 06 | swiss-grid | Strict grid, oversized stat typography, restrained colour, crisp tiles. | Social proof hero |
-| 07 | game-box-70s | Retro colour bands, hero as a box lid with a "2–5 players · ages 8+" corner badge. | Open the box |
-| 08 | toy-box | Springy micro-interactions, meeple mascot, a die that rolls to pick a game. | Roll for a game |
-| 09 | pixel-arcade | 8-bit pixel art, chunky pixel type, "PRESS START" blink, scanlines. | Press start |
-| 10 | tavern-quest | Parchment, wax seals, illuminated capitals; a quest notice board. | Accept the quest |
-| 11 | chess-club-noir | Black and ivory, elegant serif, checkered motifs, members'-club restraint. | Ranked play |
-| 12 | neo-brutalist | Thick black borders, raw grid, flat yellow and pink, hard shadows. | Social proof hero |
-| 13 | glass-lounge | Glassmorphism panels over soft gradient blobs; modern app polish. | Live lobby |
-| 14 | cartographer | Topographic contour lines, compass rose, map legend; exploring 1,396 games as a world. | Pick your vibe |
-| 15 | go-ink | Wabi-sabi minimalism: go-board grid, ink-wash stones, generous whitespace. | Three-step start |
-| 16 | comic-panel | Halftone dots, speech bubbles, panel gutters, onomatopoeia ("CHECKMATE!"). | Invite your friends |
-| 17 | card-room-felt | Green baize, brass trim, playing-card suits, a dealt hand of game cards. | Top ten shelf |
-| 18 | bauhaus | Primary colours, circles, squares and triangles as game pieces, geometric type. | Pick your vibe |
-| 19 | space-opera | Starfield, planets and HUD frames; sci-fi strategy mood. | Live lobby |
-| 20 | botanical | Watercolour leaves and birds, field-guide labels, soft greens. | Top ten shelf |
-| 21 | mosaic-tiles | Patterned tile grid, glazed colours, a tile that flips to reveal the CTA. | Roll for a game |
-| 22 | terminal | Monospace green-on-black CLI: `> join --table ark-nova`, blinking cursor. | Live lobby |
-| 23 | gazette | Broadsheet newspaper: masthead, columns, "10,845,000 PLAYERS AND COUNTING". | Social proof hero |
-| 24 | scrapbook | Polaroids of game nights, washi tape, handwritten notes, doodles. | Invite your friends |
-| 25 | lobby-app | Product-first: the hero is the app itself, a realistic table list with Join buttons. | Live lobby |
+| 01 | lab-panel | American comic-book pages with a boxy retro-futuristic lab: inked panels, pastel flats, gadget callouts, chunky red-button splash. | Press start |
+| 02 | city-heroes-ink | Superhero splash page: thick uniform outlines, flat candy colour, starburst rays, round-faced hero trio over a city skyline. | Ranked play |
+| 03 | pompadour-pop | 1950s-flavoured pop-art pin-up cover: halftone Ben-Day sky, swaggering silhouette, big-jawed bravado, cheesy sound effects. | Social proof hero |
+| 04 | pulp-horror | EC-style horror comic: moody spot blacks, dripping title lettering, eerie hatching, a nervous hero, comic dread that ends friendly. | Pick your vibe |
+| 05 | funnies-strip | Sunday newspaper funnies: wobbly ink, a four-panel strip on aged newsprint, scheming trio, a candy-sphere running gag. | Invite your friends |
+| 06 | ronin-widescreen | Graphic-novel noir: cinemascope panels, flat geometry, stark silhouettes, bold sunset gradients, minimal captions. | Accept the quest |
+| 07 | mission-briefing | Kid-operative spy comic: treehouse HQ, numbered mission files, "TOP SECRET" stamps, team badges, ink-and-flat colour action. | Three-step start |
+| 08 | imaginary-house | Bright chunky cartoon annual: a sprawling mansion cutaway where the ten games live as residents, doodled friends, bold flat colours. | Live lobby |
+| 09 | gothic-gag | Gothic gag comic: crooked tombstones, skull motifs, scythe silhouettes, purple-black inks with acid-green accents, deadpan captions. | Top ten shelf |
+| 10 | hero-cover | Issue #1 superhero comic cover: masthead, price box, barcode, a dial-watch that transforms (rolls) into a random game. | Roll for a game |
+| 11 | once-upon-a-time | An opening storybook: ornate illuminated pages, "Once upon a time…" lettering, page-turn feel. | Three-step start |
+| 12 | sing-along | Painted matte backdrop, film-frame borders, karaoke-style highlighted lyrics and a bouncing ball. | Press start |
+| 13 | wobbly-cul-de-sac | Early-2000s cartoon suburb: boiling wobbly ink outlines, grainy flat colour, scribbled sky, jawbreaker colours. | Invite your friends |
+| 14 | scam-flyer | Crude marker-lettered flyer taped to a pole, misspelt-feeling hand lettering (still legible), bold claims. | Social proof hero |
+| 15 | jawbreaker | Candy-striped layered spheres, sticky-sweet palette, rubbery bounce; a candy that cracks open to pick a game. | Roll for a game |
+| 16 | junkyard-fort | Cardboard-and-scrap clubhouse, hand-drawn signs, duct tape, crayon scrawls; a seat on the crate. | Seat at the table |
+| 17 | secret-lab | Retro-futuristic pastel lab, giant chunky buttons, blueprint gadgets, boxy sans-serif lettering. | Press start |
+| 18 | sugar-and-spice | Thick black outlines, flat saturated colour, round-headed shapes, a city skyline and bold starburst rays. | Ranked play |
+| 19 | saturday-morning | TV test pattern, channel-guide listing, bumper cards, rabbit-ear antenna; "now playing" schedule. | Live lobby |
+| 20 | lone-wanderer | Wide-screen flat geometry, stark silhouettes, sunset gradients, bold diagonal composition. | Accept the quest |
+| 21 | spooky-farm | Cartoon-horror pastel: moonlit farmhouse, wobbly shadows, jumpy eyes, comic dread with a friendly end. | Pick your vibe |
+| 22 | pop-squiggle | Loud 90s pop: Memphis squiggles, confetti triangles, wacky speech and exaggerated pose-like type. | Three-step start |
+| 23 | check-it-bumper | Black-and-white checkerboard bumper cards with neon blocks, big blocky title type, channel-ident energy. | Top ten shelf |
+| 24 | recess-doodle | Schoolyard notebook: ruled paper, ballpoint doodles, sticker sheet, gel-pen scribbles. | Invite your friends |
+| 25 | title-card | Cartoon title card: iris-out circle, "Starring" credit roll of the ten games, curtain-call finale. | Live lobby |
 
 ## Games
 

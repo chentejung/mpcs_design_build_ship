@@ -1,0 +1,94 @@
+/* 12 Sing-Along: painted matte backdrop, film-frame borders, karaoke lyrics, bouncing ball */
+#s12{
+  --ink:#0d0a1a; --film:#120e22; --paper:#fff; --soft:#d9d0f0; --yel:#ffd84d; --pink:#ff6fa0; --teal:#6fe3d6; --cta-ink:#1b1030;
+  background:var(--ink); color:var(--paper);
+  font-family:"Trebuchet MS","Segoe UI",Verdana,Arial,sans-serif; line-height:1.5; overflow-x:hidden;
+}
+#s12 *,#s12 *::before,#s12 *::after{box-sizing:border-box}
+#s12 .s12-hero{padding:10px;background:#000}
+#s12 .s12-film{background:var(--film);border-radius:6px;overflow:hidden;border:1px solid #2c2547}
+#s12 .s12-holes{height:22px;background:repeating-linear-gradient(90deg,transparent 0 10px,#e9e2f7 10px 28px,transparent 28px 44px) 0 50%/auto 12px no-repeat,var(--film)}
+#s12 .s12-stage{position:relative;min-height:540px;padding:18px 12px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;overflow:hidden;border-block:3px solid #000}
+#s12 .s12-scene{position:absolute;inset:0;width:100%;height:100%;display:block}
+#s12 .s12-sails{transform-box:fill-box;transform-origin:center;animation:s12-spin 14s linear infinite}
+#s12 .s12-smoke{animation:s12-smoke 4s ease-in-out infinite}
+@keyframes s12-spin{to{transform:rotate(360deg)}}
+@keyframes s12-smoke{0%,100%{opacity:.25}50%{opacity:.7}}
+
+#s12 .s12-card,#s12 .s12-lyrics{position:relative;z-index:1;width:100%;max-width:760px;text-align:center;background:rgba(13,10,26,.9);border:3px solid var(--yel);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+#s12 .s12-card{padding:14px 18px;transform:rotate(-1deg)}
+#s12 .s12-eyebrow{margin:0;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);font-weight:700}
+#s12 .s12-title{margin:2px 0 0;font:900 clamp(1.7rem,6vw,3rem)/1.05 Impact,"Arial Black","Trebuchet MS",sans-serif;text-transform:uppercase;letter-spacing:.02em;color:var(--yel);text-shadow:3px 3px 0 var(--pink)}
+#s12 .s12-lyrics{padding:16px 16px 18px}
+#s12 .s12-lines{margin:0 0 8px}
+#s12 .s12-line{margin:0 0 .15em;padding-top:.7em;font:700 clamp(1.05rem,3.6vw,1.6rem)/1.25 "Trebuchet MS",Verdana,sans-serif}
+#s12 .s12-lyric{position:relative;display:inline-block;color:var(--paper)}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  #s12 .s12-lyric{color:transparent;background:linear-gradient(90deg,var(--yel) 50%,var(--paper) 50%) 100% 0/200% 100%;-webkit-background-clip:text;background-clip:text;animation:s12-sing 2.6s linear var(--d) both}
+}
+@keyframes s12-sing{to{background-position:0 0}}
+#s12 .s12-ball{position:absolute;top:-.85em;left:0;width:0;height:0;opacity:0;animation:s12-roll 2.6s linear var(--d) both}
+#s12 .s12-ball i{position:absolute;left:-.4em;top:0;width:.8em;height:.8em;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,var(--pink) 60%,#b3195a);box-shadow:0 0 .6em var(--pink);animation:s12-bounce .43s ease-in infinite alternate-reverse}
+@keyframes s12-roll{0%{left:0;opacity:0}1%{left:0;opacity:1}99%{left:100%;opacity:1}100%{left:100%;opacity:0}}
+@keyframes s12-bounce{from{transform:translateY(0)}to{transform:translateY(-.55em)}}
+
+#s12 .s12-ctawrap{margin:12px 0 0}
+#s12 .s12-cta{display:inline-flex;align-items:center;gap:12px;padding:16px 40px;border-radius:999px;background:var(--yel);color:var(--cta-ink);font:900 1.5rem/1 Impact,"Arial Black","Trebuchet MS",sans-serif;text-transform:uppercase;letter-spacing:.05em;text-decoration:none;border:3px solid #fff;box-shadow:0 5px 0 #b8860b,0 0 0 5px rgba(255,216,77,.35),0 12px 26px rgba(255,216,77,.35);transition:transform .12s,box-shadow .12s}
+#s12 .s12-cta:hover{transform:translateY(-2px) scale(1.03)}
+#s12 .s12-cta:active{transform:translateY(3px);box-shadow:0 2px 0 #b8860b}
+#s12 .s12-play{width:1.2em;height:1.2em;display:block}
+#s12 .s12-plain{margin:12px 0 0;font-size:.92rem;color:var(--soft)}
+#s12 .s12-plainlink{color:var(--paper);font-weight:700;text-underline-offset:3px}
+#s12 a:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+
+#s12 .s12-main{background:linear-gradient(180deg,#000,#1a1235 50%,#0d0a1a)}
+#s12 .s12-sec{max-width:1160px;margin:0 auto;padding:46px 14px;text-align:center}
+#s12 .s12-h2{margin:0 0 8px;font:900 clamp(1.5rem,5vw,2.4rem)/1.1 Impact,"Arial Black","Trebuchet MS",sans-serif;text-transform:uppercase;letter-spacing:.03em;color:var(--yel);text-shadow:2px 2px 0 #7a1c4c}
+#s12 .s12-sub{margin:0 auto 26px;max-width:36em;color:var(--soft)}
+
+#s12 .s12-reel{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:16px 12px}
+#s12 .s12-frame{background:#050309;border-radius:4px;padding:18px 0 0;position:relative}
+#s12 .s12-frame::before,#s12 .s12-frame::after{content:"";position:absolute;left:0;right:0;height:10px;background:repeating-linear-gradient(90deg,transparent 0 5px,#e9e2f7 5px 13px,transparent 13px 20px) 0 50%/auto 7px no-repeat}
+#s12 .s12-frame::before{top:5px}#s12 .s12-frame::after{bottom:5px}
+#s12 .s12-frame__a{display:flex;flex-direction:column;gap:2px;padding:0 8px 22px;color:var(--paper);text-decoration:none;text-align:left}
+#s12 .s12-frame__no{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-weight:700}
+#s12 .s12-frame__img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block;margin:3px 0 6px;border:2px solid #2c2547;transition:filter .2s}
+#s12 .s12-frame__a:hover .s12-frame__img{filter:saturate(1.3) brightness(1.1)}
+#s12 .s12-frame__name{font-weight:700;font-size:.98rem;line-height:1.2}
+#s12 .s12-frame__tag{font-size:.78rem;color:var(--yel);font-weight:700;text-transform:uppercase;letter-spacing:.1em}
+#s12 .s12-more{margin:30px 0 0}
+#s12 .s12-link{color:var(--yel);font-size:1.15rem;font-weight:700;text-underline-offset:4px}
+
+#s12 .s12-slates{list-style:none;margin:0;padding:0;display:grid;gap:18px;text-align:left}
+#s12 .s12-slate{background:#1e1740;border:3px solid #fff;border-radius:6px;padding:0 18px 18px;overflow:hidden}
+#s12 .s12-slate__top{height:26px;margin:0 -18px 14px;background:repeating-linear-gradient(-45deg,#fff 0 14px,#0d0a1a 14px 28px);border-bottom:3px solid #fff}
+#s12 .s12-slate__no{margin:0;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--pink);font-weight:700}
+#s12 .s12-slate__h{margin:2px 0 6px;font:900 1.4rem/1.1 Impact,"Arial Black",sans-serif;text-transform:uppercase;color:var(--paper)}
+#s12 .s12-slate__p{margin:0;color:var(--soft)}
+#s12 .s12-slate__no{color:#ff9fc0}
+
+#s12 .s12-marquee{margin:22px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px;border:8px dotted var(--yel);border-radius:22px;background:#150f2e}
+#s12 .s12-marquee div{display:flex;flex-direction:column;padding:10px 4px}
+#s12 .s12-marquee dd{margin:0;font:900 clamp(1.6rem,6vw,2.6rem)/1.1 Impact,"Arial Black",sans-serif;color:var(--yel)}
+#s12 .s12-marquee dt{order:2;color:var(--soft);font-size:.9rem}
+#s12 .s12-marquee div:last-child{grid-column:1 / -1}
+#s12 .s12-end{padding-bottom:72px}
+
+@media (min-width:700px){
+  #s12 .s12-hero{padding:18px}
+  #s12 .s12-reel{grid-template-columns:repeat(3,1fr)}
+  #s12 .s12-slates{grid-template-columns:repeat(3,1fr)}
+  #s12 .s12-marquee{grid-template-columns:repeat(5,1fr)}
+  #s12 .s12-marquee div:last-child{grid-column:auto}
+}
+@media (min-width:1000px){
+  #s12 .s12-stage{min-height:640px}
+  #s12 .s12-reel{grid-template-columns:repeat(5,1fr)}
+}
+@media (max-width:400px){#s12 .s12-cta{padding:14px 30px;font-size:1.3rem}#s12 .s12-hero{padding:6px}}
+@media (prefers-reduced-motion:reduce){
+  #s12 *,#s12 *::before,#s12 *::after{animation:none!important;transition:none!important}
+  #s12 .s12-lyric{background-position:0 0}
+  #s12 .s12-ball{display:none}
+  #s12 .s12-cta:hover,#s12 .s12-cta:active{transform:none}
+}

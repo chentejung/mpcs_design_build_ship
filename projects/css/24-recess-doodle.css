@@ -1,0 +1,192 @@
+/* 24 · Recess Doodle: ruled notebook paper, ballpoint doodles, die-cut stickers, gel-pen scribbles. */
+
+#s24 {
+  --paper: #fdfcf3;
+  --rule: #b9d3ee;
+  --margin: #e8707a;
+  --pen: #1f3fae;
+  --ink: #1c2233;
+  --orange: #ff9f1a;
+  --pink: #ff5fa8;
+  --green: #31c46b;
+  --purple: #8a4dff;
+  --yellow: #ffe66b;
+  --hand: "Segoe Print", "Bradley Hand", "Chalkboard SE", "Comic Sans MS", "Marker Felt", cursive, system-ui, sans-serif;
+  --blob: 255px 18px 225px 18px / 18px 225px 18px 255px;
+
+  position: relative;
+  color: var(--ink);
+  font-family: var(--hand);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(90deg, transparent 78px, var(--margin) 78px, var(--margin) 80px, transparent 80px),
+    repeating-linear-gradient(180deg, transparent 0 33px, var(--rule) 33px 35px);
+}
+#s24 *, #s24 *::before, #s24 *::after { box-sizing: border-box; }
+#s24 :focus-visible { outline: 4px dashed var(--pen); outline-offset: 4px; }
+#s24 h1, #s24 h2, #s24 h3, #s24 p, #s24 ol, #s24 ul { margin: 0; padding: 0; }
+#s24 ol, #s24 ul { list-style: none; }
+#s24 .s24-wrap { width: min(1160px, 100% - 2rem); margin-inline: auto; padding-left: clamp(0px, 5vw, 70px); }
+#s24 .s24-holes { position: absolute; left: 22px; top: 0; bottom: 0; width: 26px; background: radial-gradient(circle at 13px 13px, #d9d4c0 0 11px, #b8b29b 12px 13px, transparent 14px) 0 0 / 26px 360px repeat-y; pointer-events: none; z-index: 1; }
+
+/* buttons */
+#s24 .s24-cta {
+  display: inline-block;
+  font-family: var(--hand);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 3.6vw, 2.1rem);
+  line-height: 1.1;
+  color: var(--ink);
+  background: var(--orange);
+  border: 4px solid var(--ink);
+  border-radius: var(--blob);
+  padding: 0.55em 1.3em;
+  text-decoration: none;
+  box-shadow: 6px 7px 0 var(--ink);
+  transform: rotate(-1.5deg);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+#s24 .s24-cta:hover { transform: rotate(1deg) scale(1.05); box-shadow: 9px 10px 0 var(--ink); }
+#s24 .s24-cta:active { transform: translate(4px, 5px); box-shadow: 2px 2px 0 var(--ink); }
+#s24 .s24-cta--xl { font-size: clamp(1.6rem, 5vw, 2.8rem); }
+#s24 .s24-alt {
+  color: var(--pen); font-weight: 700; font-size: 1.15rem;
+  text-decoration: underline wavy var(--pink) 2px; text-underline-offset: 6px;
+  padding: 0.2em 0.1em;
+}
+#s24 .s24-alt:hover { color: #7a1fd0; }
+#s24 .s24-link {
+  display: inline-block; color: var(--ink); font-weight: 700; text-decoration: none;
+  background: var(--yellow); border: 3px solid var(--ink); border-radius: var(--blob);
+  padding: 0.35em 1.1em; box-shadow: 4px 4px 0 var(--ink);
+}
+#s24 .s24-link:hover { background: #fff08f; transform: rotate(-1.5deg); }
+
+/* hero */
+#s24 .s24-hero { position: relative; overflow: hidden; }
+#s24 .s24-hero .s24-wrap {
+  display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1rem; align-items: center;
+  padding-block: clamp(1.6rem, 4vw, 3.4rem); min-height: min(600px, 80vh);
+}
+#s24 .s24-tag {
+  display: inline-block; font-weight: 700; font-size: 0.95rem;
+  background: var(--yellow); border: 2px solid var(--ink); padding: 0.1em 0.8em;
+  transform: rotate(-2deg);
+}
+#s24 .s24-hero h1 {
+  margin-top: 0.6rem;
+  font-size: clamp(2.3rem, 6.3vw, 4.6rem);
+  line-height: 1.1; font-weight: 700; color: var(--pen);
+}
+#s24 .s24-hero h1 .s24-circled { position: relative; display: inline-block; padding: 0 0.1em; }
+#s24 .s24-hero h1 .s24-circled svg { position: absolute; left: -8%; top: -12%; width: 116%; height: 124%; overflow: visible; }
+#s24 .s24-hero h1 .s24-circled svg path { stroke-dasharray: 600; stroke-dashoffset: 600; animation: s24-draw 1.4s 0.3s ease-out forwards; }
+@keyframes s24-draw { to { stroke-dashoffset: 0; } }
+#s24 .s24-lede { margin-top: 1rem; max-width: 34ch; font-size: clamp(1.15rem, 2.2vw, 1.4rem); }
+#s24 .s24-lede span { background: linear-gradient(transparent 55%, var(--yellow) 55% 92%, transparent 92%); font-weight: 700; }
+#s24 .s24-cta-row { margin-top: 1.4rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1.1rem 1.8rem; }
+#s24 .s24-fine { margin-top: 0.9rem; font-size: 0.98rem; }
+#s24 .s24-hero__art svg { width: 100%; max-width: 480px; height: auto; margin-inline: auto; overflow: visible; }
+#s24 .s24-float { animation: s24-float 3.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes s24-float { 0%, 100% { transform: translate(0, 0) rotate(-4deg); } 50% { transform: translate(14px, -12px) rotate(3deg); } }
+#s24 .s24-jiggle { animation: s24-jig 0.8s steps(2) infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes s24-jig { 0% { transform: rotate(-1.5deg); } 100% { transform: rotate(1.5deg); } }
+
+/* sections */
+#s24 .s24-section { position: relative; padding-block: clamp(2.2rem, 5vw, 4rem); }
+#s24 .s24-head { margin-bottom: 1.6rem; }
+#s24 .s24-head h2 {
+  display: inline-block; font-size: clamp(1.9rem, 5vw, 3.2rem); line-height: 1.15; color: var(--pen);
+  background: linear-gradient(transparent 62%, var(--yellow) 62% 94%, transparent 94%);
+  transform: rotate(-1deg);
+}
+#s24 .s24-head p { margin-top: 0.2rem; font-size: 1.15rem; }
+
+/* sticker sheet */
+#s24 .s24-sheet {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.6rem 1.2rem;
+  background: rgba(255, 255, 255, 0.8);
+  border: 3px dashed #8a93ad; border-radius: 14px;
+  padding: clamp(1rem, 3vw, 2rem);
+}
+#s24 .s24-sticker {
+  position: relative;
+  background: #fff;
+  border-radius: 18px 22px 16px 24px;
+  padding: 8px 8px 10px;
+  box-shadow: 0 0 0 2px #e6e6e6, 2px 4px 7px rgba(30, 30, 60, 0.35);
+  transition: transform 0.15s;
+}
+#s24 .s24-sticker:nth-child(odd) { transform: rotate(-2.5deg); }
+#s24 .s24-sticker:nth-child(even) { transform: rotate(2deg); }
+#s24 .s24-sticker:nth-child(3n) { transform: rotate(-0.5deg); }
+#s24 .s24-sticker:hover { transform: rotate(0) scale(1.06); z-index: 2; }
+#s24 .s24-sticker img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 12px 16px 10px 16px; }
+#s24 .s24-sticker h3 { margin-top: 0.4rem; font-size: 1.02rem; line-height: 1.2; color: var(--ink); }
+#s24 .s24-sticker p {
+  display: inline-block; margin-top: 0.15rem; font-size: 0.82rem; font-weight: 700;
+  border-radius: 999px; padding: 0 0.7em; color: var(--ink);
+}
+#s24 .s24-sticker p.s24-t-strategy { background: #ffd0e6; border: 2px solid var(--pink); }
+#s24 .s24-sticker p.s24-t-family { background: #c9f2d9; border: 2px solid var(--green); }
+#s24 .s24-sticker p.s24-t-coop { background: #e0d1ff; border: 2px solid var(--purple); }
+#s24 .s24-more { margin-top: 1.8rem; text-align: center; }
+
+/* how it works: passed notes */
+#s24 .s24-notes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; }
+#s24 .s24-note {
+  position: relative; background: #fff7a8; padding: 1.6rem 1.3rem 1.4rem;
+  box-shadow: 3px 5px 8px rgba(30, 30, 60, 0.3);
+  border-bottom-right-radius: 40px 10px;
+}
+#s24 .s24-note::before { content: ""; position: absolute; top: -12px; left: 50%; width: 90px; height: 26px; margin-left: -45px; background: rgba(255, 95, 168, 0.55); transform: rotate(-3deg); }
+#s24 .s24-note:nth-child(1) { transform: rotate(-2deg); }
+#s24 .s24-note:nth-child(2) { transform: rotate(1.5deg); background: #cfeeff; }
+#s24 .s24-note:nth-child(3) { transform: rotate(-1deg); background: #d6f7dd; }
+#s24 .s24-note h3 { font-size: 1.4rem; color: var(--pen); line-height: 1.2; }
+#s24 .s24-note h3 b { display: inline-block; width: 1.9em; height: 1.9em; line-height: 1.7em; text-align: center; border: 3px solid var(--pen); border-radius: 50%; margin-right: 0.35em; font-size: 0.85em; }
+#s24 .s24-note p { margin-top: 0.4rem; }
+
+/* proof */
+#s24 .s24-proof { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.3rem; }
+#s24 .s24-stat {
+  text-align: center; background: #fff; border: 3px solid var(--ink); border-radius: var(--blob);
+  padding: 1.1rem 0.6rem; box-shadow: 4px 5px 0 var(--ink);
+}
+#s24 .s24-stat:nth-child(odd) { transform: rotate(-1.5deg); }
+#s24 .s24-stat:nth-child(even) { transform: rotate(1.5deg); }
+#s24 .s24-stat strong { display: block; font-size: clamp(1.5rem, 3.2vw, 2.3rem); line-height: 1.1; color: var(--pen); }
+#s24 .s24-stat span { font-weight: 700; }
+#s24 .s24-scribbles { margin-top: 1.6rem; display: flex; flex-wrap: wrap; gap: 0.6rem 0.9rem; }
+#s24 .s24-scribbles li { background: #fff; border: 2px dashed var(--pen); border-radius: 999px; padding: 0.05em 0.9em; font-weight: 700; }
+
+/* final */
+#s24 .s24-final { text-align: center; }
+#s24 .s24-final h2 { font-size: clamp(2.1rem, 6.4vw, 4.2rem); line-height: 1.12; color: var(--pen); margin-bottom: 1.4rem; }
+#s24 .s24-final h2 span { background: linear-gradient(transparent 60%, var(--yellow) 60% 92%, transparent 92%); }
+#s24 .s24-final .s24-cta-row { justify-content: center; }
+#s24 .s24-final .s24-fine { background: var(--paper); display: inline-block; padding: 0 0.6em; }
+
+@media (max-width: 1000px) { #s24 .s24-sheet { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 860px) {
+  #s24 .s24-hero .s24-wrap { grid-template-columns: 1fr; min-height: 0; }
+  #s24 .s24-hero__art { max-width: 300px; margin: 0 auto; }
+  #s24 .s24-notes { grid-template-columns: 1fr; gap: 2rem; }
+  #s24 .s24-note:nth-child(n) { transform: none; }
+  #s24 .s24-sheet { grid-template-columns: repeat(3, 1fr); }
+  #s24 .s24-proof { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  #s24 { background-image: linear-gradient(90deg, transparent 18px, var(--margin) 18px, var(--margin) 20px, transparent 20px), repeating-linear-gradient(180deg, transparent 0 33px, var(--rule) 33px 35px); }
+  #s24 .s24-holes { display: none; }
+  #s24 .s24-wrap { padding-left: 1.4rem; width: calc(100% - 1.2rem); }
+  #s24 .s24-sheet { grid-template-columns: repeat(2, 1fr); gap: 1.2rem 0.8rem; padding: 0.8rem; }
+  #s24 .s24-hero__art { max-width: 200px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #s24 *, #s24 *::before, #s24 *::after { animation: none !important; transition: none !important; }
+  #s24 .s24-hero h1 .s24-circled svg path { stroke-dashoffset: 0 !important; }
+  #s24 .s24-cta:hover, #s24 .s24-cta:active, #s24 .s24-sticker:hover, #s24 .s24-link:hover { transform: none; }
+}
