@@ -3,12 +3,12 @@
 //   index.html?view=sNN        that style's own page, with the gallery bar
 //   index.html?view=sNN&thumb  the bare style, loaded into a grid card's iframe
 (() => {
-  const PLANNED = 20;
+  const PLANNED = 23;
   const styles = [...document.querySelectorAll(".style")];
   const num = (s) => s.id.slice(1);
   const pageUrl = (s) => `index.html?view=${s.id}`;
 
-  const INITS = {s06: initS06, s07: initS07, s03: initS03, s01: initS01, s05: initS05, s11: initS11, s12: initS12, s13: initS13, s14: initS14, s15: initS15, s16: initS16, s17: initS17, s18: initS18, s19: initS19, s20: initS20};
+  const INITS = {s06: initS06, s07: initS07, s03: initS03, s01: initS01, s05: initS05, s11: initS11, s12: initS12, s13: initS13, s14: initS14, s15: initS15, s16: initS16, s17: initS17, s18: initS18, s19: initS19, s20: initS20, s21: initS21, s22: initS22, s23: initS23};
   styles.forEach((s) => INITS[s.id]?.(s));
 
   const params = new URLSearchParams(location.search);
@@ -804,6 +804,123 @@
       // Short line on screen; the matching names are for screen readers only.
       const more = document.createElement("span");
       more.className = "s20-sr";
+      more.textContent = `: ${listOf(names)}`;
+      status.textContent = `${picked.dataset.road} road: ${names.length} of ${ads.length} games in colour`;
+      status.append(more, ".");
+    };
+
+    radios.forEach((r) => r.addEventListener("change", update));
+    reset.addEventListener("click", () => {
+      radios.forEach((r) => (r.checked = false));
+      update();
+      radios[0].focus();
+    });
+    update();
+  }
+  function initS21(root) {
+    // 21 Welcome Sheet: "Which way tonight?" radio group. Lighting the chosen
+    // road and its ads is pure CSS (:has on the checked radio), so this only keeps
+    // the spoken status line in step and wires up the reset. State lives in the
+    // radios and resets on reload.
+    const radios = [...root.querySelectorAll('input[name="s21-vibe"]')];
+    const status = root.querySelector(".s21-status");
+    const reset = root.querySelector(".s21-reset");
+    const ads = [...root.querySelectorAll(".s21-ad")];
+    if (!radios.length || !status || !reset || !ads.length) return;
+
+    const nameOf = (ad) => ad.querySelector(".s21-ad__name").textContent;
+    const listOf = (names) =>
+      names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+
+    const update = () => {
+      const picked = radios.find((r) => r.checked);
+      reset.hidden = !picked;
+      if (!picked) {
+        status.textContent = "All ten games are on the road.";
+        return;
+      }
+      const names = ads.filter((a) => a.classList.contains(`s21-fit-${picked.value}`)).map(nameOf);
+      // Short line on screen; the matching names are for screen readers only.
+      const more = document.createElement("span");
+      more.className = "s21-sr";
+      more.textContent = `: ${listOf(names)}`;
+      status.textContent = `${picked.dataset.road} road: ${names.length} of ${ads.length} games in colour`;
+      status.append(more, ".");
+    };
+
+    radios.forEach((r) => r.addEventListener("change", update));
+    reset.addEventListener("click", () => {
+      radios.forEach((r) => (r.checked = false));
+      update();
+      radios[0].focus();
+    });
+    update();
+  }
+  function initS22(root) {
+    // 22 Welcome Door: "Which way tonight?" radio group. Lighting the chosen
+    // road and its ads is pure CSS (:has on the checked radio), so this only keeps
+    // the spoken status line in step and wires up the reset. State lives in the
+    // radios and resets on reload.
+    const radios = [...root.querySelectorAll('input[name="s22-vibe"]')];
+    const status = root.querySelector(".s22-status");
+    const reset = root.querySelector(".s22-reset");
+    const ads = [...root.querySelectorAll(".s22-ad")];
+    if (!radios.length || !status || !reset || !ads.length) return;
+
+    const nameOf = (ad) => ad.querySelector(".s22-ad__name").textContent;
+    const listOf = (names) =>
+      names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+
+    const update = () => {
+      const picked = radios.find((r) => r.checked);
+      reset.hidden = !picked;
+      if (!picked) {
+        status.textContent = "All ten games are on the road.";
+        return;
+      }
+      const names = ads.filter((a) => a.classList.contains(`s22-fit-${picked.value}`)).map(nameOf);
+      // Short line on screen; the matching names are for screen readers only.
+      const more = document.createElement("span");
+      more.className = "s22-sr";
+      more.textContent = `: ${listOf(names)}`;
+      status.textContent = `${picked.dataset.road} road: ${names.length} of ${ads.length} games in colour`;
+      status.append(more, ".");
+    };
+
+    radios.forEach((r) => r.addEventListener("change", update));
+    reset.addEventListener("click", () => {
+      radios.forEach((r) => (r.checked = false));
+      update();
+      radios[0].focus();
+    });
+    update();
+  }
+  function initS23(root) {
+    // 23 Welcome Board: "Which way tonight?" radio group. Lighting the chosen
+    // road and its ads is pure CSS (:has on the checked radio), so this only keeps
+    // the spoken status line in step and wires up the reset. State lives in the
+    // radios and resets on reload.
+    const radios = [...root.querySelectorAll('input[name="s23-vibe"]')];
+    const status = root.querySelector(".s23-status");
+    const reset = root.querySelector(".s23-reset");
+    const ads = [...root.querySelectorAll(".s23-ad")];
+    if (!radios.length || !status || !reset || !ads.length) return;
+
+    const nameOf = (ad) => ad.querySelector(".s23-ad__name").textContent;
+    const listOf = (names) =>
+      names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+
+    const update = () => {
+      const picked = radios.find((r) => r.checked);
+      reset.hidden = !picked;
+      if (!picked) {
+        status.textContent = "All ten games are on the road.";
+        return;
+      }
+      const names = ads.filter((a) => a.classList.contains(`s23-fit-${picked.value}`)).map(nameOf);
+      // Short line on screen; the matching names are for screen readers only.
+      const more = document.createElement("span");
+      more.className = "s23-sr";
       more.textContent = `: ${listOf(names)}`;
       status.textContent = `${picked.dataset.road} road: ${names.length} of ${ads.length} games in colour`;
       status.append(more, ".");

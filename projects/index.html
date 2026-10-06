@@ -31,6 +31,9 @@
   <link rel="stylesheet" href="css/18-extra-edition.css">
   <link rel="stylesheet" href="css/19-scoreboard-night.css">
   <link rel="stylesheet" href="css/20-clubhouse-signup.css">
+  <link rel="stylesheet" href="css/21-welcome-sheet.css">
+  <link rel="stylesheet" href="css/22-welcome-door.css">
+  <link rel="stylesheet" href="css/23-welcome-board.css">
 </head>
 <body>
 
@@ -6228,6 +6231,1312 @@
 </div>
 </section>
 
+<!-- ============ 21 ============ -->
+<section class="style" id="s21" data-name="Welcome Sheet" data-hook="Pick your vibe" aria-labelledby="s21-title">
+<svg class="s21-defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="s21-dotk" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="3.5" cy="3.5" r="1.8" fill="#1a1512"/></pattern>
+    <pattern id="s21-doty" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="2.4" fill="#efc23f"/></pattern>
+    <pattern id="s21-plankp" width="60" height="160" patternUnits="userSpaceOnUse">
+      <rect width="60" height="160" fill="#c4934f"/>
+      <rect x="0" y="0" width="6" height="160" fill="#9c6f35"/>
+      <path d="M57 0 V160" stroke="#1a1512" stroke-width="1.8" stroke-opacity=".45"/>
+      <path d="M22 0 Q26 80 20 160" stroke="#9c6f35" stroke-width="1.6" stroke-opacity=".5" fill="none"/>
+    </pattern>
+
+    <!-- Road geometry, shared with the SVG links. One unit is 1/1200 of the sheet. -->
+    <path id="s21-pa" d="M936 0 C936 130 600 90 600 220"/>
+    <path id="s21-pf" d="M600 30 V300"/>
+    <path id="s21-pl" d="M600 30 C600 170 200 130 200 300"/>
+    <path id="s21-pr" d="M600 30 C600 170 1000 130 1000 300"/>
+    <path id="s21-ml" d="M200 0 C200 120 90 110 90 240"/>
+    <path id="s21-mm" d="M600 0 C600 150 90 90 90 240"/>
+    <path id="s21-mr" d="M1000 0 C1000 170 90 70 90 240"/>
+    <path id="s21-pc" d="M90 0 C90 130 1110 90 1110 220"/>
+    <path id="s21-pd" d="M1110 0 C1110 140 600 70 600 220"/>
+
+    <!-- A pointing hand, index finger out to the left. Fingers are capsules and
+         the palm is drawn last so it covers their roots and reads as one shape. -->
+    <symbol id="s21-point" viewBox="0 0 120 100">
+      <g stroke="#1a1512" stroke-width="3.6" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="2" y="38" width="76" height="16" rx="8" fill="currentColor"/>
+        <rect x="60" y="56" width="30" height="15" rx="7.5" fill="currentColor"/>
+        <rect x="64" y="69" width="26" height="14" rx="7" fill="currentColor"/>
+        <rect x="80" y="22" width="15" height="28" rx="7.5" fill="currentColor" transform="rotate(16 87.5 36)"/>
+        <path d="M76 34 Q104 28 112 54 Q114 78 94 88 Q76 90 72 72 Q70 48 76 34 Z" fill="currentColor"/>
+      </g>
+    </symbol>
+
+    <!-- The crew. Three original pals, waist-up. Every contour is split into arcs
+         of different stroke weight so a line swells and thins; fills are flat cel
+         colour with one darker shade, and no screen runs over them. -->
+    <symbol id="s21-pal-a" viewBox="0 0 120 170">
+      <g stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 168 Q12 124 40 109 Q60 101 80 109 Q108 124 106 168 Z" fill="#3f7fc0"/>
+        <path d="M14 168 Q12 124 40 109 L48 116 Q28 130 30 168 Z" fill="#255b93"/>
+        <path d="M14 168 Q12 124 40 109" fill="none" stroke="#1a1512" stroke-width="4.5"/>
+        <path d="M40 109 Q60 101 80 109" fill="none" stroke="#1a1512" stroke-width="3"/>
+        <path d="M80 109 Q108 124 106 168" fill="none" stroke="#1a1512" stroke-width="3.9"/>
+        <path d="M49 86 H71 V112 H49 Z" fill="#c98b42"/>
+        <path d="M49 88 V110 M71 88 V110" stroke="#1a1512" stroke-width="3"/>
+        <ellipse cx="60" cy="55" rx="36" ry="39" fill="#e8ae63"/>
+        <path d="M26 66 Q33 92 60 93 Q87 92 94 66 Q60 80 26 66 Z" fill="#c98b42" opacity=".4"/>
+        <path d="M24 46 Q13 44 14 55 Q15 67 27 62" fill="#e8ae63" stroke="#1a1512" stroke-width="3"/>
+        <path d="M96 46 Q107 44 106 55 Q105 67 93 62" fill="#e8ae63" stroke="#1a1512" stroke-width="3"/>
+        <path d="M60 16 A36 39 0 0 1 96 55" fill="none" stroke="#1a1512" stroke-width="2.7"/>
+        <path d="M96 55 A36 39 0 0 1 60 94" fill="none" stroke="#1a1512" stroke-width="4.5"/>
+        <path d="M60 94 A36 39 0 0 1 24 55" fill="none" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M24 55 A36 39 0 0 1 60 16" fill="none" stroke="#1a1512" stroke-width="2.7"/>
+        <!-- two hair puffs -->
+        <circle cx="26" cy="24" r="17" fill="#4a2c12" stroke="#1a1512" stroke-width="3.6"/>
+        <circle cx="94" cy="24" r="17" fill="#4a2c12" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M26 30 Q30 10 60 9 Q90 10 94 30 Q60 20 26 30 Z" fill="#4a2c12" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M27 40 Q60 28 93 42 Q60 36 27 50 Z" fill="#1a1512"/>
+        <ellipse cx="45" cy="56" rx="12.5" ry="13.5" fill="#fff" stroke="#1a1512" stroke-width="3"/>
+        <ellipse cx="76" cy="56" rx="12.5" ry="13.5" fill="#fff" stroke="#1a1512" stroke-width="3"/>
+        <circle cx="48" cy="59" r="5.4" fill="#1a1512"/>
+        <circle cx="79" cy="59" r="5.4" fill="#1a1512"/>
+        <circle cx="29" cy="70" r="6.5" fill="#e8766a" opacity=".55"/>
+        <circle cx="92" cy="70" r="6.5" fill="#e8766a" opacity=".55"/>
+        <path d="M44 75 Q60 101 77 75 Z" fill="#fff" stroke="#1a1512" stroke-width="3.6" stroke-linejoin="round"/>
+        <g stroke="#1a1512" stroke-width="2"><path d="M52 79 V90"/><path d="M60 81 V93"/><path d="M69 79 V90"/></g>
+      </g>
+    </symbol>
+
+    <symbol id="s21-pal-b" viewBox="0 0 120 170">
+      <g stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 168 Q16 126 42 111 Q60 104 78 111 Q104 126 102 168 Z" fill="#c8372a"/>
+        <path d="M78 111 Q104 126 102 168 H86 Q88 130 70 117 Z" fill="#9c2318"/>
+        <path d="M18 168 Q16 126 42 111" fill="none" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M42 111 Q60 104 78 111" fill="none" stroke="#1a1512" stroke-width="3"/>
+        <path d="M78 111 Q104 126 102 168" fill="none" stroke="#1a1512" stroke-width="4.5"/>
+        <path d="M50 88 H70 V114 H50 Z" fill="#a9703a"/>
+        <path d="M50 90 V112 M70 90 V112" stroke="#1a1512" stroke-width="3"/>
+        <ellipse cx="60" cy="56" rx="34" ry="38" fill="#c98b42"/>
+        <path d="M28 68 Q34 92 60 93 Q86 92 92 68 Q60 81 28 68 Z" fill="#a9703a" opacity=".42"/>
+        <path d="M26 47 Q15 45 16 56 Q17 68 29 63" fill="#c98b42" stroke="#1a1512" stroke-width="3"/>
+        <path d="M94 47 Q105 45 104 56 Q103 68 91 63" fill="#c98b42" stroke="#1a1512" stroke-width="3"/>
+        <path d="M60 18 A34 38 0 0 1 94 56" fill="none" stroke="#1a1512" stroke-width="2.7"/>
+        <path d="M94 56 A34 38 0 0 1 60 94" fill="none" stroke="#1a1512" stroke-width="4.2"/>
+        <path d="M60 94 A34 38 0 0 1 26 56" fill="none" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M26 56 A34 38 0 0 1 60 18" fill="none" stroke="#1a1512" stroke-width="2.7"/>
+        <!-- mop of hair, drawn as overlapping lobes -->
+        <path d="M24 44 Q20 14 52 12 Q84 10 96 32 Q100 44 96 52 Q88 30 60 28 Q34 28 30 52 Q24 54 24 44 Z" fill="#2f1d0c" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M52 12 Q46 0 68 2 Q58 10 64 24 Z" fill="#2f1d0c" stroke="#1a1512" stroke-width="3"/>
+        <path d="M28 42 Q60 30 92 44 Q60 38 28 52 Z" fill="#1a1512"/>
+        <!-- round glasses -->
+        <g fill="#fff" stroke="#1a1512" stroke-width="3"><circle cx="45" cy="58" r="14"/><circle cx="76" cy="58" r="14"/></g>
+        <path d="M59 58 H62" stroke="#1a1512" stroke-width="3"/>
+        <circle cx="47" cy="60" r="5.6" fill="#1a1512"/>
+        <circle cx="78" cy="60" r="5.6" fill="#1a1512"/>
+        <circle cx="30" cy="72" r="6" fill="#e8766a" opacity=".5"/>
+        <circle cx="91" cy="72" r="6" fill="#e8766a" opacity=".5"/>
+        <path d="M46 78 Q60 100 75 78 Z" fill="#fff" stroke="#1a1512" stroke-width="3.6" stroke-linejoin="round"/>
+        <g stroke="#1a1512" stroke-width="1.9"><path d="M53 81 V91"/><path d="M61 82 V93"/><path d="M69 81 V91"/></g>
+      </g>
+    </symbol>
+
+    <symbol id="s21-pal-c" viewBox="0 0 120 170">
+      <g stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 168 Q14 125 41 110 Q60 102 79 110 Q106 125 104 168 Z" fill="#3f7a4e"/>
+        <path d="M16 168 Q14 125 41 110 L49 117 Q30 131 32 168 Z" fill="#2b5637"/>
+        <path d="M16 168 Q14 125 41 110" fill="none" stroke="#1a1512" stroke-width="4.2"/>
+        <path d="M41 110 Q60 102 79 110" fill="none" stroke="#1a1512" stroke-width="3"/>
+        <path d="M79 110 Q106 125 104 168" fill="none" stroke="#1a1512" stroke-width="3.9"/>
+        <path d="M49 87 H71 V113 H49 Z" fill="#8a5a2a"/>
+        <path d="M49 89 V111 M71 89 V111" stroke="#1a1512" stroke-width="3"/>
+        <ellipse cx="60" cy="55" rx="35" ry="38" fill="#a9703a"/>
+        <path d="M27 67 Q33 91 60 92 Q87 91 93 67 Q60 80 27 67 Z" fill="#8a5a2a" opacity=".42"/>
+        <path d="M25 46 Q14 44 15 55 Q16 67 28 62" fill="#a9703a" stroke="#1a1512" stroke-width="3"/>
+        <path d="M95 46 Q106 44 105 55 Q104 67 92 62" fill="#a9703a" stroke="#1a1512" stroke-width="3"/>
+        <path d="M60 17 A35 38 0 0 1 95 55" fill="none" stroke="#1a1512" stroke-width="2.7"/>
+        <path d="M95 55 A35 38 0 0 1 60 93" fill="none" stroke="#1a1512" stroke-width="4.5"/>
+        <path d="M60 93 A35 38 0 0 1 25 55" fill="none" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M25 55 A35 38 0 0 1 60 17" fill="none" stroke="#1a1512" stroke-width="2.7"/>
+        <!-- soft cap -->
+        <path d="M23 40 Q22 12 60 11 Q98 12 97 40 Z" fill="#efc23f" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M18 39 H102 Q107 53 92 53 H28 Q13 51 18 39 Z" fill="#c9980f" stroke="#1a1512" stroke-width="3.6"/>
+        <circle cx="60" cy="13" r="7" fill="#c9980f" stroke="#1a1512" stroke-width="3"/>
+        <ellipse cx="45" cy="60" rx="12" ry="13" fill="#fff" stroke="#1a1512" stroke-width="3"/>
+        <ellipse cx="76" cy="60" rx="12" ry="13" fill="#fff" stroke="#1a1512" stroke-width="3"/>
+        <circle cx="48" cy="63" r="5.2" fill="#1a1512"/>
+        <circle cx="79" cy="63" r="5.2" fill="#1a1512"/>
+        <circle cx="29" cy="73" r="6.2" fill="#e8766a" opacity=".5"/>
+        <circle cx="92" cy="73" r="6.2" fill="#e8766a" opacity=".5"/>
+        <g fill="#7a4a1c"><circle cx="34" cy="62" r="3.4"/><circle cx="40" cy="54" r="3"/><circle cx="87" cy="62" r="3.4"/><circle cx="81" cy="54" r="3"/></g>
+        <path d="M45 78 Q60 99 76 78 Z" fill="#fff" stroke="#1a1512" stroke-width="3.6" stroke-linejoin="round"/>
+        <g stroke="#1a1512" stroke-width="1.9"><path d="M52 81 V91"/><path d="M60 82 V93"/><path d="M69 81 V91"/></g>
+      </g>
+    </symbol>
+
+
+    <symbol id="s21-i-pencil" viewBox="0 0 48 48">
+      <g stroke="#1a1512" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M11 37 L14 27 L33 8 L40 15 L21 34 Z" fill="currentColor"/>
+        <path d="M33 8 L40 15" />
+        <path d="M11 37 L14 27 L21 34 Z" fill="#f6edd4"/>
+        <path d="M8 41 H24" />
+      </g>
+    </symbol>
+
+    <symbol id="s21-i-arrow" viewBox="0 0 40 30">
+      <path d="M2 15 H24 M24 4 L36 15 L24 26" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="s21-tally5" viewBox="0 0 64 34">
+      <g fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round">
+        <path d="M8 5 V29"/><path d="M19 4 V30"/><path d="M30 5 V29"/><path d="M41 4 V30"/><path d="M3 27 L47 7"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="s21-table">
+  <div class="s21-paper">
+    <div class="s21-loose" aria-hidden="true">
+      <svg class="s21-loose__dice" viewBox="0 0 120 120" focusable="false">
+        <g transform="rotate(-11 40 46)">
+          <rect x="6" y="14" width="58" height="58" rx="11" fill="#fcf6e6" stroke="#1a1512" stroke-width="3"/>
+          <g fill="#1a1512"><circle cx="22" cy="30" r="5"/><circle cx="48" cy="56" r="5"/><circle cx="35" cy="43" r="5"/></g>
+        </g>
+        <g transform="rotate(17 82 82)">
+          <rect x="54" y="52" width="54" height="54" rx="10" fill="#fcf6e6" stroke="#1a1512" stroke-width="3"/>
+          <g fill="#c8372a"><circle cx="70" cy="68" r="4.8"/><circle cx="92" cy="68" r="4.8"/><circle cx="70" cy="90" r="4.8"/><circle cx="92" cy="90" r="4.8"/></g>
+        </g>
+      </svg>
+      <svg class="s21-loose__chalk" viewBox="0 0 140 120" focusable="false">
+        <g stroke="#1a1512" stroke-width="3" stroke-linejoin="round">
+          <rect x="10" y="24" width="86" height="20" rx="7" fill="#f6f2e2" transform="rotate(-9 53 34)"/>
+          <rect x="24" y="56" width="74" height="18" rx="6" fill="#efc23f" transform="rotate(6 61 65)"/>
+          <rect x="16" y="84" width="66" height="18" rx="6" fill="#f6f2e2" transform="rotate(-4 49 93)"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="s21-paper__inner">
+
+      <header class="s21-mast">
+        <h1 class="s21-mast__title" id="s21-title">Welcome to Board Game Arena!</h1>
+      </header>
+
+      <div class="s21-panel s21-hero">
+        <div class="s21-hero__copy">
+          <p class="s21-lede">Join the largest boardgame table in the world.</p>
+          <a class="s21-cta" href="https://en.boardgamearena.com/account?page=newuser">
+            <svg class="s21-cta__icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#s21-i-pencil"/></svg>
+            <span class="s21-cta__text"><span class="s21-cta__main">Put your name down</span><span class="s21-cta__sub">Create free account <span aria-hidden="true">&rarr;</span></span></span>
+          </a>
+        </div>
+        <div class="s21-hero__art">
+          <svg class="s21-start" viewBox="0 0 560 460" role="img" aria-labelledby="s21-start-t" focusable="false">
+            <title id="s21-start-t">A sign-up sheet nailed to the clubhouse door. Three friends have written their names; one ruled line is left blank with a pencil on it, and a grinning pal points at the empty line.</title>
+            <rect width="560" height="460" fill="#efc23f"/>
+            <rect width="560" height="460" fill="url(#s21-doty)" opacity=".35"/>
+            <path d="M0 300 H560 V460 H0 Z" fill="#8a9a5b"/>
+            <path d="M0 300 H560" stroke="#1a1512" stroke-width="4.2"/>
+
+            <!-- the clubhouse door -->
+            <path d="M24 40 H330 V460 H24 Z" fill="url(#s21-plankp)" stroke="#1a1512" stroke-width="4.2" stroke-linejoin="round"/>
+            <circle cx="306" cy="258" r="12" fill="#9c6f35" stroke="#1a1512" stroke-width="3.6"/>
+
+            <!-- the sign-up sheet -->
+            <g>
+              <path d="M58 70 L300 64 L306 338 L64 344 Z" fill="#fcf6e6" stroke="#1a1512" stroke-width="3.6" stroke-linejoin="round"/>
+              <text class="s21-sheet__head" x="182" y="104" text-anchor="middle">SIGN-UP SHEET</text>
+              <path d="M76 118 H290" stroke="#1a1512" stroke-width="2.4" stroke-opacity=".7"/>
+              <g stroke="#2f4a7a" stroke-width="1.8" stroke-opacity=".45">
+                <path d="M76 158 H290"/><path d="M76 206 H290"/><path d="M76 254 H290"/><path d="M76 302 H290"/>
+              </g>
+              <text class="s21-sheet__name" x="84" y="152">1. Mia</text>
+              <text class="s21-sheet__name" x="84" y="200">2. Leo</text>
+              <text class="s21-sheet__name" x="84" y="248">3. Ana</text>
+              <text class="s21-sheet__blank" x="84" y="296">4. your name here</text>
+              <!-- nails holding the sheet -->
+              <circle cx="70" cy="80" r="7" fill="#1a1512"/>
+              <circle cx="292" cy="75" r="7" fill="#1a1512"/>
+              <!-- a pencil resting on the blank line -->
+              <g transform="rotate(-7 230 318)">
+                <path d="M186 312 H272 V326 H186 Z" fill="#efc23f" stroke="#1a1512" stroke-width="3" stroke-linejoin="round"/>
+                <path d="M186 312 L168 319 L186 326 Z" fill="#fcf6e6" stroke="#1a1512" stroke-width="3" stroke-linejoin="round"/>
+                <path d="M272 312 H284 V326 H272 Z" fill="#c8372a" stroke="#1a1512" stroke-width="3" stroke-linejoin="round"/>
+              </g>
+            </g>
+
+            <!-- "Start here" plank, nailed to a post beside the door -->
+            <g class="s21-startsign">
+              <path d="M352 56 H372 V300 H352 Z" fill="#9c6f35" stroke="#1a1512" stroke-width="3.6" stroke-linejoin="round"/>
+              <g class="s21-startsign__arm">
+                <path d="M374 72 H540 V124 H374 Z" fill="#ecd8ab" stroke="#1a1512" stroke-width="3.6" stroke-linejoin="round"/>
+                <circle cx="388" cy="84" r="5" fill="#1a1512"/>
+                <circle cx="526" cy="84" r="5" fill="#1a1512"/>
+                <text x="457" y="107" text-anchor="middle">Start here</text>
+              </g>
+            </g>
+
+            <g class="s21-balloon">
+              <path d="M364 146 h168 a20 20 0 0 1 20 20 v52 a20 20 0 0 1 -20 20 h-96 l-28 24 l5 -24 h-49 a20 20 0 0 1 -20 -20 v-52 a20 20 0 0 1 20 -20 z" fill="#fcf6e6" stroke="#1a1512" stroke-width="3.6"/>
+              <text x="448" y="182" text-anchor="middle">We saved</text>
+              <text x="448" y="212" text-anchor="middle">you a spot!</text>
+            </g>
+
+            <!-- the pal at the door, pointing at the blank line -->
+            <g>
+              <use href="#s21-pal-c" x="382" y="252" width="146" height="208"/>
+              <g class="s21-point-g"><use href="#s21-point" x="296" y="300" width="124" height="104" color="#a9703a"/></g>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="s21-chalk">
+        <div class="s21-board">
+          <div class="s21-board__head">
+            <h2 class="s21-h2 s21-board__title" id="s21-tally-t">Chalked up so far</h2>
+            <p class="s21-board__kick">The whole club, counted</p>
+          </div>
+          <dl class="s21-tally" aria-labelledby="s21-tally-t">
+            <div class="s21-tally__cell">
+              <dt>Players</dt>
+              <dd>10,845,000</dd>
+              <svg class="s21-tally__marks" viewBox="0 0 64 34" aria-hidden="true" focusable="false"><use href="#s21-tally5"/></svg>
+            </div>
+            <div class="s21-tally__cell">
+              <dt>Games</dt>
+              <dd>1,396</dd>
+              <svg class="s21-tally__marks" viewBox="0 0 64 34" aria-hidden="true" focusable="false"><use href="#s21-tally5"/></svg>
+            </div>
+            <div class="s21-tally__cell">
+              <dt>Games a month</dt>
+              <dd>8,950,000</dd>
+              <svg class="s21-tally__marks" viewBox="0 0 64 34" aria-hidden="true" focusable="false"><use href="#s21-tally5"/></svg>
+            </div>
+          </dl>
+          <svg class="s21-board__duster" viewBox="0 0 110 60" aria-hidden="true" focusable="false">
+            <g stroke="#1a1512" stroke-width="3" stroke-linejoin="round">
+              <rect x="6" y="6" width="98" height="26" rx="5" fill="#9c6f35"/>
+              <rect x="10" y="30" width="90" height="22" rx="6" fill="#f6f2e2"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <svg class="s21-link" viewBox="0 0 1200 220" aria-hidden="true" focusable="false">
+        <g><use href="#s21-pa" class="s21-rd__edge"/><use href="#s21-pa" class="s21-rd__pave"/><use href="#s21-pa" class="s21-rd__dots"/><use href="#s21-pa" class="s21-rd__line"/></g>
+      </svg>
+
+      <section class="s21-hook" aria-labelledby="s21-hook-t">
+        <div class="s21-band">
+          <h2 class="s21-h2" id="s21-hook-t">Which way tonight?</h2>
+          <p class="s21-band__kick">Pick your vibe</p>
+        </div>
+
+        <svg class="s21-fork" viewBox="0 0 1200 300" aria-hidden="true" focusable="false">
+          <g class="s21-br s21-br--strategy"><use href="#s21-pl" class="s21-rd__edge"/><use href="#s21-pl" class="s21-rd__pave"/><use href="#s21-pl" class="s21-rd__dots"/><use href="#s21-pl" class="s21-rd__line"/></g>
+          <g class="s21-br s21-br--friends"><use href="#s21-pr" class="s21-rd__edge"/><use href="#s21-pr" class="s21-rd__pave"/><use href="#s21-pr" class="s21-rd__dots"/><use href="#s21-pr" class="s21-rd__line"/></g>
+          <g class="s21-br s21-br--family"><use href="#s21-pf" class="s21-rd__edge"/><use href="#s21-pf" class="s21-rd__pave"/><use href="#s21-pf" class="s21-rd__dots"/><use href="#s21-pf" class="s21-rd__line"/></g>
+          <g class="s21-fork__hub">
+            <circle cx="600" cy="36" r="42"/>
+            <circle cx="600" cy="36" r="30"/>
+            <circle cx="600" cy="36" r="12"/>
+          </g>
+        </svg>
+
+        <fieldset class="s21-pick">
+          <legend class="s21-sr">Choose the road that fits your game night</legend>
+          <div class="s21-pick__row">
+            <div class="s21-vibe s21-vibe--strategy">
+              <input class="s21-sr" type="radio" name="s21-vibe" id="s21-vibe-strategy" value="strategy" data-road="Strategy" autocomplete="off">
+              <label for="s21-vibe-strategy">
+                <svg class="s21-vibe__pal" viewBox="0 0 120 170" aria-hidden="true" focusable="false"><use href="#s21-pal-b"/></svg>
+                <span class="s21-vibe__name">Strategy</span>
+                <span class="s21-vibe__note">Think it through</span>
+                <span class="s21-vibe__stamp" aria-hidden="true">This way</span>
+              </label>
+            </div>
+            <div class="s21-vibe s21-vibe--family">
+              <input class="s21-sr" type="radio" name="s21-vibe" id="s21-vibe-family" value="family" data-road="Family" autocomplete="off">
+              <label for="s21-vibe-family">
+                <svg class="s21-vibe__pal" viewBox="0 0 120 170" aria-hidden="true" focusable="false"><use href="#s21-pal-c"/></svg>
+                <span class="s21-vibe__name">Family</span>
+                <span class="s21-vibe__note">Easy going</span>
+                <span class="s21-vibe__stamp" aria-hidden="true">This way</span>
+              </label>
+            </div>
+            <div class="s21-vibe s21-vibe--friends">
+              <input class="s21-sr" type="radio" name="s21-vibe" id="s21-vibe-friends" value="friends" data-road="With friends" autocomplete="off">
+              <label for="s21-vibe-friends">
+                <svg class="s21-vibe__pal" viewBox="0 0 120 170" aria-hidden="true" focusable="false"><use href="#s21-pal-a"/></svg>
+                <span class="s21-vibe__name">With friends</span>
+                <span class="s21-vibe__note">Bring the crew</span>
+                <span class="s21-vibe__stamp" aria-hidden="true">This way</span>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="s21-herald">
+          <p class="s21-status" role="status" aria-live="polite">All ten games are on the road.</p>
+          <button class="s21-reset" type="button" hidden>Show all ten</button>
+        </div>
+
+        <h3 class="s21-sr">The top ten games</h3>
+        <ol class="s21-ads">
+          <li class="s21-ad s21-fit-strategy"><div class="s21-ad__pic"><img class="s21-cover" src="img/covers/ark-nova.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s21-ad__name">Ark Nova</h4><p class="s21-ad__tag">Strategy</p></li>
+          <li class="s21-ad s21-fit-strategy"><div class="s21-ad__pic"><img class="s21-cover" src="img/covers/terraforming-mars.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s21-ad__name">Terraforming Mars</h4><p class="s21-ad__tag">Strategy</p></li>
+          <li class="s21-ad s21-ad--family s21-fit-family s21-fit-friends"><div class="s21-ad__pic"><img class="s21-cover" src="img/covers/catan.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s21-ad__name">CATAN</h4><p class="s21-ad__tag">Family</p></li>
+          <li class="s21-ad s21-fit-strategy"><div class="s21-ad__pic"><img class="s21-cover" src="img/covers/wingspan.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s21-ad__name">Wingspan</h4><p class="s21-ad__tag">Strategy</p></li>
+          <li class="s21-ad s21-ad--family s21-fit-family"><div class="s21-ad__pic"><img class="s21-cover" src="img/covers/azul.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s21-ad__name">Azul</h4><p class="s21-ad__tag">Family</p></li>
+          <li class="s21-ad s21-ad--family s21-fit-family s21-fit-friends"><div class="s21-ad__pic"><img class="s21-cover" src="img/covers/ticket-to-ride.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s21-ad__name">Ticket to Ride</h4><p class="s21-ad__tag">Family</p></li>
+          <li class="s21-ad s21-ad--family s21-fit-family s21-fit-friends"><div class="s21-ad__pic"><img class="s21-cover" src="img/covers/carcassonne.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s21-ad__name">Carcassonne</h4><p class="s21-ad__tag">Family</p></li>
+          <li class="s21-ad s21-fit-strategy"><div class="s21-ad__pic"><img class="s21-cover" src="img/covers/castles-of-burgundy.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s21-ad__name">The Castles of Burgundy</h4><p class="s21-ad__tag">Strategy</p></li>
+          <li class="s21-ad s21-ad--family s21-fit-family"><div class="s21-ad__pic"><img class="s21-cover" src="img/covers/splendor.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s21-ad__name">Splendor</h4><p class="s21-ad__tag">Family</p></li>
+          <li class="s21-ad s21-ad--coop s21-fit-friends"><div class="s21-ad__pic"><img class="s21-cover" src="img/covers/nemesis-retaliation.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s21-ad__name">Nemesis: Retaliation</h4><p class="s21-ad__tag">Co-op</p></li>
+        </ol>
+        <p class="s21-more"><a href="https://en.boardgamearena.com/gamelist">See all 1,396 games <span aria-hidden="true">&rarr;</span></a></p>
+      </section>
+
+      <svg class="s21-link s21-merge" viewBox="0 0 1200 240" aria-hidden="true" focusable="false">
+        <g class="s21-br s21-br--friends"><use href="#s21-mr" class="s21-rd__edge"/><use href="#s21-mr" class="s21-rd__pave"/><use href="#s21-mr" class="s21-rd__dots"/><use href="#s21-mr" class="s21-rd__line"/></g>
+        <g class="s21-br s21-br--family"><use href="#s21-mm" class="s21-rd__edge"/><use href="#s21-mm" class="s21-rd__pave"/><use href="#s21-mm" class="s21-rd__dots"/><use href="#s21-mm" class="s21-rd__line"/></g>
+        <g class="s21-br s21-br--strategy"><use href="#s21-ml" class="s21-rd__edge"/><use href="#s21-ml" class="s21-rd__pave"/><use href="#s21-ml" class="s21-rd__dots"/><use href="#s21-ml" class="s21-rd__line"/></g>
+      </svg>
+
+      <section class="s21-stop s21-stop--left" aria-labelledby="s21-why-t">
+        <div class="s21-lane" aria-hidden="true"></div>
+        <p class="s21-mile" aria-hidden="true"><span>&sect;</span></p>
+        <div class="s21-stop__body">
+          <div class="s21-band s21-band--green">
+            <h2 class="s21-h2" id="s21-why-t">House rules</h2>
+            <p class="s21-band__kick">Painted on the fence</p>
+          </div>
+          <div class="s21-fencesign">
+            <ul class="s21-slats">
+              <li class="s21-slat"><h3>Free</h3><p>Your account costs nothing.</p></li>
+              <li class="s21-slat"><h3>No download</h3><p>Every game runs in your browser.</p></li>
+              <li class="s21-slat"><h3>Any device</h3><p>PC, Mac, tablet or phone.</p></li>
+              <li class="s21-slat"><h3>Everyone&rsquo;s welcome</h3><p>42 languages, players in 200+ countries.</p></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <svg class="s21-link" viewBox="0 0 1200 220" aria-hidden="true" focusable="false">
+        <g><use href="#s21-pc" class="s21-rd__edge"/><use href="#s21-pc" class="s21-rd__pave"/><use href="#s21-pc" class="s21-rd__dots"/><use href="#s21-pc" class="s21-rd__line"/></g>
+      </svg>
+
+      <section class="s21-stop s21-stop--right" aria-labelledby="s21-join-t">
+        <div class="s21-lane" aria-hidden="true"></div>
+        <p class="s21-mile" aria-hidden="true"><span>Go</span></p>
+        <div class="s21-stop__body">
+          <div class="s21-band">
+            <h2 class="s21-h2" id="s21-join-t">How to join</h2>
+            <p class="s21-band__kick">Three signs up the path</p>
+          </div>
+          <ol class="s21-signs">
+            <li class="s21-sign">
+              <p class="s21-sign__plank">
+                <span class="s21-sign__no" aria-hidden="true">1</span>
+                <span class="s21-sign__text">Create your free account</span>
+                <svg class="s21-sign__arrow" viewBox="0 0 40 30" aria-hidden="true" focusable="false"><use href="#s21-i-arrow"/></svg>
+              </p>
+            </li>
+            <li class="s21-sign">
+              <p class="s21-sign__plank">
+                <span class="s21-sign__no" aria-hidden="true">2</span>
+                <span class="s21-sign__text">Pick a game your friends know</span>
+                <svg class="s21-sign__arrow" viewBox="0 0 40 30" aria-hidden="true" focusable="false"><use href="#s21-i-arrow"/></svg>
+              </p>
+            </li>
+            <li class="s21-sign">
+              <p class="s21-sign__plank">
+                <span class="s21-sign__no" aria-hidden="true">3</span>
+                <span class="s21-sign__text">Play in your browser</span>
+                <svg class="s21-sign__arrow" viewBox="0 0 40 30" aria-hidden="true" focusable="false"><use href="#s21-i-arrow"/></svg>
+              </p>
+            </li>
+          </ol>
+          <p class="s21-join__go">
+            <a class="s21-cta" href="https://en.boardgamearena.com/account?page=newuser">
+              <svg class="s21-cta__icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#s21-i-pencil"/></svg>
+              <span class="s21-cta__text"><span class="s21-cta__main">Put your name down</span><span class="s21-cta__sub">Create free account <span aria-hidden="true">&rarr;</span></span></span>
+            </a>
+          </p>
+        </div>
+      </section>
+
+      <svg class="s21-link" viewBox="0 0 1200 220" aria-hidden="true" focusable="false">
+        <g><use href="#s21-pd" class="s21-rd__edge"/><use href="#s21-pd" class="s21-rd__pave"/><use href="#s21-pd" class="s21-rd__dots"/><use href="#s21-pd" class="s21-rd__line"/></g>
+      </svg>
+
+      <section class="s21-finish" aria-labelledby="s21-finish-t">
+        <div class="s21-lane s21-lane--finish" aria-hidden="true"></div>
+        <div class="s21-panel s21-finish__panel">
+          <p class="s21-finish__word" aria-hidden="true">Finish</p>
+          <svg class="s21-finish__art" viewBox="0 0 540 210" role="img" aria-labelledby="s21-fin-t" focusable="false">
+            <title id="s21-fin-t">The crew grin round the clubhouse table, with one stool left free for you.</title>
+            <rect width="540" height="210" fill="#fcf6e6"/>
+            <rect width="540" height="210" fill="url(#s21-doty)" opacity=".4"/>
+            <use href="#s21-pal-a" x="16" y="46" width="116" height="164"/>
+            <use href="#s21-pal-b" x="146" y="38" width="116" height="164"/>
+            <use href="#s21-pal-c" x="276" y="46" width="116" height="164"/>
+            <g class="s21-seat">
+              <path d="M418 198 V150 h96 V198 M430 198 V160 M502 198 V160" fill="none" stroke="#c8372a" stroke-width="4.2" stroke-dasharray="14 10" stroke-linecap="round"/>
+              <text class="s21-seat__word" x="466" y="128" text-anchor="middle">Your stool</text>
+            </g>
+          </svg>
+        </div>
+        <h2 class="s21-h2 s21-finish__title" id="s21-finish-t">Your crew kept a stool free. <em>Your move.</em></h2>
+        <a class="s21-cta" href="https://en.boardgamearena.com/account?page=newuser">
+          <svg class="s21-cta__icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#s21-i-pencil"/></svg>
+          <span class="s21-cta__text"><span class="s21-cta__main">Put your name down</span><span class="s21-cta__sub">Create free account <span aria-hidden="true">&rarr;</span></span></span>
+        </a>
+      </section>
+
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ 22 ============ -->
+<section class="style" id="s22" data-name="Welcome Door" data-hook="Pick your vibe" aria-labelledby="s22-title">
+<svg class="s22-defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="s22-dotk" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="3.5" cy="3.5" r="1.8" fill="#1a1512"/></pattern>
+    <pattern id="s22-doty" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="2.4" fill="#efc23f"/></pattern>
+    <pattern id="s22-plankp" width="60" height="160" patternUnits="userSpaceOnUse">
+      <rect width="60" height="160" fill="#c4934f"/>
+      <rect x="0" y="0" width="6" height="160" fill="#9c6f35"/>
+      <path d="M57 0 V160" stroke="#1a1512" stroke-width="1.8" stroke-opacity=".45"/>
+      <path d="M22 0 Q26 80 20 160" stroke="#9c6f35" stroke-width="1.6" stroke-opacity=".5" fill="none"/>
+    </pattern>
+
+    <!-- Road geometry, shared with the SVG links. One unit is 1/1200 of the sheet. -->
+    <pattern id="s22-sidingp" width="560" height="28" patternUnits="userSpaceOnUse">
+      <rect width="560" height="28" fill="#8fc2b6"/>
+      <rect y="23" width="560" height="5" fill="#6fa59a"/>
+      <path d="M0 23 H560" stroke="#1a1512" stroke-opacity=".3" stroke-width="1.4"/>
+    </pattern>
+    <path id="s22-pa" d="M936 0 C936 130 600 90 600 220"/>
+    <path id="s22-pf" d="M600 30 V300"/>
+    <path id="s22-pl" d="M600 30 C600 170 200 130 200 300"/>
+    <path id="s22-pr" d="M600 30 C600 170 1000 130 1000 300"/>
+    <path id="s22-ml" d="M200 0 C200 120 90 110 90 240"/>
+    <path id="s22-mm" d="M600 0 C600 150 90 90 90 240"/>
+    <path id="s22-mr" d="M1000 0 C1000 170 90 70 90 240"/>
+    <path id="s22-pc" d="M90 0 C90 130 1110 90 1110 220"/>
+    <path id="s22-pd" d="M1110 0 C1110 140 600 70 600 220"/>
+
+    <!-- A pointing hand, index finger out to the left. Fingers are capsules and
+         the palm is drawn last so it covers their roots and reads as one shape. -->
+    <symbol id="s22-point" viewBox="0 0 120 100">
+      <g stroke="#1a1512" stroke-width="3.6" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="2" y="38" width="76" height="16" rx="8" fill="currentColor"/>
+        <rect x="60" y="56" width="30" height="15" rx="7.5" fill="currentColor"/>
+        <rect x="64" y="69" width="26" height="14" rx="7" fill="currentColor"/>
+        <rect x="80" y="22" width="15" height="28" rx="7.5" fill="currentColor" transform="rotate(16 87.5 36)"/>
+        <path d="M76 34 Q104 28 112 54 Q114 78 94 88 Q76 90 72 72 Q70 48 76 34 Z" fill="currentColor"/>
+      </g>
+    </symbol>
+
+    <!-- The crew. Three original pals, waist-up. Every contour is split into arcs
+         of different stroke weight so a line swells and thins; fills are flat cel
+         colour with one darker shade, and no screen runs over them. -->
+    <symbol id="s22-pal-a" viewBox="0 0 120 170">
+      <g stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 168 Q12 124 40 109 Q60 101 80 109 Q108 124 106 168 Z" fill="#3f7fc0"/>
+        <path d="M14 168 Q12 124 40 109 L48 116 Q28 130 30 168 Z" fill="#255b93"/>
+        <path d="M14 168 Q12 124 40 109" fill="none" stroke="#1a1512" stroke-width="4.5"/>
+        <path d="M40 109 Q60 101 80 109" fill="none" stroke="#1a1512" stroke-width="3"/>
+        <path d="M80 109 Q108 124 106 168" fill="none" stroke="#1a1512" stroke-width="3.9"/>
+        <path d="M49 86 H71 V112 H49 Z" fill="#c98b42"/>
+        <path d="M49 88 V110 M71 88 V110" stroke="#1a1512" stroke-width="3"/>
+        <ellipse cx="60" cy="55" rx="36" ry="39" fill="#e8ae63"/>
+        <path d="M26 66 Q33 92 60 93 Q87 92 94 66 Q60 80 26 66 Z" fill="#c98b42" opacity=".4"/>
+        <path d="M24 46 Q13 44 14 55 Q15 67 27 62" fill="#e8ae63" stroke="#1a1512" stroke-width="3"/>
+        <path d="M96 46 Q107 44 106 55 Q105 67 93 62" fill="#e8ae63" stroke="#1a1512" stroke-width="3"/>
+        <path d="M60 16 A36 39 0 0 1 96 55" fill="none" stroke="#1a1512" stroke-width="2.7"/>
+        <path d="M96 55 A36 39 0 0 1 60 94" fill="none" stroke="#1a1512" stroke-width="4.5"/>
+        <path d="M60 94 A36 39 0 0 1 24 55" fill="none" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M24 55 A36 39 0 0 1 60 16" fill="none" stroke="#1a1512" stroke-width="2.7"/>
+        <!-- two hair puffs -->
+        <circle cx="26" cy="24" r="17" fill="#4a2c12" stroke="#1a1512" stroke-width="3.6"/>
+        <circle cx="94" cy="24" r="17" fill="#4a2c12" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M26 30 Q30 10 60 9 Q90 10 94 30 Q60 20 26 30 Z" fill="#4a2c12" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M27 40 Q60 28 93 42 Q60 36 27 50 Z" fill="#1a1512"/>
+        <ellipse cx="45" cy="56" rx="12.5" ry="13.5" fill="#fff" stroke="#1a1512" stroke-width="3"/>
+        <ellipse cx="76" cy="56" rx="12.5" ry="13.5" fill="#fff" stroke="#1a1512" stroke-width="3"/>
+        <circle cx="48" cy="59" r="5.4" fill="#1a1512"/>
+        <circle cx="79" cy="59" r="5.4" fill="#1a1512"/>
+        <circle cx="29" cy="70" r="6.5" fill="#e8766a" opacity=".55"/>
+        <circle cx="92" cy="70" r="6.5" fill="#e8766a" opacity=".55"/>
+        <path d="M44 75 Q60 101 77 75 Z" fill="#fff" stroke="#1a1512" stroke-width="3.6" stroke-linejoin="round"/>
+        <g stroke="#1a1512" stroke-width="2"><path d="M52 79 V90"/><path d="M60 81 V93"/><path d="M69 79 V90"/></g>
+      </g>
+    </symbol>
+
+    <symbol id="s22-pal-b" viewBox="0 0 120 170">
+      <g stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 168 Q16 126 42 111 Q60 104 78 111 Q104 126 102 168 Z" fill="#c8372a"/>
+        <path d="M78 111 Q104 126 102 168 H86 Q88 130 70 117 Z" fill="#9c2318"/>
+        <path d="M18 168 Q16 126 42 111" fill="none" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M42 111 Q60 104 78 111" fill="none" stroke="#1a1512" stroke-width="3"/>
+        <path d="M78 111 Q104 126 102 168" fill="none" stroke="#1a1512" stroke-width="4.5"/>
+        <path d="M50 88 H70 V114 H50 Z" fill="#a9703a"/>
+        <path d="M50 90 V112 M70 90 V112" stroke="#1a1512" stroke-width="3"/>
+        <ellipse cx="60" cy="56" rx="34" ry="38" fill="#c98b42"/>
+        <path d="M28 68 Q34 92 60 93 Q86 92 92 68 Q60 81 28 68 Z" fill="#a9703a" opacity=".42"/>
+        <path d="M26 47 Q15 45 16 56 Q17 68 29 63" fill="#c98b42" stroke="#1a1512" stroke-width="3"/>
+        <path d="M94 47 Q105 45 104 56 Q103 68 91 63" fill="#c98b42" stroke="#1a1512" stroke-width="3"/>
+        <path d="M60 18 A34 38 0 0 1 94 56" fill="none" stroke="#1a1512" stroke-width="2.7"/>
+        <path d="M94 56 A34 38 0 0 1 60 94" fill="none" stroke="#1a1512" stroke-width="4.2"/>
+        <path d="M60 94 A34 38 0 0 1 26 56" fill="none" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M26 56 A34 38 0 0 1 60 18" fill="none" stroke="#1a1512" stroke-width="2.7"/>
+        <!-- mop of hair, drawn as overlapping lobes -->
+        <path d="M24 44 Q20 14 52 12 Q84 10 96 32 Q100 44 96 52 Q88 30 60 28 Q34 28 30 52 Q24 54 24 44 Z" fill="#2f1d0c" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M52 12 Q46 0 68 2 Q58 10 64 24 Z" fill="#2f1d0c" stroke="#1a1512" stroke-width="3"/>
+        <path d="M28 42 Q60 30 92 44 Q60 38 28 52 Z" fill="#1a1512"/>
+        <!-- round glasses -->
+        <g fill="#fff" stroke="#1a1512" stroke-width="3"><circle cx="45" cy="58" r="14"/><circle cx="76" cy="58" r="14"/></g>
+        <path d="M59 58 H62" stroke="#1a1512" stroke-width="3"/>
+        <circle cx="47" cy="60" r="5.6" fill="#1a1512"/>
+        <circle cx="78" cy="60" r="5.6" fill="#1a1512"/>
+        <circle cx="30" cy="72" r="6" fill="#e8766a" opacity=".5"/>
+        <circle cx="91" cy="72" r="6" fill="#e8766a" opacity=".5"/>
+        <path d="M46 78 Q60 100 75 78 Z" fill="#fff" stroke="#1a1512" stroke-width="3.6" stroke-linejoin="round"/>
+        <g stroke="#1a1512" stroke-width="1.9"><path d="M53 81 V91"/><path d="M61 82 V93"/><path d="M69 81 V91"/></g>
+      </g>
+    </symbol>
+
+    <symbol id="s22-pal-c" viewBox="0 0 120 170">
+      <g stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 168 Q14 125 41 110 Q60 102 79 110 Q106 125 104 168 Z" fill="#3f7a4e"/>
+        <path d="M16 168 Q14 125 41 110 L49 117 Q30 131 32 168 Z" fill="#2b5637"/>
+        <path d="M16 168 Q14 125 41 110" fill="none" stroke="#1a1512" stroke-width="4.2"/>
+        <path d="M41 110 Q60 102 79 110" fill="none" stroke="#1a1512" stroke-width="3"/>
+        <path d="M79 110 Q106 125 104 168" fill="none" stroke="#1a1512" stroke-width="3.9"/>
+        <path d="M49 87 H71 V113 H49 Z" fill="#8a5a2a"/>
+        <path d="M49 89 V111 M71 89 V111" stroke="#1a1512" stroke-width="3"/>
+        <ellipse cx="60" cy="55" rx="35" ry="38" fill="#a9703a"/>
+        <path d="M27 67 Q33 91 60 92 Q87 91 93 67 Q60 80 27 67 Z" fill="#8a5a2a" opacity=".42"/>
+        <path d="M25 46 Q14 44 15 55 Q16 67 28 62" fill="#a9703a" stroke="#1a1512" stroke-width="3"/>
+        <path d="M95 46 Q106 44 105 55 Q104 67 92 62" fill="#a9703a" stroke="#1a1512" stroke-width="3"/>
+        <path d="M60 17 A35 38 0 0 1 95 55" fill="none" stroke="#1a1512" stroke-width="2.7"/>
+        <path d="M95 55 A35 38 0 0 1 60 93" fill="none" stroke="#1a1512" stroke-width="4.5"/>
+        <path d="M60 93 A35 38 0 0 1 25 55" fill="none" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M25 55 A35 38 0 0 1 60 17" fill="none" stroke="#1a1512" stroke-width="2.7"/>
+        <!-- soft cap -->
+        <path d="M23 40 Q22 12 60 11 Q98 12 97 40 Z" fill="#efc23f" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M18 39 H102 Q107 53 92 53 H28 Q13 51 18 39 Z" fill="#c9980f" stroke="#1a1512" stroke-width="3.6"/>
+        <circle cx="60" cy="13" r="7" fill="#c9980f" stroke="#1a1512" stroke-width="3"/>
+        <ellipse cx="45" cy="60" rx="12" ry="13" fill="#fff" stroke="#1a1512" stroke-width="3"/>
+        <ellipse cx="76" cy="60" rx="12" ry="13" fill="#fff" stroke="#1a1512" stroke-width="3"/>
+        <circle cx="48" cy="63" r="5.2" fill="#1a1512"/>
+        <circle cx="79" cy="63" r="5.2" fill="#1a1512"/>
+        <circle cx="29" cy="73" r="6.2" fill="#e8766a" opacity=".5"/>
+        <circle cx="92" cy="73" r="6.2" fill="#e8766a" opacity=".5"/>
+        <g fill="#7a4a1c"><circle cx="34" cy="62" r="3.4"/><circle cx="40" cy="54" r="3"/><circle cx="87" cy="62" r="3.4"/><circle cx="81" cy="54" r="3"/></g>
+        <path d="M45 78 Q60 99 76 78 Z" fill="#fff" stroke="#1a1512" stroke-width="3.6" stroke-linejoin="round"/>
+        <g stroke="#1a1512" stroke-width="1.9"><path d="M52 81 V91"/><path d="M60 82 V93"/><path d="M69 81 V91"/></g>
+      </g>
+    </symbol>
+
+
+    <symbol id="s22-i-pencil" viewBox="0 0 48 48">
+      <g stroke="#1a1512" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M11 37 L14 27 L33 8 L40 15 L21 34 Z" fill="currentColor"/>
+        <path d="M33 8 L40 15" />
+        <path d="M11 37 L14 27 L21 34 Z" fill="#f6edd4"/>
+        <path d="M8 41 H24" />
+      </g>
+    </symbol>
+
+  </defs>
+</svg>
+
+<div class="s22-table">
+  <div class="s22-paper">
+    <div class="s22-loose" aria-hidden="true">
+      <svg class="s22-loose__dice" viewBox="0 0 120 120" focusable="false">
+        <g transform="rotate(-11 40 46)">
+          <rect x="6" y="14" width="58" height="58" rx="11" fill="#fcf6e6" stroke="#1a1512" stroke-width="3"/>
+          <g fill="#1a1512"><circle cx="22" cy="30" r="5"/><circle cx="48" cy="56" r="5"/><circle cx="35" cy="43" r="5"/></g>
+        </g>
+        <g transform="rotate(17 82 82)">
+          <rect x="54" y="52" width="54" height="54" rx="10" fill="#fcf6e6" stroke="#1a1512" stroke-width="3"/>
+          <g fill="#c8372a"><circle cx="70" cy="68" r="4.8"/><circle cx="92" cy="68" r="4.8"/><circle cx="70" cy="90" r="4.8"/><circle cx="92" cy="90" r="4.8"/></g>
+        </g>
+      </svg>
+    </div>
+
+    <div class="s22-paper__inner">
+
+      <header class="s22-mast">
+        <h1 class="s22-mast__title" id="s22-title">Welcome to Board Game Arena!</h1>
+      </header>
+
+      <div class="s22-panel s22-hero">
+        <div class="s22-hero__copy">
+          <p class="s22-lede">Join the largest boardgame table in the world.</p>
+          <a class="s22-cta" href="https://en.boardgamearena.com/account?page=newuser">
+            <svg class="s22-cta__icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#s22-i-pencil"/></svg>
+            <span class="s22-cta__text"><span class="s22-cta__main">Put your name down</span><span class="s22-cta__sub">Create free account <span aria-hidden="true">&rarr;</span></span></span>
+          </a>
+        </div>
+        <div class="s22-hero__art">
+          <svg class="s22-start" viewBox="0 0 560 460" role="img" aria-labelledby="s22-start-t" focusable="false">
+            <title id="s22-start-t">The clubhouse door seen straight on, with a painted arched sign above it. A sign-up sheet is pinned to the door with three friends&rsquo; names written in and one line left blank. A grinning pal points at the blank line.</title>
+            <defs><path id="s22-arc" d="M96 116 Q225 -2 354 116"/></defs>
+            <rect width="560" height="460" fill="url(#s22-sidingp)"/>
+            <path d="M0 340 H560 V460 H0 Z" fill="#8a9a5b"/>
+            <path d="M0 340 H560" stroke="#1a1512" stroke-width="3"/>
+            <g fill="none" stroke="#5e7a3c" stroke-width="2.4" stroke-linecap="round"><path d="M40 392 l-5 -14 M46 392 l1 -16 M52 392 l6 -13"/><path d="M470 420 l-5 -14 M476 420 l1 -16 M482 420 l6 -13"/><path d="M300 440 l-5 -12 M306 440 l1 -14 M312 440 l5 -11"/></g>
+
+            <!-- trim, door, hinges, handle, mat -->
+            <path d="M90 340 V250 a135 135 0 0 1 270 0 V340 Z" fill="#f3e6c4" stroke="#1a1512" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M104 340 V250 a121 121 0 0 1 242 0 V340 Z" fill="url(#s22-plankp)" stroke="#1a1512" stroke-width="3" stroke-linejoin="round"/>
+            <g fill="#6b4a22" stroke="#1a1512" stroke-width="2.2"><rect x="104" y="200" width="16" height="24" rx="3"/><rect x="104" y="290" width="16" height="24" rx="3"/></g>
+            <circle cx="334" cy="268" r="9" fill="#efc23f" stroke="#1a1512" stroke-width="2.4"/>
+            <rect x="118" y="344" width="214" height="22" rx="6" fill="#8d5a34" stroke="#1a1512" stroke-width="2.4"/>
+            <path d="M130 355 H320" stroke="#e9c98d" stroke-width="3" stroke-dasharray="10 8" stroke-linecap="round"/>
+
+            <!-- the arched painted sign, nailed above the door -->
+            <g class="s22-arch">
+              <path d="M96 116 Q225 -2 354 116" fill="none" stroke="#1a1512" stroke-width="46"/>
+              <path d="M96 116 Q225 -2 354 116" fill="none" stroke="#ecd8ab" stroke-width="40"/>
+              <text dy="9"><textPath href="#s22-arc" startOffset="50%" text-anchor="middle">Come on in</textPath></text>
+              <circle cx="98" cy="100" r="4.5" fill="#1a1512"/><circle cx="352" cy="100" r="4.5" fill="#1a1512"/>
+            </g>
+
+            <!-- the sign-up sheet pinned on the door -->
+            <g transform="rotate(-2 225 256)">
+              <path d="M140 180 H310 V332 H140 Z" fill="#fcf6e6" stroke="#1a1512" stroke-width="3" stroke-linejoin="round"/>
+              <text class="s22-sheet__head" x="225" y="206" text-anchor="middle">SIGN-UP SHEET</text>
+              <path d="M152 216 H298" stroke="#1a1512" stroke-width="2" stroke-opacity=".7"/>
+              <g stroke="#2f4a7a" stroke-width="1.6" stroke-opacity=".45"><path d="M152 246 H298"/><path d="M152 272 H298"/><path d="M152 298 H298"/><path d="M152 324 H298"/></g>
+              <text class="s22-sheet__name" x="156" y="241">1. Mia</text>
+              <text class="s22-sheet__name" x="156" y="267">2. Leo</text>
+              <text class="s22-sheet__name" x="156" y="293">3. Ana</text>
+              <text class="s22-sheet__blank" x="156" y="319">4. your name here</text>
+              <circle cx="152" cy="190" r="5.5" fill="#1a1512"/><circle cx="298" cy="190" r="5.5" fill="#1a1512"/>
+            </g>
+            <!-- a pencil on a string, hanging from the sheet -->
+            <path d="M142 330 Q130 350 150 366" fill="none" stroke="#8d5a34" stroke-width="2.4"/>
+            <g transform="rotate(18 176 366)">
+              <path d="M148 360 H206 V372 H148 Z" fill="#efc23f" stroke="#1a1512" stroke-width="2.4" stroke-linejoin="round"/>
+              <path d="M148 360 L134 366 L148 372 Z" fill="#fcf6e6" stroke="#1a1512" stroke-width="2.4" stroke-linejoin="round"/>
+              <path d="M206 360 H216 V372 H206 Z" fill="#c8372a" stroke="#1a1512" stroke-width="2.4" stroke-linejoin="round"/>
+            </g>
+
+            <!-- a bush by the door -->
+            <g stroke="#1a1512" stroke-width="2.4"><circle cx="30" cy="318" r="28" fill="#4f9a5c"/><circle cx="64" cy="332" r="20" fill="#5fae6a"/></g>
+            <g fill="#f0c23a"><circle cx="22" cy="310" r="3.4"/><circle cx="38" cy="324" r="3.4"/><circle cx="62" cy="326" r="3"/></g><g fill="#d2452c"><circle cx="34" cy="304" r="3"/><circle cx="70" cy="338" r="3"/></g>
+
+            <g class="s22-balloon">
+              <path d="M390 112 h138 a20 20 0 0 1 20 20 v52 a20 20 0 0 1 -20 20 h-72 l-26 24 l4 -24 h-44 a20 20 0 0 1 -20 -20 v-52 a20 20 0 0 1 20 -20 z" fill="#fcf6e6" stroke="#1a1512" stroke-width="3"/>
+              <text x="459" y="150" text-anchor="middle">We saved</text>
+              <text x="459" y="180" text-anchor="middle">you a spot!</text>
+            </g>
+
+            <!-- the pal beside the door, pointing at the blank line -->
+            <g>
+              <use href="#s22-pal-c" x="392" y="250" width="146" height="208"/>
+              <g class="s22-point-g"><use href="#s22-point" x="296" y="274" width="124" height="104" color="#a9703a"/></g>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="s22-plaques">
+        <h2 class="s22-sr" id="s22-numbers-t">The club in numbers</h2>
+        <dl class="s22-plaques__row" aria-labelledby="s22-numbers-t">
+          <div class="s22-plaque"><dt>Players</dt><dd>10,845,000</dd></div>
+          <div class="s22-plaque"><dt>Games</dt><dd>1,396</dd></div>
+          <div class="s22-plaque"><dt>Games a month</dt><dd>8,950,000</dd></div>
+        </dl>
+      </div>
+
+      <svg class="s22-link" viewBox="0 0 1200 220" aria-hidden="true" focusable="false">
+        <g><use href="#s22-pa" class="s22-rd__edge"/><use href="#s22-pa" class="s22-rd__pave"/><use href="#s22-pa" class="s22-rd__dots"/><use href="#s22-pa" class="s22-rd__line"/></g>
+      </svg>
+
+      <section class="s22-hook" aria-labelledby="s22-hook-t">
+        <div class="s22-band">
+          <h2 class="s22-h2" id="s22-hook-t">Which way tonight?</h2>
+          <p class="s22-band__kick">Pick your vibe</p>
+        </div>
+
+        <svg class="s22-fork" viewBox="0 0 1200 300" aria-hidden="true" focusable="false">
+          <g class="s22-br s22-br--strategy"><use href="#s22-pl" class="s22-rd__edge"/><use href="#s22-pl" class="s22-rd__pave"/><use href="#s22-pl" class="s22-rd__dots"/><use href="#s22-pl" class="s22-rd__line"/></g>
+          <g class="s22-br s22-br--friends"><use href="#s22-pr" class="s22-rd__edge"/><use href="#s22-pr" class="s22-rd__pave"/><use href="#s22-pr" class="s22-rd__dots"/><use href="#s22-pr" class="s22-rd__line"/></g>
+          <g class="s22-br s22-br--family"><use href="#s22-pf" class="s22-rd__edge"/><use href="#s22-pf" class="s22-rd__pave"/><use href="#s22-pf" class="s22-rd__dots"/><use href="#s22-pf" class="s22-rd__line"/></g>
+          <g class="s22-fork__hub">
+            <circle cx="600" cy="36" r="42"/>
+            <circle cx="600" cy="36" r="30"/>
+            <circle cx="600" cy="36" r="12"/>
+          </g>
+        </svg>
+
+        <fieldset class="s22-pick">
+          <legend class="s22-sr">Choose the road that fits your game night</legend>
+          <div class="s22-pick__row">
+            <div class="s22-vibe s22-vibe--strategy">
+              <input class="s22-sr" type="radio" name="s22-vibe" id="s22-vibe-strategy" value="strategy" data-road="Strategy" autocomplete="off">
+              <label for="s22-vibe-strategy">
+                <svg class="s22-vibe__pal" viewBox="0 0 120 170" aria-hidden="true" focusable="false"><use href="#s22-pal-b"/></svg>
+                <span class="s22-vibe__name">Strategy</span>
+                <span class="s22-vibe__note">Think it through</span>
+                <span class="s22-vibe__stamp" aria-hidden="true">This way</span>
+              </label>
+            </div>
+            <div class="s22-vibe s22-vibe--family">
+              <input class="s22-sr" type="radio" name="s22-vibe" id="s22-vibe-family" value="family" data-road="Family" autocomplete="off">
+              <label for="s22-vibe-family">
+                <svg class="s22-vibe__pal" viewBox="0 0 120 170" aria-hidden="true" focusable="false"><use href="#s22-pal-c"/></svg>
+                <span class="s22-vibe__name">Family</span>
+                <span class="s22-vibe__note">Easy going</span>
+                <span class="s22-vibe__stamp" aria-hidden="true">This way</span>
+              </label>
+            </div>
+            <div class="s22-vibe s22-vibe--friends">
+              <input class="s22-sr" type="radio" name="s22-vibe" id="s22-vibe-friends" value="friends" data-road="With friends" autocomplete="off">
+              <label for="s22-vibe-friends">
+                <svg class="s22-vibe__pal" viewBox="0 0 120 170" aria-hidden="true" focusable="false"><use href="#s22-pal-a"/></svg>
+                <span class="s22-vibe__name">With friends</span>
+                <span class="s22-vibe__note">Bring the crew</span>
+                <span class="s22-vibe__stamp" aria-hidden="true">This way</span>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="s22-herald">
+          <p class="s22-status" role="status" aria-live="polite">All ten games are on the road.</p>
+          <button class="s22-reset" type="button" hidden>Show all ten</button>
+        </div>
+
+        <h3 class="s22-sr">The top ten games</h3>
+        <ol class="s22-ads">
+          <li class="s22-ad s22-fit-strategy"><div class="s22-ad__pic"><img class="s22-cover" src="img/covers/ark-nova.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s22-ad__name">Ark Nova</h4><p class="s22-ad__tag">Strategy</p></li>
+          <li class="s22-ad s22-fit-strategy"><div class="s22-ad__pic"><img class="s22-cover" src="img/covers/terraforming-mars.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s22-ad__name">Terraforming Mars</h4><p class="s22-ad__tag">Strategy</p></li>
+          <li class="s22-ad s22-ad--family s22-fit-family s22-fit-friends"><div class="s22-ad__pic"><img class="s22-cover" src="img/covers/catan.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s22-ad__name">CATAN</h4><p class="s22-ad__tag">Family</p></li>
+          <li class="s22-ad s22-fit-strategy"><div class="s22-ad__pic"><img class="s22-cover" src="img/covers/wingspan.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s22-ad__name">Wingspan</h4><p class="s22-ad__tag">Strategy</p></li>
+          <li class="s22-ad s22-ad--family s22-fit-family"><div class="s22-ad__pic"><img class="s22-cover" src="img/covers/azul.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s22-ad__name">Azul</h4><p class="s22-ad__tag">Family</p></li>
+          <li class="s22-ad s22-ad--family s22-fit-family s22-fit-friends"><div class="s22-ad__pic"><img class="s22-cover" src="img/covers/ticket-to-ride.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s22-ad__name">Ticket to Ride</h4><p class="s22-ad__tag">Family</p></li>
+          <li class="s22-ad s22-ad--family s22-fit-family s22-fit-friends"><div class="s22-ad__pic"><img class="s22-cover" src="img/covers/carcassonne.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s22-ad__name">Carcassonne</h4><p class="s22-ad__tag">Family</p></li>
+          <li class="s22-ad s22-fit-strategy"><div class="s22-ad__pic"><img class="s22-cover" src="img/covers/castles-of-burgundy.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s22-ad__name">The Castles of Burgundy</h4><p class="s22-ad__tag">Strategy</p></li>
+          <li class="s22-ad s22-ad--family s22-fit-family"><div class="s22-ad__pic"><img class="s22-cover" src="img/covers/splendor.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s22-ad__name">Splendor</h4><p class="s22-ad__tag">Family</p></li>
+          <li class="s22-ad s22-ad--coop s22-fit-friends"><div class="s22-ad__pic"><img class="s22-cover" src="img/covers/nemesis-retaliation.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s22-ad__name">Nemesis: Retaliation</h4><p class="s22-ad__tag">Co-op</p></li>
+        </ol>
+        <p class="s22-more"><a href="https://en.boardgamearena.com/gamelist">See all 1,396 games <span aria-hidden="true">&rarr;</span></a></p>
+      </section>
+
+      <svg class="s22-link s22-merge" viewBox="0 0 1200 240" aria-hidden="true" focusable="false">
+        <g class="s22-br s22-br--friends"><use href="#s22-mr" class="s22-rd__edge"/><use href="#s22-mr" class="s22-rd__pave"/><use href="#s22-mr" class="s22-rd__dots"/><use href="#s22-mr" class="s22-rd__line"/></g>
+        <g class="s22-br s22-br--family"><use href="#s22-mm" class="s22-rd__edge"/><use href="#s22-mm" class="s22-rd__pave"/><use href="#s22-mm" class="s22-rd__dots"/><use href="#s22-mm" class="s22-rd__line"/></g>
+        <g class="s22-br s22-br--strategy"><use href="#s22-ml" class="s22-rd__edge"/><use href="#s22-ml" class="s22-rd__pave"/><use href="#s22-ml" class="s22-rd__dots"/><use href="#s22-ml" class="s22-rd__line"/></g>
+      </svg>
+
+      <section class="s22-stop s22-stop--left" aria-labelledby="s22-why-t">
+        <div class="s22-lane" aria-hidden="true"></div>
+        <p class="s22-mile" aria-hidden="true"><span>&sect;</span></p>
+        <div class="s22-stop__body">
+          <div class="s22-band s22-band--green">
+            <h2 class="s22-h2" id="s22-why-t">House rules</h2>
+            <p class="s22-band__kick">Tied on the rope</p>
+          </div>
+          <ul class="s22-tags">
+              <li class="s22-tag s22-tag--sun"><span class="s22-tag__string" aria-hidden="true"></span><span class="s22-tag__hole" aria-hidden="true"></span><div class="s22-tag__face"><h3>Free</h3><p>Your account costs nothing.</p></div></li>
+              <li class="s22-tag s22-tag--sky"><span class="s22-tag__string" aria-hidden="true"></span><span class="s22-tag__hole" aria-hidden="true"></span><div class="s22-tag__face"><h3>No download</h3><p>Every game runs in your browser.</p></div></li>
+              <li class="s22-tag s22-tag--leaf"><span class="s22-tag__string" aria-hidden="true"></span><span class="s22-tag__hole" aria-hidden="true"></span><div class="s22-tag__face"><h3>Any device</h3><p>PC, Mac, tablet or phone.</p></div></li>
+              <li class="s22-tag s22-tag--rose"><span class="s22-tag__string" aria-hidden="true"></span><span class="s22-tag__hole" aria-hidden="true"></span><div class="s22-tag__face"><h3>Everyone&rsquo;s welcome</h3><p>42 languages, players in 200+ countries.</p></div></li>
+          </ul>
+        </div>
+      </section>
+
+      <svg class="s22-link" viewBox="0 0 1200 220" aria-hidden="true" focusable="false">
+        <g><use href="#s22-pc" class="s22-rd__edge"/><use href="#s22-pc" class="s22-rd__pave"/><use href="#s22-pc" class="s22-rd__dots"/><use href="#s22-pc" class="s22-rd__line"/></g>
+      </svg>
+
+      <section class="s22-stop s22-stop--right" aria-labelledby="s22-join-t">
+        <div class="s22-lane" aria-hidden="true"></div>
+        <p class="s22-mile" aria-hidden="true"><span>Go</span></p>
+        <div class="s22-stop__body">
+          <div class="s22-band">
+            <h2 class="s22-h2" id="s22-join-t">How to join</h2>
+            <p class="s22-band__kick">Follow the stones</p>
+          </div>
+          <div class="s22-lawn">
+            <ol class="s22-stones">
+              <li class="s22-stone"><span class="s22-stone__rock" aria-hidden="true">1</span><span class="s22-stone__text">Create your free account</span></li>
+              <li class="s22-stone"><span class="s22-stone__rock" aria-hidden="true">2</span><span class="s22-stone__text">Pick a game your friends know</span></li>
+              <li class="s22-stone"><span class="s22-stone__rock" aria-hidden="true">3</span><span class="s22-stone__text">Play in your browser</span></li>
+            </ol>
+            <p class="s22-join__go">
+              <a class="s22-cta" href="https://en.boardgamearena.com/account?page=newuser">
+              <svg class="s22-cta__icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#s22-i-pencil"/></svg>
+              <span class="s22-cta__text"><span class="s22-cta__main">Put your name down</span><span class="s22-cta__sub">Create free account <span aria-hidden="true">&rarr;</span></span></span>
+            </a>
+              <svg class="s22-join__door" viewBox="0 0 64 88" aria-hidden="true" focusable="false">
+                <path d="M4 86 V34 a28 28 0 0 1 56 0 V86 Z" fill="#f3e6c4" stroke="#1a1512" stroke-width="2.4" stroke-linejoin="round"/>
+                <path d="M10 86 V35 a22 22 0 0 1 44 0 V86 Z" fill="url(#s22-plankp)" stroke="#1a1512" stroke-width="2.4" stroke-linejoin="round"/>
+                <circle cx="45" cy="60" r="3.4" fill="#efc23f" stroke="#1a1512" stroke-width="1.8"/>
+                <path d="M2 86 H62" stroke="#1a1512" stroke-width="2.6" stroke-linecap="round"/>
+              </svg>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <svg class="s22-link" viewBox="0 0 1200 220" aria-hidden="true" focusable="false">
+        <g><use href="#s22-pd" class="s22-rd__edge"/><use href="#s22-pd" class="s22-rd__pave"/><use href="#s22-pd" class="s22-rd__dots"/><use href="#s22-pd" class="s22-rd__line"/></g>
+      </svg>
+
+      <section class="s22-finish" aria-labelledby="s22-finish-t">
+        <div class="s22-lane s22-lane--finish" aria-hidden="true"></div>
+        <div class="s22-panel s22-finish__panel">
+          <p class="s22-finish__word" aria-hidden="true">Finish</p>
+          <svg class="s22-finish__art" viewBox="0 0 540 210" role="img" aria-labelledby="s22-fin-t" focusable="false">
+            <title id="s22-fin-t">The crew grin round the clubhouse table, with one stool left free for you.</title>
+            <rect width="540" height="210" fill="#fcf6e6"/>
+            <rect width="540" height="210" fill="url(#s22-doty)" opacity=".4"/>
+            <use href="#s22-pal-a" x="16" y="46" width="116" height="164"/>
+            <use href="#s22-pal-b" x="146" y="38" width="116" height="164"/>
+            <use href="#s22-pal-c" x="276" y="46" width="116" height="164"/>
+            <g class="s22-seat">
+              <path d="M418 198 V150 h96 V198 M430 198 V160 M502 198 V160" fill="none" stroke="#c8372a" stroke-width="4.2" stroke-dasharray="14 10" stroke-linecap="round"/>
+              <text class="s22-seat__word" x="466" y="128" text-anchor="middle">Your stool</text>
+            </g>
+          </svg>
+        </div>
+        <h2 class="s22-h2 s22-finish__title" id="s22-finish-t">Your crew kept a stool free. <em>Your move.</em></h2>
+        <a class="s22-cta" href="https://en.boardgamearena.com/account?page=newuser">
+          <svg class="s22-cta__icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#s22-i-pencil"/></svg>
+          <span class="s22-cta__text"><span class="s22-cta__main">Put your name down</span><span class="s22-cta__sub">Create free account <span aria-hidden="true">&rarr;</span></span></span>
+        </a>
+      </section>
+
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ 23 ============ -->
+<section class="style" id="s23" data-name="Welcome Board" data-hook="Pick your vibe" aria-labelledby="s23-title">
+<svg class="s23-defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="s23-dotk" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="3.5" cy="3.5" r="1.8" fill="#1a1512"/></pattern>
+    <pattern id="s23-doty" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="2.4" fill="#efc23f"/></pattern>
+    <!-- Road geometry, shared with the SVG links. One unit is 1/1200 of the sheet. -->
+    <path id="s23-pa" d="M936 0 C936 130 600 90 600 220"/>
+    <path id="s23-pf" d="M600 30 V300"/>
+    <path id="s23-pl" d="M600 30 C600 170 200 130 200 300"/>
+    <path id="s23-pr" d="M600 30 C600 170 1000 130 1000 300"/>
+    <path id="s23-ml" d="M200 0 C200 120 90 110 90 240"/>
+    <path id="s23-mm" d="M600 0 C600 150 90 90 90 240"/>
+    <path id="s23-mr" d="M1000 0 C1000 170 90 70 90 240"/>
+    <path id="s23-pc" d="M90 0 C90 130 1110 90 1110 220"/>
+    <path id="s23-pd" d="M1110 0 C1110 140 600 70 600 220"/>
+
+    <!-- A pointing hand, index finger out to the left. Fingers are capsules and
+         the palm is drawn last so it covers their roots and reads as one shape. -->
+    <symbol id="s23-point" viewBox="0 0 120 100">
+      <g stroke="#1a1512" stroke-width="3.6" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="2" y="38" width="76" height="16" rx="8" fill="currentColor"/>
+        <rect x="60" y="56" width="30" height="15" rx="7.5" fill="currentColor"/>
+        <rect x="64" y="69" width="26" height="14" rx="7" fill="currentColor"/>
+        <rect x="80" y="22" width="15" height="28" rx="7.5" fill="currentColor" transform="rotate(16 87.5 36)"/>
+        <path d="M76 34 Q104 28 112 54 Q114 78 94 88 Q76 90 72 72 Q70 48 76 34 Z" fill="currentColor"/>
+      </g>
+    </symbol>
+
+    <!-- The crew. Three original pals, waist-up. Every contour is split into arcs
+         of different stroke weight so a line swells and thins; fills are flat cel
+         colour with one darker shade, and no screen runs over them. -->
+    <symbol id="s23-pal-a" viewBox="0 0 120 170">
+      <g stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 168 Q12 124 40 109 Q60 101 80 109 Q108 124 106 168 Z" fill="#3f7fc0"/>
+        <path d="M14 168 Q12 124 40 109 L48 116 Q28 130 30 168 Z" fill="#255b93"/>
+        <path d="M14 168 Q12 124 40 109" fill="none" stroke="#1a1512" stroke-width="4.5"/>
+        <path d="M40 109 Q60 101 80 109" fill="none" stroke="#1a1512" stroke-width="3"/>
+        <path d="M80 109 Q108 124 106 168" fill="none" stroke="#1a1512" stroke-width="3.9"/>
+        <path d="M49 86 H71 V112 H49 Z" fill="#c98b42"/>
+        <path d="M49 88 V110 M71 88 V110" stroke="#1a1512" stroke-width="3"/>
+        <ellipse cx="60" cy="55" rx="36" ry="39" fill="#e8ae63"/>
+        <path d="M26 66 Q33 92 60 93 Q87 92 94 66 Q60 80 26 66 Z" fill="#c98b42" opacity=".4"/>
+        <path d="M24 46 Q13 44 14 55 Q15 67 27 62" fill="#e8ae63" stroke="#1a1512" stroke-width="3"/>
+        <path d="M96 46 Q107 44 106 55 Q105 67 93 62" fill="#e8ae63" stroke="#1a1512" stroke-width="3"/>
+        <path d="M60 16 A36 39 0 0 1 96 55" fill="none" stroke="#1a1512" stroke-width="2.7"/>
+        <path d="M96 55 A36 39 0 0 1 60 94" fill="none" stroke="#1a1512" stroke-width="4.5"/>
+        <path d="M60 94 A36 39 0 0 1 24 55" fill="none" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M24 55 A36 39 0 0 1 60 16" fill="none" stroke="#1a1512" stroke-width="2.7"/>
+        <!-- two hair puffs -->
+        <circle cx="26" cy="24" r="17" fill="#4a2c12" stroke="#1a1512" stroke-width="3.6"/>
+        <circle cx="94" cy="24" r="17" fill="#4a2c12" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M26 30 Q30 10 60 9 Q90 10 94 30 Q60 20 26 30 Z" fill="#4a2c12" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M27 40 Q60 28 93 42 Q60 36 27 50 Z" fill="#1a1512"/>
+        <ellipse cx="45" cy="56" rx="12.5" ry="13.5" fill="#fff" stroke="#1a1512" stroke-width="3"/>
+        <ellipse cx="76" cy="56" rx="12.5" ry="13.5" fill="#fff" stroke="#1a1512" stroke-width="3"/>
+        <circle cx="48" cy="59" r="5.4" fill="#1a1512"/>
+        <circle cx="79" cy="59" r="5.4" fill="#1a1512"/>
+        <circle cx="29" cy="70" r="6.5" fill="#e8766a" opacity=".55"/>
+        <circle cx="92" cy="70" r="6.5" fill="#e8766a" opacity=".55"/>
+        <path d="M44 75 Q60 101 77 75 Z" fill="#fff" stroke="#1a1512" stroke-width="3.6" stroke-linejoin="round"/>
+        <g stroke="#1a1512" stroke-width="2"><path d="M52 79 V90"/><path d="M60 81 V93"/><path d="M69 79 V90"/></g>
+      </g>
+    </symbol>
+
+    <symbol id="s23-pal-b" viewBox="0 0 120 170">
+      <g stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 168 Q16 126 42 111 Q60 104 78 111 Q104 126 102 168 Z" fill="#c8372a"/>
+        <path d="M78 111 Q104 126 102 168 H86 Q88 130 70 117 Z" fill="#9c2318"/>
+        <path d="M18 168 Q16 126 42 111" fill="none" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M42 111 Q60 104 78 111" fill="none" stroke="#1a1512" stroke-width="3"/>
+        <path d="M78 111 Q104 126 102 168" fill="none" stroke="#1a1512" stroke-width="4.5"/>
+        <path d="M50 88 H70 V114 H50 Z" fill="#a9703a"/>
+        <path d="M50 90 V112 M70 90 V112" stroke="#1a1512" stroke-width="3"/>
+        <ellipse cx="60" cy="56" rx="34" ry="38" fill="#c98b42"/>
+        <path d="M28 68 Q34 92 60 93 Q86 92 92 68 Q60 81 28 68 Z" fill="#a9703a" opacity=".42"/>
+        <path d="M26 47 Q15 45 16 56 Q17 68 29 63" fill="#c98b42" stroke="#1a1512" stroke-width="3"/>
+        <path d="M94 47 Q105 45 104 56 Q103 68 91 63" fill="#c98b42" stroke="#1a1512" stroke-width="3"/>
+        <path d="M60 18 A34 38 0 0 1 94 56" fill="none" stroke="#1a1512" stroke-width="2.7"/>
+        <path d="M94 56 A34 38 0 0 1 60 94" fill="none" stroke="#1a1512" stroke-width="4.2"/>
+        <path d="M60 94 A34 38 0 0 1 26 56" fill="none" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M26 56 A34 38 0 0 1 60 18" fill="none" stroke="#1a1512" stroke-width="2.7"/>
+        <!-- mop of hair, drawn as overlapping lobes -->
+        <path d="M24 44 Q20 14 52 12 Q84 10 96 32 Q100 44 96 52 Q88 30 60 28 Q34 28 30 52 Q24 54 24 44 Z" fill="#2f1d0c" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M52 12 Q46 0 68 2 Q58 10 64 24 Z" fill="#2f1d0c" stroke="#1a1512" stroke-width="3"/>
+        <path d="M28 42 Q60 30 92 44 Q60 38 28 52 Z" fill="#1a1512"/>
+        <!-- round glasses -->
+        <g fill="#fff" stroke="#1a1512" stroke-width="3"><circle cx="45" cy="58" r="14"/><circle cx="76" cy="58" r="14"/></g>
+        <path d="M59 58 H62" stroke="#1a1512" stroke-width="3"/>
+        <circle cx="47" cy="60" r="5.6" fill="#1a1512"/>
+        <circle cx="78" cy="60" r="5.6" fill="#1a1512"/>
+        <circle cx="30" cy="72" r="6" fill="#e8766a" opacity=".5"/>
+        <circle cx="91" cy="72" r="6" fill="#e8766a" opacity=".5"/>
+        <path d="M46 78 Q60 100 75 78 Z" fill="#fff" stroke="#1a1512" stroke-width="3.6" stroke-linejoin="round"/>
+        <g stroke="#1a1512" stroke-width="1.9"><path d="M53 81 V91"/><path d="M61 82 V93"/><path d="M69 81 V91"/></g>
+      </g>
+    </symbol>
+
+    <symbol id="s23-pal-c" viewBox="0 0 120 170">
+      <g stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 168 Q14 125 41 110 Q60 102 79 110 Q106 125 104 168 Z" fill="#3f7a4e"/>
+        <path d="M16 168 Q14 125 41 110 L49 117 Q30 131 32 168 Z" fill="#2b5637"/>
+        <path d="M16 168 Q14 125 41 110" fill="none" stroke="#1a1512" stroke-width="4.2"/>
+        <path d="M41 110 Q60 102 79 110" fill="none" stroke="#1a1512" stroke-width="3"/>
+        <path d="M79 110 Q106 125 104 168" fill="none" stroke="#1a1512" stroke-width="3.9"/>
+        <path d="M49 87 H71 V113 H49 Z" fill="#8a5a2a"/>
+        <path d="M49 89 V111 M71 89 V111" stroke="#1a1512" stroke-width="3"/>
+        <ellipse cx="60" cy="55" rx="35" ry="38" fill="#a9703a"/>
+        <path d="M27 67 Q33 91 60 92 Q87 91 93 67 Q60 80 27 67 Z" fill="#8a5a2a" opacity=".42"/>
+        <path d="M25 46 Q14 44 15 55 Q16 67 28 62" fill="#a9703a" stroke="#1a1512" stroke-width="3"/>
+        <path d="M95 46 Q106 44 105 55 Q104 67 92 62" fill="#a9703a" stroke="#1a1512" stroke-width="3"/>
+        <path d="M60 17 A35 38 0 0 1 95 55" fill="none" stroke="#1a1512" stroke-width="2.7"/>
+        <path d="M95 55 A35 38 0 0 1 60 93" fill="none" stroke="#1a1512" stroke-width="4.5"/>
+        <path d="M60 93 A35 38 0 0 1 25 55" fill="none" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M25 55 A35 38 0 0 1 60 17" fill="none" stroke="#1a1512" stroke-width="2.7"/>
+        <!-- soft cap -->
+        <path d="M23 40 Q22 12 60 11 Q98 12 97 40 Z" fill="#efc23f" stroke="#1a1512" stroke-width="3.6"/>
+        <path d="M18 39 H102 Q107 53 92 53 H28 Q13 51 18 39 Z" fill="#c9980f" stroke="#1a1512" stroke-width="3.6"/>
+        <circle cx="60" cy="13" r="7" fill="#c9980f" stroke="#1a1512" stroke-width="3"/>
+        <ellipse cx="45" cy="60" rx="12" ry="13" fill="#fff" stroke="#1a1512" stroke-width="3"/>
+        <ellipse cx="76" cy="60" rx="12" ry="13" fill="#fff" stroke="#1a1512" stroke-width="3"/>
+        <circle cx="48" cy="63" r="5.2" fill="#1a1512"/>
+        <circle cx="79" cy="63" r="5.2" fill="#1a1512"/>
+        <circle cx="29" cy="73" r="6.2" fill="#e8766a" opacity=".5"/>
+        <circle cx="92" cy="73" r="6.2" fill="#e8766a" opacity=".5"/>
+        <g fill="#7a4a1c"><circle cx="34" cy="62" r="3.4"/><circle cx="40" cy="54" r="3"/><circle cx="87" cy="62" r="3.4"/><circle cx="81" cy="54" r="3"/></g>
+        <path d="M45 78 Q60 99 76 78 Z" fill="#fff" stroke="#1a1512" stroke-width="3.6" stroke-linejoin="round"/>
+        <g stroke="#1a1512" stroke-width="1.9"><path d="M52 81 V91"/><path d="M60 82 V93"/><path d="M69 81 V91"/></g>
+      </g>
+    </symbol>
+
+
+    <symbol id="s23-i-pencil" viewBox="0 0 48 48">
+      <g stroke="#1a1512" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M11 37 L14 27 L33 8 L40 15 L21 34 Z" fill="currentColor"/>
+        <path d="M33 8 L40 15" />
+        <path d="M11 37 L14 27 L21 34 Z" fill="#f6edd4"/>
+        <path d="M8 41 H24" />
+      </g>
+    </symbol>
+
+    <clipPath id="s23-polc"><rect x="28" y="210" width="166" height="170"/></clipPath>
+  </defs>
+</svg>
+
+<div class="s23-table">
+  <div class="s23-paper">
+    <div class="s23-loose" aria-hidden="true">
+      <svg class="s23-loose__dice" viewBox="0 0 120 120" focusable="false">
+        <g transform="rotate(-11 40 46)">
+          <rect x="6" y="14" width="58" height="58" rx="11" fill="#fcf6e6" stroke="#1a1512" stroke-width="3"/>
+          <g fill="#1a1512"><circle cx="22" cy="30" r="5"/><circle cx="48" cy="56" r="5"/><circle cx="35" cy="43" r="5"/></g>
+        </g>
+        <g transform="rotate(17 82 82)">
+          <rect x="54" y="52" width="54" height="54" rx="10" fill="#fcf6e6" stroke="#1a1512" stroke-width="3"/>
+          <g fill="#c8372a"><circle cx="70" cy="68" r="4.8"/><circle cx="92" cy="68" r="4.8"/><circle cx="70" cy="90" r="4.8"/><circle cx="92" cy="90" r="4.8"/></g>
+        </g>
+      </svg>
+      <svg class="s23-loose__chalk" viewBox="0 0 140 120" focusable="false">
+        <g stroke="#1a1512" stroke-width="3" stroke-linejoin="round">
+          <rect x="10" y="24" width="86" height="20" rx="7" fill="#f6f2e2" transform="rotate(-9 53 34)"/>
+          <rect x="24" y="56" width="74" height="18" rx="6" fill="#efc23f" transform="rotate(6 61 65)"/>
+          <rect x="16" y="84" width="66" height="18" rx="6" fill="#f6f2e2" transform="rotate(-4 49 93)"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="s23-paper__inner">
+
+      <header class="s23-mast">
+        <h1 class="s23-mast__title" id="s23-title">Welcome to Board Game Arena!</h1>
+      </header>
+
+      <div class="s23-board">
+        <div class="s23-hero">
+          <div class="s23-hero__copy s23-pin">
+            <p class="s23-lede">Join the largest boardgame table in the world.</p>
+            <a class="s23-cta" href="https://en.boardgamearena.com/account?page=newuser">
+            <svg class="s23-cta__icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#s23-i-pencil"/></svg>
+            <span class="s23-cta__text"><span class="s23-cta__main">Put your name down</span><span class="s23-cta__sub">Create free account <span aria-hidden="true">&rarr;</span></span></span>
+          </a>
+          </div>
+          <div class="s23-hero__art">
+            <svg class="s23-start" viewBox="0 0 600 460" role="img" aria-labelledby="s23-start-t" focusable="false">
+            <title id="s23-start-t">A big sign-up sheet pinned to a corkboard. Three friends have written their names; one ruled line is left blank with a pencil under it. A grinning pal in a snapshot points at the empty line.</title>
+
+            <!-- the sign-up sheet, pinned -->
+            <g transform="rotate(-2.2 374 230)">
+              <path d="M241 47 H517 V382 L487 416 H241 Z" fill="#2a1a08" opacity=".22"/>
+              <path d="M236 40 H512 V376 L482 410 H236 Z" fill="#fcf6e6" stroke="#1a1512" stroke-width="2.4" stroke-linejoin="round"/>
+              <path d="M512 376 L482 410 V376 Z" fill="#e6dcc0" stroke="#1a1512" stroke-width="2" stroke-linejoin="round"/>
+              <text class="s23-sheet__head" x="374" y="88" text-anchor="middle">SIGN-UP SHEET</text>
+              <path d="M256 104 H492" stroke="#1a1512" stroke-width="2" stroke-opacity=".7"/>
+              <g stroke="#2f4a7a" stroke-width="1.6" stroke-opacity=".45">
+                <path d="M256 160 H492"/><path d="M256 208 H492"/><path d="M256 256 H492"/><path d="M256 304 H492"/>
+              </g>
+              <text class="s23-sheet__name" x="262" y="152">1. Mia</text>
+              <text class="s23-sheet__name" x="262" y="200">2. Leo</text>
+              <text class="s23-sheet__name" x="262" y="248">3. Ana</text>
+              <text class="s23-sheet__blank" x="262" y="296">4. your name here</text>
+              <!-- a pencil under the blank line -->
+              <g transform="rotate(-5 400 342)">
+                <path d="M340 334 H424 V348 H340 Z" fill="#efc23f" stroke="#1a1512" stroke-width="2.2" stroke-linejoin="round"/>
+                <path d="M340 334 L322 341 L340 348 Z" fill="#fcf6e6" stroke="#1a1512" stroke-width="2.2" stroke-linejoin="round"/>
+                <path d="M424 334 H436 V348 H424 Z" fill="#c8372a" stroke="#1a1512" stroke-width="2.2" stroke-linejoin="round"/>
+              </g>
+              <g><ellipse cx="376" cy="64" rx="9" ry="3.6" fill="#2a1a08" opacity=".25"/><circle cx="374" cy="52" r="11" fill="#c8372a" stroke="#1a1512" stroke-width="2"/><circle cx="370.15" cy="47.6" r="3.52" fill="#fff" opacity=".6"/></g>
+            </g>
+
+            <!-- a small pinned card with a die -->
+            <g transform="rotate(7 554 384)">
+              <rect x="516" y="352" width="78" height="62" rx="3" fill="#fcf6e6" stroke="#1a1512" stroke-width="2"/>
+              <rect x="539" y="364" width="32" height="32" rx="7" fill="#fff" stroke="#1a1512" stroke-width="2"/>
+              <g fill="#1a1512"><circle cx="548" cy="373" r="2.8"/><circle cx="562" cy="373" r="2.8"/><circle cx="555" cy="380" r="2.8"/><circle cx="548" cy="387" r="2.8"/><circle cx="562" cy="387" r="2.8"/></g>
+              <g><ellipse cx="557" cy="369" rx="9" ry="3.6" fill="#2a1a08" opacity=".25"/><circle cx="555" cy="357" r="8" fill="#2f6fd0" stroke="#1a1512" stroke-width="2"/><circle cx="552.2" cy="353.8" r="2.56" fill="#fff" opacity=".6"/></g>
+            </g>
+            <!-- and a small pinned star -->
+            <g transform="rotate(-8 566 70)">
+              <rect x="536" y="44" width="60" height="50" rx="3" fill="#ffd1df" stroke="#1a1512" stroke-width="2"/>
+              <path d="M566 54 L571 66 L584 66 L574 74 L578 86 L566 78 L554 86 L558 74 L548 66 L561 66 Z" fill="#efc23f" stroke="#1a1512" stroke-width="1.8" stroke-linejoin="round"/>
+              <g><ellipse cx="568" cy="61" rx="9" ry="3.6" fill="#2a1a08" opacity=".25"/><circle cx="566" cy="49" r="8" fill="#2fa86a" stroke="#1a1512" stroke-width="2"/><circle cx="563.2" cy="45.8" r="2.56" fill="#fff" opacity=".6"/></g>
+            </g>
+
+            <g class="s23-balloon">
+              <path d="M36 40 h168 a20 20 0 0 1 20 20 v52 a20 20 0 0 1 -20 20 h-96 l-28 24 l5 -24 h-49 a20 20 0 0 1 -20 -20 v-52 a20 20 0 0 1 20 -20 z" fill="#fcf6e6" stroke="#1a1512" stroke-width="2.4"/>
+              <text x="120" y="76" text-anchor="middle">We saved</text>
+              <text x="120" y="106" text-anchor="middle">you a spot!</text>
+            </g>
+
+            <!-- the pal, in a pinned snapshot, pointing at the blank line -->
+            <g transform="rotate(-3.5 110 312)">
+              <rect x="20" y="206" width="196" height="238" rx="3" fill="#2a1a08" opacity=".22"/>
+              <rect x="14" y="198" width="196" height="238" rx="3" fill="#fffdf6" stroke="#1a1512" stroke-width="2"/>
+              <rect x="26" y="210" width="172" height="172" fill="#efc23f"/>
+              <rect x="26" y="210" width="172" height="172" fill="url(#s23-doty)" opacity=".4"/>
+              <g clip-path="url(#s23-polc)"><use href="#s23-pal-c" x="34" y="226" width="158" height="224"/></g>
+              <rect x="26" y="210" width="172" height="172" fill="none" stroke="#1a1512" stroke-width="1.6"/>
+              <g><ellipse cx="114" cy="217" rx="9" ry="3.6" fill="#2a1a08" opacity=".25"/><circle cx="112" cy="205" r="10" fill="#efc23f" stroke="#1a1512" stroke-width="2"/><circle cx="108.5" cy="201.0" r="3.2" fill="#fff" opacity=".6"/></g>
+              <g class="s23-point-g"><use href="#s23-point" transform="translate(262 0) scale(-1 1)" x="0" y="262" width="124" height="104" color="#a9703a"/></g>
+            </g>
+          </svg>
+          </div>
+        </div>
+
+        <h2 class="s23-sr" id="s23-tally-t">The club in numbers</h2>
+        <dl class="s23-tally" aria-labelledby="s23-tally-t">
+          <div class="s23-tally__cell s23-pin"><dt>Players</dt><dd>10,845,000</dd></div>
+          <div class="s23-tally__cell s23-pin"><dt>Games</dt><dd>1,396</dd></div>
+          <div class="s23-tally__cell s23-pin"><dt>Games a month</dt><dd>8,950,000</dd></div>
+        </dl>
+      </div>
+
+      <svg class="s23-link" viewBox="0 0 1200 220" aria-hidden="true" focusable="false">
+        <g><use href="#s23-pa" class="s23-rd__edge"/><use href="#s23-pa" class="s23-rd__pave"/><use href="#s23-pa" class="s23-rd__dots"/><use href="#s23-pa" class="s23-rd__line"/></g>
+      </svg>
+
+      <section class="s23-hook" aria-labelledby="s23-hook-t">
+        <div class="s23-band">
+          <h2 class="s23-h2" id="s23-hook-t">Which way tonight?</h2>
+          <p class="s23-band__kick">Pick your vibe</p>
+        </div>
+
+        <svg class="s23-fork" viewBox="0 0 1200 300" aria-hidden="true" focusable="false">
+          <g class="s23-br s23-br--strategy"><use href="#s23-pl" class="s23-rd__edge"/><use href="#s23-pl" class="s23-rd__pave"/><use href="#s23-pl" class="s23-rd__dots"/><use href="#s23-pl" class="s23-rd__line"/></g>
+          <g class="s23-br s23-br--friends"><use href="#s23-pr" class="s23-rd__edge"/><use href="#s23-pr" class="s23-rd__pave"/><use href="#s23-pr" class="s23-rd__dots"/><use href="#s23-pr" class="s23-rd__line"/></g>
+          <g class="s23-br s23-br--family"><use href="#s23-pf" class="s23-rd__edge"/><use href="#s23-pf" class="s23-rd__pave"/><use href="#s23-pf" class="s23-rd__dots"/><use href="#s23-pf" class="s23-rd__line"/></g>
+          <g class="s23-fork__hub">
+            <circle cx="600" cy="36" r="42"/>
+            <circle cx="600" cy="36" r="30"/>
+            <circle cx="600" cy="36" r="12"/>
+          </g>
+        </svg>
+
+        <fieldset class="s23-pick">
+          <legend class="s23-sr">Choose the road that fits your game night</legend>
+          <div class="s23-pick__row">
+            <div class="s23-vibe s23-vibe--strategy">
+              <input class="s23-sr" type="radio" name="s23-vibe" id="s23-vibe-strategy" value="strategy" data-road="Strategy" autocomplete="off">
+              <label for="s23-vibe-strategy">
+                <svg class="s23-vibe__pal" viewBox="0 0 120 170" aria-hidden="true" focusable="false"><use href="#s23-pal-b"/></svg>
+                <span class="s23-vibe__name">Strategy</span>
+                <span class="s23-vibe__note">Think it through</span>
+                <span class="s23-vibe__stamp" aria-hidden="true">This way</span>
+              </label>
+            </div>
+            <div class="s23-vibe s23-vibe--family">
+              <input class="s23-sr" type="radio" name="s23-vibe" id="s23-vibe-family" value="family" data-road="Family" autocomplete="off">
+              <label for="s23-vibe-family">
+                <svg class="s23-vibe__pal" viewBox="0 0 120 170" aria-hidden="true" focusable="false"><use href="#s23-pal-c"/></svg>
+                <span class="s23-vibe__name">Family</span>
+                <span class="s23-vibe__note">Easy going</span>
+                <span class="s23-vibe__stamp" aria-hidden="true">This way</span>
+              </label>
+            </div>
+            <div class="s23-vibe s23-vibe--friends">
+              <input class="s23-sr" type="radio" name="s23-vibe" id="s23-vibe-friends" value="friends" data-road="With friends" autocomplete="off">
+              <label for="s23-vibe-friends">
+                <svg class="s23-vibe__pal" viewBox="0 0 120 170" aria-hidden="true" focusable="false"><use href="#s23-pal-a"/></svg>
+                <span class="s23-vibe__name">With friends</span>
+                <span class="s23-vibe__note">Bring the crew</span>
+                <span class="s23-vibe__stamp" aria-hidden="true">This way</span>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="s23-herald">
+          <p class="s23-status" role="status" aria-live="polite">All ten games are on the road.</p>
+          <button class="s23-reset" type="button" hidden>Show all ten</button>
+        </div>
+
+        <h3 class="s23-sr">The top ten games</h3>
+        <ol class="s23-ads">
+          <li class="s23-ad s23-fit-strategy"><div class="s23-ad__pic"><img class="s23-cover" src="img/covers/ark-nova.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s23-ad__name">Ark Nova</h4><p class="s23-ad__tag">Strategy</p></li>
+          <li class="s23-ad s23-fit-strategy"><div class="s23-ad__pic"><img class="s23-cover" src="img/covers/terraforming-mars.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s23-ad__name">Terraforming Mars</h4><p class="s23-ad__tag">Strategy</p></li>
+          <li class="s23-ad s23-ad--family s23-fit-family s23-fit-friends"><div class="s23-ad__pic"><img class="s23-cover" src="img/covers/catan.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s23-ad__name">CATAN</h4><p class="s23-ad__tag">Family</p></li>
+          <li class="s23-ad s23-fit-strategy"><div class="s23-ad__pic"><img class="s23-cover" src="img/covers/wingspan.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s23-ad__name">Wingspan</h4><p class="s23-ad__tag">Strategy</p></li>
+          <li class="s23-ad s23-ad--family s23-fit-family"><div class="s23-ad__pic"><img class="s23-cover" src="img/covers/azul.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s23-ad__name">Azul</h4><p class="s23-ad__tag">Family</p></li>
+          <li class="s23-ad s23-ad--family s23-fit-family s23-fit-friends"><div class="s23-ad__pic"><img class="s23-cover" src="img/covers/ticket-to-ride.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s23-ad__name">Ticket to Ride</h4><p class="s23-ad__tag">Family</p></li>
+          <li class="s23-ad s23-ad--family s23-fit-family s23-fit-friends"><div class="s23-ad__pic"><img class="s23-cover" src="img/covers/carcassonne.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s23-ad__name">Carcassonne</h4><p class="s23-ad__tag">Family</p></li>
+          <li class="s23-ad s23-fit-strategy"><div class="s23-ad__pic"><img class="s23-cover" src="img/covers/castles-of-burgundy.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s23-ad__name">The Castles of Burgundy</h4><p class="s23-ad__tag">Strategy</p></li>
+          <li class="s23-ad s23-ad--family s23-fit-family"><div class="s23-ad__pic"><img class="s23-cover" src="img/covers/splendor.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s23-ad__name">Splendor</h4><p class="s23-ad__tag">Family</p></li>
+          <li class="s23-ad s23-ad--coop s23-fit-friends"><div class="s23-ad__pic"><img class="s23-cover" src="img/covers/nemesis-retaliation.png" alt="" width="280" height="280" loading="lazy"></div><h4 class="s23-ad__name">Nemesis: Retaliation</h4><p class="s23-ad__tag">Co-op</p></li>
+        </ol>
+        <p class="s23-more"><a href="https://en.boardgamearena.com/gamelist">See all 1,396 games <span aria-hidden="true">&rarr;</span></a></p>
+      </section>
+
+      <svg class="s23-link s23-merge" viewBox="0 0 1200 240" aria-hidden="true" focusable="false">
+        <g class="s23-br s23-br--friends"><use href="#s23-mr" class="s23-rd__edge"/><use href="#s23-mr" class="s23-rd__pave"/><use href="#s23-mr" class="s23-rd__dots"/><use href="#s23-mr" class="s23-rd__line"/></g>
+        <g class="s23-br s23-br--family"><use href="#s23-mm" class="s23-rd__edge"/><use href="#s23-mm" class="s23-rd__pave"/><use href="#s23-mm" class="s23-rd__dots"/><use href="#s23-mm" class="s23-rd__line"/></g>
+        <g class="s23-br s23-br--strategy"><use href="#s23-ml" class="s23-rd__edge"/><use href="#s23-ml" class="s23-rd__pave"/><use href="#s23-ml" class="s23-rd__dots"/><use href="#s23-ml" class="s23-rd__line"/></g>
+      </svg>
+
+      <section class="s23-stop s23-stop--left" aria-labelledby="s23-why-t">
+        <div class="s23-lane" aria-hidden="true"></div>
+        <p class="s23-mile" aria-hidden="true"><span>&sect;</span></p>
+        <div class="s23-stop__body">
+          <div class="s23-band s23-band--green">
+            <h2 class="s23-h2" id="s23-why-t">House rules</h2>
+            <p class="s23-band__kick">Stuck on the board</p>
+          </div>
+          <div class="s23-corkpanel">
+            <ul class="s23-notes">
+              <li class="s23-note s23-note--yellow s23-pin"><div class="s23-note__paper"><h3>Free</h3><p>Your account costs nothing.</p></div></li>
+              <li class="s23-note s23-note--pink s23-pin"><div class="s23-note__paper"><h3>No download</h3><p>Every game runs in your browser.</p></div></li>
+              <li class="s23-note s23-note--green s23-pin"><div class="s23-note__paper"><h3>Any device</h3><p>PC, Mac, tablet or phone.</p></div></li>
+              <li class="s23-note s23-note--blue s23-pin"><div class="s23-note__paper"><h3>Everyone&rsquo;s welcome</h3><p>42 languages, players in 200+ countries.</p></div></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <svg class="s23-link" viewBox="0 0 1200 220" aria-hidden="true" focusable="false">
+        <g><use href="#s23-pc" class="s23-rd__edge"/><use href="#s23-pc" class="s23-rd__pave"/><use href="#s23-pc" class="s23-rd__dots"/><use href="#s23-pc" class="s23-rd__line"/></g>
+      </svg>
+
+      <section class="s23-stop s23-stop--right" aria-labelledby="s23-join-t">
+        <div class="s23-lane" aria-hidden="true"></div>
+        <p class="s23-mile" aria-hidden="true"><span>Go</span></p>
+        <div class="s23-stop__body">
+          <div class="s23-band">
+            <h2 class="s23-h2" id="s23-join-t">How to join</h2>
+            <p class="s23-band__kick">Follow the red string</p>
+          </div>
+          <div class="s23-corkpanel">
+            <div class="s23-join">
+              <svg class="s23-string s23-string--3" viewBox="0 0 600 40" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M100 29 Q200 -2 300 29 M300 29 Q400 -2 500 29"/></svg>
+              <svg class="s23-string s23-string--4" viewBox="0 0 800 40" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M100 29 Q200 -2 300 29 M300 29 Q400 -2 500 29 M500 29 Q600 -2 700 29"/></svg>
+              <ol class="s23-steps" role="list">
+              <li class="s23-step s23-pin"><span class="s23-step__no" aria-hidden="true">1</span><span class="s23-step__text">Create your free account</span></li>
+              <li class="s23-step s23-pin"><span class="s23-step__no" aria-hidden="true">2</span><span class="s23-step__text">Pick a game your friends know</span></li>
+              <li class="s23-step s23-pin"><span class="s23-step__no" aria-hidden="true">3</span><span class="s23-step__text">Play in your browser</span></li>
+              </ol>
+              <p class="s23-join__go s23-pin">
+                <a class="s23-cta" href="https://en.boardgamearena.com/account?page=newuser">
+            <svg class="s23-cta__icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#s23-i-pencil"/></svg>
+            <span class="s23-cta__text"><span class="s23-cta__main">Put your name down</span><span class="s23-cta__sub">Create free account <span aria-hidden="true">&rarr;</span></span></span>
+          </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <svg class="s23-link" viewBox="0 0 1200 220" aria-hidden="true" focusable="false">
+        <g><use href="#s23-pd" class="s23-rd__edge"/><use href="#s23-pd" class="s23-rd__pave"/><use href="#s23-pd" class="s23-rd__dots"/><use href="#s23-pd" class="s23-rd__line"/></g>
+      </svg>
+
+      <section class="s23-finish" aria-labelledby="s23-finish-t">
+        <div class="s23-lane s23-lane--finish" aria-hidden="true"></div>
+        <div class="s23-panel s23-finish__panel">
+          <p class="s23-finish__word" aria-hidden="true">Finish</p>
+          <svg class="s23-finish__art" viewBox="0 0 540 210" role="img" aria-labelledby="s23-fin-t" focusable="false">
+            <title id="s23-fin-t">The crew grin round the clubhouse table, with one stool left free for you.</title>
+            <rect width="540" height="210" fill="#fcf6e6"/>
+            <rect width="540" height="210" fill="url(#s23-doty)" opacity=".4"/>
+            <use href="#s23-pal-a" x="16" y="46" width="116" height="164"/>
+            <use href="#s23-pal-b" x="146" y="38" width="116" height="164"/>
+            <use href="#s23-pal-c" x="276" y="46" width="116" height="164"/>
+            <g class="s23-seat">
+              <path d="M418 198 V150 h96 V198 M430 198 V160 M502 198 V160" fill="none" stroke="#c8372a" stroke-width="4.2" stroke-dasharray="14 10" stroke-linecap="round"/>
+              <text class="s23-seat__word" x="466" y="128" text-anchor="middle">Your stool</text>
+            </g>
+          </svg>
+        </div>
+        <h2 class="s23-h2 s23-finish__title" id="s23-finish-t">Your crew kept a stool free. <em>Your move.</em></h2>
+        <a class="s23-cta" href="https://en.boardgamearena.com/account?page=newuser">
+          <svg class="s23-cta__icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#s23-i-pencil"/></svg>
+          <span class="s23-cta__text"><span class="s23-cta__main">Put your name down</span><span class="s23-cta__sub">Create free account <span aria-hidden="true">&rarr;</span></span></span>
+        </a>
+      </section>
+
+    </div>
+  </div>
+</div>
+</section>
+
 </main>
 
 <footer class="gallery-note">
@@ -6246,6 +7555,22 @@
       <li>The Castles of Burgundy: photo by Mshuang2, <a href="https://commons.wikimedia.org/wiki/File:Castles_of_Burgundy_(Board_Game).jpg">CC0</a>, via Wikimedia Commons</li>
       <li>Splendor: photo by JIP, <a href="https://commons.wikimedia.org/wiki/File:Splendor_in_Tapiola.jpg">CC BY-SA 4.0</a>, via Wikimedia Commons</li>
       <li>Nemesis: Retaliation: photo by El Pantera, <a href="https://commons.wikimedia.org/wiki/File:Playing_board_game_-_Play_213_1681550178485.jpg">CC BY-SA 4.0</a>, via Wikimedia Commons</li>
+    </ul>
+  </details>
+  <details class="gallery-credits">
+    <summary>Cover credits</summary>
+    <ul>
+      <li>Box covers in styles 21&ndash;23 are the publishers&rsquo; images, saved from <a href="https://en.boardgamearena.com/gamelist">Board Game Arena</a> as shown there and used only in this private design concept. All rights belong to their owners.</li>
+      <li>Ark Nova: <a href="https://en.boardgamearena.com/gamepanel?game=arknova">Board Game Arena</a></li>
+      <li>Terraforming Mars: <a href="https://en.boardgamearena.com/gamepanel?game=terraformingmars">Board Game Arena</a></li>
+      <li>CATAN: <a href="https://en.boardgamearena.com/gamepanel?game=catan">Board Game Arena</a></li>
+      <li>Wingspan: <a href="https://en.boardgamearena.com/gamepanel?game=wingspan">Board Game Arena</a></li>
+      <li>Azul: <a href="https://en.boardgamearena.com/gamepanel?game=azul">Board Game Arena</a></li>
+      <li>Ticket to Ride: <a href="https://en.boardgamearena.com/gamepanel?game=tickettoride">Board Game Arena</a></li>
+      <li>Carcassonne: <a href="https://en.boardgamearena.com/gamepanel?game=carcassonne">Board Game Arena</a></li>
+      <li>The Castles of Burgundy: <a href="https://en.boardgamearena.com/gamepanel?game=castlesofburgundy">Board Game Arena</a></li>
+      <li>Splendor: <a href="https://en.boardgamearena.com/gamepanel?game=splendor">Board Game Arena</a></li>
+      <li>Nemesis: Retaliation: <a href="https://en.boardgamearena.com/gamepanel?game=nemesisretaliation">Board Game Arena</a></li>
     </ul>
   </details>
   <details class="gallery-credits">
@@ -6273,6 +7598,6 @@
   </details>
 </footer>
 
-<script src="js/gallery.js?v=25"></script>
+<script src="js/gallery.js?v=27"></script>
 </body>
 </html>

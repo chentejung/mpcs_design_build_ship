@@ -76,6 +76,8 @@ Game pictures are freely licensed photos (CC0, CC BY or CC BY-SA) from Wikimedia
 
 To swap a game in the top ten, find a Commons photo that clearly shows that game, download it locally and add its credit line. Publisher box art is copyrighted, so a photo that is mostly box art needs a licence you trust. Decorative art is CSS shapes, SVG drawn here, or emoji.
 
+**Box covers (styles 21–23 only).** At the owner's explicit request these styles show the real box covers exactly as Board Game Arena shows them, saved locally as `img/covers/<slug>.png`, one per top-ten game. They are publishers' copyrighted images, so each needs a line in the **Cover credits** list in the `index.html` footer, and the three styles should stay out of any public deploy until permission is confirmed.
+
 ## Deploy
 
 The site is hosted on Vercel as a static site, from a GitHub repo whose root is `designBuild/`. The Vercel project's Root Directory is `projects`, with framework preset "Other" and no build command. Use relative paths only (`css/…`, not `/css/…`) so the page works both from the filesystem and on Vercel.
