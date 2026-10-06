@@ -3,12 +3,12 @@
 //   index.html?view=sNN        that style's own page, with the gallery bar
 //   index.html?view=sNN&thumb  the bare style, loaded into a grid card's iframe
 (() => {
-  const PLANNED = 10;
+  const PLANNED = 13;
   const styles = [...document.querySelectorAll(".style")];
   const num = (s) => s.id.slice(1);
   const pageUrl = (s) => `index.html?view=${s.id}`;
 
-  const INITS = {s06: initS06, s07: initS07, s03: initS03, s01: initS01, s05: initS05};
+  const INITS = {s06: initS06, s07: initS07, s03: initS03, s01: initS01, s05: initS05, s11: initS11, s12: initS12, s13: initS13};
   styles.forEach((s) => INITS[s.id]?.(s));
 
   const params = new URLSearchParams(location.search);
@@ -347,6 +347,148 @@
       { threshold: 0.35 }
     );
     gauges.forEach((g) => observer.observe(g));
+  }
+  function initS11(root) {
+    // 11 Crossroads: "Which way tonight?" radio group. Lighting the chosen road and
+    // its games is pure CSS (:has on the checked radio), so this only keeps the
+    // spoken status line in step and wires up the reset. State lives in the radios
+    // and resets on reload.
+    const radios = [...root.querySelectorAll('input[name="s11-vibe"]')];
+    const status = root.querySelector(".s11-status");
+    const reset = root.querySelector(".s11-reset");
+    const cards = [...root.querySelectorAll(".s11-card")];
+    if (!radios.length || !status || !reset || !cards.length) return;
+
+    const nameOf = (card) => card.querySelector(".s11-card__name").textContent;
+    const listOf = (names) =>
+      names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+
+    const update = () => {
+      const picked = radios.find((r) => r.checked);
+      reset.hidden = !picked;
+      if (!picked) {
+        status.textContent = "All ten games are on the road.";
+        return;
+      }
+      const names = cards.filter((c) => c.classList.contains(`s11-fit-${picked.value}`)).map(nameOf);
+      // Short line on screen; the matching names are for screen readers only.
+      const more = document.createElement("span");
+      more.className = "s11-sr";
+      more.textContent = `: ${listOf(names)}`;
+      status.textContent = `${picked.dataset.road} road: ${names.length} of ${cards.length} games lit`;
+      status.append(more, ".");
+    };
+
+    radios.forEach((r) => r.addEventListener("change", update));
+    reset.addEventListener("click", () => {
+      radios.forEach((r) => (r.checked = false));
+      update();
+      radios[0].focus();
+    });
+    update();
+  }
+  function initS12(root) {
+    // 12 Trail Map: "Plan tonight's route". The three destination tickets are a radio
+    // group; repainting the road and lighting the matching landmarks is pure CSS (:has
+    // on the checked radio), so this only keeps the spoken status line in step and
+    // wires up the reset. State lives in the radios and resets on reload.
+    const radios = [...root.querySelectorAll('input[name="s12-vibe"]')];
+    const status = root.querySelector(".s12-status");
+    const reset = root.querySelector(".s12-reset");
+    const marks = [...root.querySelectorAll(".s12-mark")];
+    if (!radios.length || !status || !reset || !marks.length) return;
+
+    const nameOf = (mark) => mark.querySelector(".s12-mark__name").textContent;
+    const listOf = (names) =>
+      names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+
+    const update = () => {
+      const picked = radios.find((r) => r.checked);
+      reset.hidden = !picked;
+      if (!picked) {
+        status.textContent = "All ten landmarks are on the map.";
+        return;
+      }
+      const names = marks.filter((m) => m.classList.contains(`s12-fit-${picked.value}`)).map(nameOf);
+      // Short line on screen; the matching names are for screen readers only.
+      const more = document.createElement("span");
+      more.className = "s12-sr";
+      more.textContent = `: ${listOf(names)}`;
+      status.textContent = `${picked.dataset.route} plotted: ${names.length} of ${marks.length} games on the route`;
+      status.append(more, ".");
+    };
+
+    radios.forEach((r) => r.addEventListener("change", update));
+    reset.addEventListener("click", () => {
+      radios.forEach((r) => (r.checked = false));
+      update();
+      radios[0].focus();
+    });
+    update();
+  }
+  function initS13(root) {
+    // 13 Spinner Route: "Spin for your vibe". The spinner's three segments are a radio
+    // group; the needle's angle and the lit games are pure CSS (:has on the checked
+    // radio), so the segments work without JS. This adds the Spin button, keeps the
+    // status line in step and wires up the reset. State lives in the radios and
+    // resets on reload. The needle's extra turns are skipped under reduced motion.
+    const radios = [...root.querySelectorAll('input[name="s13-vibe"]')];
+    const wheel = root.querySelector(".s13-wheel");
+    const spin = root.querySelector(".s13-spin");
+    const status = root.querySelector(".s13-status");
+    const reset = root.querySelector(".s13-reset");
+    const games = [...root.querySelectorAll(".s13-game")];
+    if (!radios.length || !wheel || !spin || !status || !reset || !games.length) return;
+
+    const calm = () =>
+      document.documentElement.classList.contains("is-thumb") ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const nameOf = (game) => game.querySelector(".s13-game__name").textContent;
+    const listOf = (names) =>
+      names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+    let turns = 0;
+    let timer = 0;
+
+    const update = () => {
+      const picked = radios.find((r) => r.checked);
+      reset.hidden = !picked;
+      if (!picked) {
+        status.textContent = "All ten games are in play.";
+        return;
+      }
+      const names = games.filter((g) => g.classList.contains(`s13-fit-${picked.value}`)).map(nameOf);
+      status.textContent = `${picked.dataset.vibe}: ${listOf(names)}.`;
+    };
+
+    const settle = () => {
+      timer = 0;
+      wheel.classList.remove("s13-is-spinning");
+      update();
+    };
+
+    radios.forEach((r) => r.addEventListener("change", update));
+    spin.addEventListener("click", () => {
+      if (timer) return;
+      const options = radios.filter((r) => !r.checked);
+      const pick = options[Math.floor(Math.random() * options.length)];
+      pick.checked = true;
+      if (calm()) {
+        settle();
+        return;
+      }
+      turns += 2;
+      wheel.style.setProperty("--s13-turns", String(turns));
+      wheel.classList.add("s13-is-spinning");
+      status.textContent = "Spinning…";
+      timer = setTimeout(settle, 1300);
+    });
+    reset.addEventListener("click", () => {
+      radios.forEach((r) => (r.checked = false));
+      update();
+      radios[0].focus();
+    });
+    spin.hidden = false;
+    update();
   }
 /*INITFNS*/
 })();

@@ -1,0 +1,1262 @@
+/* 12 Trail Map: a Board Path variant. The board is an illustrated trail map lying
+   on kraft cardboard: pale sage and sky map paper with dotted contour lines and a
+   faint grid, a teal border with compass-rose corners, dice and cards on the table.
+   One road of printed spaces winds down the page as an S-curve from the trailhead
+   through three stops to the friends' table at FINISH.
+   Hook: pick your vibe. Three destination tickets (Strategy, Family, With friends)
+   plot a route: the road takes the ticket's colour and its games light up as
+   landmarks, the rest fade. Pure CSS (:has); gallery.js keeps the status in step.
+   Fonts: Rye (h1, CTA label, closing heading, START/FINISH) and Libre Baskerville.
+   Every rule and custom property is scoped under #s12. */
+
+@font-face {
+  font-family: "s12 Rye";
+  src: url("../fonts/rye/rye-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s12 Libre Baskerville";
+  src: url("../fonts/librebaskerville/librebaskerville-var.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s12 Libre Baskerville";
+  src: url("../fonts/librebaskerville/librebaskerville-italic-var.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+#s12 {
+  --s12-kraft: #b8895a;
+  --s12-kraft-2: #a2743f;
+  --s12-map: #e6ecd9;
+  --s12-map-sky: #dbe9e4;
+  --s12-paper: #f7f1de;
+  --s12-ink: #1d2a26;
+  --s12-ink-2: #3f4f48;
+  --s12-teal: #1f6f6b;
+  --s12-teal-deep: #163f3c;
+  --s12-cta: #b93c26;
+  --s12-cta-hover: #a3321e;
+  --s12-cta-deep: #7a2414;
+  --s12-strategy: #2b56a3;
+  --s12-family: #c98a12;
+  --s12-friends: #8a3f86;
+  --s12-coop: #1f6f6b;
+  --s12-tr-cream: #fbf6e6;
+  --s12-tr-red: #d9583f;
+  --s12-tr-cobalt: #3d64b9;
+  --s12-tr-mustard: #e2b13c;
+  --s12-tr-teal: #2f8f86;
+  /* Road colours. Picking a ticket repaints every coloured space in its colour. */
+  --s12-r1: var(--s12-tr-red);
+  --s12-r2: var(--s12-tr-cobalt);
+  --s12-r3: var(--s12-tr-mustard);
+  --s12-r4: var(--s12-tr-teal);
+  --s12-display: "s12 Rye", "Rockwell", "Clarendon", "Bookman Old Style", Georgia, serif;
+  --s12-body: "s12 Libre Baskerville", "Baskerville", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --s12-bw: clamp(10px, 1.6vw, 22px);
+  --s12-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .22 0 0 0 0 .15 0 0 0 0 .07 0 0 0 .14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --s12-fibre: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .7' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .28 0 0 0 0 .17 0 0 0 0 .06 0 0 0 .5 -.05'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+  --s12-contours: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='560'%3E%3Cg fill='none' stroke='%237f9f8a' stroke-opacity='.5' stroke-width='1.5' stroke-dasharray='1 6' stroke-linecap='round'%3E%3Cpath d='M130 170c40-60 150-70 190-20s10 130-70 140-160-60-120-120z'/%3E%3Cpath d='M98 170c50-92 204-104 256-32s10 172-102 182S48 260 98 170z'/%3E%3Cpath d='M66 176c60-124 256-136 318-42s10 212-134 222S6 292 66 176z'/%3E%3Cpath d='M170 172c20-24 80-28 100-6s0 62-40 64-80-28-60-58z'/%3E%3Cpath d='M400 430c26-36 92-38 112-4s-16 80-64 82-74-42-48-78z'/%3E%3Cpath d='M430 434c14-18 52-20 62 0s-10 42-36 42-38-24-26-42z'/%3E%3C/g%3E%3C/svg%3E");
+
+  background: var(--s12-kraft);
+  color: var(--s12-ink);
+  font-family: var(--s12-body);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+#s12 *,
+#s12 *::before,
+#s12 *::after {
+  box-sizing: border-box;
+}
+
+#s12 h1,
+#s12 h2,
+#s12 h3,
+#s12 p,
+#s12 ol,
+#s12 ul,
+#s12 dl,
+#s12 dd,
+#s12 fieldset {
+  margin: 0;
+}
+
+#s12 ol,
+#s12 ul {
+  padding: 0;
+  list-style: none;
+}
+
+#s12 fieldset {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+
+#s12 [hidden] {
+  display: none !important;
+}
+
+#s12 .s12-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+#s12 .s12-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Plotting a route: the chosen ticket repaints the road */
+
+#s12:has(#s12-vibe-strategy:checked) { --s12-plot: var(--s12-strategy); --s12-plot-ink: #fff; }
+#s12:has(#s12-vibe-family:checked) { --s12-plot: var(--s12-family); --s12-plot-ink: var(--s12-ink); }
+#s12:has(#s12-vibe-friends:checked) { --s12-plot: var(--s12-friends); --s12-plot-ink: #fff; }
+
+#s12:has(.s12-pick input:checked) {
+  --s12-r1: var(--s12-plot);
+  --s12-r2: var(--s12-plot);
+  --s12-r3: var(--s12-plot);
+  --s12-r4: var(--s12-plot);
+}
+
+/* Links, buttons and focus */
+
+#s12 a {
+  color: var(--s12-teal-deep);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 2px;
+}
+
+#s12 a:hover {
+  color: var(--s12-ink);
+}
+
+#s12 a:focus-visible,
+#s12 button:focus-visible {
+  outline: 3px solid var(--s12-ink);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Table and board */
+
+#s12 .s12-table {
+  position: relative;
+  padding: clamp(8px, 3vw, 46px);
+  background:
+    var(--s12-fibre),
+    var(--s12-noise),
+    radial-gradient(120% 60% at 30% 0%, #c99a68 0%, transparent 60%),
+    linear-gradient(180deg, var(--s12-kraft) 0%, var(--s12-kraft-2) 100%);
+}
+
+#s12 .s12-board {
+  position: relative;
+  max-width: 1340px;
+  margin: 0 auto;
+  border: var(--s12-bw) solid var(--s12-teal);
+  border-radius: 6px;
+  background:
+    var(--s12-noise),
+    var(--s12-contours),
+    linear-gradient(90deg, rgb(31 111 107 / 0.07) 1px, transparent 1px) 0 0 / 140px 140px,
+    linear-gradient(180deg, rgb(31 111 107 / 0.07) 1px, transparent 1px) 0 0 / 140px 140px,
+    radial-gradient(70% 40% at 85% 10%, var(--s12-map-sky), transparent 70%),
+    radial-gradient(60% 40% at 10% 70%, var(--s12-map-sky), transparent 70%),
+    var(--s12-map);
+  box-shadow:
+    inset 0 0 0 3px var(--s12-map),
+    inset 0 0 0 5px var(--s12-tr-mustard),
+    inset 0 0 0 7px var(--s12-map),
+    inset 0 0 0 8px var(--s12-teal),
+    0 0 0 2px #dfe3cf,
+    5px 7px 0 2px #8a8e80,
+    6px 9px 0 2px #6b6e62,
+    12px 22px 30px rgb(50 28 8 / 0.45);
+}
+
+/* Map fold lines */
+#s12 .s12-board::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent calc(50% - 2px), rgb(40 60 50 / 0.1) calc(50% - 1px), rgb(255 255 255 / 0.45) 50%, transparent calc(50% + 2px)),
+    linear-gradient(180deg, transparent calc(33% - 2px), rgb(40 60 50 / 0.08) calc(33% - 1px), rgb(255 255 255 / 0.35) 33%, transparent calc(33% + 2px)),
+    linear-gradient(180deg, transparent calc(66% - 2px), rgb(40 60 50 / 0.08) calc(66% - 1px), rgb(255 255 255 / 0.35) 66%, transparent calc(66% + 2px));
+  pointer-events: none;
+}
+
+#s12 .s12-medal {
+  --s12-m: calc(var(--s12-bw) * 2.6);
+  position: absolute;
+  z-index: 3;
+  width: var(--s12-m);
+  height: var(--s12-m);
+  filter: drop-shadow(1px 2px 1px rgb(30 20 10 / 0.35));
+}
+
+#s12 .s12-medal--tl { top: calc(var(--s12-bw) * -0.5 - var(--s12-m) / 2); left: calc(var(--s12-bw) * -0.5 - var(--s12-m) / 2); }
+#s12 .s12-medal--tr { top: calc(var(--s12-bw) * -0.5 - var(--s12-m) / 2); right: calc(var(--s12-bw) * -0.5 - var(--s12-m) / 2); }
+#s12 .s12-medal--bl { bottom: calc(var(--s12-bw) * -0.5 - var(--s12-m) / 2); left: calc(var(--s12-bw) * -0.5 - var(--s12-m) / 2); }
+#s12 .s12-medal--br { bottom: calc(var(--s12-bw) * -0.5 - var(--s12-m) / 2); right: calc(var(--s12-bw) * -0.5 - var(--s12-m) / 2); }
+
+#s12 .s12-board__inner {
+  position: relative;
+  z-index: 1;
+  container-type: inline-size;
+  padding: 0 clamp(12px, 3.4vw, 52px);
+  /* Road geometry: one unit is 1/1200 of the inner width on wide screens */
+  --s12-u: 0.62px;
+}
+
+/* Loose pieces on the table, only where there is room */
+
+#s12 .s12-loose {
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  #s12 .s12-loose {
+    display: block;
+  }
+
+  #s12 .s12-loose svg {
+    position: absolute;
+    z-index: 4;
+    pointer-events: none;
+    filter: drop-shadow(2px 4px 3px rgb(40 22 6 / 0.35));
+  }
+
+  #s12 .s12-loose__cards { width: 150px; left: calc(-4vw - 20px); top: 34%; }
+  #s12 .s12-loose__dice { width: 120px; right: calc(-4vw - 6px); top: 14%; }
+  #s12 .s12-loose__compass { width: 84px; right: calc(-4vw + 6px); top: 62%; }
+}
+
+/* Type */
+
+#s12 .s12-eyebrow {
+  margin-bottom: 0.6rem;
+  color: var(--s12-teal-deep);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+#s12 .s12-h1 {
+  max-width: 13ch;
+  font-family: var(--s12-display);
+  font-size: clamp(1.85rem, 1rem + 3.4vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.08;
+  color: var(--s12-ink);
+  text-wrap: balance;
+}
+
+#s12 .s12-h1 em,
+#s12 .s12-final em {
+  font-style: normal;
+  color: var(--s12-cta);
+}
+
+#s12 .s12-h2 {
+  max-width: 24ch;
+  margin-bottom: 0.45rem;
+  font-size: clamp(1.45rem, 1.05rem + 1.4vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--s12-ink);
+  text-wrap: balance;
+}
+
+#s12 .s12-lede,
+#s12 .s12-sub {
+  max-width: 34em;
+  color: var(--s12-ink-2);
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.15rem);
+}
+
+#s12 .s12-sub {
+  font-style: italic;
+}
+
+#s12 .s12-lede {
+  margin-top: 0.9rem;
+}
+
+/* Primary CTA: a stamped red trail sign */
+
+#s12 .s12-cta {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0.75rem 1.6rem 0.8rem;
+  border: 3px solid var(--s12-ink);
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.16), rgb(255 255 255 / 0) 45%),
+    var(--s12-cta);
+  color: #fff;
+  line-height: 1.1;
+  text-decoration: none;
+  box-shadow:
+    inset 0 0 0 3px var(--s12-cta),
+    inset 0 0 0 4.5px rgb(255 255 255 / 0.55),
+    0 6px 0 var(--s12-cta-deep),
+    0 6px 0 3px var(--s12-ink),
+    6px 14px 18px rgb(40 20 6 / 0.3);
+}
+
+#s12 .s12-cta:hover {
+  color: #fff;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.1), rgb(255 255 255 / 0) 45%),
+    var(--s12-cta-hover);
+}
+
+#s12 .s12-cta:focus-visible {
+  outline: 4px solid var(--s12-ink);
+  outline-offset: 9px;
+  border-radius: 12px;
+}
+
+#s12 .s12-cta__main {
+  font-family: var(--s12-display);
+  font-size: clamp(1.3rem, 1.1rem + 0.7vw, 1.65rem);
+  letter-spacing: 0.02em;
+}
+
+#s12 .s12-cta__sub {
+  margin-top: 0.3rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+/* Road: printed spaces. The lane is the straight CSS run, .s12-link the SVG curves. */
+
+#s12 .s12-lane {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 6px;
+  width: calc(52 * var(--s12-u));
+  border-inline: calc(4 * var(--s12-u)) solid var(--s12-ink);
+  background: repeating-linear-gradient(
+    180deg,
+    var(--s12-tr-cream) 0 calc(41 * var(--s12-u)),
+    var(--s12-ink) 0 calc(44 * var(--s12-u)),
+    var(--s12-r1) 0 calc(85 * var(--s12-u)),
+    var(--s12-ink) 0 calc(88 * var(--s12-u)),
+    var(--s12-r2) 0 calc(129 * var(--s12-u)),
+    var(--s12-ink) 0 calc(132 * var(--s12-u)),
+    var(--s12-r3) 0 calc(173 * var(--s12-u)),
+    var(--s12-ink) 0 calc(176 * var(--s12-u)),
+    var(--s12-r4) 0 calc(217 * var(--s12-u)),
+    var(--s12-ink) 0 calc(220 * var(--s12-u))
+  );
+  box-shadow: 0 0 0 2px rgb(255 255 255 / 0.3);
+}
+
+#s12 .s12-lane--hero {
+  display: none;
+}
+
+#s12 .s12-link {
+  display: none;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#s12 .s12-tr {
+  fill: none;
+  stroke-width: 44;
+}
+
+#s12 .s12-tr--edge { stroke: var(--s12-ink); stroke-width: 52; }
+#s12 .s12-tr--base { stroke: var(--s12-tr-cream); stroke-dasharray: 41 3; }
+#s12 .s12-tr--c1 { stroke: var(--s12-r1); stroke-dasharray: 41 179; stroke-dashoffset: -44; }
+#s12 .s12-tr--c2 { stroke: var(--s12-r2); stroke-dasharray: 41 179; stroke-dashoffset: -88; }
+#s12 .s12-tr--c3 { stroke: var(--s12-r3); stroke-dasharray: 41 179; stroke-dashoffset: -132; }
+#s12 .s12-tr--c4 { stroke: var(--s12-r4); stroke-dasharray: 41 179; stroke-dashoffset: -176; }
+
+/* The small road on the hero map uses thinner spaces */
+#s12 .s12-map__road .s12-tr { stroke-width: 20; }
+#s12 .s12-map__road .s12-tr--edge { stroke-width: 25; }
+#s12 .s12-map__road .s12-tr--base { stroke-dasharray: 19 3; }
+#s12 .s12-map__road .s12-tr--c1 { stroke-dasharray: 19 69; stroke-dashoffset: -22; }
+#s12 .s12-map__road .s12-tr--c2 { stroke-dasharray: 19 69; stroke-dashoffset: -44; }
+#s12 .s12-map__road .s12-tr--c3 { stroke-dasharray: 19 69; stroke-dashoffset: -66; }
+#s12 .s12-map__road .s12-tr--c4 { stroke-dasharray: 0 88; }
+
+/* Milestones: the big landmark spaces where the road meets each stop */
+
+#s12 .s12-milestone {
+  position: absolute;
+  z-index: 1;
+  top: 1.1rem;
+  left: calc(6px + 26 * var(--s12-u) - 25px);
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border: 3px solid var(--s12-ink);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0 20%, var(--s12-paper) 60%);
+  box-shadow:
+    inset 0 0 0 4px var(--s12-paper),
+    inset 0 0 0 7px var(--s12-teal),
+    3px 4px 0 rgb(29 42 38 / 0.3);
+  color: var(--s12-teal-deep);
+}
+
+#s12 .s12-milestone svg {
+  width: 46%;
+  height: 46%;
+}
+
+/* Hero: the trailhead */
+
+#s12 .s12-hero {
+  position: relative;
+  padding: clamp(1.1rem, 3vw, 3rem) 0 0;
+}
+
+#s12 .s12-hero__copy {
+  position: relative;
+  z-index: 1;
+}
+
+#s12 .s12-hero .s12-cta {
+  margin-top: 1.4rem;
+}
+
+#s12 .s12-box {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1.8rem;
+  width: fit-content;
+  max-width: 100%;
+  border: 3px solid var(--s12-ink);
+  border-radius: 8px;
+  background: var(--s12-paper);
+  box-shadow: 3px 4px 0 rgb(29 42 38 / 0.18);
+  overflow: hidden;
+}
+
+#s12 .s12-box__cell {
+  flex: 1 1 auto;
+  padding: 0.45rem clamp(0.6rem, 0.8vw, 1rem) 0.5rem;
+  border-right: 2px solid var(--s12-ink);
+}
+
+#s12 .s12-box__cell:last-child {
+  border-right: 0;
+}
+
+#s12 .s12-box dt {
+  color: var(--s12-teal-deep);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+#s12 .s12-box dd {
+  font-size: clamp(1.05rem, 0.4rem + 1.1vw, 1.45rem);
+  font-weight: 700;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+#s12 .s12-hero__art {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 460px);
+  margin: 1.6rem auto 0;
+}
+
+#s12 .s12-map {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#s12 .s12-map__start {
+  fill: var(--s12-teal-deep);
+  font-family: var(--s12-display);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+#s12 .s12-map__label {
+  fill: var(--s12-ink-2);
+  font-family: var(--s12-body);
+  font-size: 15px;
+  font-style: italic;
+}
+
+#s12 .s12-map__label--big {
+  fill: var(--s12-ink);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+#s12 .s12-map__tag {
+  fill: #fff;
+  font-family: var(--s12-body);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* Stops along the road */
+
+#s12 .s12-stop {
+  position: relative;
+  padding: 1.25rem 0 2.75rem calc(6px + 52 * var(--s12-u) + 16px);
+}
+
+#s12 .s12-plan {
+  margin-top: 1rem;
+}
+
+#s12 .s12-stop__body {
+  position: relative;
+  container-type: inline-size;
+  padding-top: 0.2rem;
+}
+
+/* Hook: the destination tickets */
+
+#s12 .s12-pick {
+  margin-top: 1.4rem;
+}
+
+#s12 .s12-pick__row {
+  display: grid;
+  gap: 0.8rem;
+}
+
+#s12 .s12-ticket {
+  --s12-tk: var(--s12-strategy);
+  --s12-tk-ink: #fff;
+  position: relative;
+}
+
+#s12 .s12-ticket--family { --s12-tk: var(--s12-family); --s12-tk-ink: var(--s12-ink); }
+#s12 .s12-ticket--friends { --s12-tk: var(--s12-friends); }
+
+#s12 .s12-ticket label {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  min-height: 76px;
+  border: 2px solid var(--s12-ink);
+  border-radius: 10px;
+  background: var(--s12-paper);
+  box-shadow: 3px 5px 0 rgb(29 42 38 / 0.18);
+  cursor: pointer;
+}
+
+#s12 .s12-ticket__stub {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 70px;
+  border-radius: 8px 0 0 8px;
+  background: var(--s12-tk);
+  color: var(--s12-tk-ink);
+}
+
+/* Perforated tear line between stub and ticket */
+#s12 .s12-ticket__stub::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -4px;
+  bottom: 0;
+  width: 8px;
+  background: radial-gradient(circle, var(--s12-paper) 0 2.5px, transparent 3px) 0 2px / 8px 10px repeat-y;
+}
+
+#s12 .s12-ticket__stub svg {
+  width: 32px;
+  height: 32px;
+}
+
+#s12 .s12-ticket__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.1rem;
+  padding: 0.6rem 1rem 0.6rem 1.1rem;
+}
+
+#s12 .s12-ticket__name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+#s12 .s12-ticket__route {
+  color: var(--s12-ink-2);
+  font-size: 0.92rem;
+  font-style: italic;
+}
+
+#s12 .s12-ticket__stamp {
+  position: absolute;
+  z-index: 1;
+  top: -11px;
+  right: 10px;
+  display: none;
+  padding: 0.05rem 0.45rem;
+  border: 2.5px solid var(--s12-tk);
+  border-radius: 5px;
+  color: var(--s12-ink);
+  background: var(--s12-paper);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transform: rotate(-5deg);
+}
+
+#s12 .s12-ticket label:hover {
+  background: #fffaf0;
+}
+
+#s12 .s12-ticket input:checked + label {
+  border-color: var(--s12-ink);
+  box-shadow:
+    0 0 0 3px var(--s12-tk),
+    0 0 0 5px var(--s12-ink),
+    4px 8px 0 rgb(29 42 38 / 0.2);
+}
+
+#s12 .s12-ticket input:checked + label .s12-ticket__stamp {
+  display: block;
+}
+
+#s12 .s12-pick:has(input:checked) .s12-ticket input:not(:checked) + label {
+  opacity: 0.62;
+}
+
+#s12 .s12-ticket input:focus-visible + label {
+  outline: 3px solid var(--s12-ink);
+  outline-offset: 6px;
+}
+
+#s12 .s12-herald {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  min-height: 2.6rem;
+  margin: 1.1rem 0 1.4rem;
+}
+
+#s12 .s12-status {
+  color: var(--s12-ink-2);
+  font-style: italic;
+}
+
+#s12 .s12-reset {
+  padding: 0.35rem 0.9rem;
+  border: 2px solid var(--s12-ink);
+  border-radius: 999px;
+  background: var(--s12-paper);
+  color: var(--s12-ink);
+  font: 700 0.9rem/1.2 var(--s12-body);
+  cursor: pointer;
+}
+
+#s12 .s12-reset:hover {
+  background: #fff;
+}
+
+/* The top ten as landmarks */
+
+#s12 .s12-marks {
+  display: grid;
+  gap: 0.75rem;
+}
+
+#s12 .s12-mark {
+  --s12-tag: var(--s12-family);
+  --s12-tag-ink: var(--s12-ink);
+  position: relative;
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 0.15rem 0.85rem;
+  align-items: start;
+  padding: 6px;
+  border-radius: 10px;
+  background: var(--s12-paper);
+  box-shadow:
+    0 0 0 1px #c9cdb5,
+    0 2px 0 #bfc3aa,
+    3px 7px 12px rgb(40 50 30 / 0.2);
+}
+
+#s12 .s12-mark--strategy { --s12-tag: var(--s12-strategy); --s12-tag-ink: #fff; }
+#s12 .s12-mark--coop { --s12-tag: var(--s12-coop); --s12-tag-ink: #fff; }
+
+#s12 .s12-mark__pic {
+  grid-row: 1 / 3;
+  aspect-ratio: 4 / 3;
+  border: 2px solid var(--s12-ink);
+  border-radius: 6px;
+  overflow: hidden;
+  background: #cfd5bd;
+}
+
+#s12 .s12-mark__pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#s12 .s12-mark__pin {
+  position: absolute;
+  z-index: 1;
+  top: -9px;
+  left: -9px;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 2.5px solid var(--s12-ink);
+  border-radius: 50%;
+  background: var(--s12-paper);
+  color: var(--s12-ink);
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 2px 3px 0 rgb(29 42 38 / 0.25);
+}
+
+#s12 .s12-mark__name {
+  align-self: end;
+  padding-top: 0.2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+#s12 .s12-mark__tag {
+  align-self: start;
+  justify-self: start;
+  margin-top: 0.3rem;
+  padding: 0.05rem 0.55rem;
+  border-radius: 999px;
+  background: var(--s12-tag);
+  color: var(--s12-tag-ink);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Lit and faded landmarks once a route is plotted */
+
+#s12 .s12-plan:has(#s12-vibe-strategy:checked) .s12-fit-strategy,
+#s12 .s12-plan:has(#s12-vibe-family:checked) .s12-fit-family,
+#s12 .s12-plan:has(#s12-vibe-friends:checked) .s12-fit-friends {
+  z-index: 1;
+  box-shadow:
+    0 0 0 3px var(--s12-plot),
+    0 0 0 5px var(--s12-ink),
+    4px 10px 16px rgb(40 50 30 / 0.3);
+}
+
+#s12 .s12-plan:has(#s12-vibe-strategy:checked) .s12-fit-strategy .s12-mark__pin,
+#s12 .s12-plan:has(#s12-vibe-family:checked) .s12-fit-family .s12-mark__pin,
+#s12 .s12-plan:has(#s12-vibe-friends:checked) .s12-fit-friends .s12-mark__pin {
+  background: var(--s12-plot);
+  color: var(--s12-plot-ink);
+}
+
+#s12 .s12-plan:has(#s12-vibe-strategy:checked) .s12-mark:not(.s12-fit-strategy),
+#s12 .s12-plan:has(#s12-vibe-family:checked) .s12-mark:not(.s12-fit-family),
+#s12 .s12-plan:has(#s12-vibe-friends:checked) .s12-mark:not(.s12-fit-friends) {
+  opacity: 0.45;
+  box-shadow: 0 0 0 1px #c9cdb5;
+}
+
+#s12 .s12-plan:has(#s12-vibe-strategy:checked) .s12-mark:not(.s12-fit-strategy) img,
+#s12 .s12-plan:has(#s12-vibe-family:checked) .s12-mark:not(.s12-fit-family) img,
+#s12 .s12-plan:has(#s12-vibe-friends:checked) .s12-mark:not(.s12-fit-friends) img {
+  filter: grayscale(1) sepia(0.25);
+}
+
+#s12 .s12-more {
+  margin-top: 1.6rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+/* Why play here: the map legend */
+
+#s12 .s12-legend {
+  max-width: 44rem;
+  padding: 1.1rem 1.3rem 1.3rem;
+  border: 2px solid var(--s12-ink);
+  border-radius: 4px;
+  background: var(--s12-paper);
+  box-shadow:
+    inset 0 0 0 4px var(--s12-paper),
+    inset 0 0 0 5px var(--s12-teal),
+    3px 5px 0 rgb(29 42 38 / 0.15);
+}
+
+#s12 .s12-legend .s12-h2 {
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
+  border-bottom: 2px solid var(--s12-ink);
+}
+
+#s12 .s12-legend__list {
+  display: grid;
+  gap: 0;
+}
+
+#s12 .s12-legend__list li {
+  display: grid;
+  grid-template-columns: 2.2rem 1fr;
+  gap: 0 0.6rem;
+  align-items: center;
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed rgb(29 42 38 / 0.35);
+}
+
+#s12 .s12-legend__list li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+#s12 .s12-legend__list h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+#s12 .s12-legend__list p {
+  grid-column: 2;
+  color: var(--s12-ink-2);
+}
+
+#s12 .s12-legend__key {
+  grid-row: span 2;
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 2.5px solid var(--s12-ink);
+  border-radius: 5px;
+}
+
+#s12 .s12-legend__key--a { background: var(--s12-tr-red); }
+#s12 .s12-legend__key--b { background: var(--s12-tr-cobalt); }
+#s12 .s12-legend__key--c { background: var(--s12-tr-mustard); }
+#s12 .s12-legend__key--d { background: var(--s12-tr-teal); }
+
+/* How to join: three printed spaces */
+
+#s12 .s12-steps {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.3rem 0 2rem;
+  counter-reset: s12-step;
+}
+
+#s12 .s12-step {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  max-width: 30rem;
+  padding: 0.65rem 1rem 0.65rem 0.65rem;
+  border: 2.5px solid var(--s12-ink);
+  border-radius: 8px;
+  background: var(--s12-paper);
+  box-shadow: 3px 4px 0 rgb(29 42 38 / 0.18);
+  font-size: 1.05rem;
+}
+
+#s12 .s12-step__no {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2.6rem;
+  height: 2.6rem;
+  border: 2.5px solid var(--s12-ink);
+  border-radius: 50%;
+  background: var(--s12-teal);
+  color: #fff;
+  font-family: var(--s12-display);
+  font-size: 1.2rem;
+}
+
+/* Finish: the friends' table */
+
+#s12 .s12-finish {
+  position: relative;
+  padding: 2.2rem 0 clamp(2.5rem, 5vw, 4rem);
+  text-align: center;
+}
+
+#s12 .s12-lane--finish {
+  bottom: auto;
+  height: 2.2rem;
+}
+
+#s12 .s12-finish__space {
+  max-width: 440px;
+  margin: 0 auto 1.6rem;
+  padding: 12px;
+  border: 3px solid var(--s12-ink);
+  border-radius: 18px;
+  background: repeating-conic-gradient(var(--s12-ink) 0 25%, var(--s12-paper) 0 50%) 0 0 / 20px 20px;
+  box-shadow: 4px 6px 0 rgb(29 42 38 / 0.2);
+}
+
+#s12 .s12-finish__space > * {
+  background: var(--s12-paper);
+}
+
+#s12 .s12-finish__word {
+  padding: 0.7rem 0 0;
+  border-radius: 8px 8px 0 0;
+  color: var(--s12-teal-deep);
+  font-family: var(--s12-display);
+  font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+  letter-spacing: 0.16em;
+  text-indent: 0.16em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+#s12 .s12-finish__table {
+  width: 100%;
+  height: auto;
+  padding: 0.4rem 1rem 0.6rem;
+  border-radius: 0 0 8px 8px;
+}
+
+#s12 .s12-final {
+  max-width: 16ch;
+  margin: 0 auto 1.8rem;
+  font-family: var(--s12-display);
+  font-size: clamp(1.7rem, 1.1rem + 2.2vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+/* Narrow phones */
+
+@media (max-width: 520px) {
+  #s12 .s12-box {
+    display: block;
+    width: 100%;
+    max-width: 22rem;
+  }
+
+  #s12 .s12-box__cell {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.3rem 0.8rem;
+    border-right: 0;
+    border-bottom: 2px solid var(--s12-ink);
+  }
+
+  #s12 .s12-box__cell:last-child {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  #s12 .s12-cta {
+    padding: 0.65rem 1.1rem 0.7rem;
+  }
+
+  #s12 .s12-ticket__stub {
+    width: 54px;
+  }
+
+  #s12 .s12-mark {
+    grid-template-columns: 76px 1fr;
+  }
+
+  #s12 .s12-cta__sub {
+    font-size: 0.875rem;
+  }
+
+  #s12 .s12-legend {
+    padding: 0.9rem 0.9rem 1rem;
+  }
+
+  #s12 .s12-legend__list li {
+    grid-template-columns: 1.5rem 1fr;
+  }
+
+  #s12 .s12-legend__key {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+}
+
+@container (min-width: 460px) {
+  #s12 .s12-marks {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container (min-width: 680px) {
+  #s12 .s12-pick__row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #s12 .s12-marks {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1.2rem 0.9rem;
+  }
+
+  #s12 .s12-mark {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr;
+    padding: 7px 7px 10px;
+  }
+
+  #s12 .s12-mark__pic {
+    grid-row: auto;
+  }
+
+  #s12 .s12-mark__name {
+    padding: 0.4rem 0.2rem 0;
+  }
+
+  #s12 .s12-mark__tag {
+    margin: 0.35rem 0.2rem 0;
+  }
+
+  /* Landmarks stagger up and down like stops along a trail */
+  #s12 .s12-mark:nth-child(even) {
+    transform: translateY(1.1rem);
+  }
+
+  #s12 .s12-marks {
+    padding-bottom: 1.1rem;
+  }
+
+  #s12 .s12-legend__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1.6rem;
+  }
+
+  #s12 .s12-legend__list li:nth-last-child(2) {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
+/* Wide screens: the road snakes across the board */
+
+@media (min-width: 860px) {
+  #s12 .s12-board__inner {
+    --s12-u: calc(100cqi / 1200);
+  }
+
+  #s12 .s12-link {
+    display: block;
+  }
+
+  #s12 .s12-hero {
+    display: grid;
+    grid-template-columns: 54% 46%;
+    align-items: end;
+  }
+
+  #s12 .s12-hero__copy {
+    align-self: center;
+    padding: 0 2rem 2.5rem 0;
+  }
+
+  #s12 .s12-hero__art {
+    width: min(100%, 500px);
+    margin: 0 auto 1.5rem;
+  }
+
+  #s12 .s12-stop {
+    padding: 2rem 2cqi 3rem 16cqi;
+  }
+
+  #s12 .s12-plan {
+    margin-top: 0;
+  }
+
+  #s12 .s12-stop--right {
+    padding: 2rem 16cqi 3rem 2cqi;
+  }
+
+  #s12 .s12-stop--right .s12-stop__body {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  #s12 .s12-lane {
+    left: calc(64 * var(--s12-u));
+  }
+
+  #s12 .s12-stop--right .s12-lane {
+    left: calc(1084 * var(--s12-u));
+  }
+
+  #s12 .s12-hero .s12-lane--hero {
+    display: block;
+    top: auto;
+    height: 100px;
+    left: calc(910 * var(--s12-u));
+  }
+
+  #s12 .s12-milestone {
+    --s12-ms: max(64px, calc(130 * var(--s12-u)));
+    top: 1.4rem;
+    left: calc(90 * var(--s12-u) - var(--s12-ms) / 2);
+    width: var(--s12-ms);
+    height: var(--s12-ms);
+    border-width: 4px;
+    box-shadow:
+      inset 0 0 0 6px var(--s12-paper),
+      inset 0 0 0 11px var(--s12-teal),
+      inset 0 0 0 13px var(--s12-paper),
+      4px 6px 0 rgb(29 42 38 / 0.3);
+  }
+
+  #s12 .s12-stop--right .s12-milestone {
+    left: calc(1110 * var(--s12-u) - var(--s12-ms) / 2);
+  }
+
+  #s12 .s12-lane--finish {
+    left: calc(574 * var(--s12-u));
+  }
+
+  #s12 .s12-finish__space {
+    margin-top: 0;
+  }
+}
+
+@media (min-width: 860px) and (max-height: 820px) {
+  #s12 .s12-lede {
+    margin-top: 0.6rem;
+  }
+
+  #s12 .s12-hero .s12-cta {
+    margin-top: 1.1rem;
+  }
+
+  #s12 .s12-box {
+    margin-top: 1.3rem;
+  }
+}
+
+/* Motion */
+
+@media (prefers-reduced-motion: no-preference) {
+  #s12 .s12-cta {
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  #s12 .s12-cta:hover {
+    transform: translateY(3px);
+    box-shadow:
+      inset 0 0 0 3px var(--s12-cta-hover),
+      inset 0 0 0 4.5px rgb(255 255 255 / 0.55),
+      0 3px 0 var(--s12-cta-deep),
+      0 3px 0 3px var(--s12-ink),
+      4px 8px 12px rgb(40 20 6 / 0.3);
+  }
+
+  #s12 .s12-ticket label,
+  #s12 .s12-mark,
+  #s12 .s12-mark img {
+    transition: opacity 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease, transform 0.3s ease;
+  }
+
+  #s12 .s12-tr,
+  #s12 .s12-lane {
+    transition: stroke 0.4s ease, background 0.4s ease;
+  }
+
+  #s12 .s12-ticket input:checked + label .s12-ticket__stamp {
+    animation: s12-stamp 0.35s cubic-bezier(0.3, 1.5, 0.5, 1) both;
+  }
+
+  #s12 .s12-map__road .s12-tr {
+    animation: s12-draw 1.4s ease-out 0.2s both;
+  }
+
+  #s12 .s12-map__you {
+    animation: s12-pulse 2.6s ease-in-out 1.6s infinite;
+  }
+
+  #s12 .s12-flame {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: s12-flicker 1.8s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes s12-stamp {
+  from { transform: rotate(-20deg) scale(1.6); opacity: 0; }
+  to { transform: rotate(-5deg) scale(1); opacity: 1; }
+}
+
+@keyframes s12-draw {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes s12-pulse {
+  0%, 100% { stroke-opacity: 1; }
+  50% { stroke-opacity: 0.3; }
+}
+
+@keyframes s12-flicker {
+  from { transform: scaleY(1); }
+  to { transform: scaleY(0.9) skewX(-3deg); }
+}
+
+/* Landing-card preview: a calm, still final state */
+
+.is-thumb #s12 *,
+.is-thumb #s12 *::before,
+.is-thumb #s12 *::after {
+  animation: none !important;
+  transition: none !important;
+}
