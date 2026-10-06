@@ -12,38 +12,40 @@ The 25 style briefs for the gallery, plus `00-baseline` as the control. Each pai
 
 ## Styles
 
-The set has been redone twice. **01–10** are **American comic-book art** (heavy inks, Ben-Day halftone, four-colour print, panels, captions, sound-effect lettering), one per 1990s–2000s Cartoon Network original, picked from Screen Rant, Collider and SlashFilm rankings: Dexter's Laboratory, The Powerpuff Girls, Johnny Bravo, Courage the Cowardly Dog, Ed Edd n Eddy, Samurai Jack, Codename: Kids Next Door, Foster's Home for Imaginary Friends, The Grim Adventures of Billy & Mandy, Ben 10. Show names are for our reference only and never appear on the page. **11–12** are classic hand-painted animated-feature looks, and **13–25** are early cartoon-channel comedy looks (wobbly ink lines, flat colour, scribbles, pop shapes). The retired first Disney-style 01–10 live in the git history and nowhere else.
+Each of the 25 styles is based on one show from [Looper's 25 best Cartoon Network shows](https://www.looper.com/787648/best-cartoon-network-shows-of-all-time-ranked/), in rank order (01 = #1). The show column is for our reference only: show names, characters, logos, catchphrases and title lettering never appear on the page. Evoke the show's *drawing technique, palette and mood*; every character, shape and word is original.
 
-Guardrails: evoke the *technique and mood* only. No copyrighted characters, logos, character names, quotes or franchise lettering; every shape, mascot and word is original.
+**The through-line is playing together.** Every style is an invitation: copy speaks to "you and your friends", "your crew", "pull up a seat", "we saved you a spot"; art shows groups gathered around a game, an empty seat waiting, friends waving you over, hands reaching into the same pile of pieces. No lone hero. Solo-play claims are fine but never the lead.
 
-| # | Slug | Look | Hook |
-|---|------|------|------|
-| 00 | baseline | Faithful recreation of the current page. | Start playing now |
-| 01 | lab-panel | American comic-book pages with a boxy retro-futuristic lab: inked panels, pastel flats, gadget callouts, chunky red-button splash. | Press start |
-| 02 | city-heroes-ink | Superhero splash page: thick uniform outlines, flat candy colour, starburst rays, round-faced hero trio over a city skyline. | Ranked play |
-| 03 | pompadour-pop | 1950s-flavoured pop-art pin-up cover: halftone Ben-Day sky, swaggering silhouette, big-jawed bravado, cheesy sound effects. | Social proof hero |
-| 04 | pulp-horror | EC-style horror comic: moody spot blacks, dripping title lettering, eerie hatching, a nervous hero, comic dread that ends friendly. | Pick your vibe |
-| 05 | funnies-strip | Sunday newspaper funnies: wobbly ink, a four-panel strip on aged newsprint, scheming trio, a candy-sphere running gag. | Invite your friends |
-| 06 | ronin-widescreen | Graphic-novel noir: cinemascope panels, flat geometry, stark silhouettes, bold sunset gradients, minimal captions. | Accept the quest |
-| 07 | mission-briefing | Kid-operative spy comic: treehouse HQ, numbered mission files, "TOP SECRET" stamps, team badges, ink-and-flat colour action. | Three-step start |
-| 08 | imaginary-house | Bright chunky cartoon annual: a sprawling mansion cutaway where the ten games live as residents, doodled friends, bold flat colours. | Live lobby |
-| 09 | gothic-gag | Gothic gag comic: crooked tombstones, skull motifs, scythe silhouettes, purple-black inks with acid-green accents, deadpan captions. | Top ten shelf |
-| 10 | hero-cover | Issue #1 superhero comic cover: masthead, price box, barcode, a dial-watch that transforms (rolls) into a random game. | Roll for a game |
-| 11 | once-upon-a-time | An opening storybook: ornate illuminated pages, "Once upon a time…" lettering, page-turn feel. | Three-step start |
-| 12 | sing-along | Painted matte backdrop, film-frame borders, karaoke-style highlighted lyrics and a bouncing ball. | Press start |
-| 13 | wobbly-cul-de-sac | Early-2000s cartoon suburb: boiling wobbly ink outlines, grainy flat colour, scribbled sky, jawbreaker colours. | Invite your friends |
-| 14 | scam-flyer | Crude marker-lettered flyer taped to a pole, misspelt-feeling hand lettering (still legible), bold claims. | Social proof hero |
-| 15 | jawbreaker | Candy-striped layered spheres, sticky-sweet palette, rubbery bounce; a candy that cracks open to pick a game. | Roll for a game |
-| 16 | junkyard-fort | Cardboard-and-scrap clubhouse, hand-drawn signs, duct tape, crayon scrawls; a seat on the crate. | Seat at the table |
-| 17 | secret-lab | Retro-futuristic pastel lab, giant chunky buttons, blueprint gadgets, boxy sans-serif lettering. | Press start |
-| 18 | sugar-and-spice | Thick black outlines, flat saturated colour, round-headed shapes, a city skyline and bold starburst rays. | Ranked play |
-| 19 | saturday-morning | TV test pattern, channel-guide listing, bumper cards, rabbit-ear antenna; "now playing" schedule. | Live lobby |
-| 20 | lone-wanderer | Wide-screen flat geometry, stark silhouettes, sunset gradients, bold diagonal composition. | Accept the quest |
-| 21 | spooky-farm | Cartoon-horror pastel: moonlit farmhouse, wobbly shadows, jumpy eyes, comic dread with a friendly end. | Pick your vibe |
-| 22 | pop-squiggle | Loud 90s pop: Memphis squiggles, confetti triangles, wacky speech and exaggerated pose-like type. | Three-step start |
-| 23 | check-it-bumper | Black-and-white checkerboard bumper cards with neon blocks, big blocky title type, channel-ident energy. | Top ten shelf |
-| 24 | recess-doodle | Schoolyard notebook: ruled paper, ballpoint doodles, sticker sheet, gel-pen scribbles. | Invite your friends |
-| 25 | title-card | Cartoon title card: iris-out circle, "Starring" credit roll of the ten games, curtain-call finale. | Live lobby |
+The ten styles marked *kept* were built in the comic-book round and moved to their show's rank; they get a play-together revision rather than a rebuild.
+
+| # | Show (reference only) | Slug | Look | Hook |
+|---|------|------|------|------|
+| 00 | – | baseline | Faithful recreation of the current page. | Start playing now |
+| 01 | Adventure Time | candy-kingdom-quest | Noodle-limbed rounded characters, pastel candy kingdom, treehouse hangout, simple bold shapes, whimsical flat colour. | Invite your friends |
+| 02 | The Powerpuff Girls | city-heroes-ink *(kept)* | Superhero splash page: thick uniform outlines, flat candy colour, starburst rays, round-faced hero trio over a city skyline. | Team up |
+| 03 | Samurai Jack | ronin-widescreen *(kept)* | Graphic-novel noir: cinemascope panels, flat geometry, stark silhouettes, bold sunset gradients, minimal captions. Now: the wanderer finds companions. | Accept the quest |
+| 04 | Courage the Cowardly Dog | pulp-horror *(kept)* | Horror-comic splash: spot blacks, dripping title, nervous hero, friendly monsters who just want a fourth player. | Seat at the table |
+| 05 | Steven Universe | crystal-beach-town | Soft painted pastel backgrounds, boardwalk beach town, gem facets and star motifs, gentle warm found-family mood. | Invite your friends |
+| 06 | Teen Titans | tower-team-anime | Anime-influenced Western action: T-shaped tower on an island, speed lines, chibi gag moments, team roll call. | Team up |
+| 07 | Dexter's Laboratory | lab-panel *(kept)* | Comic pages with a boxy retro lab, inked panels, pastel flats, gadget callouts, chunky red button. Now: "Player 2, press start". | Press start |
+| 08 | Ben 10 | hero-cover *(kept)* | Issue #1 superhero comic cover; a dial-watch that rolls a random game for the whole group. | Roll for a game |
+| 09 | Regular Show | park-slackers | Muted suburban park, flat thick outlines, retro 80s arcade/video-game references, cabinet screens, slacker buddies. | Live lobby |
+| 10 | Ed, Edd n Eddy | funnies-strip *(kept)* | Sunday newspaper funnies: wobbly boiling ink, four-panel strip on newsprint, scheming trio, candy-sphere gag. | Invite your friends |
+| 11 | Justice League | hall-of-heroes | Angular streamlined hero design, art-deco moderne architecture, bold shadow shapes, orbital meeting hall with a round table. | Team up |
+| 12 | Craig of the Creek | creek-adventure | Lush afternoon creek woods, kid-built forts, hand-drawn maps, trading-card swaps, warm golden light. | Seat at the table |
+| 13 | Codename: Kids Next Door | mission-briefing *(kept)* | Kid-operative spy comic: treehouse HQ, numbered mission files, TOP SECRET stamps, team badges. Now: recruit your squad. | Three-step start |
+| 14 | Infinity Train | endless-carriages | Mysterious train where every carriage is a different world, glowing number motifs, painterly corridors, fellow passengers. | Live lobby |
+| 15 | The Marvelous Misadventures of Flapjack | sea-yarn | Grimy textured painted nautical look, sepia-and-teal sea, candy-island legend, sailor's yarn told to a crew. | Accept the quest |
+| 16 | Scooby-Doo! Mystery Incorporated | mystery-van | Moody teal-and-orange 70s mystery: the gang's van, clue boards with red string, unmasking reveals. | Pick your vibe |
+| 17 | Chowder | bouncy-kitchen | Flat shapes filled with textile patterns, bustling fantasy kitchen, steaming pots, everyone squeezed round the dinner table. | Seat at the table |
+| 18 | The Grim Adventures of Billy & Mandy | gothic-gag *(kept)* | Gothic gag comic: crooked tombstones, purple-black inks, acid-green accents, deadpan captions; the graveyard game night. | Top ten shelf |
+| 19 | The Amazing World of Gumball | mixed-media-town | Mixed media: photographic-feeling backgrounds with flat 2D, 3D-ish and puppet-like characters side by side; school and family chaos. | Invite your friends |
+| 20 | Cow and Chicken | barnyard-crude | Crude scratchy linework, loud primary flats, absurd farmhouse, deliberately lumpy proportions. | Pick your vibe |
+| 21 | Foster's Home for Imaginary Friends | imaginary-house *(kept)* | Bright chunky cartoon annual: a mansion cutaway where doodled friends play games in every room. | Live lobby |
+| 22 | Sym-Bionic Titan | mecha-retro | Retro 80s sci-fi mecha and high-school drama: three pilots combine into one giant, cel shading, chrome and neon dusk. | Team up |
+| 23 | The Looney Tunes Show | toon-sitcom | Bright clean modern toon sitcom: suburban living room, couch game nights, neighbours dropping in, bold flat backgrounds. | Social proof hero |
+| 24 | Total Drama Island | reality-camp | Reality-TV summer camp: confessional-cam frames, lakeside campfire, team flags, challenge boards, on-screen lower thirds. | Three-step start |
+| 25 | Johnny Bravo | pompadour-pop *(kept)* | 1950s pop-art pin-up cover: halftone sky, swaggering silhouette, jukebox strips; now he's the host gathering a crowd. | Social proof hero |
 
 ## Games
 
@@ -73,4 +75,5 @@ Every style shows these ten games and no others: the first ten on the live homep
 - **Social proof hero**: the big numbers are the hero, with an animated count-up (static under reduced motion).
 - **Three-step start**: Create account → Pick a game → Play in your browser. Answers the "is this hard?" doubt.
 - **Ranked play**: lead with skill levels from beginner to pro and the ranking ladder.
+- **Team up**: lead with playing on the same side or the same table: co-op games, "grab your crew", a team roll call with an open spot for you.
 - **Open the box / Press start / Accept the quest / Roll for a game**: the theme's own verb on the primary CTA, with the plain "Create free account" beneath it so the action stays unambiguous.

@@ -8,7 +8,7 @@
   const num = (s) => s.id.slice(1);
   const pageUrl = (s) => `index.html?view=${s.id}`;
 
-  const INITS = {s03: initS03, s04: initS04, s10: initS10, s14: initS14, s15: initS15, s21: initS21};
+  const INITS = {s08: initS08, s16: initS16, s20: initS20, s23: initS23, s25: initS25};
   styles.forEach((s) => INITS[s.id]?.(s));
 
   const params = new URLSearchParams(location.search);
@@ -91,12 +91,137 @@
     });
   }
 
-  function initS03(root) {
+  function initS08(root) {
+    if (!root) return;
+    var btn = root.querySelector(".s08-spin");
+    var face = root.querySelector(".s08-face");
+    var covers = root.querySelectorAll(".s08-vc");
+    var result = root.querySelector(".s08-result");
+    if (!btn || !face || !covers.length || !result) return;
+    var label = result.querySelector(".s08-result-label");
+    var img = result.querySelector(".s08-result-img");
+    var nameEl = result.querySelector(".s08-result-name");
+    var tagEl = result.querySelector(".s08-result-tag");
+    var gameEl = result.querySelector(".s08-result-game");
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var current = 0, turns = 0, timer = null, busy = false;
+    btn.hidden = false;
+
+    function show(i) {
+      var c = covers[i];
+      label.textContent = "Tonight the crew plays";
+      img.src = c.getAttribute("data-img");
+      nameEl.textContent = c.getAttribute("data-name");
+      tagEl.textContent = c.getAttribute("data-tag");
+      gameEl.textContent = c.getAttribute("data-name");
+      for (var k = 0; k < covers.length; k++) covers[k].classList.toggle("s08-picked", k === i);
+      result.classList.remove("s08-flash");
+      void result.offsetWidth;
+      if (!reduce) result.classList.add("s08-flash");
+      root.classList.remove("s08-spinning");
+      busy = false;
+      btn.removeAttribute("aria-disabled");
+      btn.textContent = "Spin again!";
+    }
+
+    btn.addEventListener("click", function () {
+      if (busy) return;
+      var n = covers.length, next;
+      do { next = Math.floor(Math.random() * n); } while (next === current && n > 1);
+      current = next;
+      clearTimeout(timer);
+      if (reduce) {
+        face.style.transform = "rotate(" + (-next * 36) + "deg)";
+        show(next);
+        return;
+      }
+      turns += 3;
+      face.style.transform = "rotate(" + (-next * 36 - turns * 360) + "deg)";
+      root.classList.add("s08-spinning");
+      busy = true;
+      btn.setAttribute("aria-disabled", "true");
+      timer = setTimeout(function () { show(next); }, 1700);
+    });
+  }
+
+  function initS16(root) {
+    if (!root || !root.querySelector) return;
+    var picker = root.querySelector(".s16-picker");
+    if (!picker) return;
+    var radios = picker.querySelectorAll(".s16-radio");
+    var status = picker.querySelector(".s16-status");
+    var reset = picker.querySelector(".s16-reset");
+    var pins = root.querySelectorAll(".s16-pin");
+    var idle = status ? status.textContent : "";
+    var leads = {
+      strategy: "Lead A: the planners. ",
+      family: "Lead B: the whole family. ",
+      friends: "Lead C: the party crowd. "
+    };
+    function apply(v) {
+      var names = [];
+      pins.forEach(function (p) {
+        if ((" " + p.getAttribute("data-vibes") + " ").indexOf(" " + v + " ") > -1) {
+          var n = p.querySelector(".s16-pin-name");
+          if (n) names.push(n.textContent);
+        }
+      });
+      if (status) status.textContent = (leads[v] || "") + names.length + " of the ten match: " + names.join(", ") + ".";
+      if (reset) reset.hidden = false;
+    }
+    radios.forEach(function (r) {
+      r.addEventListener("change", function () { if (r.checked) apply(r.value); });
+    });
+    if (reset) {
+      reset.addEventListener("click", function () {
+        radios.forEach(function (r) { r.checked = false; });
+        if (status) status.textContent = idle;
+        reset.hidden = true;
+        if (radios[0]) radios[0].focus();
+      });
+    }
+  }
+
+  function initS20(root) {
+    if (!root || !root.querySelector) return;
+    var picker = root.querySelector(".s20-picker");
+    if (!picker) return;
+    var radios = picker.querySelectorAll(".s20-radio");
+    var status = picker.querySelector(".s20-status");
+    var reset = picker.querySelector(".s20-reset");
+    var frames = root.querySelectorAll(".s20-frame");
+    var idle = status ? status.textContent : "";
+    var lines = {
+      strategy: "Brainy barn it is! ",
+      family: "Whole-family hoedown! ",
+      friends: "Rowdy bunch, here we go! "
+    };
+    function apply(v) {
+      var n = 0;
+      frames.forEach(function (f) {
+        if ((" " + f.getAttribute("data-vibes") + " ").indexOf(" " + v + " ") > -1) n++;
+      });
+      if (status) status.textContent = (lines[v] || "") + n + " of the ten fit your crew.";
+      if (reset) reset.hidden = false;
+    }
+    radios.forEach(function (r) {
+      r.addEventListener("change", function () { if (r.checked) apply(r.value); });
+    });
+    if (reset) {
+      reset.addEventListener("click", function () {
+        radios.forEach(function (r) { r.checked = false; });
+        if (status) status.textContent = idle;
+        reset.hidden = true;
+        if (radios[0]) radios[0].focus();
+      });
+    }
+  }
+
+  function initS23(root) {
     if (!root || !root.querySelectorAll) return;
     var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    // Thumbnails show the final numbers rather than a count-up caught mid-way.
-    var thumb = document.documentElement.classList.contains("is-thumb");
-    if (reduce || thumb || !("requestAnimationFrame" in window)) return;
+    // Thumbnails and reduced motion keep the final numbers that are already in the HTML.
+    if (reduce || document.documentElement.classList.contains("is-thumb") || !("requestAnimationFrame" in window)) return;
     var items = root.querySelectorAll("[data-count]");
     function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
     function run(el) {
@@ -104,9 +229,9 @@
       el.setAttribute("data-run", "1");
       var target = parseInt(el.getAttribute("data-count"), 10);
       var suffix = el.getAttribute("data-suffix") || "";
-      var out = el.querySelector(".s03-n");
+      var out = el.querySelector(".s23-n");
       if (!out || isNaN(target)) return;
-      var dur = target > 100000 ? 1800 : 1300, t0 = null;
+      var dur = target > 100000 ? 1900 : 1300, t0 = null;
       function step(t) {
         if (t0 === null) t0 = t;
         var p = Math.min(1, (t - t0) / dur);
@@ -129,115 +254,27 @@
     }
   }
 
-  function initS04(root) {
-    if (!root || !root.querySelector) return;
-    var picker = root.querySelector(".s04-picker");
-    if (!picker) return;
-    var radios = picker.querySelectorAll(".s04-radio");
-    var status = picker.querySelector(".s04-status");
-    var reset = picker.querySelector(".s04-reset");
-    var panels = root.querySelectorAll(".s04-panel");
-    var idle = status ? status.textContent : "";
-    var lines = {
-      strategy: "Door I creaks open: the brain-burners. ",
-      family: "Door II creaks open: the cosy haunt. ",
-      friends: "Door III creaks open: the midnight party. "
-    };
-    function apply(v) {
-      var n = 0;
-      panels.forEach(function (p) {
-        var on = (" " + p.getAttribute("data-vibes") + " ").indexOf(" " + v + " ") > -1;
-        if (on) n++;
-      });
-      if (status) status.textContent = (lines[v] || "") + n + " of the ten are waiting for you.";
-      if (reset) reset.hidden = false;
-    }
-    radios.forEach(function (r) {
-      r.addEventListener("change", function () { if (r.checked) apply(r.value); });
-    });
-    if (reset) {
-      reset.addEventListener("click", function () {
-        radios.forEach(function (r) { r.checked = false; });
-        if (status) status.textContent = idle;
-        reset.hidden = true;
-        if (radios[0]) radios[0].focus();
-      });
-    }
-  }
-
-  function initS10(root) {
-    if (!root) return;
-    var btn = root.querySelector(".s10-spin");
-    var face = root.querySelector(".s10-face");
-    var covers = root.querySelectorAll(".s10-vc");
-    var result = root.querySelector(".s10-result");
-    if (!btn || !face || !covers.length || !result) return;
-    var label = result.querySelector(".s10-result-label");
-    var img = result.querySelector(".s10-result-img");
-    var nameEl = result.querySelector(".s10-result-name");
-    var tagEl = result.querySelector(".s10-result-tag");
-    var gameEl = result.querySelector(".s10-result-game");
-    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var current = 0, turns = 0, timer = null, busy = false;
-    btn.hidden = false;
-
-    function show(i) {
-      var c = covers[i];
-      label.textContent = "You transformed into";
-      img.src = c.getAttribute("data-img");
-      nameEl.textContent = c.getAttribute("data-name");
-      tagEl.textContent = c.getAttribute("data-tag");
-      gameEl.textContent = c.getAttribute("data-name");
-      for (var k = 0; k < covers.length; k++) covers[k].classList.toggle("s10-picked", k === i);
-      result.classList.remove("s10-flash");
-      void result.offsetWidth;
-      if (!reduce) result.classList.add("s10-flash");
-      root.classList.remove("s10-spinning");
-      busy = false;
-      btn.removeAttribute("aria-disabled");
-      btn.textContent = "Spin again!";
-    }
-
-    btn.addEventListener("click", function () {
-      if (busy) return;
-      var n = covers.length, next;
-      do { next = Math.floor(Math.random() * n); } while (next === current && n > 1);
-      current = next;
-      clearTimeout(timer);
-      if (reduce) {
-        face.style.transform = "rotate(" + (-next * 36) + "deg)";
-        show(next);
-        return;
-      }
-      turns += 3;
-      face.style.transform = "rotate(" + (-next * 36 - turns * 360) + "deg)";
-      root.classList.add("s10-spinning");
-      busy = true;
-      btn.setAttribute("aria-disabled", "true");
-      timer = setTimeout(function () { show(next); }, 1700);
-    });
-  }
-
-  function initS14(root) {
+  function initS25(root) {
     if (!root || !root.querySelectorAll) return;
     var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     // Thumbnails show the final numbers rather than a count-up caught mid-way.
     var thumb = document.documentElement.classList.contains("is-thumb");
     if (reduce || thumb || !("requestAnimationFrame" in window)) return;
     var items = root.querySelectorAll("[data-count]");
+    function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
     function run(el) {
       if (el.getAttribute("data-run")) return;
       el.setAttribute("data-run", "1");
       var target = parseInt(el.getAttribute("data-count"), 10);
       var suffix = el.getAttribute("data-suffix") || "";
-      var out = el.querySelector(".s14-n");
+      var out = el.querySelector(".s25-n");
       if (!out || isNaN(target)) return;
-      var dur = 1600, t0 = null;
+      var dur = target > 100000 ? 1800 : 1300, t0 = null;
       function step(t) {
         if (t0 === null) t0 = t;
         var p = Math.min(1, (t - t0) / dur);
         var e = 1 - Math.pow(1 - p, 3);
-        out.textContent = Math.round(target * e).toLocaleString("en-US") + (p < 1 ? "" : suffix);
+        out.textContent = fmt(Math.round(target * e)) + (p < 1 ? "" : suffix);
         if (p < 1) window.requestAnimationFrame(step);
       }
       out.textContent = "0";
@@ -248,95 +285,10 @@
         entries.forEach(function (en) {
           if (en.isIntersecting) { run(en.target); io.unobserve(en.target); }
         });
-      }, { threshold: 0.3 });
+      }, { threshold: 0.2 });
       items.forEach(function (el) { io.observe(el); });
     } else {
       items.forEach(run);
     }
-  }
-
-  function initS15(root) {
-    if (!root) return;
-    var stage = root.querySelector(".s15-stage");
-    var btn = root.querySelector(".s15-crackbtn");
-    var items = root.querySelectorAll(".s15-grid .s15-g");
-    if (!stage || !btn || !items.length) return;
-    var reveal = stage.querySelector(".s15-reveal");
-    var img = reveal.querySelector(".s15-r-img");
-    var tag = reveal.querySelector(".s15-r-tag");
-    var nameEl = reveal.querySelector(".s15-r-name");
-    var link = reveal.querySelector(".s15-r-link");
-    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var last = -1, cracked = false, timer = null;
-    btn.hidden = false;
-    root.classList.add("s15-js");
-
-    function pick() {
-      var i;
-      do { i = Math.floor(Math.random() * items.length); } while (i === last && items.length > 1);
-      last = i;
-      var g = items[i];
-      img.src = g.getAttribute("data-img");
-      tag.textContent = g.getAttribute("data-tag");
-      nameEl.textContent = g.getAttribute("data-name");
-      link.textContent = "Play " + g.getAttribute("data-name") + " free";
-    }
-    function open() {
-      pick();
-      cracked = true;
-      stage.setAttribute("data-state", "cracked");
-      btn.textContent = "Crack another candy";
-    }
-    function seal() {
-      cracked = false;
-      stage.setAttribute("data-state", "sealed");
-    }
-    function go() {
-      clearTimeout(timer);
-      if (cracked && !reduce) {
-        seal();
-        timer = setTimeout(open, 450);
-      } else {
-        open();
-      }
-    }
-    btn.addEventListener("click", go);
-    stage.addEventListener("click", function (e) {
-      if (e.target.closest && e.target.closest("a")) return;
-      if (!cracked) go();
-    });
-  }
-
-  function initS21(root) {
-    var grid = root.querySelector('.s21-grid');
-    var picker = root.querySelector('.s21-picker');
-    if (!grid || !picker) return;
-    var radios = picker.querySelectorAll('.s21-radio');
-    var status = picker.querySelector('.s21-status');
-    var reset = picker.querySelector('.s21-reset');
-    var names = { strategy: 'Strategy', family: 'Family', friends: 'With friends' };
-    var idle = status.textContent;
-    root.classList.add('s21-js');
-    function apply(v) {
-      var n = 0;
-      grid.setAttribute('data-vibe', v);
-      grid.querySelectorAll('.s21-card').forEach(function (c) {
-        var on = (' ' + c.getAttribute('data-vibes') + ' ').indexOf(' ' + v + ' ') > -1;
-        c.classList.toggle('s21-match', on);
-        if (on) n++;
-      });
-      status.textContent = names[v] + ': ' + n + ' of the ten light up. Ready when you are.';
-      reset.hidden = false;
-    }
-    radios.forEach(function (r) {
-      r.addEventListener('change', function () { if (r.checked) apply(r.value); });
-    });
-    reset.addEventListener('click', function () {
-      grid.removeAttribute('data-vibe');
-      grid.querySelectorAll('.s21-card').forEach(function (c) { c.classList.remove('s21-match'); });
-      radios.forEach(function (r) { r.checked = false; });
-      status.textContent = idle;
-      reset.hidden = true;
-    });
   }
 })();

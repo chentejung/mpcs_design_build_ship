@@ -1,6 +1,6 @@
 /* 02 City Heroes Ink: a superhero splash page.
    Thick uniform outlines, flat candy colour, starburst rays, a round-faced hero trio
-   over a city skyline, and a ranking ladder you climb like a skyscraper.
+   round a game table over a city skyline, with the fourth seat saved for you.
    Every rule is scoped under #s02. */
 
 #s02 {
@@ -166,6 +166,7 @@
 
 #s02 .s02-h1__c {
   width: fit-content;
+  font-size: 0.86em;
   margin-top: 0.08em;
   padding: 0.04em 0.18em 0.02em;
   border: 5px solid var(--s02-ink);
@@ -276,7 +277,7 @@
   position: absolute;
   top: 4%;
   left: 2%;
-  max-width: 11rem;
+  max-width: 13rem;
   padding: 0.55rem 0.9rem;
   border: 5px solid var(--s02-ink);
   border-radius: 50% / 46%;
@@ -301,7 +302,7 @@
   transform: skewX(30deg) rotate(30deg);
 }
 
-/* The ladder tower */
+/* The team roll call tower */
 
 #s02 .s02-tower {
   position: relative;
@@ -366,35 +367,13 @@
   align-items: center;
   gap: 0.7rem;
   min-height: clamp(42px, 5vh, 52px);
-  padding: 0.35rem 3.4rem 0.35rem 0.7rem;
+  padding: 0.35rem 0.7rem;
   border-top: 4px solid var(--s02-ink);
   color: #fff;
 }
 
 #s02 .s02-floor:first-child {
   border-top: 0;
-}
-
-#s02 .s02-floor::after {
-  /* lit windows */
-  content: "";
-  position: absolute;
-  right: 0.7rem;
-  top: 50%;
-  width: 2.2rem;
-  height: 1rem;
-  translate: 0 -50%;
-  background:
-    linear-gradient(var(--s02-yellow), var(--s02-yellow)) 0 0 / 0.9rem 1rem no-repeat,
-    linear-gradient(var(--s02-yellow), var(--s02-yellow)) 100% 0 / 0.9rem 1rem no-repeat;
-  opacity: 0.85;
-}
-
-#s02 .s02-floor:nth-child(3)::after,
-#s02 .s02-floor:nth-child(6)::after {
-  background:
-    linear-gradient(#5d48a8, #5d48a8) 0 0 / 0.9rem 1rem no-repeat,
-    linear-gradient(var(--s02-yellow), var(--s02-yellow)) 100% 0 / 0.9rem 1rem no-repeat;
 }
 
 #s02 .s02-floor__lvl {
@@ -405,7 +384,7 @@
   height: 2rem;
   border: 4px solid var(--s02-ink);
   border-radius: 50%;
-  background: #fff;
+  background: var(--s02-dot, #fff);
   color: var(--s02-ink);
   font-family: var(--s02-punch);
   font-weight: 900;
@@ -413,36 +392,46 @@
   line-height: 1;
 }
 
+#s02 .s02-floor--pink { --s02-dot: var(--s02-pink); }
+#s02 .s02-floor--green { --s02-dot: var(--s02-green); }
+#s02 .s02-floor--purple { --s02-dot: var(--s02-lilac); }
+
 #s02 .s02-floor__name {
   font-family: var(--s02-punch);
   font-weight: 900;
-  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
-  letter-spacing: 0.04em;
+  font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+  letter-spacing: 0.03em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
-#s02 .s02-floor--top {
-  background: var(--s02-yellow);
-  color: var(--s02-ink);
-}
-
-#s02 .s02-floor--top .s02-floor__name::after {
-  content: " ★";
+#s02 .s02-floor__tag {
+  margin-left: auto;
+  padding: 0 0.5em;
+  border-radius: 999px;
+  background: var(--s02-ink);
+  color: var(--s02-green);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 #s02 .s02-floor--you {
   flex-wrap: wrap;
-  background: var(--s02-green);
+  min-height: clamp(54px, 7vh, 66px);
+  background: var(--s02-yellow);
   color: var(--s02-ink);
+  outline: 4px dashed var(--s02-ink);
+  outline-offset: -10px;
 }
 
-#s02 .s02-floor--you::after {
-  display: none;
+#s02 .s02-floor--you .s02-floor__lvl {
+  border-style: dashed;
 }
 
 #s02 .s02-floor__note {
   margin-left: auto;
-  margin-right: -2.7rem;
   padding: 0.15em 0.6em;
   border: 3px solid var(--s02-ink);
   border-radius: 999px;
@@ -534,21 +523,26 @@
 
 /* SVG motion */
 
-#s02 .s02-fly {
+#s02 .s02-bob {
   animation: s02-bob 2.8s ease-in-out infinite;
 }
 
-#s02 .s02-hero--b .s02-fly {
+#s02 .s02-bob--b {
   animation-delay: -0.9s;
 }
 
-#s02 .s02-hero--c .s02-fly {
+#s02 .s02-bob--c {
   animation-delay: -1.8s;
 }
 
-#s02 .s02-speed path {
-  stroke-dasharray: 40 18;
-  animation: s02-dash 0.8s linear infinite;
+#s02 .s02-roll {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: s02-shake 1.6s ease-in-out infinite;
+}
+
+#s02 .s02-seat__ring {
+  animation: s02-dash 1.2s linear infinite;
 }
 
 #s02 .s02-sparkles path {
@@ -580,11 +574,16 @@
 }
 
 @keyframes s02-bob {
-  50% { transform: translate(6px, -10px); }
+  50% { transform: translate(0, -6px); }
+}
+
+@keyframes s02-shake {
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
 }
 
 @keyframes s02-dash {
-  to { stroke-dashoffset: -58; }
+  to { stroke-dashoffset: -56; }
 }
 
 @keyframes s02-twinkle {
@@ -979,18 +978,23 @@
 }
 
 #s02 .s02-finale__trio svg {
-  width: clamp(84px, 13vw, 132px);
+  width: clamp(64px, 12vw, 124px);
   animation: s02-bob 2.6s ease-in-out infinite;
 }
 
 #s02 .s02-finale__trio svg:nth-child(2) {
-  width: clamp(104px, 16vw, 160px);
+  width: clamp(84px, 15vw, 150px);
   margin: -20px -8px 0;
   animation-delay: -0.8s;
 }
 
 #s02 .s02-finale__trio svg:nth-child(3) {
   animation-delay: -1.6s;
+}
+
+#s02 .s02-finale__trio .s02-finale__you {
+  margin-left: -8px;
+  animation-delay: -2.2s;
 }
 
 #s02 .s02-finale__box {

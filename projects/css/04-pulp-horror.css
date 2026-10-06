@@ -1,5 +1,5 @@
-/* 04 Pulp Horror: vintage horror-comic splash page with comic dread that ends friendly.
-   Hook: pick your vibe. Every rule is scoped under #s04. */
+/* 04 Pulp Horror: vintage horror-comic splash page with comic dread that ends friendly:
+   friendly monsters round a candlelit game table, one chair left. Hook: seat at the table. Every rule is scoped under #s04. */
 
 #s04 {
   --s04-ink: #0f0a12;
@@ -65,11 +65,9 @@
 #s04 .s04-issue,
 #s04 .s04-cta,
 #s04 .s04-kicker,
-#s04 .s04-door-name,
 #s04 .s04-panel-no,
 #s04 .s04-panel-name,
 #s04 .s04-all,
-#s04 .s04-reset,
 #s04 .s04-step-h,
 #s04 .s04-fact strong {
   font-weight: 900;
@@ -376,7 +374,7 @@
 #s04 .s04-eye-pair--b { animation-delay: 1.7s; }
 #s04 .s04-eye-pair--c { animation-delay: 3.1s; }
 
-/* ---------- Pick your door ---------- */
+/* ---------- Top ten on the table ---------- */
 
 #s04 .s04-fate {
   padding: clamp(2.5rem, 5vw, 4.5rem) 0;
@@ -419,181 +417,6 @@
 #s04 .s04-sub {
   margin-top: 0.7rem;
   font-size: 1.05rem;
-}
-
-#s04 .s04-picker {
-  min-width: 0;
-  padding: 0;
-  border: 0;
-}
-
-#s04 .s04-doors {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(0.8rem, 3vw, 2.5rem);
-  max-width: 62rem;
-  margin: 0 auto;
-}
-
-#s04 .s04-radio {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  pointer-events: none;
-}
-
-#s04 .s04-door {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.8rem;
-  min-height: 16rem;
-  padding: 3.2rem 0.9rem 1.4rem;
-  border: 5px solid var(--s04-ink);
-  border-radius: 50% 50% 6px 6px / 5.5rem 5.5rem 6px 6px;
-  background:
-    repeating-linear-gradient(90deg, transparent 0 22px, rgba(15, 10, 18, 0.35) 22px 25px),
-    var(--s04-door, var(--s04-plum));
-  box-shadow: 8px 8px 0 var(--s04-ink);
-  cursor: pointer;
-  text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-}
-
-#s04 .s04-door--a { --s04-door: #4a2b4f; }
-#s04 .s04-door--b { --s04-door: #2f4a35; }
-#s04 .s04-door--c { --s04-door: #6a2430; }
-
-#s04 .s04-door::before {
-  /* glow escaping under the door when chosen */
-  content: "";
-  position: absolute;
-  inset: auto 8% -14px 8%;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--s04-yellow);
-  opacity: 0;
-  filter: blur(4px);
-  transition: opacity 0.2s ease;
-}
-
-#s04 .s04-door-num {
-  position: absolute;
-  top: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--s04-shock);
-  font-size: 1.5rem;
-  color: var(--s04-yellow);
-  text-shadow: 2px 2px 0 var(--s04-ink);
-}
-
-#s04 .s04-door-plate {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  width: 100%;
-  padding: 0.7rem 0.7rem 0.8rem;
-  background: var(--s04-cream);
-  color: var(--s04-ink);
-  border: 3px solid var(--s04-ink);
-  border-radius: 4px;
-  box-shadow: inset 0 0 0 3px var(--s04-cream), inset 0 0 0 5px var(--s04-ink);
-}
-
-#s04 .s04-door-name {
-  font-family: var(--s04-display);
-  font-size: clamp(1rem, 1.8vw, 1.3rem);
-  line-height: 1.1;
-  text-transform: uppercase;
-}
-
-#s04 .s04-door-desc {
-  font-size: 0.92rem;
-  line-height: 1.3;
-}
-
-#s04 .s04-knob {
-  width: 1.1rem;
-  height: 1.1rem;
-  margin-top: auto;
-  margin-left: auto;
-  border: 3px solid var(--s04-ink);
-  border-radius: 50%;
-  background: var(--s04-yellow);
-}
-
-#s04 .s04-door:hover {
-  transform: translateY(-4px);
-  box-shadow: 10px 12px 0 var(--s04-ink);
-}
-
-#s04 .s04-radio:focus-visible + .s04-door {
-  outline: 4px solid var(--s04-red);
-  outline-offset: 5px;
-}
-
-#s04 .s04-radio:checked + .s04-door {
-  background:
-    repeating-linear-gradient(90deg, transparent 0 22px, rgba(15, 10, 18, 0.35) 22px 25px),
-    radial-gradient(ellipse at 50% 100%, rgba(244, 196, 48, 0.75), transparent 70%),
-    var(--s04-door, var(--s04-plum));
-  box-shadow: 8px 8px 0 var(--s04-red), 12px 12px 0 var(--s04-ink);
-}
-
-#s04 .s04-radio:checked + .s04-door::before {
-  opacity: 0.9;
-}
-
-#s04 .s04-radio:checked + .s04-door .s04-door-plate {
-  background: var(--s04-yellow);
-  box-shadow: inset 0 0 0 3px var(--s04-yellow), inset 0 0 0 5px var(--s04-ink);
-}
-
-#s04 .s04-status-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem 1rem;
-  margin: 2rem auto 1.8rem;
-  text-align: center;
-}
-
-#s04 .s04-status {
-  padding: 0.45rem 0.9rem;
-  background: var(--s04-yellow);
-  border: 3px solid var(--s04-ink);
-  font-family: var(--s04-hand);
-  font-weight: 700;
-  font-size: 0.98rem;
-}
-
-#s04 .s04-reset {
-  padding: 0.45rem 0.9rem;
-  background: var(--s04-cream);
-  color: var(--s04-ink);
-  border: 3px solid var(--s04-ink);
-  box-shadow: 4px 4px 0 var(--s04-ink);
-  font-family: var(--s04-display);
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-#s04 .s04-reset[hidden] {
-  display: none;
-}
-
-#s04 .s04-reset:hover {
-  background: #fff;
-}
-
-#s04 .s04-reset:focus-visible {
-  outline: 4px solid var(--s04-red);
-  outline-offset: 3px;
 }
 
 /* the ten games as a crooked comic page */
@@ -691,39 +514,6 @@
   font-weight: 700;
   font-size: 0.8rem;
   text-transform: uppercase;
-}
-
-/* door filtering: pure CSS via :has, JS only adds the status line */
-#s04:has(#s04-v-strategy:checked) .s04-panel:not([data-vibes~="strategy"]) img,
-#s04:has(#s04-v-family:checked) .s04-panel:not([data-vibes~="family"]) img,
-#s04:has(#s04-v-friends:checked) .s04-panel:not([data-vibes~="friends"]) img {
-  filter: grayscale(1) brightness(0.4);
-}
-
-#s04:has(#s04-v-strategy:checked) .s04-panel:not([data-vibes~="strategy"]) .s04-panel-cap,
-#s04:has(#s04-v-family:checked) .s04-panel:not([data-vibes~="family"]) .s04-panel-cap,
-#s04:has(#s04-v-friends:checked) .s04-panel:not([data-vibes~="friends"]) .s04-panel-cap {
-  background: #b9b2a3;
-  box-shadow: none;
-}
-
-#s04:has(#s04-v-strategy:checked) .s04-panel:not([data-vibes~="strategy"]),
-#s04:has(#s04-v-family:checked) .s04-panel:not([data-vibes~="family"]),
-#s04:has(#s04-v-friends:checked) .s04-panel:not([data-vibes~="friends"]) {
-  border-color: #4a4452;
-}
-
-#s04:has(#s04-v-strategy:checked) .s04-panel[data-vibes~="strategy"],
-#s04:has(#s04-v-family:checked) .s04-panel[data-vibes~="family"],
-#s04:has(#s04-v-friends:checked) .s04-panel[data-vibes~="friends"] {
-  border-color: var(--s04-yellow);
-  box-shadow: inset 0 0 0 4px var(--s04-yellow);
-}
-
-#s04:has(#s04-v-strategy:checked) .s04-panel[data-vibes~="strategy"] .s04-panel-tag,
-#s04:has(#s04-v-family:checked) .s04-panel[data-vibes~="family"] .s04-panel-tag,
-#s04:has(#s04-v-friends:checked) .s04-panel[data-vibes~="friends"] .s04-panel-tag {
-  background: var(--s04-green);
 }
 
 #s04 .s04-fate-foot {
@@ -998,28 +788,9 @@
     display: none;
   }
 
-  #s04 .s04-doors {
-    grid-template-columns: minmax(0, 1fr);
-    max-width: 26rem;
-  }
 
-  #s04 .s04-door {
-    min-height: 0;
-    flex-direction: row;
-    padding: 0.8rem 0.9rem 0.8rem 3.4rem;
-    border-radius: 3rem 10px 10px 3rem;
-  }
 
-  #s04 .s04-door-num {
-    top: 50%;
-    left: 1.3rem;
-    transform: translate(-50%, -50%);
-  }
 
-  #s04 .s04-knob {
-    margin: 0;
-    flex: none;
-  }
 
   #s04 .s04-panels {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1136,8 +907,4 @@
     box-shadow: 7px 7px 0 var(--s04-red), 10px 10px 0 var(--s04-ink);
   }
 
-  #s04 .s04-door:hover {
-    transform: none;
-    box-shadow: 8px 8px 0 var(--s04-ink);
-  }
 }
