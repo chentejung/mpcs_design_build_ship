@@ -1,0 +1,1362 @@
+/* 15 Gazette Crossroads: 11's crossroads printed as a two-colour newspaper. A
+   broadsheet sheet of newsprint on a slate desk: black ink plus one spot red,
+   a masthead with dateline and ear boxes, column rules and heavy black section
+   bands. The road is no longer rainbow spaces but a solid charcoal highway
+   ribbon with cream edge stripes, a dashed cream centre line and red route
+   shields; the road forks at a signpost into three branches, and the chosen one
+   turns spot red while its centre line flows.
+   "House rules" is a ruled standings table and "how to join" is three big route
+   shields, the two set pieces 11 left undesigned.
+   Hook: pick your vibe ("Which way tonight?").
+   Fonts: Rye (masthead, h1, CTA label, closing heading, START/FINISH) and Libre
+   Baskerville for everything else.
+   Every rule and custom property is scoped under #s15. */
+
+@font-face {
+  font-family: "s15 Rye";
+  src: url("../fonts/rye/rye-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s15 Libre Baskerville";
+  src: url("../fonts/librebaskerville/librebaskerville-var.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s15 Libre Baskerville";
+  src: url("../fonts/librebaskerville/librebaskerville-italic-var.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+#s15 {
+  --s15-desk: #4a4741;
+  --s15-desk-2: #3a3832;
+  --s15-paper: #efe7d2;
+  --s15-paper-2: #f7f1e0;
+  --s15-ink: #16130f;
+  --s15-ink-2: #443a2e;
+  --s15-rule: #16130f;
+  --s15-red: #c3251c;
+  --s15-red-deep: #8f1611;
+  --s15-road: #211d18;
+  --s15-display: "s15 Rye", "Rockwell", "Clarendon", "Bookman Old Style", Georgia, serif;
+  --s15-body: "s15 Libre Baskerville", "Baskerville", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --s15-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .28 0 0 0 0 .14 0 0 0 .14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  --s15-weave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.01 .6' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .24 0 0 0 0 .12 0 0 0 .3 -.03'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E");
+
+  background: var(--s15-desk);
+  color: var(--s15-ink);
+  font-family: var(--s15-body);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+#s15 *,
+#s15 *::before,
+#s15 *::after {
+  box-sizing: border-box;
+}
+
+#s15 h1,
+#s15 h2,
+#s15 h3,
+#s15 h4,
+#s15 p,
+#s15 ol,
+#s15 ul,
+#s15 dl,
+#s15 dd,
+#s15 figure,
+#s15 table,
+#s15 fieldset {
+  margin: 0;
+}
+
+#s15 ol,
+#s15 ul {
+  padding: 0;
+  list-style: none;
+}
+
+#s15 fieldset {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+
+#s15 [hidden] {
+  display: none !important;
+}
+
+#s15 .s15-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+#s15 .s15-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Links and focus */
+
+#s15 a {
+  color: var(--s15-red-deep);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 2px;
+}
+
+#s15 a:hover {
+  color: var(--s15-ink);
+}
+
+#s15 a:focus-visible,
+#s15 button:focus-visible {
+  outline: 3px solid var(--s15-ink);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Desk and the printed sheet */
+
+#s15 .s15-desk {
+  position: relative;
+  padding: clamp(8px, 2.6vw, 40px);
+  background:
+    var(--s15-weave),
+    var(--s15-grain),
+    radial-gradient(120% 70% at 25% 0%, rgb(255 255 255 / 0.07), transparent 60%),
+    linear-gradient(180deg, var(--s15-desk) 0%, var(--s15-desk-2) 100%);
+}
+
+#s15 .s15-sheet {
+  position: relative;
+  max-width: 1340px;
+  margin: 0 auto;
+  padding: clamp(10px, 1.6vw, 20px) 0 0;
+  background:
+    var(--s15-grain),
+    radial-gradient(ellipse at 50% 0%, transparent 62%, rgb(120 96 48 / 0.16) 100%),
+    var(--s15-paper);
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 0.25),
+    0 14px 34px rgb(12 9 5 / 0.45);
+}
+
+#s15 .s15-sheet__inner {
+  position: relative;
+  z-index: 1;
+  container-type: inline-size;
+  padding: 0 clamp(12px, 3.2vw, 48px) clamp(1.5rem, 3vw, 2.5rem);
+  /* Road geometry. --s15-cu is 1/1200 of the inner width, matching the SVG
+     roads' viewBox; --s15-u is the straight lanes' unit, fixed when narrow. */
+  --s15-cu: calc(100cqi / 1200);
+  --s15-u: 0.62px;
+}
+
+/* Masthead */
+
+#s15 .s15-mast {
+  display: grid;
+  gap: 0.35rem 1rem;
+  padding: 0 clamp(12px, 3.2vw, 48px);
+  text-align: center;
+}
+
+#s15 .s15-masthead {
+  font-family: var(--s15-display);
+  font-size: clamp(1.5rem, 5.4vw, 3.6rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--s15-ink);
+}
+
+#s15 .s15-masthead em {
+  font-style: normal;
+  color: var(--s15-red);
+}
+
+#s15 .s15-ear {
+  display: none;
+  padding: 0.3rem 0.6rem;
+  border: 2px solid var(--s15-ink);
+  font-size: 0.8125rem;
+  line-height: 1.3;
+  text-align: center;
+}
+
+#s15 .s15-ear b {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--s15-red-deep);
+}
+
+#s15 .s15-dateline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem 1.1rem;
+  padding: 0.3rem 0 0.35rem;
+  border-top: 2px solid var(--s15-ink);
+  border-bottom: 5px double var(--s15-ink);
+  font-size: 0.78rem;
+  font-style: italic;
+  letter-spacing: 0.05em;
+}
+
+#s15 .s15-dateline span + span::before {
+  content: "\2605";
+  margin-right: 1.1rem;
+  font-style: normal;
+  color: var(--s15-red);
+}
+
+/* Section bands: the heavy black bar with an italic kicker on the right */
+
+#s15 .s15-band {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.1rem 1rem;
+  padding: 0.4rem 0.9rem 0.5rem;
+  background: var(--s15-ink);
+  color: var(--s15-paper);
+}
+
+#s15 .s15-band--red {
+  background: var(--s15-red-deep);
+  color: #fff;
+}
+
+#s15 .s15-band__kicker {
+  font-size: 0.9rem;
+  font-style: italic;
+  opacity: 0.92;
+}
+
+#s15 .s15-h2 {
+  font-family: var(--s15-display);
+  font-size: clamp(1.2rem, 0.9rem + 1.5vw, 1.95rem);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+#s15 .s15-h2 em {
+  font-style: normal;
+  color: var(--s15-red);
+}
+
+/* Hero */
+
+#s15 .s15-hero {
+  position: relative;
+  padding: clamp(1.1rem, 2.6vw, 2.2rem) 0 0;
+}
+
+#s15 .s15-hero__copy {
+  position: relative;
+  z-index: 1;
+}
+
+#s15 .s15-h1 {
+  font-family: var(--s15-display);
+  font-size: clamp(1.85rem, 1.05rem + 3.2vw, 3.5rem);
+  line-height: 1.06;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+}
+
+#s15 .s15-h1 em {
+  font-style: normal;
+  color: var(--s15-red);
+}
+
+#s15 .s15-lede {
+  margin-top: 0.8rem;
+  max-width: 34em;
+  color: var(--s15-ink-2);
+  font-size: clamp(1rem, 0.95rem + 0.3vw, 1.15rem);
+}
+
+/* Primary CTA: a stamped red slug with a route shield */
+
+#s15 .s15-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1.3rem;
+  padding: 0.7rem 1.5rem 0.75rem 1rem;
+  border: 3px solid var(--s15-ink);
+  background: var(--s15-red);
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 6px 6px 0 var(--s15-ink);
+}
+
+#s15 .s15-cta:hover {
+  background: var(--s15-red-deep);
+  color: #fff;
+}
+
+#s15 .s15-cta:focus-visible {
+  outline: 4px solid var(--s15-ink);
+  outline-offset: 6px;
+}
+
+#s15 .s15-cta__shield {
+  flex: none;
+  width: 30px;
+  height: 33px;
+  color: #fff;
+}
+
+#s15 .s15-cta__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.12;
+}
+
+#s15 .s15-cta__main {
+  font-family: var(--s15-display);
+  font-size: clamp(1.2rem, 1.05rem + 0.6vw, 1.5rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+#s15 .s15-cta__sub {
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* Box score: the three big numbers in one ruled row */
+
+#s15 .s15-score {
+  display: flex;
+  flex-wrap: wrap;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 1.6rem;
+  border: 3px solid var(--s15-ink);
+  background: var(--s15-paper-2);
+}
+
+#s15 .s15-score__cell {
+  flex: 1 1 auto;
+  padding: 0.4rem 1rem 0.5rem;
+  border-right: 1px solid var(--s15-ink);
+}
+
+#s15 .s15-score__cell:last-child {
+  border-right: 0;
+}
+
+#s15 .s15-score dt {
+  font-size: 0.7rem;
+  font-style: italic;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+#s15 .s15-score dd {
+  font-family: var(--s15-display);
+  font-size: clamp(1.15rem, 0.5rem + 1.3vw, 1.75rem);
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+
+#s15 .s15-score__cell:first-child dd {
+  color: var(--s15-red-deep);
+}
+
+/* Hero art: the START plate and its signpost */
+
+#s15 .s15-hero__art {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 440px);
+  margin: 1.4rem auto 0;
+}
+
+#s15 .s15-start {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#s15 .s15-start__word {
+  fill: var(--s15-ink);
+  font-family: var(--s15-display);
+  font-size: 58px;
+  letter-spacing: 8px;
+}
+
+#s15 .s15-start__small {
+  fill: var(--s15-ink-2);
+  font-size: 17px;
+  font-style: italic;
+}
+
+#s15 .s15-post__arm text {
+  fill: var(--s15-paper);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* Roads. Lanes are the straight CSS runs; the SVGs carry the curves. */
+
+#s15 .s15-lane {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 6px;
+  width: calc(52 * var(--s15-u));
+  border-inline: calc(3 * var(--s15-u)) solid var(--s15-paper);
+  background:
+    repeating-linear-gradient(
+        180deg,
+        var(--s15-paper) 0 calc(20 * var(--s15-u)),
+        transparent 0 calc(44 * var(--s15-u))
+      )
+      50% 0 / calc(5 * var(--s15-u)) 100% no-repeat,
+    var(--s15-road);
+  box-shadow: 0 0 0 calc(2 * var(--s15-u)) var(--s15-ink);
+}
+
+#s15 .s15-lane--hero {
+  display: none;
+}
+
+#s15 .s15-link {
+  display: none;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#s15 .s15-rd__edge,
+#s15 .s15-rd__kerb,
+#s15 .s15-rd__base,
+#s15 .s15-rd__line {
+  fill: none;
+}
+
+#s15 .s15-rd__edge { stroke: var(--s15-ink); stroke-width: 56; }
+#s15 .s15-rd__kerb { stroke: var(--s15-paper); stroke-width: 50; }
+#s15 .s15-rd__base { stroke: var(--s15-rd, var(--s15-road)); stroke-width: 44; }
+#s15 .s15-rd__line { stroke: var(--s15-paper); stroke-width: 4.5; stroke-dasharray: 20 24; }
+
+#s15 .s15-rd__shield {
+  fill: var(--s15-red);
+  stroke: var(--s15-paper);
+  stroke-width: 3;
+}
+
+#s15 .s15-fork {
+  display: none;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#s15 .s15-fork__hub {
+  fill: var(--s15-ink);
+  stroke: var(--s15-paper);
+  stroke-width: 4;
+}
+
+#s15 .s15-fork__star {
+  fill: var(--s15-paper);
+}
+
+#s15 .s15-br {
+  --s15-rd: var(--s15-road);
+}
+
+/* Milestone markers on the straight lanes */
+
+#s15 .s15-milestone {
+  position: absolute;
+  z-index: 1;
+  top: 1rem;
+  left: calc(6px + 26 * var(--s15-u) - 26px);
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 57px;
+  color: var(--s15-red);
+}
+
+#s15 .s15-milestone svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#s15 .s15-milestone span {
+  position: relative;
+  padding-bottom: 0.3em;
+  color: #fff;
+  font-family: var(--s15-display);
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+/* The hook: the crossroads and the classifieds */
+
+#s15 .s15-hook {
+  position: relative;
+  padding-top: 0.5rem;
+}
+
+#s15 .s15-hook__head {
+  position: relative;
+  margin-bottom: clamp(1rem, 2.4vw, 1.8rem);
+}
+
+#s15 .s15-hook__sub {
+  margin-top: 0.7rem;
+  color: var(--s15-ink-2);
+  font-size: 1.02rem;
+  font-style: italic;
+}
+
+/* The three roads' destination plates */
+
+#s15 .s15-pick__row {
+  display: grid;
+  gap: 0.9rem;
+}
+
+#s15 .s15-vibe {
+  position: relative;
+}
+
+#s15 .s15-vibe label {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.2rem 0.9rem;
+  height: 100%;
+  padding: 0.85rem 1rem 0.9rem;
+  border: 3px solid var(--s15-ink);
+  background: var(--s15-paper-2);
+  box-shadow: 5px 5px 0 var(--s15-ink);
+  cursor: pointer;
+}
+
+#s15 .s15-vibe__mark {
+  grid-row: span 2;
+  width: 42px;
+  height: 42px;
+  color: var(--s15-road);
+}
+
+#s15 .s15-vibe__name {
+  align-self: end;
+  font-family: var(--s15-display);
+  font-size: 1.15rem;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+#s15 .s15-vibe__note {
+  align-self: start;
+  color: var(--s15-ink-2);
+  font-size: 0.88rem;
+  font-style: italic;
+}
+
+#s15 .s15-vibe__stamp {
+  position: absolute;
+  top: -0.7rem;
+  right: 0.6rem;
+  padding: 0.05rem 0.5rem;
+  border: 2px solid var(--s15-ink);
+  background: var(--s15-red);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0;
+}
+
+#s15 .s15-vibe label:hover {
+  background: #fff;
+}
+
+#s15 .s15-vibe input:checked + label {
+  background: var(--s15-paper-2);
+  box-shadow: 5px 5px 0 var(--s15-red-deep);
+  outline: 3px solid var(--s15-red);
+  outline-offset: 3px;
+}
+
+#s15 .s15-vibe input:checked + label .s15-vibe__mark {
+  color: var(--s15-red);
+}
+
+#s15 .s15-vibe input:checked + label .s15-vibe__stamp {
+  opacity: 1;
+}
+
+#s15 .s15-pick:has(input:checked) .s15-vibe input:not(:checked) + label {
+  opacity: 0.55;
+  box-shadow: 3px 3px 0 var(--s15-ink);
+}
+
+#s15 .s15-vibe input:focus-visible + label {
+  z-index: 2;
+  outline: 3px solid var(--s15-ink);
+  outline-offset: 5px;
+}
+
+/* The chosen road turns spot red; the others fade back */
+
+#s15 .s15-sheet__inner:has(#s15-vibe-strategy:checked) .s15-br--strategy,
+#s15 .s15-sheet__inner:has(#s15-vibe-family:checked) .s15-br--family,
+#s15 .s15-sheet__inner:has(#s15-vibe-friends:checked) .s15-br--friends {
+  --s15-rd: var(--s15-red);
+}
+
+#s15 .s15-sheet__inner:has(#s15-vibe-strategy:checked) .s15-br:not(.s15-br--strategy),
+#s15 .s15-sheet__inner:has(#s15-vibe-family:checked) .s15-br:not(.s15-br--family),
+#s15 .s15-sheet__inner:has(#s15-vibe-friends:checked) .s15-br:not(.s15-br--friends) {
+  opacity: 0.28;
+}
+
+/* Status line */
+
+#s15 .s15-herald {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1.2rem;
+  min-height: 2.6rem;
+  margin: clamp(1.1rem, 2.4vw, 1.8rem) 0 clamp(1rem, 2vw, 1.5rem);
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--s15-ink);
+}
+
+#s15 .s15-status {
+  color: var(--s15-ink-2);
+  font-size: 1rem;
+  font-style: italic;
+}
+
+#s15 .s15-reset {
+  padding: 0.3rem 0.8rem;
+  border: 2px solid var(--s15-ink);
+  background: var(--s15-paper-2);
+  color: var(--s15-ink);
+  font-family: var(--s15-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+#s15 .s15-reset:hover {
+  background: #fff;
+}
+
+/* Classifieds: the top ten as small ads, photo, name and tag only */
+
+#s15 .s15-ads {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 0.9rem;
+}
+
+#s15 .s15-ad {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 8px 0;
+  border: 4px double var(--s15-ink);
+  background: var(--s15-paper-2);
+}
+
+/* the dashed foot hints at a tear-off coupon */
+#s15 .s15-ad::after {
+  content: "";
+  display: block;
+  margin-top: 0.5rem;
+  border-top: 2px dashed var(--s15-ink);
+  height: 7px;
+  opacity: 0.6;
+}
+
+#s15 .s15-ad__pic {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  border: 2px solid var(--s15-ink);
+  background: #d8cfb6;
+  overflow: hidden;
+}
+
+#s15 .s15-ad__pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) sepia(0.28) contrast(1.12);
+}
+
+/* halftone screen over the photo, as a newspaper cut would print */
+#s15 .s15-ad__pic::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(rgb(22 19 15 / 0.4) 1.1px, transparent 1.5px) 0 0 / 4px 4px;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+#s15 .s15-ad:hover .s15-ad__pic img {
+  filter: none;
+}
+
+#s15 .s15-ad:hover .s15-ad__pic::after {
+  opacity: 0.3;
+}
+
+#s15 .s15-ad__kind {
+  margin-top: 0.5rem;
+  color: var(--s15-red-deep);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+#s15 .s15-ad__name {
+  margin: 0.1rem 0 0;
+  font-family: var(--s15-display);
+  font-size: 0.98rem;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+#s15 .s15-ad__flag {
+  position: absolute;
+  z-index: 2;
+  top: -11px;
+  right: -7px;
+  padding: 0.1rem 0.45rem;
+  border: 2px solid var(--s15-ink);
+  background: var(--s15-red);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0;
+}
+
+/* Lit and unlit ads once a road is chosen */
+
+#s15 .s15-sheet__inner:has(#s15-vibe-strategy:checked) .s15-fit-strategy,
+#s15 .s15-sheet__inner:has(#s15-vibe-family:checked) .s15-fit-family,
+#s15 .s15-sheet__inner:has(#s15-vibe-friends:checked) .s15-fit-friends {
+  border-color: var(--s15-red);
+  box-shadow: 4px 4px 0 var(--s15-ink);
+}
+
+#s15 .s15-sheet__inner:has(#s15-vibe-strategy:checked) .s15-fit-strategy .s15-ad__flag,
+#s15 .s15-sheet__inner:has(#s15-vibe-family:checked) .s15-fit-family .s15-ad__flag,
+#s15 .s15-sheet__inner:has(#s15-vibe-friends:checked) .s15-fit-friends .s15-ad__flag {
+  opacity: 1;
+}
+
+#s15 .s15-sheet__inner:has(#s15-vibe-strategy:checked) .s15-ad:not(.s15-fit-strategy),
+#s15 .s15-sheet__inner:has(#s15-vibe-family:checked) .s15-ad:not(.s15-fit-family),
+#s15 .s15-sheet__inner:has(#s15-vibe-friends:checked) .s15-ad:not(.s15-fit-friends) {
+  opacity: 0.42;
+}
+
+#s15 .s15-more {
+  margin-top: 1.4rem;
+  text-align: center;
+}
+
+#s15 .s15-more a {
+  display: inline-block;
+  padding: 0.45rem 1.1rem;
+  border: 3px solid var(--s15-ink);
+  background: var(--s15-paper-2);
+  color: var(--s15-ink);
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 4px 4px 0 var(--s15-ink);
+}
+
+#s15 .s15-more a:hover {
+  background: #fff;
+}
+
+/* Stops on the road */
+
+#s15 .s15-stop {
+  position: relative;
+  padding: 1.5rem 0 2.5rem calc(6px + 52 * var(--s15-u) + 18px);
+}
+
+#s15 .s15-stop__body {
+  position: relative;
+  container-type: inline-size;
+}
+
+/* House rules: a ruled standings table */
+
+#s15 .s15-rules {
+  width: 100%;
+  margin-top: 1.1rem;
+  border: 3px solid var(--s15-ink);
+  border-collapse: collapse;
+  table-layout: fixed;
+  background: var(--s15-paper-2);
+  font-size: 0.98rem;
+}
+
+/* the band above already labels the table, so the caption is for screen readers */
+#s15 .s15-rules caption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+#s15 .s15-rules thead th {
+  padding: 0.35rem 0.8rem;
+  border-bottom: 3px solid var(--s15-ink);
+  background: var(--s15-ink);
+  color: var(--s15-paper);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+#s15 .s15-rules thead th:last-child {
+  text-align: center;
+}
+
+#s15 .s15-rules tbody tr + tr th,
+#s15 .s15-rules tbody tr + tr td {
+  border-top: 1px solid rgb(22 19 15 / 0.45);
+}
+
+#s15 .s15-rules thead th:first-child,
+#s15 .s15-rules tbody th {
+  width: 11rem;
+}
+
+#s15 .s15-rules tbody th {
+  padding: 0.65rem 0.8rem;
+  font-family: var(--s15-display);
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+#s15 .s15-rules tbody th span {
+  display: block;
+  color: var(--s15-red-deep);
+  font-family: var(--s15-body);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+#s15 .s15-rules tbody td {
+  padding: 0.65rem 0.8rem;
+  border-left: 1px solid rgb(22 19 15 / 0.45);
+  color: var(--s15-ink-2);
+}
+
+#s15 .s15-rules__yes {
+  width: 3.4rem;
+  color: var(--s15-red);
+  font-family: var(--s15-display);
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+/* How to join: three big route shields */
+
+#s15 .s15-route {
+  display: grid;
+  gap: 1.2rem;
+  margin-top: 1.4rem;
+}
+
+#s15 .s15-route__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.2rem 1.1rem;
+}
+
+#s15 .s15-route__shield {
+  grid-row: span 2;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(76px, 9vw, 104px);
+  aspect-ratio: 80 / 88;
+  color: var(--s15-road);
+}
+
+#s15 .s15-route__shield svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#s15 .s15-route__no {
+  position: relative;
+  padding-bottom: 0.22em;
+  color: #fff;
+  font-family: var(--s15-display);
+  font-size: clamp(1.9rem, 2.6vw, 2.6rem);
+  line-height: 1;
+}
+
+#s15 .s15-route__item:nth-child(3) .s15-route__shield {
+  color: var(--s15-red);
+}
+
+#s15 .s15-route__name {
+  align-self: end;
+  font-family: var(--s15-display);
+  font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.3rem);
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+#s15 .s15-route__note {
+  align-self: start;
+  color: var(--s15-ink-2);
+  font-size: 0.95rem;
+}
+
+#s15 .s15-join__go {
+  margin-top: 1.6rem;
+}
+
+/* Finish */
+
+#s15 .s15-finish {
+  position: relative;
+  padding: 2rem 0 clamp(1.5rem, 3vw, 2.5rem);
+  text-align: center;
+}
+
+#s15 .s15-lane--finish {
+  bottom: auto;
+  height: 2rem;
+}
+
+#s15 .s15-finish__plate {
+  max-width: 460px;
+  margin: 0 auto 1.5rem;
+  padding: 10px;
+  border: 3px solid var(--s15-ink);
+  background: repeating-conic-gradient(var(--s15-ink) 0 25%, var(--s15-paper-2) 0 50%) 0 0 / 18px 18px;
+  box-shadow: 5px 5px 0 rgb(22 19 15 / 0.25);
+}
+
+#s15 .s15-finish__plate > * {
+  background: var(--s15-paper-2);
+}
+
+#s15 .s15-finish__word {
+  padding: 0.5rem 0 0.1rem;
+  color: var(--s15-red);
+  font-family: var(--s15-display);
+  font-size: clamp(2rem, 1.5rem + 1.8vw, 3rem);
+  letter-spacing: 0.2em;
+  text-indent: 0.2em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+#s15 .s15-finish__art {
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 0 1rem 0.6rem;
+}
+
+#s15 .s15-finish__title {
+  max-width: 20em;
+  margin: 0 auto 1.3rem;
+  font-size: clamp(1.4rem, 1rem + 1.9vw, 2.3rem);
+}
+
+#s15 .s15-finish .s15-cta {
+  margin-top: 0;
+}
+
+/* Narrow phones */
+
+@media (max-width: 560px) {
+  #s15 .s15-score {
+    display: block;
+    width: 100%;
+    max-width: 22rem;
+  }
+
+  #s15 .s15-score__cell {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.3rem 0.8rem;
+    border-right: 0;
+    border-bottom: 1px solid var(--s15-ink);
+  }
+
+  #s15 .s15-score__cell:last-child {
+    border-bottom: 0;
+  }
+
+  #s15 .s15-rules {
+    font-size: 0.92rem;
+  }
+
+  #s15 .s15-rules tbody th,
+  #s15 .s15-rules tbody td {
+    padding: 0.5rem 0.55rem;
+  }
+
+  #s15 .s15-rules tbody th {
+    white-space: normal;
+  }
+
+  /* the confirmation column is pure reassurance; the band already says
+     "what every player gets", so it goes rather than squeeze the table */
+  #s15 .s15-rules thead th:last-child,
+  #s15 .s15-rules__yes {
+    display: none;
+  }
+
+  #s15 .s15-rules thead th:first-child,
+  #s15 .s15-rules tbody th {
+    width: 8rem;
+  }
+}
+
+/* Thin the road on small phones so the stops keep their text measure */
+
+@media (max-width: 480px) {
+  #s15 .s15-sheet__inner {
+    --s15-u: 0.5px;
+  }
+
+  #s15 .s15-stop {
+    padding-left: calc(6px + 52 * var(--s15-u) + 12px);
+  }
+}
+
+@media (max-width: 400px) {
+  #s15 .s15-cta {
+    gap: 0.6rem;
+    padding: 0.6rem 1rem 0.65rem 0.8rem;
+  }
+
+  #s15 .s15-cta__shield {
+    width: 24px;
+    height: 26px;
+  }
+
+  #s15 .s15-ads {
+    gap: 0.8rem 0.7rem;
+  }
+
+  #s15 .s15-ad__name {
+    font-size: 0.9rem;
+  }
+}
+
+/* Wider sheets */
+
+@container (min-width: 560px) {
+  #s15 .s15-pick__row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@container (min-width: 640px) {
+  #s15 .s15-ads {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@container (min-width: 620px) {
+  #s15 .s15-route {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.4rem 1.6rem;
+  }
+
+  #s15 .s15-route__item {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    gap: 0.5rem;
+  }
+
+  #s15 .s15-route__shield {
+    grid-row: auto;
+  }
+
+  /* reserve two lines so the three notes sit on one line together */
+  #s15 .s15-route__name {
+    align-self: start;
+    min-height: 2.3em;
+  }
+}
+
+/* Wide screens: the road snakes down the sheet */
+
+@media (min-width: 860px) {
+  #s15 .s15-sheet__inner {
+    --s15-u: var(--s15-cu);
+  }
+
+  #s15 .s15-link,
+  #s15 .s15-fork {
+    display: block;
+  }
+
+  #s15 .s15-mast {
+    grid-template-columns: minmax(140px, 1fr) auto minmax(140px, 1fr);
+    align-items: center;
+  }
+
+  #s15 .s15-ear {
+    display: block;
+    max-width: 200px;
+  }
+
+  #s15 .s15-ear--l { justify-self: start; }
+  #s15 .s15-ear--r { justify-self: end; }
+
+  #s15 .s15-dateline {
+    grid-column: 1 / -1;
+  }
+
+  #s15 .s15-hero {
+    display: grid;
+    grid-template-columns: 56% 44%;
+    align-items: end;
+    padding-top: clamp(0.8rem, 1.4vw, 1.2rem);
+  }
+
+  #s15 .s15-hero__copy {
+    align-self: center;
+    padding: 0 2.4rem 2.2rem 0;
+    border-right: 1px solid rgb(22 19 15 / 0.35);
+  }
+
+  #s15 .s15-hero__art {
+    width: min(100%, 430px);
+    margin: 0 auto 1.4rem;
+  }
+
+  #s15 .s15-hero .s15-lane--hero {
+    display: block;
+    top: auto;
+    height: 96px;
+    left: calc(910 * var(--s15-u));
+  }
+
+  #s15 .s15-hook__head {
+    margin-bottom: 0;
+  }
+
+  #s15 .s15-stop {
+    padding: 2rem 2cqi 2.8rem 16cqi;
+  }
+
+  #s15 .s15-stop--right {
+    padding: 2rem 16cqi 2.8rem 2cqi;
+  }
+
+  #s15 .s15-lane {
+    left: calc(64 * var(--s15-u));
+  }
+
+  #s15 .s15-stop--right .s15-lane {
+    left: calc(1084 * var(--s15-u));
+  }
+
+  #s15 .s15-milestone {
+    --s15-ms: max(62px, calc(112 * var(--s15-u)));
+    top: 1.3rem;
+    left: calc(90 * var(--s15-u) - var(--s15-ms) / 2);
+    width: var(--s15-ms);
+    height: calc(var(--s15-ms) * 1.1);
+  }
+
+  #s15 .s15-milestone span {
+    font-size: calc(var(--s15-ms) * 0.34);
+  }
+
+  #s15 .s15-stop--right .s15-milestone {
+    left: calc(1110 * var(--s15-u) - var(--s15-ms) / 2);
+  }
+
+  #s15 .s15-lane--finish {
+    left: calc(574 * var(--s15-u));
+  }
+
+  #s15 .s15-merge {
+    margin-top: -0.5rem;
+  }
+}
+
+/* Keep the hero compact on short desktop windows so the CTA stays in view */
+
+@media (min-width: 860px) and (max-height: 820px) {
+  #s15 .s15-lede {
+    margin-top: 0.6rem;
+  }
+
+  #s15 .s15-cta {
+    margin-top: 1rem;
+  }
+
+  #s15 .s15-score {
+    margin-top: 1.1rem;
+  }
+
+  #s15 .s15-hero__art {
+    width: min(100%, 370px);
+  }
+}
+
+/* Motion */
+
+@media (prefers-reduced-motion: no-preference) {
+  #s15 .s15-cta,
+  #s15 .s15-more a {
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  }
+
+  #s15 .s15-cta:hover,
+  #s15 .s15-more a:hover {
+    transform: translate(-2px, -2px);
+  }
+
+  #s15 .s15-cta:hover {
+    box-shadow: 8px 8px 0 var(--s15-ink);
+  }
+
+  #s15 .s15-cta:active {
+    transform: translate(3px, 3px);
+    box-shadow: 2px 2px 0 var(--s15-ink);
+  }
+
+  #s15 .s15-vibe label,
+  #s15 .s15-vibe__stamp,
+  #s15 .s15-ad,
+  #s15 .s15-ad__flag {
+    transition: opacity 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease,
+      background-color 0.2s ease, transform 0.3s cubic-bezier(0.3, 1.4, 0.5, 1);
+  }
+
+  #s15 .s15-ad__pic img,
+  #s15 .s15-ad__pic::after {
+    transition: filter 0.3s ease, opacity 0.3s ease;
+  }
+
+  #s15 .s15-br,
+  #s15 .s15-rd__base {
+    transition: opacity 0.35s ease, stroke 0.35s ease;
+  }
+
+  /* the signpost arms swing out when the page opens */
+  #s15 .s15-post__arm {
+    transform-box: fill-box;
+    transform-origin: 0% 50%;
+    animation: s15-swing 0.9s cubic-bezier(0.3, 1.5, 0.5, 1) both;
+  }
+
+  #s15 .s15-post__arm--l,
+  #s15 .s15-post__arm--l2 {
+    transform-origin: 100% 50%;
+  }
+
+  #s15 .s15-post__arm--l { animation-delay: 0.15s; }
+  #s15 .s15-post__arm--r { animation-delay: 0.35s; }
+  #s15 .s15-post__arm--l2 { animation-delay: 0.55s; }
+
+  /* the chosen road's centre line flows away from the crossroads */
+  #s15 .s15-rd__line {
+    animation: s15-flow 1.4s linear infinite paused;
+  }
+
+  #s15 .s15-sheet__inner:has(#s15-vibe-strategy:checked) .s15-br--strategy .s15-rd__line,
+  #s15 .s15-sheet__inner:has(#s15-vibe-family:checked) .s15-br--family .s15-rd__line,
+  #s15 .s15-sheet__inner:has(#s15-vibe-friends:checked) .s15-br--friends .s15-rd__line {
+    animation-play-state: running;
+  }
+}
+
+@keyframes s15-swing {
+  0% { transform: scaleX(0.2); opacity: 0; }
+  100% { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes s15-flow {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -44; }
+}
+
+/* Landing-card preview: a calm, still final state */
+
+.is-thumb #s15 *,
+.is-thumb #s15 *::before,
+.is-thumb #s15 *::after {
+  animation: none !important;
+  transition: none !important;
+}

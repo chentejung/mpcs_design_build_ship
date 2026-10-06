@@ -1,0 +1,1109 @@
+/* 17 Sunday Gang: the retired Sunday-funnies page rebuilt with far heavier
+   character art. A comics sheet on a wooden desk: newsprint with a halftone
+   wash, boiling hand-inked panel borders, flat cel colour, a backyard fence
+   and mustard sky behind an original crew of three friends.
+   No road or track anywhere: this is a newspaper page, not a board.
+   Hook: pick your vibe, as three big comic panels; the chosen one brings its
+   classified ads up into full colour.
+   Fonts: Rye (masthead, headings, CTA, sound effects) and Libre Baskerville
+   (everything else, balloons and captions included).
+   Every rule and custom property is scoped under #s17. */
+
+@font-face {
+  font-family: "s17 Rye";
+  src: url("../fonts/rye/rye-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s17 Libre Baskerville";
+  src: url("../fonts/librebaskerville/librebaskerville-var.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s17 Libre Baskerville";
+  src: url("../fonts/librebaskerville/librebaskerville-italic-var.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+#s17 {
+  --s17-ink: #1a1510;
+  --s17-paper: #f0e4c4;
+  --s17-paper-2: #faf3df;
+  --s17-desk: #7d5a33;
+  --s17-desk-2: #5e421f;
+  --s17-red: #d23b24;
+  --s17-red-deep: #a32713;
+  --s17-yellow: #f2c230;
+  --s17-sky: #f5c93f;
+  --s17-blue: #2f6fbf;
+  --s17-blue-deep: #184a8c;
+  --s17-green: #6f9a3a;
+  --s17-pink: #ef88a8;
+  --s17-fence: #c9935a;
+  --s17-fence-2: #a9763f;
+
+  --s17-display: "s17 Rye", "Rockwell", "Clarendon", "Bookman Old Style", Georgia, serif;
+  --s17-body: "s17 Libre Baskerville", "Baskerville", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+
+  /* wobbly, hand-cut panel corners */
+  --s17-wob: 255px 16px 225px 14px / 14px 225px 16px 255px;
+  --s17-wob-2: 18px 230px 14px 240px / 240px 16px 230px 14px;
+
+  --s17-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .24 0 0 0 0 .08 0 0 0 .15 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  position: relative;
+  color: var(--s17-ink);
+  font-family: var(--s17-body);
+  font-size: 1rem;
+  line-height: 1.55;
+  background: var(--s17-desk);
+}
+
+#s17 *,
+#s17 *::before,
+#s17 *::after {
+  box-sizing: border-box;
+}
+
+#s17 h1,
+#s17 h2,
+#s17 h3,
+#s17 h4,
+#s17 p,
+#s17 ol,
+#s17 ul,
+#s17 dl,
+#s17 dd,
+#s17 figure,
+#s17 fieldset,
+#s17 legend {
+  margin: 0;
+}
+
+#s17 ol,
+#s17 ul {
+  padding: 0;
+  list-style: none;
+}
+
+#s17 fieldset {
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+#s17 [hidden] {
+  display: none !important;
+}
+
+#s17 .s17-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+#s17 .s17-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skin reaches the drawn hands through currentColor, set by a `color`
+   presentation attribute in the markup. It cannot be a class: CSS selectors
+   do not match inside the shadow tree a <use> builds from a <symbol>, so a
+   class there would leave every hand inking itself black. */
+
+/* Desk and sheet */
+
+#s17 .s17-table {
+  padding: clamp(0px, 2.2vw, 30px) clamp(0px, 2vw, 26px);
+  background:
+    var(--s17-grain),
+    repeating-linear-gradient(92deg, rgb(0 0 0 / 0.07) 0 2px, transparent 2px 9px),
+    radial-gradient(120% 70% at 22% 0%, #9a7442 0%, transparent 62%),
+    linear-gradient(180deg, var(--s17-desk) 0%, var(--s17-desk-2) 100%);
+}
+
+#s17 .s17-paper {
+  position: relative;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: clamp(10px, 1.6vw, 18px) clamp(10px, 2.6vw, 34px) clamp(26px, 4vw, 46px);
+  background:
+    radial-gradient(rgb(110 80 30 / 0.1) 1px, transparent 1.5px) 0 0 / 5px 5px,
+    radial-gradient(ellipse at 50% 0%, transparent 52%, rgb(150 112 46 / 0.2) 100%),
+    var(--s17-paper);
+  box-shadow: 0 10px 34px rgb(30 18 4 / 0.45);
+}
+
+/* Masthead */
+
+#s17 .s17-mast {
+  display: grid;
+  gap: 6px 18px;
+  padding-bottom: 7px;
+  margin-bottom: clamp(12px, 2vw, 18px);
+  border-bottom: 6px double var(--s17-ink);
+  text-align: center;
+}
+
+#s17 .s17-masthead {
+  font-family: var(--s17-display);
+  font-size: clamp(1.5rem, 6vw, 3.6rem);
+  line-height: 1.04;
+  color: var(--s17-ink);
+  text-shadow: 3px 3px 0 var(--s17-yellow), 5px 5px 0 var(--s17-red-deep);
+  transform: rotate(-0.8deg);
+}
+
+#s17 .s17-masthead em {
+  font-style: normal;
+  color: var(--s17-red-deep);
+  text-shadow: 3px 3px 0 var(--s17-yellow), 5px 5px 0 var(--s17-ink);
+}
+
+#s17 .s17-ear {
+  display: none;
+  padding: 7px 11px;
+  border: 4px solid var(--s17-ink);
+  border-radius: var(--s17-wob);
+  background: var(--s17-paper-2);
+  font-size: 0.8125rem;
+  line-height: 1.3;
+  text-align: left;
+}
+
+#s17 .s17-ear b {
+  display: block;
+  font-family: var(--s17-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--s17-red-deep);
+}
+
+#s17 .s17-dateline {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px 20px;
+  padding-top: 5px;
+  border-top: 2px solid var(--s17-ink);
+  font-size: 0.8125rem;
+  font-style: italic;
+  letter-spacing: 0.03em;
+}
+
+#s17 .s17-dateline span + span::before {
+  content: "\2605";
+  margin-right: 20px;
+  font-style: normal;
+  color: var(--s17-red);
+}
+
+/* Panels */
+
+#s17 .s17-panel {
+  position: relative;
+  border: 5px solid var(--s17-ink);
+  border-radius: var(--s17-wob);
+  background: var(--s17-paper-2);
+  overflow: hidden;
+}
+
+#s17 .s17-panel:nth-of-type(even) {
+  border-radius: var(--s17-wob-2);
+}
+
+#s17 .s17-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Hero strip */
+
+#s17 .s17-strip {
+  display: grid;
+  gap: clamp(10px, 1.4vw, 16px);
+}
+
+#s17 .s17-copy {
+  padding: clamp(15px, 2.4vw, 26px) clamp(15px, 2.4vw, 28px) clamp(16px, 2.2vw, 24px);
+  background:
+    radial-gradient(rgb(239 136 168 / 0.3) 2.1px, transparent 2.5px) 0 0 / 11px 11px,
+    var(--s17-paper-2);
+}
+
+#s17 .s17-kicker {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 4px 11px;
+  border: 4px solid var(--s17-ink);
+  background: var(--s17-yellow);
+  font-family: var(--s17-display);
+  font-size: 0.8125rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transform: rotate(-1.8deg);
+}
+
+#s17 .s17-h1 {
+  font-family: var(--s17-display);
+  font-size: clamp(1.55rem, 1rem + 2.1vw, 2.7rem);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+#s17 .s17-h1 em {
+  display: block;
+  font-style: normal;
+  color: var(--s17-red-deep);
+}
+
+#s17 .s17-lede {
+  margin-top: 11px;
+  max-width: 34em;
+  font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.0625rem);
+  line-height: 1.5;
+}
+
+/* Primary CTA: an inked newsprint stamp */
+
+#s17 .s17-cta {
+  display: inline-flex;
+  flex-direction: column;
+  margin-top: 16px;
+  padding: 12px 24px 13px;
+  border: 5px solid var(--s17-ink);
+  border-radius: 20px 7px 18px 9px / 9px 18px 7px 20px;
+  background: var(--s17-red-deep);
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 7px 7px 0 var(--s17-ink);
+  transform: rotate(-1.4deg);
+}
+
+#s17 .s17-cta__main {
+  font-family: var(--s17-display);
+  font-size: clamp(1.1rem, 0.95rem + 0.6vw, 1.45rem);
+  line-height: 1.12;
+  letter-spacing: 0.01em;
+}
+
+#s17 .s17-cta__sub {
+  margin-top: 3px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+#s17 .s17-cta:hover {
+  background: #8d2010;
+  color: #fff;
+}
+
+#s17 a:focus-visible,
+#s17 button:focus-visible,
+#s17 input:focus-visible + label {
+  outline: 4px solid var(--s17-blue-deep);
+  outline-offset: 5px;
+}
+
+/* Box score: the three big numbers as a newspaper table */
+
+#s17 .s17-score {
+  display: grid;
+  margin-top: 18px;
+  border: 5px solid var(--s17-ink);
+  background: var(--s17-paper-2);
+  box-shadow: 4px 4px 0 rgb(26 21 16 / 0.2);
+}
+
+#s17 .s17-score div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding: 7px 13px 8px;
+}
+
+#s17 .s17-score div + div {
+  border-top: 3px solid var(--s17-ink);
+}
+
+#s17 .s17-score dt {
+  font-size: 0.72rem;
+  font-style: italic;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  line-height: 1.25;
+}
+
+#s17 .s17-score dd {
+  font-family: var(--s17-display);
+  font-size: clamp(0.95rem, 0.62rem + 0.62vw, 1.18rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  color: var(--s17-red-deep);
+  white-space: nowrap;
+}
+
+/* Lettering drawn inside the panels */
+
+#s17 .s17-say {
+  font-family: var(--s17-body);
+  font-weight: 700;
+  font-size: 21px;
+  letter-spacing: 0.015em;
+  fill: var(--s17-ink);
+}
+
+#s17 .s17-say--hot {
+  fill: var(--s17-red-deep);
+}
+
+#s17 .s17-cap {
+  font-family: var(--s17-body);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  fill: var(--s17-ink);
+}
+
+#s17 .s17-sfx {
+  font-family: var(--s17-display);
+  font-size: 38px;
+  fill: var(--s17-yellow);
+  stroke: var(--s17-ink);
+  stroke-width: 3px;
+  paint-order: stroke fill;
+}
+
+/* Section bands */
+
+#s17 .s17-section {
+  margin-top: clamp(26px, 3.6vw, 44px);
+}
+
+#s17 .s17-band {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2px 16px;
+  padding: 7px 15px 8px;
+  margin-bottom: clamp(12px, 1.6vw, 18px);
+  background: var(--s17-ink);
+  color: var(--s17-paper-2);
+  border-radius: 3px;
+}
+
+#s17 .s17-band--red {
+  background: var(--s17-red-deep);
+  color: #fff;
+}
+
+/* A second band further down the same section */
+#s17 .s17-band--mid {
+  margin-top: clamp(22px, 3vw, 36px);
+}
+
+#s17 .s17-band p {
+  font-size: 0.9375rem;
+  font-style: italic;
+}
+
+#s17 .s17-h2 {
+  font-family: var(--s17-display);
+  font-size: clamp(1.2rem, 0.95rem + 1.1vw, 1.85rem);
+  line-height: 1.14;
+  letter-spacing: 0.01em;
+}
+
+/* The hook: three big comic panels */
+
+#s17 .s17-pick__row {
+  display: grid;
+  gap: clamp(10px, 1.4vw, 16px);
+}
+
+#s17 .s17-vibe {
+  position: relative;
+}
+
+#s17 .s17-vibe label {
+  position: relative;
+  display: block;
+  height: 100%;
+  border: 5px solid var(--s17-ink);
+  border-radius: var(--s17-wob);
+  background: var(--s17-paper-2);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+#s17 .s17-vibe:nth-child(even) label {
+  border-radius: var(--s17-wob-2);
+}
+
+#s17 .s17-vibe__art {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-bottom: 5px solid var(--s17-ink);
+}
+
+#s17 .s17-vibe__foot {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+  padding: 10px 14px 12px;
+  background: var(--s17-paper-2);
+}
+
+#s17 .s17-vibe__name {
+  display: block;
+  font-family: var(--s17-display);
+  font-size: clamp(1rem, 0.9rem + 0.4vw, 1.2rem);
+  line-height: 1.15;
+}
+
+#s17 .s17-vibe__note {
+  font-size: 0.875rem;
+  font-style: italic;
+}
+
+#s17 .s17-vibe__stamp {
+  position: absolute;
+  top: 10px;
+  right: -6px;
+  z-index: 2;
+  display: none;
+  padding: 4px 14px;
+  border: 4px solid var(--s17-ink);
+  background: var(--s17-red);
+  color: #fff;
+  font-family: var(--s17-display);
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transform: rotate(5deg);
+  box-shadow: 3px 3px 0 var(--s17-ink);
+}
+
+#s17 .s17-vibe label:hover {
+  background: #fffaea;
+}
+
+#s17 .s17-vibe input:checked + label {
+  box-shadow: 0 0 0 5px var(--s17-yellow), 7px 8px 0 var(--s17-ink);
+}
+
+#s17 .s17-vibe input:checked + label .s17-vibe__foot {
+  background: var(--s17-yellow);
+}
+
+#s17 .s17-vibe input:checked + label .s17-vibe__stamp {
+  display: block;
+}
+
+/* Unchosen panels step back */
+
+#s17 .s17-pick:has(input:checked) .s17-vibe input:not(:checked) + label {
+  opacity: 0.56;
+  filter: saturate(0.3);
+}
+
+/* Spoken status line and the way back to all ten */
+
+#s17 .s17-herald {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 16px;
+  margin-top: clamp(12px, 1.6vw, 18px);
+  text-align: center;
+}
+
+#s17 .s17-status {
+  font-size: 0.9375rem;
+  font-style: italic;
+}
+
+#s17 .s17-reset {
+  padding: 6px 15px;
+  border: 4px solid var(--s17-ink);
+  border-radius: var(--s17-wob);
+  background: var(--s17-yellow);
+  color: var(--s17-ink);
+  font-family: var(--s17-body);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--s17-ink);
+}
+
+#s17 .s17-reset:hover {
+  background: #ffd75c;
+}
+
+/* The classifieds: the top ten as small ads */
+
+#s17 .s17-ads {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(10px, 1.3vw, 15px);
+}
+
+#s17 .s17-ad {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 9px 9px 0;
+  border: 5px double var(--s17-ink);
+  background: var(--s17-paper-2);
+}
+
+#s17 .s17-ad__pic {
+  position: relative;
+  border: 3px solid var(--s17-ink);
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+  background: #d8c8a4;
+}
+
+#s17 .s17-ad__pic img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) sepia(0.34) contrast(1.12);
+}
+
+/* halftone screen over the photo, as a printed ad */
+#s17 .s17-ad__pic::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(rgb(26 21 16 / 0.38) 1.1px, transparent 1.5px) 0 0 / 4px 4px;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+#s17 .s17-ad__tag {
+  margin-top: 8px;
+  font-family: var(--s17-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--s17-red-deep);
+}
+
+#s17 .s17-ad__name {
+  margin: 1px 0 7px;
+  font-family: var(--s17-display);
+  font-size: 0.95rem;
+  line-height: 1.16;
+}
+
+#s17 .s17-ad__feet {
+  display: flex;
+  margin: auto -9px 0;
+  border-top: 3px dashed var(--s17-ink);
+}
+
+#s17 .s17-ad__feet span {
+  flex: 1;
+  padding: 5px 0;
+  writing-mode: vertical-rl;
+  text-align: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+#s17 .s17-ad__feet span + span {
+  border-left: 3px dashed var(--s17-ink);
+}
+
+#s17 .s17-ad__flag {
+  position: absolute;
+  top: -11px;
+  left: -8px;
+  z-index: 2;
+  display: none;
+  padding: 2px 9px;
+  border: 3px solid var(--s17-ink);
+  background: var(--s17-red);
+  color: #fff;
+  font-family: var(--s17-display);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transform: rotate(-5deg);
+}
+
+/* A chosen vibe brings its ads up into full colour */
+
+#s17 .s17-hook:has(#s17-vibe-strategy:checked) .s17-fit-strategy,
+#s17 .s17-hook:has(#s17-vibe-family:checked) .s17-fit-family,
+#s17 .s17-hook:has(#s17-vibe-friends:checked) .s17-fit-friends {
+  border-color: var(--s17-red);
+  box-shadow: 5px 6px 0 var(--s17-ink);
+}
+
+#s17 .s17-hook:has(#s17-vibe-strategy:checked) .s17-fit-strategy .s17-ad__pic img,
+#s17 .s17-hook:has(#s17-vibe-family:checked) .s17-fit-family .s17-ad__pic img,
+#s17 .s17-hook:has(#s17-vibe-friends:checked) .s17-fit-friends .s17-ad__pic img {
+  filter: none;
+}
+
+#s17 .s17-hook:has(#s17-vibe-strategy:checked) .s17-fit-strategy .s17-ad__pic::after,
+#s17 .s17-hook:has(#s17-vibe-family:checked) .s17-fit-family .s17-ad__pic::after,
+#s17 .s17-hook:has(#s17-vibe-friends:checked) .s17-fit-friends .s17-ad__pic::after {
+  opacity: 0.2;
+}
+
+#s17 .s17-hook:has(#s17-vibe-strategy:checked) .s17-fit-strategy .s17-ad__flag,
+#s17 .s17-hook:has(#s17-vibe-family:checked) .s17-fit-family .s17-ad__flag,
+#s17 .s17-hook:has(#s17-vibe-friends:checked) .s17-fit-friends .s17-ad__flag {
+  display: block;
+}
+
+#s17 .s17-hook:has(#s17-vibe-strategy:checked) .s17-ad:not(.s17-fit-strategy),
+#s17 .s17-hook:has(#s17-vibe-family:checked) .s17-ad:not(.s17-fit-family),
+#s17 .s17-hook:has(#s17-vibe-friends:checked) .s17-ad:not(.s17-fit-friends) {
+  opacity: 0.5;
+}
+
+#s17 .s17-more {
+  margin-top: clamp(14px, 2vw, 20px);
+  text-align: center;
+}
+
+#s17 .s17-more a {
+  display: inline-block;
+  padding: 8px 19px;
+  border: 4px solid var(--s17-ink);
+  border-radius: var(--s17-wob);
+  background: var(--s17-yellow);
+  color: var(--s17-ink);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 4px 4px 0 var(--s17-ink);
+}
+
+#s17 .s17-more a:hover {
+  background: #ffd75c;
+}
+
+/* House rules: four small panels */
+
+#s17 .s17-rules {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(10px, 1.3vw, 15px);
+}
+
+#s17 .s17-rule {
+  display: flex;
+  flex-direction: column;
+  border: 5px solid var(--s17-ink);
+  border-radius: var(--s17-wob);
+  background: var(--s17-paper-2);
+  overflow: hidden;
+}
+
+#s17 .s17-rule:nth-child(even) {
+  border-radius: var(--s17-wob-2);
+}
+
+#s17 .s17-rule svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-bottom: 5px solid var(--s17-ink);
+}
+
+#s17 .s17-rule h3 {
+  margin: 10px 13px 3px;
+  font-family: var(--s17-display);
+  font-size: 1rem;
+  line-height: 1.15;
+}
+
+#s17 .s17-rule p {
+  margin: 0 13px 12px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* How to join: a three-panel strip */
+
+#s17 .s17-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: clamp(10px, 1.3vw, 15px);
+}
+
+#s17 .s17-step {
+  display: flex;
+  flex-direction: column;
+  border: 5px solid var(--s17-ink);
+  border-radius: var(--s17-wob);
+  background: var(--s17-paper-2);
+  overflow: hidden;
+}
+
+#s17 .s17-step:nth-child(even) {
+  border-radius: var(--s17-wob-2);
+}
+
+#s17 .s17-step svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-bottom: 5px solid var(--s17-ink);
+}
+
+#s17 .s17-step p {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 12px 14px 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+#s17 .s17-step__no {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--s17-ink);
+  border-radius: 50%;
+  background: var(--s17-yellow);
+  font-family: var(--s17-display);
+  font-size: 1.15rem;
+  box-shadow: 3px 3px 0 rgb(26 21 16 / 0.25);
+}
+
+#s17 .s17-steps__go {
+  margin-top: clamp(16px, 2.2vw, 22px);
+  text-align: center;
+}
+
+#s17 .s17-steps__go .s17-cta {
+  margin-top: 0;
+}
+
+/* Last panel */
+
+#s17 .s17-finale {
+  display: grid;
+  gap: clamp(10px, 1.4vw, 16px);
+  margin-top: clamp(26px, 3.6vw, 44px);
+}
+
+#s17 .s17-finale__art {
+  aspect-ratio: 640 / 300;
+}
+
+#s17 .s17-finale__copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(16px, 2.6vw, 30px);
+  background:
+    radial-gradient(rgb(242 194 48 / 0.42) 2.3px, transparent 2.7px) 0 0 / 11px 11px,
+    var(--s17-paper-2);
+}
+
+#s17 .s17-h2--big {
+  font-family: var(--s17-display);
+  font-size: clamp(1.4rem, 1rem + 1.6vw, 2.2rem);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+#s17 .s17-h2--big em {
+  font-style: normal;
+  color: var(--s17-red-deep);
+}
+
+#s17 .s17-next {
+  margin-top: 16px;
+  font-size: 0.875rem;
+  font-style: italic;
+  text-align: right;
+}
+
+/* ---------- Wider screens ---------- */
+
+@media (min-width: 560px) {
+  #s17 .s17-ads {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #s17 .s17-rules {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  #s17 .s17-score {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #s17 .s17-score div {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  #s17 .s17-score div + div {
+    border-top: 0;
+    border-left: 3px solid var(--s17-ink);
+  }
+
+  #s17 .s17-pick__row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #s17 .s17-vibe__foot {
+    display: block;
+  }
+}
+
+@media (min-width: 820px) {
+  #s17 .s17-mast {
+    grid-template-columns: minmax(140px, 1fr) auto minmax(140px, 1fr);
+    align-items: center;
+  }
+
+  #s17 .s17-ear {
+    display: block;
+    max-width: 210px;
+  }
+
+  #s17 .s17-ear--l {
+    justify-self: start;
+    transform: rotate(-1.8deg);
+  }
+
+  #s17 .s17-ear--r {
+    justify-self: end;
+    transform: rotate(1.8deg);
+  }
+
+  #s17 .s17-dateline {
+    grid-column: 1 / -1;
+  }
+
+  #s17 .s17-ads {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  #s17 .s17-finale {
+    grid-template-columns: 7fr 5fr;
+    align-items: stretch;
+  }
+
+  #s17 .s17-finale__art {
+    aspect-ratio: auto;
+    min-height: 300px;
+  }
+}
+
+@media (min-width: 1000px) {
+  #s17 .s17-strip {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  #s17 .s17-copy {
+    grid-column: 1 / 6;
+  }
+
+  #s17 .s17-hero-art {
+    grid-column: 6 / 13;
+  }
+
+  #s17 .s17-beat--a {
+    grid-column: 1 / 7;
+  }
+
+  #s17 .s17-beat--b {
+    grid-column: 7 / 13;
+  }
+
+  #s17 .s17-beat {
+    aspect-ratio: 460 / 240;
+  }
+}
+
+/* Panels keep the proportions they were drawn at, so `slice` never crops a
+   balloon or a caption bar off the edge. Holding the hero to 640 x 420 also
+   keeps it short enough that a landing card shows the strip plus the start of
+   the hook below it. */
+
+#s17 .s17-hero-art {
+  aspect-ratio: 640 / 420;
+  align-self: start;
+}
+
+#s17 .s17-beat {
+  aspect-ratio: 460 / 240;
+}
+
+/* ---------- Narrow phones ---------- */
+
+@media (max-width: 420px) {
+  #s17 .s17-paper {
+    padding-inline: 8px;
+  }
+
+  #s17 .s17-cta {
+    padding: 11px 16px 12px;
+  }
+
+  #s17 .s17-ad {
+    padding: 7px 7px 0;
+  }
+
+  #s17 .s17-ad__feet {
+    margin-inline: -7px;
+  }
+
+  #s17 .s17-masthead {
+    text-shadow: 2px 2px 0 var(--s17-yellow), 3px 3px 0 var(--s17-red-deep);
+  }
+}
+
+@media (max-width: 360px) {
+  #s17 .s17-ads {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #s17 .s17-rules {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---------- Motion ---------- */
+
+/* The ink boils: three turbulence seeds swapped on a step timer. */
+#s17 .s17-boil {
+  filter: url(#s17-boil-a);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #s17 .s17-boil {
+    animation: s17-boil 0.54s steps(1) infinite;
+  }
+
+  #s17 .s17-cta,
+  #s17 .s17-more a,
+  #s17 .s17-reset {
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  }
+
+  #s17 .s17-cta:hover {
+    transform: rotate(-1.4deg) translate(-2px, -3px);
+    box-shadow: 9px 10px 0 var(--s17-ink);
+  }
+
+  #s17 .s17-cta:active {
+    transform: rotate(-1.4deg) translate(3px, 3px);
+    box-shadow: 3px 3px 0 var(--s17-ink);
+  }
+
+  #s17 .s17-more a:hover,
+  #s17 .s17-reset:hover {
+    transform: translate(-1px, -2px);
+    box-shadow: 5px 6px 0 var(--s17-ink);
+  }
+
+  #s17 .s17-vibe label {
+    transition: opacity 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  #s17 .s17-vibe label:hover {
+    transform: translateY(-3px);
+  }
+
+  #s17 .s17-vibe input:checked + label {
+    animation: s17-pick 0.42s cubic-bezier(0.3, 1.5, 0.5, 1) both;
+  }
+
+  #s17 .s17-vibe__stamp {
+    animation: s17-stamp 0.34s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+  }
+
+  #s17 .s17-ad {
+    transition: opacity 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  #s17 .s17-ad__pic img,
+  #s17 .s17-ad__pic::after {
+    transition: filter 0.3s ease, opacity 0.3s ease;
+  }
+
+  #s17 .s17-ad__flag {
+    animation: s17-flag 0.36s cubic-bezier(0.3, 1.5, 0.5, 1) both;
+  }
+}
+
+@keyframes s17-boil {
+  0% { filter: url(#s17-boil-a); }
+  33% { filter: url(#s17-boil-b); }
+  66% { filter: url(#s17-boil-c); }
+}
+
+@keyframes s17-pick {
+  0% { transform: translateY(0) rotate(0deg); }
+  55% { transform: translateY(-7px) rotate(-1deg); }
+  100% { transform: translateY(-3px) rotate(0deg); }
+}
+
+@keyframes s17-stamp {
+  from { transform: rotate(16deg) scale(1.5); opacity: 0; }
+  to { transform: rotate(5deg) scale(1); opacity: 1; }
+}
+
+@keyframes s17-flag {
+  from { transform: rotate(-20deg) scale(0.6); opacity: 0; }
+  to { transform: rotate(-5deg) scale(1); opacity: 1; }
+}
+
+/* ---------- Landing-card preview: a still, settled page ---------- */
+
+.is-thumb #s17 *,
+.is-thumb #s17 *::before,
+.is-thumb #s17 *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+.is-thumb #s17 .s17-boil {
+  filter: url(#s17-boil-a);
+}

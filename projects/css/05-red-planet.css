@@ -1,0 +1,641 @@
+/* 05 Red Planet Project: mission control over a terraforming board. Deep-space
+   navy console, a rust-red hex planet with ocean, greenery and city tiles, three
+   global-parameter readouts, cream project cards with coloured title bands.
+   Hook: social proof hero. The three big numbers are the global parameters
+   (temperature, oxygen, oceans) and count up as their tracks fill (see initS05).
+   The HTML holds the final values. Every rule and custom property is scoped
+   under #s05. */
+
+@font-face {
+  font-family: "s05 Oxanium";
+  src: url("../fonts/oxanium/oxanium-var.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s05 Chakra Petch";
+  src: url("../fonts/chakrapetch/chakrapetch-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s05 Chakra Petch";
+  src: url("../fonts/chakrapetch/chakrapetch-semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+#s05 {
+  --s05-space: #0b1626;
+  --s05-space-2: #0f1d31;
+  --s05-panel: #13233a;
+  --s05-line: #2a4363;
+  --s05-text: #eef1f5;
+  --s05-muted: #b3c1d3;
+  --s05-rust: #b5482a;
+  --s05-rust-hi: #f08a5d;
+  --s05-ochre: #f2a93b;
+  --s05-ochre-hi: #ffc463;
+  --s05-ochre-deep: #a8660f;
+  --s05-cream: #f3e9d2;
+  --s05-ink: #1b1712;
+  --s05-ocean: #2f7fc1;
+  --s05-green: #3f8f3a;
+  --s05-city: #8b939c;
+  --s05-teal: #5cc0b0;
+  --s05-band-strategy: #1f5fa8;
+  --s05-band-family: #2e7433;
+  --s05-band-coop: #a3302a;
+  --s05-p-red: #d63a2b;
+  --s05-p-green: #3fa23f;
+  --s05-p-blue: #2f6fd6;
+  --s05-head: "s05 Oxanium", "Bahnschrift", "DIN Alternate", "Roboto Condensed", "Arial Narrow", system-ui, sans-serif;
+  --s05-body: "s05 Chakra Petch", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --s05-stars:
+    radial-gradient(1px 1px at 12% 18%, rgb(255 255 255 / 0.7), transparent 60%),
+    radial-gradient(1px 1px at 68% 8%, rgb(255 255 255 / 0.55), transparent 60%),
+    radial-gradient(1.5px 1.5px at 84% 42%, rgb(255 236 210 / 0.6), transparent 60%),
+    radial-gradient(1px 1px at 33% 64%, rgb(255 255 255 / 0.45), transparent 60%),
+    radial-gradient(1px 1px at 52% 88%, rgb(255 255 255 / 0.5), transparent 60%),
+    radial-gradient(1.5px 1.5px at 6% 80%, rgb(200 220 255 / 0.5), transparent 60%);
+
+  background:
+    var(--s05-stars) 0 0 / 360px 360px,
+    radial-gradient(60% 40% at 85% 0%, rgb(181 72 42 / 0.22), transparent 70%),
+    linear-gradient(180deg, var(--s05-space) 0%, var(--s05-space-2) 100%);
+  color: var(--s05-text);
+  font-family: var(--s05-body);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+}
+
+#s05 *,
+#s05 *::before,
+#s05 *::after {
+  box-sizing: border-box;
+}
+
+#s05 h1,
+#s05 h2,
+#s05 h3,
+#s05 p,
+#s05 ol,
+#s05 ul {
+  margin: 0;
+}
+
+#s05 ol,
+#s05 ul {
+  padding: 0;
+  list-style: none;
+}
+
+#s05 .s05-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+#s05 .s05-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+#s05 .s05-c-red { color: var(--s05-p-red); }
+#s05 .s05-c-green { color: var(--s05-p-green); }
+#s05 .s05-c-blue { color: var(--s05-p-blue); }
+
+/* Links and focus */
+
+#s05 a {
+  color: var(--s05-ochre-hi);
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 2px;
+}
+
+#s05 a:hover {
+  color: #fff;
+}
+
+#s05 a:focus-visible {
+  outline: 3px solid var(--s05-ochre-hi);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+/* Console frame */
+
+#s05 .s05-console {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: clamp(20px, 4vw, 56px) clamp(16px, 4vw, 48px) clamp(56px, 8vw, 104px);
+}
+
+#s05 .s05-h1,
+#s05 .s05-h2 {
+  font-family: var(--s05-head);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+#s05 .s05-h2 {
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  margin-bottom: clamp(24px, 3vw, 36px);
+}
+
+/* Hero: copy and planet side by side; the planet column scales with the
+   viewport, so there is no dead space between phone and desktop widths */
+
+#s05 .s05-hero__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(220px, 32vw, 360px);
+  grid-template-areas:
+    "eye planet"
+    "h1 planet"
+    "lede planet"
+    "act planet";
+  grid-template-rows: auto auto auto 1fr;
+  column-gap: clamp(24px, 5vw, 72px);
+  align-items: start;
+}
+
+#s05 .s05-eyebrow {
+  grid-area: eye;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: clamp(0px, 2vw, 24px);
+  font-family: var(--s05-head);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--s05-teal);
+}
+
+#s05 .s05-eyebrow__led {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--s05-teal);
+  box-shadow: 0 0 0 3px rgb(92 192 176 / 0.25);
+}
+
+#s05 .s05-h1 {
+  grid-area: h1;
+  margin-top: 16px;
+  max-width: 16ch;
+  font-size: clamp(2.1rem, 4.4vw, 3.5rem);
+}
+
+#s05 .s05-h1 em {
+  font-style: normal;
+  color: var(--s05-rust-hi);
+}
+
+#s05 .s05-lede {
+  grid-area: lede;
+  margin-top: 18px;
+  max-width: 40ch;
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  color: var(--s05-muted);
+}
+
+#s05 .s05-hero__act {
+  grid-area: act;
+  margin-top: clamp(22px, 3vw, 34px);
+}
+
+#s05 .s05-planet-wrap {
+  grid-area: planet;
+  align-self: center;
+}
+
+#s05 .s05-planet {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#s05 .s05-planet__glow {
+  fill: none;
+  stroke: rgb(240 138 93 / 0.22);
+  stroke-width: 10;
+}
+
+#s05 .s05-hx {
+  fill: rgb(255 210 180 / 0.06);
+  stroke: rgb(40 12 4 / 0.35);
+  stroke-width: 1.2;
+}
+
+#s05 .s05-hx--ocean { fill: var(--s05-ocean); }
+#s05 .s05-hx--green { fill: var(--s05-green); }
+#s05 .s05-hx--city { fill: var(--s05-city); }
+
+#s05 .s05-hx--you {
+  fill: rgb(255 196 99 / 0.2);
+  stroke: var(--s05-ochre-hi);
+  stroke-width: 2.5;
+  stroke-dasharray: 5 4;
+}
+
+/* Primary CTA: a gold M€ plate with a player cube */
+
+#s05 .s05-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 68px;
+  padding: 12px 28px 12px 18px;
+  border: 2px solid #ffe0a0;
+  border-radius: 10px;
+  background: linear-gradient(180deg, var(--s05-ochre-hi) 0%, var(--s05-ochre) 55%, #e2952a 100%);
+  color: var(--s05-ink);
+  text-decoration: none;
+  box-shadow:
+    0 4px 0 var(--s05-ochre-deep),
+    0 0 0 4px rgb(242 169 59 / 0.18),
+    0 12px 30px rgb(242 140 40 / 0.35);
+}
+
+#s05 .s05-cta:hover {
+  color: var(--s05-ink);
+  background: linear-gradient(180deg, #ffd27f 0%, var(--s05-ochre-hi) 60%, var(--s05-ochre) 100%);
+}
+
+#s05 .s05-cta:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 5px;
+}
+
+#s05 .s05-cta__cube {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  color: var(--s05-rust);
+}
+
+#s05 .s05-cta__text {
+  display: grid;
+  line-height: 1.1;
+}
+
+#s05 .s05-cta__main {
+  font-family: var(--s05-head);
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  font-weight: 700;
+}
+
+#s05 .s05-cta__sub {
+  margin-top: 4px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #3a2608;
+}
+
+/* The hook: three global parameters, one row, the big moment of the page */
+
+#s05 .s05-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: clamp(32px, 3.6vw, 44px);
+  border: 1px solid var(--s05-line);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgb(19 35 58 / 0.92), rgb(15 29 49 / 0.92));
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.05), 0 18px 40px rgb(0 0 0 / 0.3);
+}
+
+#s05 .s05-stat {
+  --s05-accent: var(--s05-rust-hi);
+  container-type: inline-size;
+  padding: clamp(18px, 2.4vw, 30px) clamp(16px, 2.4vw, 32px);
+}
+
+#s05 .s05-stat + .s05-stat {
+  border-left: 1px solid var(--s05-line);
+}
+
+#s05 .s05-stat--o2 { --s05-accent: var(--s05-teal); }
+#s05 .s05-stat--ocean { --s05-accent: #6fb2ec; }
+
+#s05 .s05-stat__param {
+  font-family: var(--s05-head);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--s05-accent);
+}
+
+#s05 .s05-stat__num {
+  margin-top: 6px;
+  font-family: var(--s05-head);
+  font-size: clamp(1.8rem, 18cqi, 4.6rem);
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+#s05 .s05-stat__label {
+  margin-top: 6px;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  color: var(--s05-muted);
+}
+
+/* Segmented parameter track; JS sets --s05-p from 0 to 1 while counting */
+
+#s05 .s05-track {
+  position: relative;
+  height: 10px;
+  margin-top: 16px;
+  border-radius: 3px;
+  background: rgb(255 255 255 / 0.08);
+  -webkit-mask: repeating-linear-gradient(90deg, #000 0 calc(100% / 14 - 3px), transparent 0 calc(100% / 14));
+  mask: repeating-linear-gradient(90deg, #000 0 calc(100% / 14 - 3px), transparent 0 calc(100% / 14));
+  overflow: hidden;
+}
+
+#s05 .s05-track__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: calc(var(--s05-p, 1) * 100%);
+  background: var(--s05-accent);
+}
+
+/* Panels */
+
+#s05 .s05-panel {
+  margin-top: clamp(72px, 10vw, 128px);
+}
+
+/* Why play here: four resources */
+
+#s05 .s05-why__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 2.4vw, 32px);
+}
+
+#s05 .s05-why__icon {
+  width: 44px;
+  height: 44px;
+}
+
+#s05 .s05-why__name {
+  margin-top: 14px;
+  font-family: var(--s05-head);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+#s05 .s05-why__item p {
+  margin-top: 4px;
+  max-width: 28ch;
+  color: var(--s05-muted);
+}
+
+/* How to join: three generations on a track */
+
+#s05 .s05-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2.4vw, 32px);
+  counter-reset: none;
+}
+
+#s05 .s05-step {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  border: 1px solid var(--s05-line);
+  border-radius: 12px;
+  background: var(--s05-panel);
+  font-size: 1.1rem;
+}
+
+#s05 .s05-step__n {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 50px;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  background: var(--s05-rust);
+  font-family: var(--s05-head);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Top ten: project cards. The name band has a fixed two-line height so the
+   photos line up across a row however the titles wrap. */
+
+#s05 .s05-cards {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(12px, 1.8vw, 22px);
+}
+
+#s05 .s05-card {
+  --s05-band: var(--s05-band-family);
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  border: 2px solid #c9a971;
+  border-radius: 10px;
+  background: var(--s05-cream);
+  color: var(--s05-ink);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 0.3);
+}
+
+#s05 .s05-card--strategy { --s05-band: var(--s05-band-strategy); }
+#s05 .s05-card--coop { --s05-band: var(--s05-band-coop); }
+
+#s05 .s05-card__name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(2 * 1.15em + 14px);
+  padding: 7px 8px;
+  border-radius: 5px;
+  background: var(--s05-band);
+  color: #fff;
+  font-family: var(--s05-head);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.15;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+#s05 .s05-card__pic {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  height: auto;
+  margin-top: 8px;
+  object-fit: cover;
+  border-radius: 4px;
+  background: #6b3524;
+}
+
+#s05 .s05-card__tag {
+  margin-top: 8px;
+  padding: 0 2px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #3d3326;
+}
+
+#s05 .s05-more {
+  margin-top: 28px;
+  text-align: center;
+  font-family: var(--s05-head);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+/* Closing CTA */
+
+#s05 .s05-close {
+  margin-top: clamp(72px, 10vw, 128px);
+  padding: clamp(36px, 6vw, 72px) clamp(20px, 4vw, 48px);
+  border: 1px solid var(--s05-line);
+  border-radius: 18px;
+  background:
+    radial-gradient(70% 90% at 50% 120%, rgb(181 72 42 / 0.35), transparent 70%),
+    var(--s05-panel);
+  text-align: center;
+}
+
+#s05 .s05-close__cubes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+#s05 .s05-close__cubes svg {
+  width: 34px;
+  height: 34px;
+}
+
+#s05 .s05-close__empty {
+  width: 30px;
+  height: 30px;
+  border: 2px dashed var(--s05-ochre-hi);
+  border-radius: 6px;
+}
+
+#s05 .s05-close .s05-h2 {
+  margin-bottom: 28px;
+}
+
+/* Tablet */
+
+@media (max-width: 980px) {
+  #s05 .s05-why__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #s05 .s05-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #s05 .s05-steps {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 520px;
+  }
+}
+
+/* Phone: the planet shrinks to a corner beside the eyebrow; the three numbers
+   stack as rows, each with its track */
+
+@media (max-width: 639px) {
+  #s05 .s05-hero__top {
+    grid-template-columns: minmax(0, 1fr) 96px;
+    grid-template-areas:
+      "eye planet"
+      "h1 h1"
+      "lede lede"
+      "act act";
+    grid-template-rows: auto;
+    column-gap: 12px;
+  }
+
+  #s05 .s05-eyebrow {
+    margin-top: 0;
+    align-self: center;
+  }
+
+  #s05 .s05-h1 {
+    margin-top: 6px;
+  }
+
+  #s05 .s05-stats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #s05 .s05-stat + .s05-stat {
+    border-left: 0;
+    border-top: 1px solid var(--s05-line);
+  }
+
+  #s05 .s05-stat__num {
+    font-size: clamp(2rem, 16cqi, 3.4rem);
+  }
+
+  #s05 .s05-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 359px) {
+  #s05 .s05-why__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 400px) {
+  #s05 .s05-cta {
+    gap: 10px;
+    padding: 10px 18px 10px 12px;
+  }
+
+  #s05 .s05-card__name {
+    font-size: 0.82rem;
+  }
+}
+
+/* Motion: the count-up is JS (skipped under reduced motion); only the CTA
+   gets a hover lift */
+
+@media (prefers-reduced-motion: no-preference) {
+  #s05 .s05-cta {
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  #s05 .s05-cta:hover {
+    transform: translateY(-2px);
+  }
+}

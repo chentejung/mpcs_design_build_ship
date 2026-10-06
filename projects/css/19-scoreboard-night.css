@@ -1,0 +1,1491 @@
+/* 19 Scoreboard Night: style 14's Sunday-comics crossroads, run as a night
+   edition with a mechanical scoreboard for a centrepiece. The newspaper frame
+   stays (newsprint sheet, halftone, masthead, heavy banners with an italic
+   kicker) and so does the road: ivory paving with an inked edge and a dashed
+   centre line, forking at a signpost into three spot-colour roads, one per vibe.
+   The character art follows 16: contours broken into arcs of different weight so
+   a line swells and thins, flat cel fills with no screen over the figures, big
+   eye-whites, one slab brow each, square-tooth grins, blush and freckles.
+
+   Three things are rebuilt for this style:
+   - the three big numbers are a flip-digit scoreboard, each digit its own card
+     tile in a riveted housing under a bar of bulbs, counted up on first view;
+   - the starting point is a perforated admission ticket presented by a pal,
+     where 14 printed the word START;
+   - "how to join" is three numbered ticket stubs and "house rules" is a hanging
+     "tonight's card" board of four ticked rows, in place of 14's comic strips.
+
+   The table turns slate and the hero panel turns night, so the warm newsprint
+   reads against a cool dark. Every character and word here is original.
+   Hook: pick your vibe ("Which way tonight?").
+   Fonts: Rye for display (masthead, h1, banners, CTA label, stub numbers,
+   FINISH, closing heading) and Libre Baskerville for everything else. The
+   scoreboard digits are set in the body face with tabular figures, because a
+   flip board needs every digit on the same width.
+   Every rule and custom property is scoped under #s19. */
+
+@font-face {
+  font-family: "s19 Rye";
+  src: url("../fonts/rye/rye-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s19 Libre Baskerville";
+  src: url("../fonts/librebaskerville/librebaskerville-var.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s19 Libre Baskerville";
+  src: url("../fonts/librebaskerville/librebaskerville-italic-var.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+#s19 {
+  --s19-ink: #16110d;
+  --s19-ink-2: #473826;
+  --s19-news: #f1e5c6;
+  --s19-panel: #fbf4e0;
+  --s19-road: #f7eed7;
+  --s19-table: #2c3744;
+  --s19-table-2: #1c242e;
+  --s19-board: #1f3b34;
+  --s19-board-2: #14271f;
+  --s19-board-edge: #3d5a4e;
+  --s19-tile: #faf2da;
+  --s19-tile-2: #e7dabb;
+  --s19-bulb: #ffc94a;
+  --s19-red: #d02a1c;
+  --s19-red-ink: #a3180f;
+  --s19-red-deep: #880f08;
+  --s19-blue: #2a6cc0;
+  --s19-blue-ink: #1a4e93;
+  --s19-yellow: #f5c22e;
+  --s19-yellow-ink: #6f5106;
+  --s19-night: #1b2a4a;
+  --s19-display: "s19 Rye", "Rockwell", "Clarendon", "Bookman Old Style", Georgia, serif;
+  --s19-body: "s19 Libre Baskerville", "Baskerville", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  /* Panel corners wobble like a hand-ruled border */
+  --s19-wob: 118px 15px 102px 17px / 15px 102px 17px 118px;
+  --s19-wob-sm: 42px 10px 36px 12px / 12px 36px 10px 42px;
+  --s19-halftone: radial-gradient(rgb(110 80 30 / 0.13) 1.1px, transparent 1.5px) 0 0 / 5px 5px;
+  --s19-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .18 0 0 0 0 .2 0 0 0 0 .24 0 0 0 .18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  background: var(--s19-table);
+  color: var(--s19-ink);
+  font-family: var(--s19-body);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+#s19 *,
+#s19 *::before,
+#s19 *::after {
+  box-sizing: border-box;
+}
+
+#s19 h1,
+#s19 h2,
+#s19 h3,
+#s19 h4,
+#s19 p,
+#s19 ol,
+#s19 ul,
+#s19 dl,
+#s19 dd,
+#s19 fieldset {
+  margin: 0;
+}
+
+#s19 ol,
+#s19 ul {
+  padding: 0;
+  list-style: none;
+}
+
+#s19 fieldset {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+
+#s19 [hidden] {
+  display: none !important;
+}
+
+#s19 .s19-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+#s19 .s19-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Links, buttons and focus */
+
+#s19 a {
+  color: var(--s19-blue-ink);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 2px;
+}
+
+#s19 a:hover {
+  color: var(--s19-ink);
+}
+
+#s19 a:focus-visible,
+#s19 button:focus-visible {
+  outline: 3px solid var(--s19-ink);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Slate table and the newsprint sheet */
+
+#s19 .s19-table {
+  position: relative;
+  padding: clamp(6px, 2.6vw, 40px);
+  background:
+    var(--s19-grain),
+    radial-gradient(120% 70% at 50% 0%, #3d4a59 0%, transparent 62%),
+    linear-gradient(180deg, var(--s19-table) 0%, var(--s19-table-2) 100%);
+}
+
+#s19 .s19-paper {
+  position: relative;
+  max-width: 1340px;
+  margin: 0 auto;
+  background:
+    var(--s19-halftone),
+    radial-gradient(ellipse at 50% 0%, transparent 55%, rgb(150 110 45 / 0.16) 100%),
+    var(--s19-news);
+  box-shadow:
+    0 0 0 1px rgb(10 14 20 / 0.5),
+    6px 8px 0 rgb(8 12 18 / 0.3),
+    14px 22px 36px rgb(8 12 18 / 0.5);
+}
+
+#s19 .s19-paper__inner {
+  position: relative;
+  container-type: inline-size;
+  padding: clamp(10px, 2.2vw, 26px) clamp(12px, 3vw, 44px) clamp(14px, 3vw, 34px);
+  /* Road geometry. --s19-cu is 1/1200 of the inner width, matching the SVG
+     roads; --s19-u drives the straight side lanes and is fixed when narrow. */
+  --s19-cu: calc(100cqi / 1200);
+  --s19-u: 0.62px;
+}
+
+/* Loose props beside the sheet, only where there is room */
+
+#s19 .s19-loose {
+  display: none;
+}
+
+@media (min-width: 1680px) {
+  #s19 .s19-loose {
+    display: block;
+  }
+
+  #s19 .s19-loose svg {
+    position: absolute;
+    z-index: 4;
+    pointer-events: none;
+    filter: drop-shadow(2px 4px 4px rgb(6 10 16 / 0.55));
+  }
+
+  #s19 .s19-loose__dice { width: 118px; left: -136px; top: 30%; }
+  #s19 .s19-loose__tickets { width: 150px; right: -166px; top: 58%; }
+}
+
+/* Masthead */
+
+#s19 .s19-mast {
+  padding-bottom: 0.45rem;
+  margin-bottom: clamp(0.8rem, 2vw, 1.3rem);
+  border-bottom: 6px double var(--s19-ink);
+  text-align: center;
+}
+
+#s19 .s19-mast__title {
+  font-family: var(--s19-display);
+  font-size: clamp(1.4rem, 0.7rem + 3.4vw, 3rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: var(--s19-ink);
+  text-shadow:
+    3px 0 0 var(--s19-bulb),
+    5px 3px 0 var(--s19-board),
+    6px 5px 0 rgb(22 17 13 / 0.22);
+}
+
+#s19 .s19-mast__line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.1rem 1.1rem;
+  margin-top: 0.45rem;
+  padding-top: 0.3rem;
+  border-top: 2px solid var(--s19-ink);
+  color: var(--s19-ink-2);
+  font-size: 0.78rem;
+  font-style: italic;
+  letter-spacing: 0.04em;
+}
+
+#s19 .s19-mast__line span + span::before {
+  content: "\2605";
+  margin-right: 1.1rem;
+  font-style: normal;
+  color: var(--s19-red);
+}
+
+/* Panels */
+
+#s19 .s19-panel {
+  position: relative;
+  border: 5px solid var(--s19-ink);
+  border-radius: var(--s19-wob);
+  background: var(--s19-panel);
+}
+
+/* Type */
+
+#s19 .s19-kicker {
+  align-self: flex-start;
+  display: inline-block;
+  margin-bottom: 0.6rem;
+  padding: 0.15rem 0.6rem 0.2rem;
+  border: 3px solid var(--s19-ink);
+  border-radius: var(--s19-wob-sm);
+  background: var(--s19-bulb);
+  color: var(--s19-ink);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform: rotate(-1.6deg);
+}
+
+#s19 .s19-h1 {
+  font-family: var(--s19-display);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 1rem + 2.9vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: 0.005em;
+  text-wrap: balance;
+}
+
+#s19 .s19-h2 {
+  font-family: var(--s19-display);
+  font-weight: 400;
+  font-size: clamp(1.25rem, 0.9rem + 1.5vw, 2.05rem);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+
+#s19 .s19-lede {
+  margin-top: 0.85rem;
+  max-width: 30em;
+  color: var(--s19-ink-2);
+  font-size: clamp(1.02rem, 0.95rem + 0.35vw, 1.22rem);
+}
+
+/* Section banners */
+
+#s19 .s19-band {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.1rem 1.1rem;
+  padding: 0.35rem 0.9rem 0.5rem;
+  margin-bottom: clamp(0.9rem, 2vw, 1.4rem);
+  background: var(--s19-ink);
+  color: var(--s19-panel);
+  border-radius: 3px;
+}
+
+#s19 .s19-band--green {
+  background: var(--s19-board);
+}
+
+#s19 .s19-band__kick {
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* Primary CTA */
+
+#s19 .s19-cta {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1.25rem;
+  padding: 0.7rem 1.4rem 0.75rem 1rem;
+  border: 5px solid var(--s19-ink);
+  border-radius: 22px 8px 20px 10px / 10px 20px 8px 22px;
+  background: var(--s19-red-ink);
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 8px 8px 0 var(--s19-ink);
+  transform: rotate(-1.2deg);
+}
+
+#s19 .s19-cta:hover {
+  color: #fff;
+  background: var(--s19-red-deep);
+}
+
+#s19 .s19-cta:focus-visible {
+  outline: 4px solid var(--s19-ink);
+  outline-offset: 7px;
+}
+
+#s19 .s19-cta__icon {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  color: var(--s19-bulb);
+}
+
+#s19 .s19-cta__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+#s19 .s19-cta__main {
+  font-family: var(--s19-display);
+  font-size: clamp(1.3rem, 1.1rem + 0.7vw, 1.65rem);
+  letter-spacing: 0.02em;
+}
+
+#s19 .s19-cta__sub {
+  margin-top: 0.3rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+/* ---------------------------------------------------------------------------
+   Hero: copy panel, the ticket panel, and the scoreboard across the foot
+   --------------------------------------------------------------------------- */
+
+#s19 .s19-hero {
+  display: grid;
+  gap: clamp(0.8rem, 1.8vw, 1.1rem);
+}
+
+#s19 .s19-hero__copy {
+  padding: clamp(1rem, 2.4vw, 1.9rem);
+  background:
+    radial-gradient(rgb(31 59 52 / 0.14) 2.1px, transparent 2.5px) 0 0 / 10px 10px,
+    var(--s19-panel);
+}
+
+#s19 .s19-hero__art {
+  overflow: hidden;
+}
+
+#s19 .s19-start {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+#s19 .s19-post__arm text {
+  fill: #fff;
+  font-family: var(--s19-body);
+  font-weight: 700;
+  font-size: 19px;
+}
+
+#s19 .s19-post__arm text.s19-post__dark {
+  fill: var(--s19-ink);
+}
+
+#s19 .s19-balloon text {
+  fill: var(--s19-ink);
+  font-family: var(--s19-body);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 25px;
+}
+
+/* The admission ticket: the starting point */
+
+#s19 .s19-tk__admit {
+  fill: var(--s19-ink);
+  font-family: var(--s19-display);
+  font-size: 26px;
+  letter-spacing: 1px;
+}
+
+#s19 .s19-tk__seat {
+  fill: var(--s19-red-ink);
+  font-family: var(--s19-body);
+  font-weight: 700;
+  font-size: 19px;
+}
+
+#s19 .s19-tk__no {
+  fill: var(--s19-ink-2);
+  font-family: var(--s19-display);
+  font-size: 19px;
+  letter-spacing: 2px;
+}
+
+/* ---------------------------------------------------------------------------
+   The scoreboard. A riveted housing under a bar of bulbs; one row per figure,
+   each digit its own card tile with a hinge across the middle.
+   --------------------------------------------------------------------------- */
+
+#s19 .s19-board {
+  --s19-tw: clamp(17px, 5.5cqi, 70px);
+  position: relative;
+  overflow: hidden;
+  padding: 0 0 clamp(0.7rem, 1.6vw, 1.15rem);
+  border: 6px solid var(--s19-ink);
+  border-radius: 10px 10px 6px 6px;
+  /* Four corner rivets. Each layer is sized to a small box so the dot lands in
+     the corner; at 100% 100% the gradient would centre itself on the board. */
+  background:
+    radial-gradient(circle, var(--s19-board-edge) 0 3.2px, transparent 3.8px) 11px 26px / 9px 9px no-repeat,
+    radial-gradient(circle, var(--s19-board-edge) 0 3.2px, transparent 3.8px) calc(100% - 11px) 26px / 9px 9px no-repeat,
+    radial-gradient(circle, var(--s19-board-edge) 0 3.2px, transparent 3.8px) 11px calc(100% - 11px) / 9px 9px no-repeat,
+    radial-gradient(circle, var(--s19-board-edge) 0 3.2px, transparent 3.8px) calc(100% - 11px) calc(100% - 11px) / 9px 9px no-repeat,
+    radial-gradient(120% 80% at 50% 0%, rgb(255 201 74 / 0.12) 0%, transparent 60%),
+    linear-gradient(180deg, var(--s19-board) 0%, var(--s19-board-2) 100%);
+  box-shadow: inset 0 0 0 3px rgb(255 255 255 / 0.07), 7px 8px 0 rgb(8 12 18 / 0.35);
+}
+
+/* The bulb bar across the top */
+#s19 .s19-board__lamps {
+  height: 15px;
+  border-bottom: 3px solid rgb(0 0 0 / 0.4);
+  background:
+    radial-gradient(circle at 50% 50%, var(--s19-bulb) 0 3.4px, rgb(255 201 74 / 0.22) 4.4px, transparent 5.2px) 0 0 / 25px 15px repeat-x,
+    linear-gradient(180deg, #0f1f19, #16281f);
+}
+
+#s19 .s19-board__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.1rem 1rem;
+  padding: 0.4rem clamp(0.6rem, 1.6vw, 1.2rem) 0.5rem;
+  border-bottom: 2px solid rgb(255 255 255 / 0.16);
+  color: var(--s19-tile);
+}
+
+#s19 .s19-board__title {
+  font-family: var(--s19-display);
+  font-size: clamp(0.95rem, 0.8rem + 0.5vw, 1.3rem);
+  letter-spacing: 0.02em;
+  color: var(--s19-bulb);
+}
+
+#s19 .s19-board__rows {
+  padding: clamp(0.5rem, 1.2vw, 0.9rem) clamp(0.6rem, 1.6vw, 1.2rem) 0;
+}
+
+#s19 .s19-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.5rem 0.9rem;
+  padding: clamp(0.35rem, 0.9vw, 0.6rem) 0;
+  border-bottom: 2px dashed rgb(255 255 255 / 0.16);
+}
+
+#s19 .s19-row:last-child {
+  border-bottom: 0;
+}
+
+#s19 .s19-row__label {
+  font-family: var(--s19-body);
+  font-weight: 700;
+  font-size: clamp(0.72rem, 0.6rem + 0.5vw, 1.02rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--s19-tile);
+}
+
+#s19 .s19-row__val {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#s19 .s19-flip {
+  display: flex;
+  align-items: stretch;
+  gap: 2px;
+}
+
+/* One digit card. The hinge line across the middle and the slightly darker
+   lower half are what make it read as a flip tile. */
+#s19 .s19-dig {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--s19-tw);
+  padding: calc(var(--s19-tw) * 0.14) 0;
+  border: 2px solid #050807;
+  border-radius: calc(var(--s19-tw) * 0.1);
+  background: linear-gradient(180deg, var(--s19-tile) 0 50%, var(--s19-tile-2) 50% 100%);
+  box-shadow: inset 0 1px 0 #fff, 0 2px 0 rgb(0 0 0 / 0.45);
+  color: var(--s19-ink);
+  font-family: var(--s19-body);
+  font-weight: 700;
+  font-size: calc(var(--s19-tw) * 0.7);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+#s19 .s19-dig::after {
+  content: "";
+  position: absolute;
+  inset: calc(50% - 1px) 2px auto;
+  height: 2px;
+  background: rgb(5 8 7 / 0.42);
+}
+
+#s19 .s19-sep {
+  display: grid;
+  place-items: end center;
+  width: calc(var(--s19-tw) * 0.38);
+  padding-bottom: calc(var(--s19-tw) * 0.1);
+  color: var(--s19-bulb);
+  font-family: var(--s19-body);
+  font-weight: 700;
+  font-size: calc(var(--s19-tw) * 0.62);
+  font-style: normal;
+  line-height: 1;
+}
+
+/* ---------------------------------------------------------------------------
+   The road: ivory paving, heavy inked edge, dashed centre line
+   --------------------------------------------------------------------------- */
+
+#s19 .s19-link {
+  display: none;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#s19 .s19-rd__edge,
+#s19 .s19-rd__pave,
+#s19 .s19-rd__dots,
+#s19 .s19-rd__line {
+  fill: none;
+}
+
+#s19 .s19-rd__edge { stroke: var(--s19-ink); stroke-width: 62; }
+#s19 .s19-rd__pave { stroke: var(--s19-rc, var(--s19-road)); stroke-width: 48; }
+#s19 .s19-rd__dots { stroke: url(#s19-dotk); stroke-width: 48; opacity: 0.2; }
+#s19 .s19-rd__line { stroke: var(--s19-ink); stroke-width: 5.5; stroke-dasharray: 22 20; opacity: 0.6; }
+
+#s19 .s19-br--strategy { --s19-rc: var(--s19-blue); }
+#s19 .s19-br--family { --s19-rc: var(--s19-yellow); }
+#s19 .s19-br--friends { --s19-rc: var(--s19-red); }
+
+#s19 .s19-br .s19-rd__dots { opacity: 0.14; }
+#s19 .s19-br .s19-rd__line { opacity: 0.85; }
+
+/* Straight side lanes, used on narrow screens and beside the two stops */
+
+#s19 .s19-lane {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 6px;
+  width: calc(52 * var(--s19-u));
+  border-inline: calc(5 * var(--s19-u)) solid var(--s19-ink);
+  background:
+    repeating-linear-gradient(180deg, var(--s19-ink) 0 22px, transparent 22px 42px) 50% 0 / 5px 100% no-repeat,
+    radial-gradient(rgb(22 17 13 / 0.28) 1.1px, transparent 1.5px) 0 0 / 5px 5px,
+    var(--s19-road);
+}
+
+/* Milestone plaque where a stop meets its lane */
+
+#s19 .s19-mile {
+  position: absolute;
+  z-index: 1;
+  top: 1rem;
+  left: calc(6px + 26 * var(--s19-u) - 25px);
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--s19-ink);
+  border-radius: 50%;
+  background:
+    radial-gradient(rgb(255 201 74 / 0.8) 2.2px, transparent 2.6px) 0 0 / 9px 9px,
+    var(--s19-panel);
+  box-shadow: 3px 4px 0 rgb(22 17 13 / 0.25);
+  font-family: var(--s19-display);
+  font-size: 1.3rem;
+  line-height: 1;
+  text-align: center;
+}
+
+/* The fork */
+
+#s19 .s19-fork {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#s19 .s19-fork__hub circle {
+  fill: var(--s19-panel);
+  stroke: var(--s19-ink);
+  stroke-width: 6;
+}
+
+#s19 .s19-fork__hub path {
+  fill: var(--s19-red);
+  stroke: var(--s19-ink);
+  stroke-width: 3.5;
+}
+
+/* The three vibe choices, one under the end of each road */
+
+#s19 .s19-pick__row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 clamp(4px, 1.2vw, 16px);
+}
+
+#s19 .s19-vibe {
+  --s19-vc: var(--s19-blue-ink);
+  --s19-vfill: var(--s19-blue);
+  position: relative;
+}
+
+#s19 .s19-vibe--family { --s19-vc: var(--s19-yellow-ink); --s19-vfill: var(--s19-yellow); }
+#s19 .s19-vibe--friends { --s19-vc: var(--s19-red-ink); --s19-vfill: var(--s19-red); }
+
+#s19 .s19-vibe label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  height: 100%;
+  padding: 0.7rem 0.5rem 0.9rem;
+  border: 5px solid var(--s19-ink);
+  border-radius: var(--s19-wob-sm);
+  background: var(--s19-panel);
+  box-shadow: 6px 6px 0 var(--s19-ink);
+  cursor: pointer;
+  text-align: center;
+}
+
+#s19 .s19-vibe label:hover {
+  background: #fffaea;
+}
+
+#s19 .s19-vibe__pal {
+  width: clamp(62px, 10.5vw, 118px);
+  height: auto;
+  margin-bottom: 0.15rem;
+}
+
+#s19 .s19-vibe__name {
+  font-family: var(--s19-display);
+  font-size: clamp(0.95rem, 0.7rem + 0.75vw, 1.3rem);
+  line-height: 1.1;
+}
+
+#s19 .s19-vibe__note {
+  color: var(--s19-ink-2);
+  font-size: clamp(0.72rem, 0.65rem + 0.25vw, 0.88rem);
+  font-style: italic;
+  line-height: 1.25;
+}
+
+#s19 .s19-vibe__stamp {
+  position: absolute;
+  top: -0.7rem;
+  right: -0.5rem;
+  padding: 0.1rem 0.5rem 0.15rem;
+  border: 3px solid var(--s19-ink);
+  border-radius: var(--s19-wob-sm);
+  background: var(--s19-vfill);
+  color: var(--s19-ink);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: rotate(7deg) scale(0);
+}
+
+#s19 .s19-vibe--strategy .s19-vibe__stamp,
+#s19 .s19-vibe--friends .s19-vibe__stamp {
+  color: #fff;
+}
+
+#s19 .s19-vibe input:checked + label {
+  background:
+    radial-gradient(rgb(22 17 13 / 0.1) 1.6px, transparent 2px) 0 0 / 8px 8px,
+    #fffaea;
+  box-shadow: 6px 6px 0 var(--s19-vc), 6px 6px 0 5px var(--s19-ink);
+}
+
+#s19 .s19-vibe input:checked + label .s19-vibe__stamp {
+  transform: rotate(7deg) scale(1);
+}
+
+#s19 .s19-pick:has(input:checked) .s19-vibe input:not(:checked) + label {
+  background: #ebe1c4;
+  box-shadow: 3px 3px 0 rgb(22 17 13 / 0.45);
+}
+
+#s19 .s19-pick:has(input:checked) .s19-vibe input:not(:checked) + label .s19-vibe__pal {
+  opacity: 0.4;
+}
+
+#s19 .s19-vibe input:focus-visible + label {
+  outline: 4px solid var(--s19-ink);
+  outline-offset: 5px;
+}
+
+/* Lit road: the other two roads fade back */
+
+#s19 .s19-hook:has(#s19-vibe-strategy:checked) .s19-br:not(.s19-br--strategy),
+#s19 .s19-hook:has(#s19-vibe-family:checked) .s19-br:not(.s19-br--family),
+#s19 .s19-hook:has(#s19-vibe-friends:checked) .s19-br:not(.s19-br--friends),
+#s19 .s19-paper__inner:has(#s19-vibe-strategy:checked) .s19-merge .s19-br:not(.s19-br--strategy),
+#s19 .s19-paper__inner:has(#s19-vibe-family:checked) .s19-merge .s19-br:not(.s19-br--family),
+#s19 .s19-paper__inner:has(#s19-vibe-friends:checked) .s19-merge .s19-br:not(.s19-br--friends) {
+  opacity: 0.2;
+}
+
+/* Status line */
+
+#s19 .s19-herald {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem 1.2rem;
+  min-height: 2.8rem;
+  margin: clamp(1.1rem, 2.4vw, 1.8rem) auto clamp(1rem, 2vw, 1.5rem);
+  text-align: center;
+}
+
+#s19 .s19-status {
+  color: var(--s19-ink-2);
+  font-size: 1rem;
+  font-style: italic;
+}
+
+#s19 .s19-reset {
+  flex: none;
+  padding: 0.3rem 0.9rem 0.35rem;
+  border: 3px solid var(--s19-ink);
+  border-radius: var(--s19-wob-sm);
+  background: var(--s19-bulb);
+  color: var(--s19-ink);
+  font: 700 0.9rem/1.2 var(--s19-body);
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--s19-ink);
+}
+
+#s19 .s19-reset:hover {
+  background: #ffd874;
+}
+
+/* The top ten, set as classified ads */
+
+#s19 .s19-ads {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.6rem, 1.4vw, 0.95rem);
+}
+
+#s19 .s19-ad {
+  --s19-chip: var(--s19-blue-ink);
+  --s19-chip-ink: #fff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 7px 7px 9px;
+  border: 4px double var(--s19-ink);
+  background: var(--s19-panel);
+}
+
+#s19 .s19-ad--family { --s19-chip: var(--s19-yellow); --s19-chip-ink: var(--s19-ink); }
+#s19 .s19-ad--coop { --s19-chip: var(--s19-board); --s19-chip-ink: var(--s19-panel); }
+
+#s19 .s19-ad__pic {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 3px solid var(--s19-ink);
+  background: #ddd0ae;
+}
+
+#s19 .s19-ad__pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.3) sepia(0.18) contrast(1.05);
+}
+
+#s19 .s19-ad__pic::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(rgb(22 17 13 / 0.26) 1.1px, transparent 1.5px) 0 0 / 4px 4px;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+#s19 .s19-ad__name {
+  margin: 0.5rem 0.15rem 0.35rem;
+  font-weight: 700;
+  font-size: 0.92rem;
+  line-height: 1.25;
+}
+
+#s19 .s19-ad__tag {
+  align-self: flex-start;
+  margin: auto 0.15rem 0;
+  padding: 0.05rem 0.5rem 0.1rem;
+  background: var(--s19-chip);
+  color: var(--s19-chip-ink);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Lit games: the chosen road's games come up in full colour */
+
+#s19 .s19-hook:has(#s19-vibe-strategy:checked) { --s19-pick: var(--s19-blue-ink); }
+#s19 .s19-hook:has(#s19-vibe-family:checked) { --s19-pick: var(--s19-yellow-ink); }
+#s19 .s19-hook:has(#s19-vibe-friends:checked) { --s19-pick: var(--s19-red-ink); }
+
+#s19 .s19-hook:has(#s19-vibe-strategy:checked) .s19-fit-strategy,
+#s19 .s19-hook:has(#s19-vibe-family:checked) .s19-fit-family,
+#s19 .s19-hook:has(#s19-vibe-friends:checked) .s19-fit-friends {
+  z-index: 1;
+  border-color: var(--s19-pick);
+  box-shadow: 0 0 0 4px var(--s19-pick), 7px 8px 0 var(--s19-ink);
+  transform: translateY(-5px);
+}
+
+#s19 .s19-hook:has(#s19-vibe-strategy:checked) .s19-fit-strategy .s19-ad__pic img,
+#s19 .s19-hook:has(#s19-vibe-family:checked) .s19-fit-family .s19-ad__pic img,
+#s19 .s19-hook:has(#s19-vibe-friends:checked) .s19-fit-friends .s19-ad__pic img {
+  filter: none;
+}
+
+#s19 .s19-hook:has(#s19-vibe-strategy:checked) .s19-fit-strategy .s19-ad__pic::after,
+#s19 .s19-hook:has(#s19-vibe-family:checked) .s19-fit-family .s19-ad__pic::after,
+#s19 .s19-hook:has(#s19-vibe-friends:checked) .s19-fit-friends .s19-ad__pic::after {
+  opacity: 0.3;
+}
+
+#s19 .s19-hook:has(#s19-vibe-strategy:checked) .s19-ad:not(.s19-fit-strategy),
+#s19 .s19-hook:has(#s19-vibe-family:checked) .s19-ad:not(.s19-fit-family),
+#s19 .s19-hook:has(#s19-vibe-friends:checked) .s19-ad:not(.s19-fit-friends) {
+  background: #e8dec0;
+}
+
+#s19 .s19-hook:has(#s19-vibe-strategy:checked) .s19-ad:not(.s19-fit-strategy) .s19-ad__pic img,
+#s19 .s19-hook:has(#s19-vibe-family:checked) .s19-ad:not(.s19-fit-family) .s19-ad__pic img,
+#s19 .s19-hook:has(#s19-vibe-friends:checked) .s19-ad:not(.s19-fit-friends) .s19-ad__pic img {
+  filter: grayscale(1) contrast(0.95);
+  opacity: 0.5;
+}
+
+#s19 .s19-more {
+  margin-top: clamp(1.1rem, 2.2vw, 1.6rem);
+  text-align: center;
+}
+
+#s19 .s19-more a {
+  display: inline-block;
+  padding: 0.4rem 1rem 0.45rem;
+  border: 4px solid var(--s19-ink);
+  border-radius: var(--s19-wob-sm);
+  background: var(--s19-bulb);
+  color: var(--s19-ink);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 5px 5px 0 var(--s19-ink);
+}
+
+#s19 .s19-more a:hover {
+  background: #ffd874;
+}
+
+/* Stops along the side lanes */
+
+#s19 .s19-stop {
+  position: relative;
+  padding: 1.1rem 0 2.4rem calc(6px + 52 * var(--s19-u) + 18px);
+}
+
+#s19 .s19-stop__body {
+  position: relative;
+}
+
+/* ---------------------------------------------------------------------------
+   House rules: a hanging "tonight's card" board of four ticked rows
+   --------------------------------------------------------------------------- */
+
+#s19 .s19-cardboard {
+  position: relative;
+  /* leaves room for the chains, and keeps the rail clear of the band above */
+  margin-top: 3.6rem;
+}
+
+/* The rail the board hangs from, with two chains */
+#s19 .s19-cardboard__rig {
+  position: absolute;
+  top: -2.1rem;
+  left: 0;
+  width: 100%;
+  height: 2.2rem;
+  pointer-events: none;
+}
+
+#s19 .s19-cardboard__rig::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: var(--s19-ink);
+}
+
+#s19 .s19-cardboard__rig i {
+  position: absolute;
+  top: 5px;
+  bottom: 0;
+  width: 7px;
+  background: repeating-linear-gradient(180deg, var(--s19-ink) 0 8px, transparent 8px 11px);
+}
+
+#s19 .s19-cardboard__rig i:first-child { left: 11%; }
+#s19 .s19-cardboard__rig i:last-child { right: 11%; }
+
+#s19 .s19-card {
+  position: relative;
+  overflow: hidden;
+  border: 6px solid var(--s19-ink);
+  border-radius: 8px;
+  background:
+    radial-gradient(130% 80% at 50% 0%, rgb(255 201 74 / 0.1) 0%, transparent 62%),
+    linear-gradient(180deg, var(--s19-board) 0%, var(--s19-board-2) 100%);
+  box-shadow: inset 0 0 0 3px rgb(255 255 255 / 0.07), 7px 8px 0 rgb(8 12 18 / 0.3);
+  transform: rotate(-0.5deg);
+}
+
+#s19 .s19-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.1rem 1rem;
+  padding: 0.45rem clamp(0.7rem, 1.8vw, 1.3rem) 0.5rem;
+  border-bottom: 3px solid rgb(255 255 255 / 0.18);
+  background: rgb(0 0 0 / 0.22);
+}
+
+#s19 .s19-card__title {
+  font-family: var(--s19-display);
+  font-size: clamp(1rem, 0.85rem + 0.5vw, 1.35rem);
+  color: var(--s19-bulb);
+}
+
+#s19 .s19-card__kick {
+  color: #d4e2d6;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+#s19 .s19-card__rows {
+  padding: 0 clamp(0.7rem, 1.8vw, 1.3rem);
+}
+
+#s19 .s19-card__rows li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0.2rem 0.85rem;
+  padding: clamp(0.55rem, 1.3vw, 0.85rem) 0;
+  border-bottom: 2px dashed rgb(255 255 255 / 0.16);
+}
+
+#s19 .s19-card__rows li:last-child {
+  border-bottom: 0;
+}
+
+#s19 .s19-card__tick {
+  grid-row: span 2;
+  align-self: center;
+  width: clamp(26px, 3.4vw, 38px);
+  height: clamp(26px, 3.4vw, 38px);
+  color: var(--s19-bulb);
+}
+
+#s19 .s19-card__rows h3 {
+  font-family: var(--s19-display);
+  font-weight: 400;
+  font-size: clamp(1rem, 0.85rem + 0.5vw, 1.3rem);
+  line-height: 1.15;
+  color: var(--s19-tile);
+}
+
+#s19 .s19-card__rows p {
+  color: #cfdfd2;
+  font-size: clamp(0.88rem, 0.82rem + 0.2vw, 1rem);
+  line-height: 1.45;
+}
+
+/* ---------------------------------------------------------------------------
+   How to join: three numbered ticket stubs
+   --------------------------------------------------------------------------- */
+
+#s19 .s19-stubs {
+  display: grid;
+  gap: clamp(0.7rem, 1.6vw, 1.1rem);
+}
+
+#s19 .s19-stub {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: stretch;
+  border: 5px solid var(--s19-ink);
+  border-radius: 12px;
+  background:
+    radial-gradient(rgb(22 17 13 / 0.08) 1.5px, transparent 1.9px) 0 0 / 8px 8px,
+    var(--s19-panel);
+  box-shadow: 6px 7px 0 var(--s19-ink);
+  transform: rotate(var(--s19-tilt, 0deg));
+}
+
+#s19 .s19-stub:nth-child(1) { --s19-tilt: -0.9deg; }
+#s19 .s19-stub:nth-child(2) { --s19-tilt: 0.7deg; }
+#s19 .s19-stub:nth-child(3) { --s19-tilt: -0.5deg; }
+
+/* The stub end, cut off by a perforation. Positioned so the two nicks that mark
+   the perforation anchor to this block's edge, not the whole ticket's. */
+#s19 .s19-stub__no {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: clamp(58px, 9vw, 86px);
+  padding: 0.7rem 0.5rem 0.8rem;
+  border-right: 4px dashed var(--s19-ink);
+  background: rgb(255 201 74 / 0.4);
+  font-family: var(--s19-display);
+  font-size: clamp(1.7rem, 1.2rem + 1.8vw, 2.6rem);
+  line-height: 1;
+}
+
+/* the two nicks that mark the perforation, top and bottom */
+#s19 .s19-stub__no::before,
+#s19 .s19-stub__no::after {
+  content: "";
+  position: absolute;
+  right: -11px;
+  width: 20px;
+  height: 20px;
+  border: 5px solid var(--s19-ink);
+  border-radius: 50%;
+  background: var(--s19-news);
+}
+
+#s19 .s19-stub__no::before { top: -15px; }
+#s19 .s19-stub__no::after { bottom: -15px; }
+
+#s19 .s19-stub__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.15rem;
+  padding: 0.75rem clamp(0.7rem, 1.6vw, 1.1rem) 0.85rem;
+}
+
+/* Instructions stay in the body face so they read instantly */
+#s19 .s19-stub__text {
+  font-family: var(--s19-body);
+  font-weight: 700;
+  font-size: clamp(0.98rem, 0.9rem + 0.3vw, 1.15rem);
+  line-height: 1.3;
+}
+
+#s19 .s19-join__go {
+  margin-top: clamp(0.9rem, 2vw, 1.4rem);
+}
+
+/* Finish */
+
+#s19 .s19-finish {
+  position: relative;
+  padding: 1.8rem 0 clamp(1.6rem, 3.4vw, 2.6rem);
+  text-align: center;
+}
+
+#s19 .s19-lane--finish {
+  bottom: auto;
+  height: 1.8rem;
+}
+
+#s19 .s19-finish__panel {
+  max-width: 540px;
+  margin: 0 auto 1.5rem;
+  padding: 12px;
+  border-width: 0;
+  border-radius: 0;
+  background: repeating-conic-gradient(var(--s19-ink) 0 25%, var(--s19-panel) 0 50%) 0 0 / 22px 22px;
+  box-shadow: 5px 6px 0 rgb(22 17 13 / 0.25);
+}
+
+#s19 .s19-finish__panel > * {
+  background: var(--s19-panel);
+}
+
+#s19 .s19-finish__word {
+  padding: 0.55rem 0 0.1rem;
+  border: 5px solid var(--s19-ink);
+  border-bottom: 0;
+  color: var(--s19-red-ink);
+  font-family: var(--s19-display);
+  font-size: clamp(1.9rem, 1.4rem + 2vw, 2.9rem);
+  letter-spacing: 0.15em;
+  text-indent: 0.15em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+#s19 .s19-finish__art {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 5px solid var(--s19-ink);
+  border-top: 0;
+}
+
+#s19 .s19-seat__word {
+  fill: var(--s19-red-ink);
+  font-family: var(--s19-body);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 25px;
+}
+
+#s19 .s19-finish__title {
+  max-width: 20em;
+  margin: 0 auto 1.4rem;
+  font-size: clamp(1.5rem, 1.05rem + 1.9vw, 2.5rem);
+  line-height: 1.14;
+}
+
+#s19 .s19-finish__title em {
+  font-style: normal;
+  color: var(--s19-red-ink);
+}
+
+/* Narrow phones */
+
+@media (max-width: 560px) {
+  #s19 .s19-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.3rem;
+  }
+
+  #s19 .s19-row__val {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 400px) {
+  #s19 .s19-cta {
+    gap: 0.55rem;
+    padding: 0.6rem 1rem 0.65rem 0.75rem;
+  }
+
+  #s19 .s19-cta__icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  #s19 .s19-vibe__stamp {
+    display: none;
+  }
+
+  #s19 .s19-vibe label {
+    padding: 0.55rem 0.25rem 0.7rem;
+  }
+
+  #s19 .s19-vibe__pal {
+    width: 46px;
+  }
+
+  #s19 .s19-board {
+    --s19-tw: clamp(15px, 7.4cqi, 70px);
+  }
+}
+
+/* Container steps */
+
+@container (min-width: 560px) {
+  #s19 .s19-stubs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #s19 .s19-stub {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #s19 .s19-stub__no {
+    min-width: 0;
+    padding: 0.5rem 0.5rem 0.6rem;
+    border-right: 0;
+    border-bottom: 4px dashed var(--s19-ink);
+  }
+
+  /* stacked: the perforation is the bottom edge, so the nicks move to its ends */
+  #s19 .s19-stub__no::before,
+  #s19 .s19-stub__no::after {
+    top: auto;
+    bottom: -15px;
+  }
+
+  #s19 .s19-stub__no::before { left: -15px; right: auto; }
+  #s19 .s19-stub__no::after { right: -15px; }
+}
+
+@container (min-width: 640px) {
+  #s19 .s19-ads {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* Wide screens: the road snakes down the sheet */
+
+@media (min-width: 860px) {
+  #s19 .s19-paper__inner {
+    --s19-u: var(--s19-cu);
+  }
+
+  #s19 .s19-link {
+    display: block;
+  }
+
+  #s19 .s19-hero {
+    grid-template-columns: 54fr 46fr;
+    align-items: stretch;
+  }
+
+  #s19 .s19-hero__copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #s19 .s19-hero__art {
+    align-self: start;
+    max-height: 470px;
+  }
+
+  /* the scoreboard runs the full width under both hero panels */
+  #s19 .s19-board {
+    grid-column: 1 / -1;
+  }
+
+  #s19 .s19-stop {
+    padding: 1.6rem 2cqi 2.6rem 15cqi;
+  }
+
+  #s19 .s19-stop--right {
+    padding: 1.6rem 15cqi 2.6rem 2cqi;
+  }
+
+  #s19 .s19-lane {
+    left: calc(64 * var(--s19-u));
+  }
+
+  #s19 .s19-stop--right .s19-lane {
+    left: calc(1084 * var(--s19-u));
+  }
+
+  #s19 .s19-mile {
+    --s19-ms: max(60px, calc(118 * var(--s19-u)));
+    top: 1.3rem;
+    left: calc(90 * var(--s19-u) - var(--s19-ms) / 2);
+    width: var(--s19-ms);
+    height: var(--s19-ms);
+    font-size: calc(var(--s19-ms) * 0.34);
+  }
+
+  #s19 .s19-stop--right .s19-mile {
+    left: calc(1110 * var(--s19-u) - var(--s19-ms) / 2);
+  }
+
+  #s19 .s19-lane--finish {
+    left: calc(574 * var(--s19-u));
+  }
+
+  #s19 .s19-merge {
+    margin-top: -0.4rem;
+  }
+}
+
+/* Motion: 14's animations, kept. The signpost arms swing out, the chosen road's
+   centre line marches away from the crossroads, the ticket is presented with a
+   small tilt, and the scoreboard bulbs breathe. */
+
+@media (prefers-reduced-motion: no-preference) {
+  #s19 .s19-cta {
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  }
+
+  #s19 .s19-cta:hover {
+    transform: rotate(-1.2deg) translate(-2px, -3px);
+    box-shadow: 10px 11px 0 var(--s19-ink);
+  }
+
+  #s19 .s19-cta:active {
+    transform: rotate(-1.2deg) translate(3px, 3px);
+    box-shadow: 3px 3px 0 var(--s19-ink);
+  }
+
+  #s19 .s19-vibe label,
+  #s19 .s19-vibe__stamp,
+  #s19 .s19-ad,
+  #s19 .s19-stub {
+    transition: transform 0.3s cubic-bezier(0.3, 1.4, 0.5, 1), box-shadow 0.3s ease, background-color 0.25s ease, border-color 0.25s ease;
+  }
+
+  #s19 .s19-stub:hover {
+    transform: rotate(var(--s19-tilt, 0deg)) translate(-2px, -3px);
+    box-shadow: 8px 10px 0 var(--s19-ink);
+  }
+
+  #s19 .s19-br,
+  #s19 .s19-ad__pic img,
+  #s19 .s19-ad__pic::after {
+    transition: opacity 0.35s ease, filter 0.35s ease;
+  }
+
+  #s19 .s19-post__arm {
+    transform-box: fill-box;
+    transform-origin: 0% 50%;
+    animation: s19-swing 0.9s cubic-bezier(0.3, 1.5, 0.5, 1) both;
+  }
+
+  #s19 .s19-post__arm--l {
+    transform-origin: 100% 50%;
+  }
+
+  #s19 .s19-post__arm--a { animation-delay: 0.15s; }
+  #s19 .s19-post__arm--b { animation-delay: 0.35s; }
+  #s19 .s19-post__arm--c { animation-delay: 0.55s; }
+
+  #s19 .s19-balloon {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: s19-pop 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) 0.85s both;
+  }
+
+  /* the ticket is held out, with a slow presenting tilt */
+  #s19 .s19-ticket {
+    transform-box: fill-box;
+    transform-origin: 85% 60%;
+    animation: s19-present 4.2s ease-in-out 0.9s infinite;
+  }
+
+  #s19 .s19-board__lamps {
+    animation: s19-bulbs 3.4s ease-in-out infinite;
+  }
+
+  #s19 .s19-br .s19-rd__line {
+    animation: s19-roll 2.6s linear infinite paused;
+  }
+
+  #s19 .s19-hook:has(#s19-vibe-strategy:checked) .s19-br--strategy .s19-rd__line,
+  #s19 .s19-hook:has(#s19-vibe-family:checked) .s19-br--family .s19-rd__line,
+  #s19 .s19-hook:has(#s19-vibe-friends:checked) .s19-br--friends .s19-rd__line,
+  #s19 .s19-paper__inner:has(#s19-vibe-strategy:checked) .s19-merge .s19-br--strategy .s19-rd__line,
+  #s19 .s19-paper__inner:has(#s19-vibe-family:checked) .s19-merge .s19-br--family .s19-rd__line,
+  #s19 .s19-paper__inner:has(#s19-vibe-friends:checked) .s19-merge .s19-br--friends .s19-rd__line {
+    animation-play-state: running;
+  }
+
+  #s19 .s19-seat path {
+    animation: s19-dash 3s linear infinite;
+  }
+}
+
+@keyframes s19-swing {
+  0% { transform: scaleX(0.2); opacity: 0; }
+  100% { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes s19-pop {
+  0% { transform: scale(0.2) rotate(-6deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes s19-present {
+  0%, 100% { transform: rotate(-1.2deg) translateY(0); }
+  50% { transform: rotate(1.6deg) translateY(-6px); }
+}
+
+@keyframes s19-bulbs {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.72; }
+}
+
+/* the chosen road's dashes march away from the crossroads */
+@keyframes s19-roll {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -42; }
+}
+
+@keyframes s19-dash {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -48; }
+}
+
+/* Landing-card preview: a calm, still final state */
+
+.is-thumb #s19 *,
+.is-thumb #s19 *::before,
+.is-thumb #s19 *::after {
+  animation: none !important;
+  transition: none !important;
+}

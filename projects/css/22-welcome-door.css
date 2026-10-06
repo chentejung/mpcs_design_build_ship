@@ -1,0 +1,1434 @@
+/* 22 Welcome Door: 21's page (the masthead is the h1, one merged hero panel, lighter
+   ink, drawn box covers) with four new set pieces. The merged hero is the clubhouse
+   door seen straight on, a painted arch sign above it and the sign-up sheet pinned
+   to it. The three numbers are carved wooden plaques hung from a rail. House rules
+   are four luggage tags tied on a rope. How to join is three numbered stepping
+   stones across a lawn, ending at the register button.
+   Hook: pick your vibe ("Which way tonight?"), the crossroads kept from 20.
+   Fonts: Rye (masthead, CTA label, banners, plaque figures, stones, closing heading)
+   and Libre Baskerville for everything else, instructions included.
+   Every rule and custom property is scoped under #s22. */
+
+@font-face {
+  font-family: "s22 Rye";
+  src: url("../fonts/rye/rye-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s22 Libre Baskerville";
+  src: url("../fonts/librebaskerville/librebaskerville-var.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s22 Libre Baskerville";
+  src: url("../fonts/librebaskerville/librebaskerville-italic-var.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+#s22 {
+  --s22-ink: #1a1512;
+  --s22-ink-2: #473a29;
+  --s22-news: #efe6cd;
+  --s22-panel: #fcf6e6;
+  --s22-road: #f6edd4;
+  --s22-table: #8d7a4e;
+  --s22-table-2: #74633c;
+  --s22-wood: #c4934f;
+  --s22-wood-dk: #9c6f35;
+  --s22-plank: #ecd8ab;
+  --s22-red: #c8372a;
+  --s22-red-ink: #9c2318;
+  --s22-red-deep: #7d1a11;
+  --s22-green: #3f7a4e;
+  --s22-green-ink: #2b5637;
+  --s22-yellow: #efc23f;
+  --s22-yellow-ink: #6b5007;
+  --s22-blue: #3f7fc0;
+  --s22-blue-ink: #255b93;
+  --s22-display: "s22 Rye", "Rockwell", "Clarendon", "Bookman Old Style", Georgia, serif;
+  --s22-body: "s22 Libre Baskerville", "Baskerville", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  /* Panel corners wobble like a hand-ruled border, gentler than 16's */
+  --s22-wob: 90px 12px 80px 14px / 12px 80px 14px 90px;
+  --s22-wob-sm: 36px 8px 32px 10px / 10px 32px 8px 36px;
+  --s22-halftone: radial-gradient(rgb(110 85 30 / 0.12) 1.1px, transparent 1.5px) 0 0 / 5px 5px;
+  --s22-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .25 0 0 0 0 .2 0 0 0 0 .1 0 0 0 .14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --s22-woodgrain: repeating-linear-gradient(90deg, rgb(120 80 30 / 0.07) 0 3px, transparent 3px 12px);
+
+  background: var(--s22-table);
+  color: var(--s22-ink);
+  font-family: var(--s22-body);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+#s22 *,
+#s22 *::before,
+#s22 *::after {
+  box-sizing: border-box;
+}
+
+#s22 h1,
+#s22 h2,
+#s22 h3,
+#s22 h4,
+#s22 p,
+#s22 ol,
+#s22 ul,
+#s22 dl,
+#s22 dd,
+#s22 fieldset {
+  margin: 0;
+}
+
+#s22 ol,
+#s22 ul {
+  padding: 0;
+  list-style: none;
+}
+
+#s22 fieldset {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+
+#s22 [hidden] {
+  display: none !important;
+}
+
+#s22 .s22-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+#s22 .s22-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Links, buttons and focus */
+
+#s22 a {
+  color: var(--s22-green-ink);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 2px;
+}
+
+#s22 a:hover {
+  color: var(--s22-ink);
+}
+
+#s22 a:focus-visible,
+#s22 button:focus-visible {
+  outline: 3px solid var(--s22-ink);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Table and the newsprint sheet */
+
+#s22 .s22-table {
+  position: relative;
+  padding: clamp(6px, 2.6vw, 40px);
+  background:
+    var(--s22-grain),
+    repeating-linear-gradient(90deg, rgb(60 45 10 / 0.06) 0 2px, transparent 2px 8px),
+    radial-gradient(120% 60% at 30% 0%, #a3905f 0%, transparent 60%),
+    linear-gradient(180deg, var(--s22-table) 0%, var(--s22-table-2) 100%);
+}
+
+#s22 .s22-paper {
+  position: relative;
+  max-width: 1340px;
+  margin: 0 auto;
+  background:
+    var(--s22-halftone),
+    radial-gradient(ellipse at 50% 0%, transparent 55%, rgb(140 110 45 / 0.16) 100%),
+    var(--s22-news);
+  box-shadow:
+    0 0 0 1px rgb(60 45 10 / 0.25),
+    6px 8px 0 rgb(40 30 5 / 0.18),
+    14px 22px 34px rgb(40 30 5 / 0.38);
+}
+
+#s22 .s22-paper__inner {
+  position: relative;
+  container-type: inline-size;
+  padding: clamp(10px, 2.2vw, 26px) clamp(12px, 3vw, 44px) clamp(14px, 3vw, 34px);
+  /* Road geometry. --s22-cu is 1/1200 of the inner width, matching the SVG
+     roads; --s22-u drives the straight side lanes and is fixed when narrow. */
+  --s22-cu: calc(100cqi / 1200);
+  --s22-u: 0.62px;
+}
+
+/* Loose props beside the sheet, only where there is room */
+
+#s22 .s22-loose {
+  display: none;
+}
+
+@media (min-width: 1680px) {
+#s22 .s22-loose {
+    display: block;
+  }
+
+#s22 .s22-loose svg {
+    position: absolute;
+    z-index: 4;
+    pointer-events: none;
+    filter: drop-shadow(2px 4px 3px rgb(40 25 6 / 0.4));
+  }
+
+#s22 .s22-loose__dice { width: 116px; left: -132px; top: 30%; }
+}
+
+/* Masthead */
+
+#s22 .s22-mast {
+  padding-bottom: 0.45rem;
+  margin-bottom: clamp(0.8rem, 2vw, 1.3rem);
+  border-bottom: 4px double var(--s22-ink);
+  text-align: center;
+}
+
+#s22 .s22-mast__title {
+  font-family: var(--s22-display);
+  font-size: clamp(1.7rem, 0.7rem + 4.9vw, 4.4rem);
+  line-height: 1.04;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+  color: var(--s22-ink);
+  text-shadow:
+    3px 0 0 var(--s22-yellow),
+    5px 3px 0 var(--s22-green),
+    6px 5px 0 rgb(26 21 18 / 0.22);
+}
+
+/* Panels */
+
+#s22 .s22-panel {
+  position: relative;
+  border: 3px solid var(--s22-ink);
+  border-radius: var(--s22-wob);
+  background: var(--s22-panel);
+}
+
+/* Type */
+
+#s22 .s22-kicker {
+  align-self: flex-start;
+  display: inline-block;
+  margin-bottom: 0.6rem;
+  padding: 0.15rem 0.6rem 0.2rem;
+  border: 2px solid var(--s22-ink);
+  border-radius: var(--s22-wob-sm);
+  background: var(--s22-yellow);
+  color: var(--s22-ink);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform: rotate(-1.6deg);
+}
+
+#s22 .s22-h1 {
+  font-family: var(--s22-display);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 1rem + 3vw, 3.3rem);
+  line-height: 1.08;
+  letter-spacing: 0.005em;
+  text-wrap: balance;
+}
+
+#s22 .s22-h1 em {
+  font-style: normal;
+  color: var(--s22-red-ink);
+}
+
+#s22 .s22-h2 {
+  font-family: var(--s22-display);
+  font-weight: 400;
+  font-size: clamp(1.25rem, 0.9rem + 1.5vw, 2.05rem);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+
+#s22 .s22-lede {
+  max-width: 22em;
+  color: var(--s22-ink);
+  font-size: clamp(1.2rem, 1rem + 0.9vw, 1.65rem);
+  line-height: 1.35;
+}
+
+/* Section banners */
+
+#s22 .s22-band {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.1rem 1.1rem;
+  padding: 0.35rem 0.9rem 0.5rem;
+  margin-bottom: clamp(0.9rem, 2vw, 1.4rem);
+  background: var(--s22-ink);
+  color: var(--s22-panel);
+  border-radius: 3px;
+}
+
+#s22 .s22-band--green {
+  background: var(--s22-green-ink);
+}
+
+#s22 .s22-band__kick {
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* Primary CTA: a painted sign with a pencil on it */
+
+#s22 .s22-cta {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1.25rem;
+  padding: 0.7rem 1.4rem 0.75rem 1rem;
+  border: 3px solid var(--s22-ink);
+  border-radius: 20px 8px 18px 10px / 10px 18px 8px 20px;
+  background: var(--s22-red-ink);
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 5px 5px 0 var(--s22-ink);
+  transform: rotate(-1.2deg);
+}
+
+#s22 .s22-cta:hover {
+  color: #fff;
+  background: var(--s22-red-deep);
+}
+
+#s22 .s22-cta:focus-visible {
+  outline: 4px solid var(--s22-ink);
+  outline-offset: 7px;
+}
+
+#s22 .s22-cta__icon {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  color: var(--s22-yellow);
+}
+
+#s22 .s22-cta__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+#s22 .s22-cta__main {
+  font-family: var(--s22-display);
+  font-size: clamp(1.3rem, 1.1rem + 0.7vw, 1.65rem);
+  letter-spacing: 0.02em;
+}
+
+#s22 .s22-cta__sub {
+  margin-top: 0.3rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+/* Hero */
+
+#s22 .s22-hero {
+  display: grid;
+  overflow: hidden;
+}
+
+#s22 .s22-hero__copy {
+  padding: clamp(1rem, 2.4vw, 1.9rem);
+  background:
+    radial-gradient(rgb(63 122 78 / 0.14) 2.1px, transparent 2.5px) 0 0 / 10px 10px,
+    var(--s22-panel);
+}
+
+#s22 .s22-hero__art {
+  overflow: hidden;
+  border-top: 3px solid var(--s22-ink);
+}
+
+#s22 .s22-start {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* SVG lettering in the hero scene */
+
+#s22 .s22-sheet__head {
+  fill: var(--s22-ink);
+  font-family: var(--s22-display);
+  font-size: 14px;
+  letter-spacing: 0.8px;
+}
+
+#s22 .s22-sheet__name {
+  fill: #2f4a7a;
+  font-family: var(--s22-body);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+#s22 .s22-sheet__blank {
+  fill: var(--s22-red-ink);
+  font-family: var(--s22-body);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+#s22 .s22-balloon text {
+  fill: var(--s22-ink);
+  font-family: var(--s22-body);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 22px;
+}
+
+#s22 .s22-arch text {
+  fill: var(--s22-ink);
+  font-family: var(--s22-display);
+  font-size: 27px;
+  letter-spacing: 2px;
+}
+
+/* The road: pale paving, heavy inked edge, dashed centre line */
+
+#s22 .s22-link {
+  display: none;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#s22 .s22-rd__edge,
+#s22 .s22-rd__pave,
+#s22 .s22-rd__dots,
+#s22 .s22-rd__line {
+  fill: none;
+}
+
+#s22 .s22-rd__edge { stroke: var(--s22-ink); stroke-width: 56; }
+
+#s22 .s22-rd__pave { stroke: var(--s22-rc, var(--s22-road)); stroke-width: 48; }
+
+#s22 .s22-rd__dots { stroke: url(#s22-dotk); stroke-width: 48; opacity: 0.2; }
+
+#s22 .s22-rd__line { stroke: var(--s22-ink); stroke-width: 4; stroke-dasharray: 22 20; opacity: 0.6; }
+
+#s22 .s22-br--strategy { --s22-rc: var(--s22-blue); }
+
+#s22 .s22-br--family { --s22-rc: var(--s22-yellow); }
+
+#s22 .s22-br--friends { --s22-rc: var(--s22-red); }
+
+#s22 .s22-br .s22-rd__dots { opacity: 0.14; }
+
+#s22 .s22-br .s22-rd__line { opacity: 0.85; }
+
+/* Straight side lanes, used on narrow screens and beside the two stops */
+
+#s22 .s22-lane {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 6px;
+  width: calc(52 * var(--s22-u));
+  border-inline: calc(3 * var(--s22-u)) solid var(--s22-ink);
+  background:
+    repeating-linear-gradient(180deg, var(--s22-ink) 0 22px, transparent 22px 42px) 50% 0 / 5px 100% no-repeat,
+    radial-gradient(rgb(26 21 18 / 0.28) 1.1px, transparent 1.5px) 0 0 / 5px 5px,
+    var(--s22-road);
+}
+
+/* Milestone plaque where a stop meets its lane */
+
+#s22 .s22-mile {
+  position: absolute;
+  z-index: 1;
+  top: 1rem;
+  left: calc(6px + 26 * var(--s22-u) - 25px);
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border: 3px solid var(--s22-ink);
+  border-radius: 50%;
+  background:
+    radial-gradient(rgb(239 194 63 / 0.7) 2.2px, transparent 2.6px) 0 0 / 9px 9px,
+    var(--s22-panel);
+  box-shadow: 3px 4px 0 rgb(26 21 18 / 0.25);
+  font-family: var(--s22-display);
+  font-size: 1.3rem;
+  line-height: 1;
+  text-align: center;
+}
+
+/* The fork */
+
+#s22 .s22-fork {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#s22 .s22-fork__hub circle {
+  fill: var(--s22-wood);
+  stroke: var(--s22-ink);
+  stroke-width: 4;
+}
+
+#s22 .s22-fork__hub circle:nth-child(2) {
+  fill: none;
+  stroke-width: 3;
+}
+
+#s22 .s22-fork__hub circle:nth-child(3) {
+  fill: var(--s22-ink);
+  stroke: none;
+}
+
+/* The three vibe choices, one under the end of each road */
+
+#s22 .s22-pick__row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 clamp(4px, 1.2vw, 16px);
+}
+
+#s22 .s22-vibe {
+  --s22-vc: var(--s22-blue-ink);
+  --s22-vfill: var(--s22-blue);
+  position: relative;
+}
+
+#s22 .s22-vibe--family { --s22-vc: var(--s22-yellow-ink); --s22-vfill: var(--s22-yellow); }
+
+#s22 .s22-vibe--friends { --s22-vc: var(--s22-red-ink); --s22-vfill: var(--s22-red); }
+
+#s22 .s22-vibe label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  height: 100%;
+  padding: 0.7rem 0.5rem 0.9rem;
+  border: 3px solid var(--s22-ink);
+  border-radius: var(--s22-wob-sm);
+  background: var(--s22-panel);
+  box-shadow: 4px 4px 0 var(--s22-ink);
+  cursor: pointer;
+  text-align: center;
+}
+
+#s22 .s22-vibe label:hover {
+  background: #fffbec;
+}
+
+#s22 .s22-vibe__pal {
+  width: clamp(62px, 10.5vw, 118px);
+  height: auto;
+  margin-bottom: 0.15rem;
+}
+
+#s22 .s22-vibe__name {
+  font-family: var(--s22-display);
+  font-size: clamp(0.95rem, 0.7rem + 0.75vw, 1.3rem);
+  line-height: 1.1;
+}
+
+#s22 .s22-vibe__note {
+  color: var(--s22-ink-2);
+  font-size: clamp(0.72rem, 0.65rem + 0.25vw, 0.88rem);
+  font-style: italic;
+  line-height: 1.25;
+}
+
+#s22 .s22-vibe__stamp {
+  position: absolute;
+  top: -0.7rem;
+  right: -0.5rem;
+  padding: 0.1rem 0.5rem 0.15rem;
+  border: 3px solid var(--s22-ink);
+  border-radius: var(--s22-wob-sm);
+  background: var(--s22-vfill);
+  color: var(--s22-ink);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: rotate(7deg) scale(0);
+}
+
+#s22 .s22-vibe--strategy .s22-vibe__stamp,
+#s22 .s22-vibe--friends .s22-vibe__stamp {
+  color: #fff;
+}
+
+#s22 .s22-vibe input:checked + label {
+  background:
+    radial-gradient(rgb(26 21 18 / 0.1) 1.6px, transparent 2px) 0 0 / 8px 8px,
+    #fffbec;
+  box-shadow: 4px 4px 0 var(--s22-vc), 4px 4px 0 3px var(--s22-ink);
+}
+
+#s22 .s22-vibe input:checked + label .s22-vibe__stamp {
+  transform: rotate(7deg) scale(1);
+}
+
+#s22 .s22-pick:has(input:checked) .s22-vibe input:not(:checked) + label {
+  background: #e7dcbe;
+  box-shadow: 3px 3px 0 rgb(26 21 18 / 0.45);
+}
+
+#s22 .s22-pick:has(input:checked) .s22-vibe input:not(:checked) + label .s22-vibe__pal {
+  opacity: 0.4;
+}
+
+#s22 .s22-vibe input:focus-visible + label {
+  outline: 4px solid var(--s22-ink);
+  outline-offset: 5px;
+}
+
+/* Lit road: the other two roads fade back */
+
+#s22 .s22-hook:has(#s22-vibe-strategy:checked) .s22-br:not(.s22-br--strategy),
+#s22 .s22-hook:has(#s22-vibe-family:checked) .s22-br:not(.s22-br--family),
+#s22 .s22-hook:has(#s22-vibe-friends:checked) .s22-br:not(.s22-br--friends),
+#s22 .s22-paper__inner:has(#s22-vibe-strategy:checked) .s22-merge .s22-br:not(.s22-br--strategy),
+#s22 .s22-paper__inner:has(#s22-vibe-family:checked) .s22-merge .s22-br:not(.s22-br--family),
+#s22 .s22-paper__inner:has(#s22-vibe-friends:checked) .s22-merge .s22-br:not(.s22-br--friends) {
+  opacity: 0.2;
+}
+
+/* Status line */
+
+#s22 .s22-herald {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem 1.2rem;
+  min-height: 2.8rem;
+  margin: clamp(1.1rem, 2.4vw, 1.8rem) auto clamp(1rem, 2vw, 1.5rem);
+  text-align: center;
+}
+
+#s22 .s22-status {
+  color: var(--s22-ink-2);
+  font-size: 1rem;
+  font-style: italic;
+}
+
+#s22 .s22-reset {
+  flex: none;
+  padding: 0.3rem 0.9rem 0.35rem;
+  border: 2px solid var(--s22-ink);
+  border-radius: var(--s22-wob-sm);
+  background: var(--s22-yellow);
+  color: var(--s22-ink);
+  font: 700 0.9rem/1.2 var(--s22-body);
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--s22-ink);
+}
+
+#s22 .s22-reset:hover {
+  background: #ffd45c;
+}
+
+/* The top ten, set as classified ads */
+
+#s22 .s22-ads {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.6rem, 1.4vw, 0.95rem);
+}
+
+#s22 .s22-ad {
+  --s22-chip: var(--s22-blue-ink);
+  --s22-chip-ink: #fff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 7px 7px 9px;
+  border: 3px double var(--s22-ink);
+  background: var(--s22-panel);
+}
+
+#s22 .s22-ad--family { --s22-chip: var(--s22-yellow); --s22-chip-ink: var(--s22-ink); }
+
+#s22 .s22-ad--coop { --s22-chip: var(--s22-green-ink); --s22-chip-ink: #fff; }
+
+#s22 .s22-ad__pic {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+#s22 .s22-cover {
+  display: block;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+#s22 .s22-ad__name {
+  margin: 0.5rem 0.15rem 0.35rem;
+  font-weight: 700;
+  font-size: 0.92rem;
+  line-height: 1.25;
+}
+
+#s22 .s22-ad__tag {
+  align-self: flex-start;
+  margin: auto 0.15rem 0;
+  padding: 0.05rem 0.5rem 0.1rem;
+  background: var(--s22-chip);
+  color: var(--s22-chip-ink);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Lit games: the chosen road's games come up in full colour */
+
+#s22 .s22-hook:has(#s22-vibe-strategy:checked) { --s22-pick: var(--s22-blue-ink); }
+
+#s22 .s22-hook:has(#s22-vibe-family:checked) { --s22-pick: var(--s22-yellow-ink); }
+
+#s22 .s22-hook:has(#s22-vibe-friends:checked) { --s22-pick: var(--s22-red-ink); }
+
+#s22 .s22-hook:has(#s22-vibe-strategy:checked) .s22-fit-strategy,
+#s22 .s22-hook:has(#s22-vibe-family:checked) .s22-fit-family,
+#s22 .s22-hook:has(#s22-vibe-friends:checked) .s22-fit-friends {
+  z-index: 1;
+  border-color: var(--s22-pick);
+  box-shadow: 0 0 0 2px var(--s22-pick), 4px 5px 0 var(--s22-ink);
+  transform: translateY(-5px);
+}
+
+#s22 .s22-hook:has(#s22-vibe-strategy:checked) .s22-fit-strategy .s22-cover,
+#s22 .s22-hook:has(#s22-vibe-family:checked) .s22-fit-family .s22-cover,
+#s22 .s22-hook:has(#s22-vibe-friends:checked) .s22-fit-friends .s22-cover {
+  filter: none;
+}
+
+#s22 .s22-hook:has(#s22-vibe-strategy:checked) .s22-ad:not(.s22-fit-strategy),
+#s22 .s22-hook:has(#s22-vibe-family:checked) .s22-ad:not(.s22-fit-family),
+#s22 .s22-hook:has(#s22-vibe-friends:checked) .s22-ad:not(.s22-fit-friends) {
+  background: #e6dbbd;
+}
+
+#s22 .s22-hook:has(#s22-vibe-strategy:checked) .s22-ad:not(.s22-fit-strategy) .s22-cover,
+#s22 .s22-hook:has(#s22-vibe-family:checked) .s22-ad:not(.s22-fit-family) .s22-cover,
+#s22 .s22-hook:has(#s22-vibe-friends:checked) .s22-ad:not(.s22-fit-friends) .s22-cover {
+  filter: grayscale(1) contrast(0.95);
+  opacity: 0.5;
+}
+
+#s22 .s22-more {
+  margin-top: clamp(1.1rem, 2.2vw, 1.6rem);
+  text-align: center;
+}
+
+#s22 .s22-more a {
+  display: inline-block;
+  padding: 0.4rem 1rem 0.45rem;
+  border: 2.5px solid var(--s22-ink);
+  border-radius: var(--s22-wob-sm);
+  background: var(--s22-yellow);
+  color: var(--s22-ink);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 3px 3px 0 var(--s22-ink);
+}
+
+#s22 .s22-more a:hover {
+  background: #ffd45c;
+}
+
+/* Stops along the side lanes */
+
+#s22 .s22-stop {
+  position: relative;
+  padding: 1.1rem 0 2.4rem calc(6px + 52 * var(--s22-u) + 18px);
+}
+
+#s22 .s22-stop__body {
+  position: relative;
+}
+
+/* Instructions stay in the body face so they read instantly */
+
+#s22 .s22-join__go {
+  margin-top: clamp(1rem, 2.2vw, 1.5rem);
+}
+
+/* Finish: the clubhouse table with a stool kept free */
+
+#s22 .s22-finish {
+  position: relative;
+  padding: 1.8rem 0 clamp(1.6rem, 3.4vw, 2.6rem);
+  text-align: center;
+}
+
+#s22 .s22-lane--finish {
+  bottom: auto;
+  height: 1.8rem;
+}
+
+#s22 .s22-finish__panel {
+  max-width: 540px;
+  margin: 0 auto 1.5rem;
+  padding: 12px;
+  border-width: 0;
+  border-radius: 0;
+  background: repeating-conic-gradient(var(--s22-ink) 0 25%, var(--s22-panel) 0 50%) 0 0 / 22px 22px;
+  box-shadow: 5px 6px 0 rgb(26 21 18 / 0.25);
+}
+
+#s22 .s22-finish__panel > * {
+  background: var(--s22-panel);
+}
+
+#s22 .s22-finish__word {
+  padding: 0.55rem 0 0.1rem;
+  border: 3px solid var(--s22-ink);
+  border-bottom: 0;
+  color: var(--s22-green-ink);
+  font-family: var(--s22-display);
+  font-size: clamp(1.8rem, 1.3rem + 2vw, 2.8rem);
+  letter-spacing: 0.14em;
+  text-indent: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+#s22 .s22-finish__art {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 3px solid var(--s22-ink);
+  border-top: 0;
+}
+
+#s22 .s22-seat__word {
+  fill: var(--s22-red-ink);
+  font-family: var(--s22-body);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 25px;
+}
+
+#s22 .s22-finish__title {
+  max-width: 20em;
+  margin: 0 auto 1.4rem;
+  font-size: clamp(1.5rem, 1.05rem + 1.9vw, 2.5rem);
+  line-height: 1.14;
+}
+
+#s22 .s22-finish__title em {
+  font-style: normal;
+  color: var(--s22-red-ink);
+}
+
+/* Narrow phones */
+
+@media (max-width: 400px) {
+#s22 .s22-cta {
+    gap: 0.55rem;
+    padding: 0.6rem 1rem 0.65rem 0.75rem;
+  }
+
+#s22 .s22-cta__icon {
+    width: 26px;
+    height: 26px;
+  }
+
+#s22 .s22-vibe__stamp {
+    display: none;
+  }
+
+#s22 .s22-vibe label {
+    padding: 0.55rem 0.25rem 0.7rem;
+  }
+
+#s22 .s22-vibe__pal {
+    width: 46px;
+  }
+}
+
+/* Container steps */
+
+@container (min-width: 640px) {
+#s22 .s22-ads {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* Wide screens: the road snakes down the sheet */
+
+@media (min-width: 860px) {
+#s22 .s22-paper__inner {
+    --s22-u: var(--s22-cu);
+  }
+
+#s22 .s22-link {
+    display: block;
+  }
+
+#s22 .s22-hero {
+    grid-template-columns: 5fr 6fr;
+    align-items: stretch;
+  }
+
+#s22 .s22-hero__copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+#s22 .s22-hero__art {
+    border-top: 0;
+    border-left: 3px solid var(--s22-ink);
+  }
+
+#s22 .s22-stop {
+    padding: 1.6rem 2cqi 2.6rem 15cqi;
+  }
+
+#s22 .s22-stop--right {
+    padding: 1.6rem 15cqi 2.6rem 2cqi;
+  }
+
+#s22 .s22-lane {
+    left: calc(64 * var(--s22-u));
+  }
+
+#s22 .s22-stop--right .s22-lane {
+    left: calc(1084 * var(--s22-u));
+  }
+
+#s22 .s22-mile {
+    --s22-ms: max(60px, calc(118 * var(--s22-u)));
+    top: 1.3rem;
+    left: calc(90 * var(--s22-u) - var(--s22-ms) / 2);
+    width: var(--s22-ms);
+    height: var(--s22-ms);
+    font-size: calc(var(--s22-ms) * 0.34);
+  }
+
+#s22 .s22-stop--right .s22-mile {
+    left: calc(1110 * var(--s22-u) - var(--s22-ms) / 2);
+  }
+
+#s22 .s22-lane--finish {
+    left: calc(574 * var(--s22-u));
+  }
+
+#s22 .s22-merge {
+    margin-top: -0.4rem;
+  }
+}
+
+/* Motion: 14's animations, kept. The painted signs swing out as if nailed up,
+   the chosen road's centre line marches away from the crossroads, and the pal at
+   the clubhouse door jabs a finger at the blank line. */
+
+@media (prefers-reduced-motion: no-preference) {
+#s22 .s22-cta {
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  }
+
+#s22 .s22-cta:hover {
+    transform: rotate(-1.2deg) translate(-2px, -3px);
+    box-shadow: 6px 7px 0 var(--s22-ink);
+  }
+
+#s22 .s22-cta:active {
+    transform: rotate(-1.2deg) translate(3px, 3px);
+    box-shadow: 3px 3px 0 var(--s22-ink);
+  }
+
+#s22 .s22-vibe label,
+  #s22 .s22-vibe__stamp,
+  #s22 .s22-ad {
+    transition: transform 0.3s cubic-bezier(0.3, 1.4, 0.5, 1), box-shadow 0.3s ease, background-color 0.25s ease, border-color 0.25s ease;
+  }
+
+#s22 .s22-br,
+  #s22 .s22-cover {
+    transition: opacity 0.35s ease, filter 0.35s ease;
+  }
+
+/* the "Start here" plank swings out from its post */
+
+#s22 .s22-balloon {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: s22-pop 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) 0.8s both;
+  }
+
+/* the pointing hand taps at the blank line */
+
+#s22 .s22-point-g {
+    transform-box: fill-box;
+    transform-origin: 100% 50%;
+    animation: s22-jab 2.2s ease-in-out 1.1s infinite;
+  }
+
+/* the three step signs are nailed up one after another */
+
+#s22 .s22-br .s22-rd__line {
+    animation: s22-roll 2.6s linear infinite paused;
+  }
+
+#s22 .s22-hook:has(#s22-vibe-strategy:checked) .s22-br--strategy .s22-rd__line,
+  #s22 .s22-hook:has(#s22-vibe-family:checked) .s22-br--family .s22-rd__line,
+  #s22 .s22-hook:has(#s22-vibe-friends:checked) .s22-br--friends .s22-rd__line,
+  #s22 .s22-paper__inner:has(#s22-vibe-strategy:checked) .s22-merge .s22-br--strategy .s22-rd__line,
+  #s22 .s22-paper__inner:has(#s22-vibe-family:checked) .s22-merge .s22-br--family .s22-rd__line,
+  #s22 .s22-paper__inner:has(#s22-vibe-friends:checked) .s22-merge .s22-br--friends .s22-rd__line {
+    animation-play-state: running;
+  }
+
+#s22 .s22-seat path {
+    animation: s22-dash 3s linear infinite;
+  }
+}
+
+@keyframes s22-pop {
+  0% { transform: scale(0.2) rotate(-6deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes s22-jab {
+  0%, 100% { transform: translateX(0); }
+  45% { transform: translateX(-9px); }
+  60% { transform: translateX(-4px); }
+}
+
+/* the chosen road's dashes march away from the crossroads */
+
+@keyframes s22-roll {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -42; }
+}
+
+@keyframes s22-dash {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -48; }
+}
+
+/* The three numbers: carved plaques hung from a rail */
+
+#s22 .s22-plaques {
+  position: relative;
+  margin-top: clamp(1rem, 2.2vw, 1.5rem);
+  padding-top: 34px;
+}
+
+#s22 .s22-plaques::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 18px;
+  border: 2.5px solid var(--s22-ink);
+  border-radius: 9px;
+  background: var(--s22-woodgrain), var(--s22-wood-dk);
+  box-shadow: 0 3px 0 rgb(26 21 18 / 0.25);
+}
+
+#s22 .s22-plaques__row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.7rem, 2vw, 1.5rem);
+  padding: 0 clamp(0.6rem, 1.6vw, 1.3rem);
+}
+
+#s22 .s22-plaque {
+  position: relative;
+  padding: clamp(0.8rem, 1.8vw, 1.25rem) 0.5rem clamp(0.9rem, 2vw, 1.35rem);
+  border: 2.5px solid var(--s22-ink);
+  border-radius: 14px 14px 20px 20px / 14px 14px 26px 26px;
+  background: var(--s22-woodgrain), var(--s22-plank);
+  box-shadow:
+    inset 0 0 0 5px rgb(255 255 255 / 0.28),
+    inset 0 0 0 6.5px rgb(26 21 18 / 0.3),
+    3px 4px 0 rgb(26 21 18 / 0.25);
+  text-align: center;
+  transform-origin: 50% 0;
+}
+
+#s22 .s22-plaque:nth-child(1) { transform: rotate(-0.7deg); }
+#s22 .s22-plaque:nth-child(2) { transform: rotate(0.5deg); }
+#s22 .s22-plaque:nth-child(3) { transform: rotate(-0.4deg); }
+
+/* the two ropes that hang each plaque from the rail */
+#s22 .s22-plaque::before,
+#s22 .s22-plaque::after {
+  content: "";
+  position: absolute;
+  top: -19px;
+  width: 4px;
+  height: 20px;
+  background: repeating-linear-gradient(180deg, #8d5a34 0 4px, #6b4a22 4px 7px);
+  border-inline: 1.5px solid var(--s22-ink);
+}
+
+#s22 .s22-plaque::before { left: 20%; }
+#s22 .s22-plaque::after { right: 20%; }
+
+#s22 .s22-plaque dt {
+  color: var(--s22-ink-2);
+  font-size: clamp(0.7rem, 0.62rem + 0.3vw, 0.88rem);
+  font-style: italic;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+#s22 .s22-plaque dd {
+  margin-top: 0.1rem;
+  color: #2e1a0a;
+  font-family: var(--s22-display);
+  font-size: clamp(1.5rem, 0.4rem + 3.2vw, 3.6rem);
+  line-height: 1.06;
+  letter-spacing: -0.005em;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 1.5px 0 rgb(255 245 215 / 0.7);
+}
+
+/* House rules: four luggage tags on a rope. The outline follows the cut corners
+   through a stack of drop-shadows, so it stays a thin line at any size. */
+
+#s22 .s22-tags {
+  --s22-gap: clamp(0.7rem, 1.8vw, 1.2rem);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2.4vw, 1.6rem) var(--s22-gap);
+}
+
+#s22 .s22-tag {
+  position: relative;
+  padding-top: 22px;
+  transform-origin: 50% 0;
+  filter:
+    drop-shadow(1.5px 0 0 var(--s22-ink))
+    drop-shadow(-1.5px 0 0 var(--s22-ink))
+    drop-shadow(0 1.5px 0 var(--s22-ink))
+    drop-shadow(0 -1.5px 0 var(--s22-ink))
+    drop-shadow(3px 5px 0 rgb(26 21 18 / 0.2));
+}
+
+#s22 .s22-tag:nth-child(1) { transform: rotate(-1.4deg); }
+#s22 .s22-tag:nth-child(2) { transform: rotate(1deg); }
+#s22 .s22-tag:nth-child(3) { transform: rotate(-0.8deg); }
+#s22 .s22-tag:nth-child(4) { transform: rotate(1.5deg); }
+
+/* a length of rope along the top of each tag; neighbours meet in the gap */
+#s22 .s22-tag::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: calc(var(--s22-gap) / -2);
+  right: calc(var(--s22-gap) / -2);
+  height: 9px;
+  border-radius: 5px;
+  background: repeating-linear-gradient(115deg, #b58a4a 0 5px, #8d5a34 5px 9px);
+}
+
+#s22 .s22-tag__string {
+  position: absolute;
+  z-index: 2;
+  top: 5px;
+  left: 50%;
+  width: 4px;
+  height: 36px;
+  margin-left: -2px;
+  background: #8d5a34;
+}
+
+#s22 .s22-tag__hole {
+  position: absolute;
+  z-index: 2;
+  top: 34px;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  border: 2px solid var(--s22-ink);
+  border-radius: 50%;
+  background: var(--s22-news);
+}
+
+#s22 .s22-tag__face {
+  --s22-tint: #f6e2a0;
+  height: 100%;
+  padding: 2.55rem 0.8rem 1rem;
+  background: var(--s22-tint);
+  clip-path: polygon(16% 0, 84% 0, 100% 14%, 100% 100%, 0 100%, 0 14%);
+  text-align: center;
+}
+
+#s22 .s22-tag--sky .s22-tag__face { --s22-tint: #cfe2f3; }
+#s22 .s22-tag--leaf .s22-tag__face { --s22-tint: #d4ecd2; }
+#s22 .s22-tag--rose .s22-tag__face { --s22-tint: #f4cfc8; }
+
+#s22 .s22-tag h3 {
+  font-family: var(--s22-display);
+  font-weight: 400;
+  font-size: clamp(1.02rem, 0.9rem + 0.5vw, 1.3rem);
+  line-height: 1.15;
+}
+
+#s22 .s22-tag p {
+  margin-top: 0.3rem;
+  color: var(--s22-ink-2);
+  font-size: clamp(0.88rem, 0.84rem + 0.2vw, 1rem);
+  line-height: 1.38;
+}
+
+/* How to join: stepping stones across a lawn */
+
+#s22 .s22-lawn {
+  padding: clamp(1rem, 2.4vw, 1.7rem) clamp(0.9rem, 2.4vw, 1.8rem) clamp(1rem, 2.2vw, 1.5rem);
+  border: 2.5px solid var(--s22-ink);
+  border-radius: var(--s22-wob-sm);
+  background:
+    radial-gradient(rgb(63 122 78 / 0.28) 1.4px, transparent 1.8px) 0 0 / 9px 9px,
+    #bfd68c;
+  box-shadow: 3px 4px 0 rgb(26 21 18 / 0.2);
+}
+
+#s22 .s22-stones {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.8rem, 2vw, 1.2rem);
+}
+
+#s22 .s22-stone {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: clamp(0.8rem, 2vw, 1.2rem);
+}
+
+#s22 .s22-stone:nth-child(2) { padding-left: 2.6rem; }
+#s22 .s22-stone:nth-child(3) { padding-left: 5.2rem; }
+
+#s22 .s22-stone__rock {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: clamp(64px, 8vw, 92px);
+  aspect-ratio: 1;
+  border: 2.5px solid var(--s22-ink);
+  border-radius: 52% 48% 55% 45% / 48% 54% 46% 52%;
+  background: radial-gradient(circle at 34% 28%, #efe9d6 0 16%, #cfc7b0 62%, #b3aa90 100%);
+  box-shadow: 0 4px 0 rgb(26 21 18 / 0.28);
+  color: var(--s22-ink);
+  font-family: var(--s22-display);
+  font-size: clamp(1.7rem, 1.2rem + 1.4vw, 2.5rem);
+  line-height: 1;
+}
+
+#s22 .s22-stone:nth-child(2) .s22-stone__rock { border-radius: 46% 54% 48% 52% / 55% 45% 55% 45%; }
+#s22 .s22-stone:nth-child(3) .s22-stone__rock { border-radius: 55% 45% 52% 48% / 46% 56% 44% 54%; }
+
+/* Instructions stay in the body face so they read instantly */
+#s22 .s22-stone__text {
+  min-width: 0;
+  font-weight: 700;
+  font-size: clamp(1rem, 0.94rem + 0.3vw, 1.15rem);
+  line-height: 1.3;
+}
+
+#s22 .s22-lawn .s22-join__go {
+  margin-top: clamp(1rem, 2.2vw, 1.4rem);
+}
+
+@container (min-width: 520px) {
+  #s22 .s22-tags {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+#s22 .s22-join__door {
+  display: none;
+}
+
+@container (min-width: 600px) {
+  #s22 .s22-stones {
+    flex-direction: row;
+    gap: clamp(0.8rem, 2.4vw, 2rem);
+  }
+
+  #s22 .s22-stone,
+  #s22 .s22-stone:nth-child(2),
+  #s22 .s22-stone:nth-child(3) {
+    flex: 1 1 0;
+    min-width: 0;
+    flex-direction: column;
+    padding-left: 0;
+    text-align: center;
+  }
+
+  #s22 .s22-stone:nth-child(2) { margin-top: 1.2rem; }
+  #s22 .s22-stone:nth-child(3) { margin-top: 2.4rem; }
+
+  /* pebbles between the stones */
+  #s22 .s22-stone:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: calc(clamp(64px, 8vw, 92px) / 2 - 4px);
+    left: calc(50% + clamp(64px, 8vw, 92px) / 2 + 8px);
+    right: calc(-50% + clamp(64px, 8vw, 92px) / 2 + 8px);
+    height: 8px;
+    background: radial-gradient(circle, #cfc7b0 0 3px, transparent 3.5px) 0 50% / 14px 8px repeat-x;
+  }
+
+  #s22 .s22-lawn .s22-join__go {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: clamp(0.8rem, 2vw, 1.4rem);
+  }
+
+  #s22 .s22-join__door {
+    display: block;
+    flex: none;
+    width: clamp(46px, 5vw, 64px);
+    height: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  #s22 .s22-plaques {
+    padding-top: 0;
+  }
+
+  #s22 .s22-plaques::before,
+  #s22 .s22-plaque::before,
+  #s22 .s22-plaque::after {
+    display: none;
+  }
+
+  #s22 .s22-plaques__row {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 0;
+  }
+
+  #s22 .s22-plaque {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.8rem;
+    padding: 0.55rem 1rem 0.65rem;
+  }
+
+  #s22 .s22-plaque dd {
+    margin-top: 0;
+    font-size: clamp(1.5rem, 1rem + 5vw, 2.4rem);
+  }
+}
+
+@media (max-width: 420px) {
+  #s22 .s22-plaque {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding: 0.5rem 0.5rem 0.65rem;
+    text-align: center;
+  }
+
+  #s22 .s22-plaque dd {
+    font-size: clamp(1.7rem, 0.6rem + 6.6vw, 2.3rem);
+  }
+
+  #s22 .s22-lawn {
+    padding-inline: 0.8rem;
+  }
+
+  #s22 .s22-stone:nth-child(2) { padding-left: 0.9rem; }
+  #s22 .s22-stone:nth-child(3) { padding-left: 1.8rem; }
+}
+
+/* Motion: the sign drops in, the tags sway on their rope, the stones are set down
+   one after another. All of it is skipped under reduced motion. */
+
+@media (prefers-reduced-motion: no-preference) {
+  #s22 .s22-arch {
+    transform-box: fill-box;
+    transform-origin: 50% 0;
+    animation: s22-drop 0.8s cubic-bezier(0.3, 1.5, 0.5, 1) 0.2s both;
+  }
+
+  #s22 .s22-tag { animation: s22-sway 5.5s ease-in-out infinite; }
+  #s22 .s22-tag:nth-child(2) { animation-delay: -1.4s; animation-duration: 6.3s; }
+  #s22 .s22-tag:nth-child(3) { animation-delay: -2.8s; animation-duration: 5s; }
+  #s22 .s22-tag:nth-child(4) { animation-delay: -0.6s; animation-duration: 6s; }
+
+  #s22 .s22-stone__rock { animation: s22-hop 0.6s cubic-bezier(0.3, 1.5, 0.5, 1) both; }
+  #s22 .s22-stone:nth-child(2) .s22-stone__rock { animation-delay: 0.15s; }
+  #s22 .s22-stone:nth-child(3) .s22-stone__rock { animation-delay: 0.3s; }
+}
+
+@keyframes s22-drop {
+  from { transform: translateY(-26px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes s22-sway {
+  0%, 100% { rotate: -1.2deg; }
+  50% { rotate: 1.2deg; }
+}
+
+@keyframes s22-hop {
+  from { transform: translateY(-16px) scale(0.7); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* Landing-card preview: a calm, still final state */
+
+.is-thumb #s22 *,
+.is-thumb #s22 *::before,
+.is-thumb #s22 *::after {
+  animation: none !important;
+  transition: none !important;
+}

@@ -1,0 +1,1518 @@
+/* 25 Funnies Night (24 Funnies Board on a dark table): the same page, type, colours
+   and layout as 24, with the newsprint sheet exactly as 24 has it, set on a dark
+   forest-green table with a dimmer cork board. Everything else is 24's.
+   Hook: pick your vibe ("Which way tonight?").
+   Every rule and custom property is scoped under #s25. */
+
+@font-face {
+  font-family: "s25 Bricolage Grotesque";
+  src: url("../fonts/bricolagegrotesque/bricolagegrotesque-var.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s25 Comic Neue";
+  src: url("../fonts/comicneue/comicneue-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s25 Comic Neue";
+  src: url("../fonts/comicneue/comicneue-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+#s25 {
+  --s25-ink: #1d1712;
+  --s25-ink-2: #473a29;
+  --s25-news: #f3e8c9;
+  --s25-panel: #f8f0da;
+  --s25-road: #f8f0da;
+  --s25-table: #12281d;
+  --s25-table-2: #0a1a12;
+  --s25-wood: #c4934f;
+  --s25-wood-dk: #9c6f35;
+  --s25-plank: #ecd8ab;
+  --s25-slate: #2c3a31;
+  --s25-slate-2: #212c25;
+  --s25-chalk: #f6f2e2;
+  --s25-red: #c8261c;
+  --s25-red-ink: #a51c13;
+  --s25-red-deep: #7d1a11;
+  --s25-green: #1d5796;
+  --s25-green-ink: #a51c13;
+  --s25-yellow: #f4c430;
+  --s25-yellow-ink: #6b5007;
+  --s25-blue: #2f78c4;
+  --s25-blue-ink: #1d5796;
+  --s25-display: "s25 Bricolage Grotesque", "Arial Black", "Arial Bold", Impact, "Helvetica Neue", Arial, sans-serif;
+  --s25-body: Georgia, "Times New Roman", Times, serif;
+  --s25-comic: "s25 Comic Neue", "Comic Sans MS", "Chalkboard SE", "Marker Felt", "Trebuchet MS", sans-serif;
+  /* Panel corners wobble like a hand-ruled border, gentler than 16's */
+  --s25-wob: 90px 12px 80px 14px / 12px 80px 14px 90px;
+  --s25-wob-sm: 36px 8px 32px 10px / 10px 32px 8px 36px;
+  --s25-halftone: radial-gradient(rgb(110 85 30 / 0.12) 1.1px, transparent 1.5px) 0 0 / 5px 5px;
+  --s25-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .25 0 0 0 0 .2 0 0 0 0 .1 0 0 0 .14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --s25-dust: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='d'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .9' numOctaves='3' seed='5' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 .95 0 0 0 .16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23d)'/%3E%3C/svg%3E");
+  --s25-woodgrain: repeating-linear-gradient(90deg, rgb(120 80 30 / 0.07) 0 3px, transparent 3px 12px);
+
+  background: var(--s25-table);
+  color: var(--s25-ink);
+  font-family: var(--s25-body);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+#s25 *,
+#s25 *::before,
+#s25 *::after {
+  box-sizing: border-box;
+}
+
+#s25 h1,
+#s25 h2,
+#s25 h3,
+#s25 h4,
+#s25 p,
+#s25 ol,
+#s25 ul,
+#s25 dl,
+#s25 dd,
+#s25 fieldset {
+  margin: 0;
+}
+
+#s25 ol,
+#s25 ul {
+  padding: 0;
+  list-style: none;
+}
+
+#s25 fieldset {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+
+#s25 [hidden] {
+  display: none !important;
+}
+
+#s25 .s25-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+#s25 .s25-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Links, buttons and focus */
+
+#s25 a {
+  color: var(--s25-green-ink);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 2px;
+}
+
+#s25 a:hover {
+  color: var(--s25-ink);
+}
+
+#s25 a:focus-visible,
+#s25 button:focus-visible {
+  outline: 3px solid var(--s25-ink);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Table and the newsprint sheet */
+
+#s25 .s25-table {
+  position: relative;
+  padding: clamp(6px, 2.6vw, 40px);
+  background:
+    var(--s25-grain),
+    repeating-linear-gradient(90deg, rgb(60 45 10 / 0.06) 0 2px, transparent 2px 8px),
+    radial-gradient(120% 60% at 30% 0%, #2b5a3e 0%, transparent 60%),
+    linear-gradient(180deg, var(--s25-table) 0%, var(--s25-table-2) 100%);
+}
+
+#s25 .s25-paper {
+  position: relative;
+  max-width: 1340px;
+  margin: 0 auto;
+  background:
+    var(--s25-halftone),
+    radial-gradient(ellipse at 50% 0%, transparent 55%, rgb(140 110 45 / 0.16) 100%),
+    var(--s25-news);
+  box-shadow:
+    0 0 0 1px rgb(60 45 10 / 0.25),
+    6px 8px 0 rgb(40 30 5 / 0.18),
+    14px 22px 34px rgb(40 30 5 / 0.38);
+}
+
+#s25 .s25-paper__inner {
+  position: relative;
+  container-type: inline-size;
+  padding: clamp(10px, 2.2vw, 26px) clamp(12px, 3vw, 44px) clamp(14px, 3vw, 34px);
+  /* Road geometry. --s25-cu is 1/1200 of the inner width, matching the SVG
+     roads; --s25-u drives the straight side lanes and is fixed when narrow. */
+  --s25-cu: calc(100cqi / 1200);
+  --s25-u: 0.62px;
+}
+
+/* Loose props beside the sheet, only where there is room */
+
+#s25 .s25-loose {
+  display: none;
+}
+
+@media (min-width: 1680px) {
+  #s25 .s25-loose {
+    display: block;
+  }
+
+  #s25 .s25-loose svg {
+    position: absolute;
+    z-index: 4;
+    pointer-events: none;
+    filter: drop-shadow(2px 4px 3px rgb(40 25 6 / 0.4));
+  }
+
+  #s25 .s25-loose__dice { width: 116px; left: -132px; top: 30%; }
+  #s25 .s25-loose__chalk { width: 142px; right: -158px; top: 58%; }
+}
+
+/* Masthead */
+
+#s25 .s25-mast {
+  padding-bottom: 0.45rem;
+  margin-bottom: clamp(0.8rem, 2vw, 1.3rem);
+  border-bottom: 4px double var(--s25-ink);
+  text-align: center;
+}
+
+#s25 .s25-mast__title {
+  font-family: var(--s25-display);
+  font-size: clamp(1.7rem, 0.7rem + 4.9vw, 4.4rem);
+  line-height: 1.04;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+  color: var(--s25-ink);
+  text-shadow:
+    3px 0 0 var(--s25-yellow),
+    5px 3px 0 var(--s25-green),
+    6px 5px 0 rgb(26 21 18 / 0.22);
+}
+
+/* Panels */
+
+#s25 .s25-panel {
+  position: relative;
+  border: 3px solid var(--s25-ink);
+  border-radius: var(--s25-wob);
+  background: var(--s25-panel);
+}
+
+/* Type */
+
+#s25 .s25-kicker {
+  align-self: flex-start;
+  display: inline-block;
+  margin-bottom: 0.6rem;
+  padding: 0.15rem 0.6rem 0.2rem;
+  border: 2px solid var(--s25-ink);
+  border-radius: var(--s25-wob-sm);
+  background: var(--s25-yellow);
+  color: var(--s25-ink);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform: rotate(-1.6deg);
+}
+
+#s25 .s25-h1 {
+  font-family: var(--s25-display);
+  font-weight: 800;
+  font-size: clamp(1.75rem, 1rem + 3vw, 3.3rem);
+  line-height: 1.08;
+  letter-spacing: 0.005em;
+  text-wrap: balance;
+}
+
+#s25 .s25-h1 em {
+  font-style: normal;
+  color: var(--s25-red-ink);
+}
+
+#s25 .s25-h2 {
+  font-family: var(--s25-display);
+  font-weight: 800;
+  font-size: clamp(1.25rem, 0.9rem + 1.5vw, 2.05rem);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+
+#s25 .s25-lede {
+  max-width: 22em;
+  color: var(--s25-ink);
+  font-size: clamp(1.2rem, 1rem + 0.9vw, 1.65rem);
+  line-height: 1.35;
+}
+
+/* Section banners */
+
+#s25 .s25-band {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.1rem 1.1rem;
+  padding: 0.35rem 0.9rem 0.5rem;
+  margin-bottom: clamp(0.9rem, 2vw, 1.4rem);
+  background: var(--s25-ink);
+  color: var(--s25-panel);
+  border-radius: 3px;
+}
+
+#s25 .s25-band--green {
+  background: var(--s25-green-ink);
+}
+
+#s25 .s25-band__kick {
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* Primary CTA: a painted sign with a pencil on it */
+
+#s25 .s25-cta {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1.25rem;
+  padding: 0.7rem 1.4rem 0.75rem 1rem;
+  border: 3px solid var(--s25-ink);
+  border-radius: 20px 8px 18px 10px / 10px 18px 8px 20px;
+  background: var(--s25-red-ink);
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 5px 5px 0 var(--s25-ink);
+  transform: rotate(-1.2deg);
+}
+
+#s25 .s25-cta:hover {
+  color: #fff;
+  background: var(--s25-red-deep);
+}
+
+#s25 .s25-cta:focus-visible {
+  outline: 4px solid var(--s25-ink);
+  outline-offset: 7px;
+}
+
+#s25 .s25-cta__icon {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  color: var(--s25-yellow);
+}
+
+#s25 .s25-cta__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+#s25 .s25-cta__main {
+  font-family: var(--s25-display);
+  font-size: clamp(1.3rem, 1.1rem + 0.7vw, 1.65rem);
+  letter-spacing: 0.02em;
+  font-weight: 800;
+}
+
+#s25 .s25-cta__sub {
+  margin-top: 0.3rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+/* Hero */
+
+#s25 .s25-start {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* SVG lettering in the hero scene */
+
+#s25 .s25-sheet__head {
+  fill: var(--s25-ink);
+  font-family: var(--s25-display);
+  font-size: 21px;
+  letter-spacing: 2px;
+  font-weight: 800;
+}
+
+#s25 .s25-sheet__name {
+  fill: #2f4a7a;
+  font-family: var(--s25-body);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 21px;
+}
+
+#s25 .s25-sheet__blank {
+  fill: var(--s25-red-ink);
+  font-family: var(--s25-body);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+#s25 .s25-balloon text {
+  fill: var(--s25-ink);
+  font-family: var(--s25-body);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 25px;
+}
+
+/* The road: pale paving, heavy inked edge, dashed centre line */
+
+#s25 .s25-link {
+  display: none;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#s25 .s25-rd__edge,
+#s25 .s25-rd__pave,
+#s25 .s25-rd__dots,
+#s25 .s25-rd__line {
+  fill: none;
+}
+
+#s25 .s25-rd__edge { stroke: var(--s25-ink); stroke-width: 56; }
+#s25 .s25-rd__pave { stroke: var(--s25-rc, var(--s25-road)); stroke-width: 48; }
+#s25 .s25-rd__dots { stroke: url(#s25-dotk); stroke-width: 48; opacity: 0.2; }
+#s25 .s25-rd__line { stroke: var(--s25-ink); stroke-width: 4; stroke-dasharray: 22 20; opacity: 0.6; }
+
+#s25 .s25-br--strategy { --s25-rc: var(--s25-blue); }
+#s25 .s25-br--family { --s25-rc: var(--s25-yellow); }
+#s25 .s25-br--friends { --s25-rc: var(--s25-red); }
+
+#s25 .s25-br .s25-rd__dots { opacity: 0.14; }
+#s25 .s25-br .s25-rd__line { opacity: 0.85; }
+
+/* Straight side lanes, used on narrow screens and beside the two stops */
+
+#s25 .s25-lane {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 6px;
+  width: calc(52 * var(--s25-u));
+  border-inline: calc(3 * var(--s25-u)) solid var(--s25-ink);
+  background:
+    repeating-linear-gradient(180deg, var(--s25-ink) 0 22px, transparent 22px 42px) 50% 0 / 5px 100% no-repeat,
+    radial-gradient(rgb(26 21 18 / 0.28) 1.1px, transparent 1.5px) 0 0 / 5px 5px,
+    var(--s25-road);
+}
+
+/* Milestone plaque where a stop meets its lane */
+
+#s25 .s25-mile {
+  position: absolute;
+  z-index: 1;
+  top: 1rem;
+  left: calc(6px + 26 * var(--s25-u) - 25px);
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border: 3px solid var(--s25-ink);
+  border-radius: 50%;
+  background:
+    radial-gradient(rgb(239 194 63 / 0.7) 2.2px, transparent 2.6px) 0 0 / 9px 9px,
+    var(--s25-panel);
+  box-shadow: 3px 4px 0 rgb(26 21 18 / 0.25);
+  font-family: var(--s25-display);
+  font-size: 1.3rem;
+  line-height: 1;
+  text-align: center;
+  font-weight: 800;
+}
+
+/* The fork */
+
+#s25 .s25-fork {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#s25 .s25-fork__hub circle {
+  fill: var(--s25-wood);
+  stroke: var(--s25-ink);
+  stroke-width: 4;
+}
+
+#s25 .s25-fork__hub circle:nth-child(2) {
+  fill: none;
+  stroke-width: 3;
+}
+
+#s25 .s25-fork__hub circle:nth-child(3) {
+  fill: var(--s25-ink);
+  stroke: none;
+}
+
+/* The three vibe choices, one under the end of each road */
+
+#s25 .s25-pick__row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 clamp(4px, 1.2vw, 16px);
+}
+
+#s25 .s25-vibe {
+  --s25-vc: var(--s25-blue-ink);
+  --s25-vfill: var(--s25-blue);
+  position: relative;
+}
+
+#s25 .s25-vibe--family { --s25-vc: var(--s25-yellow-ink); --s25-vfill: var(--s25-yellow); }
+#s25 .s25-vibe--friends { --s25-vc: var(--s25-red-ink); --s25-vfill: var(--s25-red); }
+
+#s25 .s25-vibe label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  height: 100%;
+  padding: 0.7rem 0.5rem 0.9rem;
+  border: 3px solid var(--s25-ink);
+  border-radius: var(--s25-wob-sm);
+  background: var(--s25-panel);
+  box-shadow: 4px 4px 0 var(--s25-ink);
+  cursor: pointer;
+  text-align: center;
+}
+
+#s25 .s25-vibe label:hover {
+  background: #fffbec;
+}
+
+#s25 .s25-vibe__pal {
+  width: clamp(62px, 10.5vw, 118px);
+  height: auto;
+  margin-bottom: 0.15rem;
+}
+
+#s25 .s25-vibe__name {
+  font-family: var(--s25-display);
+  font-size: clamp(0.95rem, 0.7rem + 0.75vw, 1.3rem);
+  line-height: 1.1;
+  font-weight: 800;
+}
+
+#s25 .s25-vibe__note {
+  color: var(--s25-ink-2);
+  font-size: clamp(0.72rem, 0.65rem + 0.25vw, 0.88rem);
+  font-style: italic;
+  line-height: 1.25;
+}
+
+#s25 .s25-vibe__stamp {
+  position: absolute;
+  top: -0.7rem;
+  right: -0.5rem;
+  padding: 0.1rem 0.5rem 0.15rem;
+  border: 3px solid var(--s25-ink);
+  border-radius: var(--s25-wob-sm);
+  background: var(--s25-vfill);
+  color: var(--s25-ink);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: rotate(7deg) scale(0);
+}
+
+#s25 .s25-vibe--strategy .s25-vibe__stamp,
+#s25 .s25-vibe--friends .s25-vibe__stamp {
+  color: #fff;
+}
+
+#s25 .s25-vibe input:checked + label {
+  background:
+    radial-gradient(rgb(26 21 18 / 0.1) 1.6px, transparent 2px) 0 0 / 8px 8px,
+    #fffbec;
+  box-shadow: 4px 4px 0 var(--s25-vc), 4px 4px 0 3px var(--s25-ink);
+}
+
+#s25 .s25-vibe input:checked + label .s25-vibe__stamp {
+  transform: rotate(7deg) scale(1);
+}
+
+#s25 .s25-pick:has(input:checked) .s25-vibe input:not(:checked) + label {
+  background: #e7dcbe;
+  box-shadow: 3px 3px 0 rgb(26 21 18 / 0.45);
+}
+
+#s25 .s25-pick:has(input:checked) .s25-vibe input:not(:checked) + label .s25-vibe__pal {
+  opacity: 0.4;
+}
+
+#s25 .s25-vibe input:focus-visible + label {
+  outline: 4px solid var(--s25-ink);
+  outline-offset: 5px;
+}
+
+/* Lit road: the other two roads fade back */
+
+#s25 .s25-hook:has(#s25-vibe-strategy:checked) .s25-br:not(.s25-br--strategy),
+#s25 .s25-hook:has(#s25-vibe-family:checked) .s25-br:not(.s25-br--family),
+#s25 .s25-hook:has(#s25-vibe-friends:checked) .s25-br:not(.s25-br--friends),
+#s25 .s25-paper__inner:has(#s25-vibe-strategy:checked) .s25-merge .s25-br:not(.s25-br--strategy),
+#s25 .s25-paper__inner:has(#s25-vibe-family:checked) .s25-merge .s25-br:not(.s25-br--family),
+#s25 .s25-paper__inner:has(#s25-vibe-friends:checked) .s25-merge .s25-br:not(.s25-br--friends) {
+  opacity: 0.2;
+}
+
+/* Status line */
+
+#s25 .s25-herald {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem 1.2rem;
+  min-height: 2.8rem;
+  margin: clamp(1.1rem, 2.4vw, 1.8rem) auto clamp(1rem, 2vw, 1.5rem);
+  text-align: center;
+}
+
+#s25 .s25-status {
+  color: var(--s25-ink-2);
+  font-size: 1rem;
+  font-style: italic;
+}
+
+#s25 .s25-reset {
+  flex: none;
+  padding: 0.3rem 0.9rem 0.35rem;
+  border: 2px solid var(--s25-ink);
+  border-radius: var(--s25-wob-sm);
+  background: var(--s25-yellow);
+  color: var(--s25-ink);
+  font: 700 0.9rem/1.2 var(--s25-body);
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--s25-ink);
+}
+
+#s25 .s25-reset:hover {
+  background: #ffd861;
+}
+
+/* The top ten, set as classified ads */
+
+#s25 .s25-ads {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.6rem, 1.4vw, 0.95rem);
+}
+
+#s25 .s25-ad {
+  --s25-chip: var(--s25-blue-ink);
+  --s25-chip-ink: #fff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 7px 7px 9px;
+  border: 3px double var(--s25-ink);
+  background: var(--s25-panel);
+}
+
+#s25 .s25-ad--family { --s25-chip: var(--s25-yellow); --s25-chip-ink: var(--s25-ink); }
+#s25 .s25-ad--coop { --s25-chip: var(--s25-green-ink); --s25-chip-ink: #fff; }
+
+#s25 .s25-ad__pic {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+#s25 .s25-cover {
+  display: block;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}#s25 .s25-ad__name {
+  margin: 0.5rem 0.15rem 0.35rem;
+  font-weight: 700;
+  font-size: 0.92rem;
+  line-height: 1.25;
+}
+
+#s25 .s25-ad__tag {
+  align-self: flex-start;
+  margin: auto 0.15rem 0;
+  padding: 0.05rem 0.5rem 0.1rem;
+  background: var(--s25-chip);
+  color: var(--s25-chip-ink);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Lit games: the chosen road's games come up in full colour */
+
+#s25 .s25-hook:has(#s25-vibe-strategy:checked) { --s25-pick: var(--s25-blue-ink); }
+#s25 .s25-hook:has(#s25-vibe-family:checked) { --s25-pick: var(--s25-yellow-ink); }
+#s25 .s25-hook:has(#s25-vibe-friends:checked) { --s25-pick: var(--s25-red-ink); }
+
+#s25 .s25-hook:has(#s25-vibe-strategy:checked) .s25-fit-strategy,
+#s25 .s25-hook:has(#s25-vibe-family:checked) .s25-fit-family,
+#s25 .s25-hook:has(#s25-vibe-friends:checked) .s25-fit-friends {
+  z-index: 1;
+  border-color: var(--s25-pick);
+  box-shadow: 0 0 0 2px var(--s25-pick), 4px 5px 0 var(--s25-ink);
+  transform: translateY(-5px);
+}
+
+#s25 .s25-hook:has(#s25-vibe-strategy:checked) .s25-fit-strategy .s25-cover,
+#s25 .s25-hook:has(#s25-vibe-family:checked) .s25-fit-family .s25-cover,
+#s25 .s25-hook:has(#s25-vibe-friends:checked) .s25-fit-friends .s25-cover {
+  filter: none;
+}#s25 .s25-hook:has(#s25-vibe-strategy:checked) .s25-ad:not(.s25-fit-strategy),
+#s25 .s25-hook:has(#s25-vibe-family:checked) .s25-ad:not(.s25-fit-family),
+#s25 .s25-hook:has(#s25-vibe-friends:checked) .s25-ad:not(.s25-fit-friends) {
+  background: #e6dbbd;
+}
+
+#s25 .s25-hook:has(#s25-vibe-strategy:checked) .s25-ad:not(.s25-fit-strategy) .s25-cover,
+#s25 .s25-hook:has(#s25-vibe-family:checked) .s25-ad:not(.s25-fit-family) .s25-cover,
+#s25 .s25-hook:has(#s25-vibe-friends:checked) .s25-ad:not(.s25-fit-friends) .s25-cover {
+  filter: grayscale(1) contrast(0.95);
+  opacity: 0.5;
+}
+
+#s25 .s25-more {
+  margin-top: clamp(1.1rem, 2.2vw, 1.6rem);
+  text-align: center;
+}
+
+#s25 .s25-more a {
+  display: inline-block;
+  padding: 0.4rem 1rem 0.45rem;
+  border: 2.5px solid var(--s25-ink);
+  border-radius: var(--s25-wob-sm);
+  background: var(--s25-yellow);
+  color: var(--s25-ink);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 3px 3px 0 var(--s25-ink);
+}
+
+#s25 .s25-more a:hover {
+  background: #ffd861;
+}
+
+/* Stops along the side lanes */
+
+#s25 .s25-stop {
+  position: relative;
+  padding: 1.1rem 0 2.4rem calc(6px + 52 * var(--s25-u) + 18px);
+}
+
+#s25 .s25-stop__body {
+  position: relative;
+}
+
+/* How to join: three numbered arrow signs nailed up the path */
+
+/* Instructions stay in the body face so they read instantly */
+
+/* Finish: the clubhouse table with a stool kept free */
+
+#s25 .s25-finish {
+  position: relative;
+  padding: 1.8rem 0 clamp(1.6rem, 3.4vw, 2.6rem);
+  text-align: center;
+}
+
+#s25 .s25-lane--finish {
+  bottom: auto;
+  height: 1.8rem;
+}
+
+#s25 .s25-finish__panel {
+  max-width: 540px;
+  margin: 0 auto 1.5rem;
+  padding: 12px;
+  border-width: 0;
+  border-radius: 0;
+  background: repeating-conic-gradient(var(--s25-ink) 0 25%, var(--s25-panel) 0 50%) 0 0 / 22px 22px;
+  box-shadow: 5px 6px 0 rgb(26 21 18 / 0.25);
+}
+
+#s25 .s25-finish__panel > * {
+  background: var(--s25-panel);
+}
+
+#s25 .s25-finish__word {
+  padding: 0.55rem 0 0.1rem;
+  border: 3px solid var(--s25-ink);
+  border-bottom: 0;
+  color: var(--s25-green-ink);
+  font-family: var(--s25-display);
+  font-size: clamp(1.8rem, 1.3rem + 2vw, 2.8rem);
+  letter-spacing: 0.14em;
+  text-indent: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+#s25 .s25-finish__art {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 3px solid var(--s25-ink);
+  border-top: 0;
+}
+
+#s25 .s25-seat__word {
+  fill: var(--s25-red-ink);
+  font-family: var(--s25-body);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 25px;
+}
+
+#s25 .s25-finish__title {
+  max-width: 20em;
+  margin: 0 auto 1.4rem;
+  font-size: clamp(1.5rem, 1.05rem + 1.9vw, 2.5rem);
+  line-height: 1.14;
+}
+
+#s25 .s25-finish__title em {
+  font-style: normal;
+  color: var(--s25-red-ink);
+}
+
+/* Narrow phones */
+
+@media (max-width: 400px) {
+  #s25 .s25-cta {
+    gap: 0.55rem;
+    padding: 0.6rem 1rem 0.65rem 0.75rem;
+  }
+
+  #s25 .s25-cta__icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  #s25 .s25-vibe__stamp {
+    display: none;
+  }
+
+  #s25 .s25-vibe label {
+    padding: 0.55rem 0.25rem 0.7rem;
+  }
+
+  #s25 .s25-vibe__pal {
+    width: 46px;
+  }
+
+}
+
+/* Container steps */
+
+@container (min-width: 640px) {
+  #s25 .s25-ads {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* Wide screens: the road snakes down the sheet */
+
+@media (min-width: 860px) {
+  #s25 .s25-paper__inner {
+    --s25-u: var(--s25-cu);
+  }
+
+  #s25 .s25-link {
+    display: block;
+  }
+
+  #s25 .s25-stop {
+    padding: 1.6rem 2cqi 2.6rem 15cqi;
+  }
+
+  #s25 .s25-stop--right {
+    padding: 1.6rem 15cqi 2.6rem 2cqi;
+  }
+
+  #s25 .s25-lane {
+    left: calc(64 * var(--s25-u));
+  }
+
+  #s25 .s25-stop--right .s25-lane {
+    left: calc(1084 * var(--s25-u));
+  }
+
+  #s25 .s25-mile {
+    --s25-ms: max(60px, calc(118 * var(--s25-u)));
+    top: 1.3rem;
+    left: calc(90 * var(--s25-u) - var(--s25-ms) / 2);
+    width: var(--s25-ms);
+    height: var(--s25-ms);
+    font-size: calc(var(--s25-ms) * 0.34);
+  }
+
+  #s25 .s25-stop--right .s25-mile {
+    left: calc(1110 * var(--s25-u) - var(--s25-ms) / 2);
+  }
+
+  #s25 .s25-lane--finish {
+    left: calc(574 * var(--s25-u));
+  }
+
+  #s25 .s25-merge {
+    margin-top: -0.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #s25 .s25-cta {
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  }
+
+  #s25 .s25-cta:hover {
+    transform: rotate(-1.2deg) translate(-2px, -3px);
+    box-shadow: 6px 7px 0 var(--s25-ink);
+  }
+
+  #s25 .s25-cta:active {
+    transform: rotate(-1.2deg) translate(3px, 3px);
+    box-shadow: 3px 3px 0 var(--s25-ink);
+  }
+
+  #s25 .s25-vibe label,
+  #s25 .s25-vibe__stamp,
+  #s25 .s25-ad {
+    transition: transform 0.3s cubic-bezier(0.3, 1.4, 0.5, 1), box-shadow 0.3s ease, background-color 0.25s ease, border-color 0.25s ease;
+  }
+
+  #s25 .s25-br,
+  #s25 .s25-cover {
+    transition: opacity 0.35s ease, filter 0.35s ease;
+  }
+
+    #s25 .s25-balloon {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: s25-pop 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) 0.8s both;
+  }
+
+  /* the pointing hand taps at the blank line */
+  #s25 .s25-point-g {
+    transform-box: fill-box;
+    transform-origin: 100% 50%;
+    animation: s25-jab 2.2s ease-in-out 1.1s infinite;
+  }
+
+  /* the three step signs are nailed up one after another */
+
+  #s25 .s25-br .s25-rd__line {
+    animation: s25-roll 2.6s linear infinite paused;
+  }
+
+  #s25 .s25-hook:has(#s25-vibe-strategy:checked) .s25-br--strategy .s25-rd__line,
+  #s25 .s25-hook:has(#s25-vibe-family:checked) .s25-br--family .s25-rd__line,
+  #s25 .s25-hook:has(#s25-vibe-friends:checked) .s25-br--friends .s25-rd__line,
+  #s25 .s25-paper__inner:has(#s25-vibe-strategy:checked) .s25-merge .s25-br--strategy .s25-rd__line,
+  #s25 .s25-paper__inner:has(#s25-vibe-family:checked) .s25-merge .s25-br--family .s25-rd__line,
+  #s25 .s25-paper__inner:has(#s25-vibe-friends:checked) .s25-merge .s25-br--friends .s25-rd__line {
+    animation-play-state: running;
+  }
+
+  #s25 .s25-seat path {
+    animation: s25-dash 3s linear infinite;
+  }
+}
+
+@keyframes s25-pop {
+  0% { transform: scale(0.2) rotate(-6deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes s25-jab {
+  0%, 100% { transform: translateX(0); }
+  45% { transform: translateX(9px); }
+  60% { transform: translateX(4px); }
+}
+
+/* each step sign settles as though just hammered onto its post */
+/* the chosen road's dashes march away from the crossroads */
+@keyframes s25-roll {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -42; }
+}
+
+@keyframes s25-dash {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -48; }
+}
+
+/* Narrow screens have no road link under the board, so give it its own gap */
+
+@media (max-width: 859px) {
+  #s25 .s25-board {
+    margin-bottom: 1.6rem;
+  }
+}
+
+/* The drawn covers are SVG; if photos or scans of covers are ever swapped in as
+   <img class="s25-cover">, they fill the same square and take the same dimming. */
+#s25 img.s25-cover {
+  object-fit: cover;
+}
+
+/* Landing-card preview: a calm, still final state */
+
+.is-thumb #s25 *,
+.is-thumb #s25 *::before,
+.is-thumb #s25 *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* ---- Corkboard: cork, wood frame, pins ---- */
+
+#s25 {
+  --s25-cork-base: #84592f;
+  --s25-wood: #4e341a;
+  --s25-corkgrain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .2 0 0 0 0 .08 0 0 0 .55 -.12'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23c)'/%3E%3C/svg%3E");
+}
+
+#s25 .s25-board,
+#s25 .s25-corkpanel {
+  position: relative;
+  border: 3px solid var(--s25-ink);
+  border-radius: 6px;
+  background:
+    radial-gradient(circle at 20% 30%, rgb(110 70 30 / 0.38) 0 1.4px, transparent 2px) 0 0 / 23px 29px,
+    radial-gradient(circle at 70% 60%, rgb(250 225 170 / 0.4) 0 1.6px, transparent 2.3px) 0 0 / 31px 25px,
+    radial-gradient(circle at 40% 80%, rgb(90 55 20 / 0.32) 0 2.4px, transparent 3.2px) 0 0 / 47px 41px,
+    var(--s25-corkgrain),
+    var(--s25-cork-base);
+  box-shadow:
+    inset 0 0 0 7px var(--s25-wood),
+    inset 0 0 0 8.5px rgb(26 21 18 / 0.45),
+    4px 5px 0 rgb(26 21 18 / 0.2);
+}
+
+#s25 .s25-board {
+  padding: clamp(20px, 3vw, 38px) clamp(20px, 3vw, 38px) clamp(22px, 3.2vw, 40px);
+}
+
+#s25 .s25-corkpanel {
+  padding: clamp(22px, 3.2vw, 36px) clamp(20px, 3vw, 34px) clamp(24px, 3.2vw, 36px);
+}
+
+#s25 .s25-pin {
+  position: relative;
+}
+
+#s25 .s25-pin::before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  top: -8px;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin-left: -8px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 30%, rgb(255 255 255 / 0.75) 0 2.2px, transparent 3px),
+    var(--s25-pinc, var(--s25-red));
+  box-shadow: 2px 3px 2px rgb(40 20 5 / 0.45), inset -2px -2px 0 rgb(0 0 0 / 0.22);
+}
+
+/* ---- Hero: the pinned sign-up sheet and the welcome card ---- */
+
+#s25 .s25-hero {
+  display: grid;
+  gap: clamp(1.2rem, 2.4vw, 1.8rem);
+  align-items: center;
+}
+
+#s25 .s25-hero__copy {
+  --s25-pinc: #c8261c;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(1.3rem, 2.6vw, 1.9rem) clamp(1.1rem, 2.4vw, 1.7rem) clamp(1.4rem, 2.6vw, 2rem);
+  background:
+    repeating-linear-gradient(180deg, transparent 0 31px, rgb(63 111 191 / 0.16) 31px 32px),
+    var(--s25-panel);
+  border: 2px solid var(--s25-ink);
+  border-radius: 4px;
+  box-shadow: 3px 4px 0 rgb(26 21 18 / 0.25);
+  transform: rotate(-1.2deg);
+}
+
+#s25 .s25-hero__art {
+  overflow: hidden;
+}
+
+#s25 .s25-start {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---- The three numbers: pinned index cards ---- */
+
+#s25 .s25-tally {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.9rem, 2.4vw, 1.8rem);
+  margin-top: clamp(1.3rem, 3vw, 2rem);
+}
+
+#s25 .s25-tally__cell {
+  --s25-tilt: -1.6deg;
+  --s25-pinc: #c8261c;
+  background: repeating-linear-gradient(180deg, transparent 0 31px, rgb(63 111 191 / 0.2) 31px 32px), #fffdf3;
+  border-radius: 3px;
+  box-shadow: 2px 3px 0 rgb(26 21 18 / 0.28), 0 0 0 1.5px rgb(26 21 18 / 0.55);
+  transform: rotate(var(--s25-tilt));
+}
+
+#s25 .s25-tally__cell:nth-child(2) { --s25-tilt: 1.2deg; --s25-pinc: #2f78c4; }
+#s25 .s25-tally__cell:nth-child(3) { --s25-tilt: -0.8deg; --s25-pinc: #ef7aa8; }
+
+#s25 .s25-tally dt {
+  padding: 0.7rem 1rem 0.4rem;
+  border-bottom: 2px solid #e0705f;
+  color: var(--s25-ink-2);
+  font-size: clamp(0.72rem, 0.64rem + 0.3vw, 0.88rem);
+  font-style: italic;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+#s25 .s25-tally dd {
+  padding: 0.55rem 0.8rem 0.9rem;
+  color: var(--s25-ink);
+  font-family: var(--s25-display);
+  font-size: clamp(1.7rem, 0.5rem + 3.3vw, 3.3rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  white-space: nowrap;
+  font-weight: 800;
+}
+
+/* ---- House rules: four sticky notes on cork ---- */
+
+#s25 .s25-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.4rem, 3vw, 2rem) clamp(1rem, 2.4vw, 1.6rem);
+}
+
+#s25 .s25-note {
+  --s25-tilt: -2deg;
+  --s25-note: #fbe07c;
+  --s25-fold: #e6c24f;
+  --s25-pinc: #c8261c;
+  filter: drop-shadow(2px 4px 2px rgb(40 22 6 / 0.35));
+  transform: rotate(var(--s25-tilt));
+}
+
+#s25 .s25-note:nth-child(2) { --s25-tilt: 1.6deg; }
+#s25 .s25-note:nth-child(3) { --s25-tilt: -1.2deg; }
+#s25 .s25-note:nth-child(4) { --s25-tilt: 2deg; }
+
+#s25 .s25-note--pink { --s25-note: #f8b4cd; --s25-fold: #e68fb4; --s25-pinc: #2f78c4; }
+#s25 .s25-note--green { --s25-note: #fbc98d; --s25-fold: #eaa95f; --s25-pinc: #f4c430; }
+#s25 .s25-note--blue { --s25-note: #bddcf8; --s25-fold: #94bfe6; --s25-pinc: #c8261c; }
+
+#s25 .s25-note__paper {
+  min-height: 8.6rem;
+  padding: 1.3rem 1.05rem 1.5rem;
+  background: var(--s25-note);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%);
+}
+
+/* the curled corner */
+#s25 .s25-note::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 24px;
+  height: 24px;
+  background: var(--s25-fold);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+#s25 .s25-note h3 {
+  margin-bottom: 0.4rem;
+  font-family: var(--s25-display);
+  font-weight: 800;
+  font-size: clamp(1.05rem, 0.9rem + 0.5vw, 1.3rem);
+  line-height: 1.15;
+}
+
+#s25 .s25-note p {
+  color: var(--s25-ink);
+  font-size: clamp(0.9rem, 0.86rem + 0.2vw, 1rem);
+  line-height: 1.4;
+}
+
+/* ---- How to join: pinned cards, red string, the CTA at the end ---- */
+
+#s25 .s25-join {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 28px;
+  justify-items: center;
+}
+
+#s25 .s25-steps {
+  display: contents;
+}
+
+#s25 .s25-step,
+#s25 .s25-join__go {
+  width: min(100%, 22rem);
+}
+
+#s25 .s25-step {
+  --s25-tilt: -1deg;
+  --s25-pinc: #c8261c;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1.15rem 1rem 1.05rem;
+  background:
+    repeating-linear-gradient(180deg, transparent 0 31px, rgb(63 111 191 / 0.14) 31px 32px),
+    var(--s25-panel);
+  border: 2px solid var(--s25-ink);
+  border-radius: 4px;
+  box-shadow: 3px 4px 0 rgb(26 21 18 / 0.22);
+  transform: rotate(var(--s25-tilt));
+}
+
+#s25 .s25-step:nth-child(2) { --s25-tilt: 0.9deg; --s25-pinc: #2f78c4; }
+#s25 .s25-step:nth-child(3) { --s25-tilt: -0.6deg; --s25-pinc: #ef7aa8; }
+
+/* where the string leaves a card, between the cards */
+#s25 .s25-step::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 3px;
+  height: 29px;
+  margin-left: -1.5px;
+  background: var(--s25-red);
+}
+
+#s25 .s25-step__no {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: clamp(40px, 4.4vw, 48px);
+  height: clamp(40px, 4.4vw, 48px);
+  border: 2px solid var(--s25-ink);
+  border-radius: 50%;
+  background: var(--s25-green);
+  color: #fff;
+  font-family: var(--s25-display);
+  font-size: clamp(1.15rem, 1rem + 0.5vw, 1.4rem);
+  line-height: 1;
+  font-weight: 800;
+}
+
+/* Instructions stay in the body face so they read instantly */
+#s25 .s25-step__text {
+  min-width: 0;
+  font-weight: 700;
+  font-size: clamp(0.98rem, 0.92rem + 0.25vw, 1.1rem);
+  line-height: 1.3;
+}
+
+#s25 .s25-join__go {
+  --s25-pinc: #c8261c;
+}
+
+#s25 .s25-join__go .s25-cta {
+  width: 100%;
+  margin-top: 0;
+  padding: 0.65rem 0.9rem 0.7rem 0.8rem;
+  gap: 0.6rem;
+}
+
+#s25 .s25-join__go .s25-cta__main {
+  font-size: clamp(1.05rem, 0.92rem + 0.4vw, 1.3rem);
+}
+
+#s25 .s25-string {
+  display: none;
+  position: absolute;
+  z-index: 2;
+  top: -29px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+#s25 .s25-string path {
+  fill: none;
+  stroke: var(--s25-red);
+  stroke-width: 3;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Narrow phones */
+
+@media (max-width: 400px) {
+  #s25 .s25-notes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #s25 .s25-tally dd {
+    font-size: clamp(1.5rem, 1rem + 5vw, 2.2rem);
+  }
+
+  #s25 .s25-step {
+    gap: 0.6rem;
+    padding-inline: 0.7rem;
+  }
+
+  #s25 .s25-step__no {
+    width: 34px;
+    height: 34px;
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 560px) {
+  #s25 .s25-tally {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.3rem;
+    max-width: 22rem;
+    margin-inline: auto;
+  }
+}
+
+/* Container steps */
+
+@container (min-width: 560px) {
+  #s25 .s25-join {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  #s25 .s25-step,
+  #s25 .s25-join__go {
+    width: auto;
+    margin-inline: clamp(0.35rem, 1vw, 0.7rem);
+  }
+
+  #s25 .s25-step {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  #s25 .s25-step:not(:last-of-type)::after {
+    display: none;
+  }
+
+  #s25 .s25-join__go {
+    grid-column: 3;
+  }
+
+  #s25 .s25-string--3 {
+    display: block;
+  }
+}
+
+@container (min-width: 1000px) {
+  #s25 .s25-notes {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@container (min-width: 1100px) {
+  #s25 .s25-join {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  #s25 .s25-step:last-of-type::after {
+    display: none;
+  }
+
+  #s25 .s25-join__go {
+    grid-column: 4;
+  }
+
+  #s25 .s25-string--3 {
+    display: none;
+  }
+
+  #s25 .s25-string--4 {
+    display: block;
+  }
+}
+
+/* Wide screens: the snapshot and sheet beside the welcome card */
+
+@media (min-width: 860px) {
+  #s25 .s25-hero {
+    grid-template-columns: 7fr 5fr;
+  }
+
+  #s25 .s25-hero__copy {
+    order: 2;
+  }
+}
+
+/* Motion: 21's animations, kept in spirit. Cards, notes and numbers are pinned up
+   one after another, the string draws across, the snapshot pal taps at the blank
+   line, and the chosen road's centre line marches away from the crossroads. */
+
+@media (prefers-reduced-motion: no-preference) {
+  #s25 .s25-tally__cell,
+  #s25 .s25-note,
+  #s25 .s25-step {
+    animation: s25-pinup 0.6s cubic-bezier(0.3, 1.4, 0.5, 1) both;
+  }
+
+  #s25 .s25-tally__cell:nth-child(2),
+  #s25 .s25-note:nth-child(2),
+  #s25 .s25-step:nth-child(2) { animation-delay: 0.14s; }
+
+  #s25 .s25-tally__cell:nth-child(3),
+  #s25 .s25-note:nth-child(3),
+  #s25 .s25-step:nth-child(3) { animation-delay: 0.28s; }
+
+  #s25 .s25-note:nth-child(4) { animation-delay: 0.42s; }
+
+  #s25 .s25-string {
+    animation: s25-draw 1.1s ease-out 0.3s both;
+  }
+
+  #s25 .s25-hero__copy {
+    transition: transform 0.25s cubic-bezier(0.3, 1.4, 0.5, 1);
+  }
+
+  #s25 .s25-hero__copy:hover {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes s25-pinup {
+  from { opacity: 0; transform: translateY(-14px) rotate(calc(var(--s25-tilt) - 6deg)); }
+}
+
+@keyframes s25-draw {
+  from { clip-path: inset(-20px 100% -20px 0); }
+  to { clip-path: inset(-20px -2px -20px 0); }
+}
+
+/* 05's type roles */
+
+#s25 .s25-mast__title,
+#s25 .s25-h2,
+#s25 .s25-cta__main,
+#s25 .s25-sheet__head,
+#s25 .s25-vibe__name,
+#s25 .s25-finish__word,
+#s25 .s25-note h3 {
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+#s25 .s25-mast__title {
+  color: var(--s25-yellow);
+  font-size: clamp(1.45rem, 0.5rem + 3.8vw, 3.5rem);
+  letter-spacing: 0.015em;
+  -webkit-text-stroke: 0.09em var(--s25-ink);
+  paint-order: stroke fill;
+  text-shadow: 0.07em 0.08em 0 var(--s25-red);
+}
+
+#s25 .s25-ad__name {
+  margin: 0.5rem 0.15rem 0.35rem;
+  font-family: var(--s25-display);
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+#s25 .s25-sheet__name,
+#s25 .s25-sheet__blank,
+#s25 .s25-balloon text,
+#s25 .s25-seat__word,
+#s25 .s25-reset,
+#s25 .s25-status,
+#s25 .s25-note p,
+#s25 .s25-step__text,
+#s25 .s25-vibe__note,
+#s25 .s25-vibe__stamp,
+#s25 .s25-tally dt,
+#s25 .s25-band__kick,
+#s25 .s25-kicker,
+#s25 .s25-ad__tag,
+#s25 .s25-cta__sub,
+#s25 .s25-more a {
+  font-family: var(--s25-comic);
+  font-weight: 700;
+}

@@ -1,0 +1,1236 @@
+/* 16 Ink Road: style 14's Sunday-comics crossroads redrawn for character. The
+   newspaper frame stays (newsprint on a wooden table, halftone washes, wobbly
+   panel borders, heavy banners with an italic kicker) and so does the road: one
+   colour of ivory paving with an inked edge and a dashed centre line, forking at
+   a signpost into three spot-colour roads, one per vibe.
+   What changed is the drawing. Outlines are heavy and broken into segments of
+   different weight so a contour swells and thins like brushed ink; fills are flat
+   cel colour with no screen over the figures, so faces stay crisp; and the crew
+   is drawn large and goofy, with big eye-whites, one slab brow each, square-tooth
+   grins, blush, freckles and oversized splayed hands. A close-up pal leans out of
+   the hero panel to wave you in. Every character and word here is original.
+   Hook: pick your vibe ("Which way tonight?").
+   Fonts: Rye (masthead, h1, CTA label, banners, closing heading) and Libre
+   Baskerville for everything else, instructions included.
+   Every rule and custom property is scoped under #s16. */
+
+@font-face {
+  font-family: "s16 Rye";
+  src: url("../fonts/rye/rye-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s16 Libre Baskerville";
+  src: url("../fonts/librebaskerville/librebaskerville-var.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s16 Libre Baskerville";
+  src: url("../fonts/librebaskerville/librebaskerville-italic-var.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+#s16 {
+  --s16-ink: #1a1410;
+  --s16-ink-2: #4a3b26;
+  --s16-news: #f1e5c6;
+  --s16-panel: #fbf4e0;
+  --s16-road: #f7eed7;
+  --s16-table: #9a8453;
+  --s16-table-2: #806a40;
+  --s16-red: #d02a1c;
+  --s16-red-ink: #a3180f;
+  --s16-red-deep: #8a130c;
+  --s16-blue: #2a6cc0;
+  --s16-blue-ink: #1a4e93;
+  --s16-yellow: #f5c22e;
+  --s16-yellow-ink: #755606;
+  --s16-olive: #8a9a4a;
+  --s16-display: "s16 Rye", "Rockwell", "Clarendon", "Bookman Old Style", Georgia, serif;
+  --s16-body: "s16 Libre Baskerville", "Baskerville", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  /* Panel corners wobble like a hand-ruled border */
+  --s16-wob: 120px 14px 104px 16px / 14px 104px 16px 120px;
+  --s16-wob-sm: 44px 9px 38px 11px / 11px 38px 9px 44px;
+  --s16-halftone: radial-gradient(rgb(110 80 30 / 0.13) 1.1px, transparent 1.5px) 0 0 / 5px 5px;
+  --s16-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .25 0 0 0 0 .18 0 0 0 0 .08 0 0 0 .14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  background: var(--s16-table);
+  color: var(--s16-ink);
+  font-family: var(--s16-body);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+#s16 *,
+#s16 *::before,
+#s16 *::after {
+  box-sizing: border-box;
+}
+
+#s16 h1,
+#s16 h2,
+#s16 h3,
+#s16 h4,
+#s16 p,
+#s16 ol,
+#s16 ul,
+#s16 dl,
+#s16 dd,
+#s16 fieldset {
+  margin: 0;
+}
+
+#s16 ol,
+#s16 ul {
+  padding: 0;
+  list-style: none;
+}
+
+#s16 fieldset {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+
+#s16 [hidden] {
+  display: none !important;
+}
+
+#s16 .s16-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+#s16 .s16-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Links, buttons and focus */
+
+#s16 a {
+  color: var(--s16-blue-ink);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 2px;
+}
+
+#s16 a:hover {
+  color: var(--s16-ink);
+}
+
+#s16 a:focus-visible,
+#s16 button:focus-visible {
+  outline: 3px solid var(--s16-ink);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Table and the newsprint sheet */
+
+#s16 .s16-table {
+  position: relative;
+  padding: clamp(6px, 2.6vw, 40px);
+  background:
+    var(--s16-grain),
+    repeating-linear-gradient(90deg, rgb(60 40 10 / 0.06) 0 2px, transparent 2px 8px),
+    radial-gradient(120% 60% at 30% 0%, #b09765 0%, transparent 60%),
+    linear-gradient(180deg, var(--s16-table) 0%, var(--s16-table-2) 100%);
+}
+
+#s16 .s16-paper {
+  position: relative;
+  max-width: 1340px;
+  margin: 0 auto;
+  background:
+    var(--s16-halftone),
+    radial-gradient(ellipse at 50% 0%, transparent 55%, rgb(150 110 45 / 0.16) 100%),
+    var(--s16-news);
+  box-shadow:
+    0 0 0 1px rgb(60 40 10 / 0.25),
+    6px 8px 0 rgb(40 25 5 / 0.18),
+    14px 22px 34px rgb(40 25 5 / 0.38);
+}
+
+#s16 .s16-paper__inner {
+  position: relative;
+  container-type: inline-size;
+  padding: clamp(10px, 2.2vw, 26px) clamp(12px, 3vw, 44px) clamp(14px, 3vw, 34px);
+  /* Road geometry. --s16-cu is 1/1200 of the inner width, matching the SVG
+     roads; --s16-u drives the straight side lanes and is fixed when narrow. */
+  --s16-cu: calc(100cqi / 1200);
+  --s16-u: 0.62px;
+}
+
+/* Loose props beside the sheet, only where there is room */
+
+#s16 .s16-loose {
+  display: none;
+}
+
+@media (min-width: 1680px) {
+  #s16 .s16-loose {
+    display: block;
+  }
+
+  #s16 .s16-loose svg {
+    position: absolute;
+    z-index: 4;
+    pointer-events: none;
+    filter: drop-shadow(2px 4px 3px rgb(40 22 6 / 0.4));
+  }
+
+  #s16 .s16-loose__dice { width: 118px; left: -134px; top: 28%; }
+  #s16 .s16-loose__cards { width: 146px; right: -162px; top: 56%; }
+}
+
+/* Masthead */
+
+#s16 .s16-mast {
+  padding-bottom: 0.45rem;
+  margin-bottom: clamp(0.8rem, 2vw, 1.3rem);
+  border-bottom: 6px double var(--s16-ink);
+  text-align: center;
+}
+
+#s16 .s16-mast__title {
+  font-family: var(--s16-display);
+  font-size: clamp(1.4rem, 0.7rem + 3.4vw, 3rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: var(--s16-ink);
+  text-shadow:
+    3px 0 0 var(--s16-yellow),
+    5px 3px 0 var(--s16-red),
+    6px 5px 0 rgb(26 20 16 / 0.22);
+}
+
+#s16 .s16-mast__line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.1rem 1.1rem;
+  margin-top: 0.45rem;
+  padding-top: 0.3rem;
+  border-top: 2px solid var(--s16-ink);
+  color: var(--s16-ink-2);
+  font-size: 0.78rem;
+  font-style: italic;
+  letter-spacing: 0.04em;
+}
+
+#s16 .s16-mast__line span + span::before {
+  content: "\2605";
+  margin-right: 1.1rem;
+  font-style: normal;
+  color: var(--s16-red);
+}
+
+/* Panels: heavier ink than 14 */
+
+#s16 .s16-panel {
+  position: relative;
+  border: 5px solid var(--s16-ink);
+  border-radius: var(--s16-wob);
+  background: var(--s16-panel);
+}
+
+/* Type */
+
+#s16 .s16-kicker {
+  align-self: flex-start;
+  display: inline-block;
+  margin-bottom: 0.6rem;
+  padding: 0.15rem 0.6rem 0.2rem;
+  border: 3px solid var(--s16-ink);
+  border-radius: var(--s16-wob-sm);
+  background: var(--s16-yellow);
+  color: var(--s16-ink);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform: rotate(-1.6deg);
+}
+
+#s16 .s16-h1 {
+  font-family: var(--s16-display);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 1rem + 2.9vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: 0.005em;
+  text-wrap: balance;
+}
+
+#s16 .s16-h1 em {
+  display: block;
+  font-style: normal;
+  color: var(--s16-red-ink);
+}
+
+#s16 .s16-h2 {
+  font-family: var(--s16-display);
+  font-weight: 400;
+  font-size: clamp(1.25rem, 0.9rem + 1.5vw, 2.05rem);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+
+#s16 .s16-lede {
+  margin-top: 0.85rem;
+  max-width: 32em;
+  color: var(--s16-ink-2);
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.12rem);
+}
+
+/* Section banners */
+
+#s16 .s16-band {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.1rem 1.1rem;
+  padding: 0.35rem 0.9rem 0.5rem;
+  margin-bottom: clamp(0.9rem, 2vw, 1.4rem);
+  background: var(--s16-ink);
+  color: var(--s16-panel);
+  border-radius: 3px;
+}
+
+#s16 .s16-band--red {
+  background: var(--s16-red-ink);
+}
+
+#s16 .s16-band__kick {
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* Primary CTA */
+
+#s16 .s16-cta {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1.25rem;
+  padding: 0.7rem 1.4rem 0.75rem 1rem;
+  border: 5px solid var(--s16-ink);
+  border-radius: 22px 8px 20px 10px / 10px 20px 8px 22px;
+  background: var(--s16-red-ink);
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 8px 8px 0 var(--s16-ink);
+  transform: rotate(-1.2deg);
+}
+
+#s16 .s16-cta:hover {
+  color: #fff;
+  background: var(--s16-red-deep);
+}
+
+#s16 .s16-cta:focus-visible {
+  outline: 4px solid var(--s16-ink);
+  outline-offset: 7px;
+}
+
+#s16 .s16-cta__icon {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  color: var(--s16-yellow);
+}
+
+#s16 .s16-cta__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+#s16 .s16-cta__main {
+  font-family: var(--s16-display);
+  font-size: clamp(1.3rem, 1.1rem + 0.7vw, 1.65rem);
+  letter-spacing: 0.02em;
+}
+
+#s16 .s16-cta__sub {
+  margin-top: 0.3rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+/* Box score: the three big numbers as a newspaper table */
+
+#s16 .s16-box {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 1.5rem;
+  border: 5px solid var(--s16-ink);
+  background: var(--s16-panel);
+}
+
+#s16 .s16-box__cell {
+  padding: 0.5rem 0.7rem 0.6rem;
+  border-right: 2px solid var(--s16-ink);
+}
+
+#s16 .s16-box__cell:last-child {
+  border-right: 0;
+}
+
+#s16 .s16-box dt {
+  color: var(--s16-ink-2);
+  font-size: 0.7rem;
+  font-style: italic;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+#s16 .s16-box dd {
+  font-family: var(--s16-display);
+  font-size: clamp(1.05rem, 0.4rem + 1.2vw, 1.6rem);
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 2px 2px 0 var(--s16-yellow);
+}
+
+#s16 .s16-box__cell:nth-child(1) dd {
+  color: var(--s16-red-ink);
+}
+
+/* The road: ivory paving, heavy inked edge, dashed centre line */
+
+#s16 .s16-link {
+  display: none;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#s16 .s16-rd__edge,
+#s16 .s16-rd__pave,
+#s16 .s16-rd__dots,
+#s16 .s16-rd__line {
+  fill: none;
+}
+
+#s16 .s16-rd__edge { stroke: var(--s16-ink); stroke-width: 62; }
+#s16 .s16-rd__pave { stroke: var(--s16-rc, var(--s16-road)); stroke-width: 48; }
+#s16 .s16-rd__dots { stroke: url(#s16-dotk); stroke-width: 48; opacity: 0.2; }
+#s16 .s16-rd__line { stroke: var(--s16-ink); stroke-width: 5.5; stroke-dasharray: 22 20; opacity: 0.6; }
+
+#s16 .s16-br--strategy { --s16-rc: var(--s16-blue); }
+#s16 .s16-br--family { --s16-rc: var(--s16-yellow); }
+#s16 .s16-br--friends { --s16-rc: var(--s16-red); }
+
+#s16 .s16-br .s16-rd__dots { opacity: 0.14; }
+#s16 .s16-br .s16-rd__line { opacity: 0.85; }
+
+/* Straight side lanes, used on narrow screens and beside the two stops */
+
+#s16 .s16-lane {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 6px;
+  width: calc(52 * var(--s16-u));
+  border-inline: calc(5 * var(--s16-u)) solid var(--s16-ink);
+  background:
+    repeating-linear-gradient(180deg, var(--s16-ink) 0 22px, transparent 22px 42px) 50% 0 / 5px 100% no-repeat,
+    radial-gradient(rgb(26 20 16 / 0.28) 1.1px, transparent 1.5px) 0 0 / 5px 5px,
+    var(--s16-road);
+}
+
+/* Milestone plaque where a stop meets its lane */
+
+#s16 .s16-mile {
+  position: absolute;
+  z-index: 1;
+  top: 1rem;
+  left: calc(6px + 26 * var(--s16-u) - 25px);
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--s16-ink);
+  border-radius: 50%;
+  background:
+    radial-gradient(rgb(245 194 46 / 0.75) 2.2px, transparent 2.6px) 0 0 / 9px 9px,
+    var(--s16-panel);
+  box-shadow: 3px 4px 0 rgb(26 20 16 / 0.25);
+  font-family: var(--s16-display);
+  font-size: 1.3rem;
+  line-height: 1;
+  text-align: center;
+}
+
+/* Hero */
+
+#s16 .s16-hero {
+  display: grid;
+  gap: clamp(0.8rem, 1.8vw, 1.1rem);
+}
+
+#s16 .s16-hero__copy {
+  padding: clamp(1rem, 2.4vw, 1.9rem);
+  background:
+    radial-gradient(rgb(42 108 192 / 0.15) 2.1px, transparent 2.5px) 0 0 / 10px 10px,
+    var(--s16-panel);
+}
+
+#s16 .s16-hero__art {
+  overflow: hidden;
+}
+
+#s16 .s16-start {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+#s16 .s16-start__word {
+  fill: var(--s16-ink);
+  font-family: var(--s16-display);
+  font-size: 46px;
+  letter-spacing: 5px;
+  paint-order: stroke;
+  stroke: var(--s16-panel);
+  stroke-width: 7;
+  stroke-linejoin: round;
+}
+
+#s16 .s16-post__arm text {
+  fill: #fff;
+  font-family: var(--s16-body);
+  font-weight: 700;
+  font-size: 20px;
+}
+
+#s16 .s16-post__arm text.s16-post__dark {
+  fill: var(--s16-ink);
+}
+
+#s16 .s16-balloon text {
+  fill: var(--s16-ink);
+  font-family: var(--s16-body);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 26px;
+}
+
+#s16 .s16-art__word {
+  fill: var(--s16-ink);
+  font-family: var(--s16-display);
+  font-size: 34px;
+  letter-spacing: 2px;
+}
+
+/* The fork */
+
+#s16 .s16-fork {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#s16 .s16-fork__hub circle {
+  fill: var(--s16-panel);
+  stroke: var(--s16-ink);
+  stroke-width: 6;
+}
+
+#s16 .s16-fork__hub path {
+  fill: var(--s16-red);
+  stroke: var(--s16-ink);
+  stroke-width: 3.5;
+}
+
+/* The three vibe choices, one under the end of each road */
+
+#s16 .s16-pick__row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 clamp(4px, 1.2vw, 16px);
+}
+
+#s16 .s16-vibe {
+  --s16-vc: var(--s16-blue-ink);
+  --s16-vfill: var(--s16-blue);
+  position: relative;
+}
+
+#s16 .s16-vibe--family { --s16-vc: var(--s16-yellow-ink); --s16-vfill: var(--s16-yellow); }
+#s16 .s16-vibe--friends { --s16-vc: var(--s16-red-ink); --s16-vfill: var(--s16-red); }
+
+#s16 .s16-vibe label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  height: 100%;
+  padding: 0.7rem 0.5rem 0.9rem;
+  border: 5px solid var(--s16-ink);
+  border-radius: var(--s16-wob-sm);
+  background: var(--s16-panel);
+  box-shadow: 6px 6px 0 var(--s16-ink);
+  cursor: pointer;
+  text-align: center;
+}
+
+#s16 .s16-vibe label:hover {
+  background: #fffaea;
+}
+
+/* Each choice carries a drawn pal, not just an icon */
+#s16 .s16-vibe__pal {
+  width: clamp(62px, 10.5vw, 118px);
+  height: auto;
+  margin-bottom: 0.15rem;
+}
+
+#s16 .s16-vibe__name {
+  font-family: var(--s16-display);
+  font-size: clamp(0.95rem, 0.7rem + 0.75vw, 1.3rem);
+  line-height: 1.1;
+}
+
+#s16 .s16-vibe__note {
+  color: var(--s16-ink-2);
+  font-size: clamp(0.72rem, 0.65rem + 0.25vw, 0.88rem);
+  font-style: italic;
+  line-height: 1.25;
+}
+
+#s16 .s16-vibe__stamp {
+  position: absolute;
+  top: -0.7rem;
+  right: -0.5rem;
+  padding: 0.1rem 0.5rem 0.15rem;
+  border: 3px solid var(--s16-ink);
+  border-radius: var(--s16-wob-sm);
+  background: var(--s16-vfill);
+  color: var(--s16-ink);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: rotate(7deg) scale(0);
+}
+
+#s16 .s16-vibe--strategy .s16-vibe__stamp,
+#s16 .s16-vibe--friends .s16-vibe__stamp {
+  color: #fff;
+}
+
+#s16 .s16-vibe input:checked + label {
+  background:
+    radial-gradient(rgb(26 20 16 / 0.1) 1.6px, transparent 2px) 0 0 / 8px 8px,
+    #fffaea;
+  box-shadow: 6px 6px 0 var(--s16-vc), 6px 6px 0 5px var(--s16-ink);
+}
+
+#s16 .s16-vibe input:checked + label .s16-vibe__stamp {
+  transform: rotate(7deg) scale(1);
+}
+
+#s16 .s16-pick:has(input:checked) .s16-vibe input:not(:checked) + label {
+  background: #ede3c6;
+  box-shadow: 3px 3px 0 rgb(26 20 16 / 0.45);
+}
+
+#s16 .s16-pick:has(input:checked) .s16-vibe input:not(:checked) + label .s16-vibe__pal {
+  opacity: 0.4;
+}
+
+#s16 .s16-vibe input:focus-visible + label {
+  outline: 4px solid var(--s16-ink);
+  outline-offset: 5px;
+}
+
+/* Lit road: the other two roads fade back */
+
+#s16 .s16-hook:has(#s16-vibe-strategy:checked) .s16-br:not(.s16-br--strategy),
+#s16 .s16-hook:has(#s16-vibe-family:checked) .s16-br:not(.s16-br--family),
+#s16 .s16-hook:has(#s16-vibe-friends:checked) .s16-br:not(.s16-br--friends),
+#s16 .s16-paper__inner:has(#s16-vibe-strategy:checked) .s16-merge .s16-br:not(.s16-br--strategy),
+#s16 .s16-paper__inner:has(#s16-vibe-family:checked) .s16-merge .s16-br:not(.s16-br--family),
+#s16 .s16-paper__inner:has(#s16-vibe-friends:checked) .s16-merge .s16-br:not(.s16-br--friends) {
+  opacity: 0.2;
+}
+
+/* Status line */
+
+#s16 .s16-herald {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem 1.2rem;
+  min-height: 2.8rem;
+  margin: clamp(1.1rem, 2.4vw, 1.8rem) auto clamp(1rem, 2vw, 1.5rem);
+  text-align: center;
+}
+
+#s16 .s16-status {
+  color: var(--s16-ink-2);
+  font-size: 1rem;
+  font-style: italic;
+}
+
+#s16 .s16-reset {
+  flex: none;
+  padding: 0.3rem 0.9rem 0.35rem;
+  border: 3px solid var(--s16-ink);
+  border-radius: var(--s16-wob-sm);
+  background: var(--s16-yellow);
+  color: var(--s16-ink);
+  font: 700 0.9rem/1.2 var(--s16-body);
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--s16-ink);
+}
+
+#s16 .s16-reset:hover {
+  background: #ffd45c;
+}
+
+/* The top ten, set as classified ads */
+
+#s16 .s16-ads {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.6rem, 1.4vw, 0.95rem);
+}
+
+#s16 .s16-ad {
+  --s16-chip: var(--s16-blue-ink);
+  --s16-chip-ink: #fff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 7px 7px 9px;
+  border: 4px double var(--s16-ink);
+  background: var(--s16-panel);
+}
+
+#s16 .s16-ad--family { --s16-chip: var(--s16-yellow); --s16-chip-ink: var(--s16-ink); }
+#s16 .s16-ad--coop { --s16-chip: var(--s16-ink); --s16-chip-ink: var(--s16-panel); }
+
+#s16 .s16-ad__pic {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 3px solid var(--s16-ink);
+  background: #ddd0ae;
+}
+
+#s16 .s16-ad__pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.3) sepia(0.18) contrast(1.05);
+}
+
+/* halftone screen over the photo, as a newspaper picture */
+#s16 .s16-ad__pic::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(rgb(26 20 16 / 0.26) 1.1px, transparent 1.5px) 0 0 / 4px 4px;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+#s16 .s16-ad__name {
+  margin: 0.5rem 0.15rem 0.35rem;
+  font-weight: 700;
+  font-size: 0.92rem;
+  line-height: 1.25;
+}
+
+#s16 .s16-ad__tag {
+  align-self: flex-start;
+  margin: auto 0.15rem 0;
+  padding: 0.05rem 0.5rem 0.1rem;
+  background: var(--s16-chip);
+  color: var(--s16-chip-ink);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Lit games: the chosen road's games come up in full colour */
+
+#s16 .s16-hook:has(#s16-vibe-strategy:checked) { --s16-pick: var(--s16-blue-ink); }
+#s16 .s16-hook:has(#s16-vibe-family:checked) { --s16-pick: var(--s16-yellow-ink); }
+#s16 .s16-hook:has(#s16-vibe-friends:checked) { --s16-pick: var(--s16-red-ink); }
+
+#s16 .s16-hook:has(#s16-vibe-strategy:checked) .s16-fit-strategy,
+#s16 .s16-hook:has(#s16-vibe-family:checked) .s16-fit-family,
+#s16 .s16-hook:has(#s16-vibe-friends:checked) .s16-fit-friends {
+  z-index: 1;
+  border-color: var(--s16-pick);
+  box-shadow: 0 0 0 4px var(--s16-pick), 7px 8px 0 var(--s16-ink);
+  transform: translateY(-5px);
+}
+
+#s16 .s16-hook:has(#s16-vibe-strategy:checked) .s16-fit-strategy .s16-ad__pic img,
+#s16 .s16-hook:has(#s16-vibe-family:checked) .s16-fit-family .s16-ad__pic img,
+#s16 .s16-hook:has(#s16-vibe-friends:checked) .s16-fit-friends .s16-ad__pic img {
+  filter: none;
+}
+
+#s16 .s16-hook:has(#s16-vibe-strategy:checked) .s16-fit-strategy .s16-ad__pic::after,
+#s16 .s16-hook:has(#s16-vibe-family:checked) .s16-fit-family .s16-ad__pic::after,
+#s16 .s16-hook:has(#s16-vibe-friends:checked) .s16-fit-friends .s16-ad__pic::after {
+  opacity: 0.3;
+}
+
+#s16 .s16-hook:has(#s16-vibe-strategy:checked) .s16-ad:not(.s16-fit-strategy),
+#s16 .s16-hook:has(#s16-vibe-family:checked) .s16-ad:not(.s16-fit-family),
+#s16 .s16-hook:has(#s16-vibe-friends:checked) .s16-ad:not(.s16-fit-friends) {
+  background: #eae0c2;
+}
+
+#s16 .s16-hook:has(#s16-vibe-strategy:checked) .s16-ad:not(.s16-fit-strategy) .s16-ad__pic img,
+#s16 .s16-hook:has(#s16-vibe-family:checked) .s16-ad:not(.s16-fit-family) .s16-ad__pic img,
+#s16 .s16-hook:has(#s16-vibe-friends:checked) .s16-ad:not(.s16-fit-friends) .s16-ad__pic img {
+  filter: grayscale(1) contrast(0.95);
+  opacity: 0.5;
+}
+
+#s16 .s16-more {
+  margin-top: clamp(1.1rem, 2.2vw, 1.6rem);
+  text-align: center;
+}
+
+#s16 .s16-more a {
+  display: inline-block;
+  padding: 0.4rem 1rem 0.45rem;
+  border: 4px solid var(--s16-ink);
+  border-radius: var(--s16-wob-sm);
+  background: var(--s16-yellow);
+  color: var(--s16-ink);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 5px 5px 0 var(--s16-ink);
+}
+
+#s16 .s16-more a:hover {
+  background: #ffd45c;
+}
+
+/* Stops along the side lanes */
+
+#s16 .s16-stop {
+  position: relative;
+  padding: 1.1rem 0 2.4rem calc(6px + 52 * var(--s16-u) + 18px);
+}
+
+#s16 .s16-stop__body {
+  position: relative;
+}
+
+/* The two comic strips */
+
+#s16 .s16-strip {
+  display: grid;
+  gap: clamp(0.6rem, 1.4vw, 0.95rem);
+}
+
+#s16 .s16-cell {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--s16-wob-sm);
+  padding-bottom: 0.8rem;
+}
+
+#s16 .s16-cell__art svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-bottom: 5px solid var(--s16-ink);
+}
+
+#s16 .s16-cell h3 {
+  margin: 0.7rem 0.85rem 0.2rem;
+  font-family: var(--s16-display);
+  font-weight: 400;
+  font-size: 1.1rem;
+  line-height: 1.15;
+  color: var(--s16-red-ink);
+}
+
+#s16 .s16-cell p {
+  margin: 0 0.85rem;
+  color: var(--s16-ink-2);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+/* Numbered step panels. Instructions stay in the body face so they read fast. */
+
+#s16 .s16-cell--step h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.8rem 0.85rem 0;
+  color: var(--s16-ink);
+  font-family: var(--s16-body);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+#s16 .s16-no {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 5px solid var(--s16-ink);
+  border-radius: 50%;
+  background: var(--s16-yellow);
+  box-shadow: 2px 3px 0 rgb(26 20 16 / 0.3);
+  font-family: var(--s16-display);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+#s16 .s16-join__go {
+  margin-top: 0.4rem;
+}
+
+/* Finish */
+
+#s16 .s16-finish {
+  position: relative;
+  padding: 1.8rem 0 clamp(1.6rem, 3.4vw, 2.6rem);
+  text-align: center;
+}
+
+#s16 .s16-lane--finish {
+  bottom: auto;
+  height: 1.8rem;
+}
+
+#s16 .s16-finish__panel {
+  max-width: 540px;
+  margin: 0 auto 1.5rem;
+  padding: 12px;
+  border-width: 0;
+  border-radius: 0;
+  background: repeating-conic-gradient(var(--s16-ink) 0 25%, var(--s16-panel) 0 50%) 0 0 / 22px 22px;
+  box-shadow: 5px 6px 0 rgb(26 20 16 / 0.25);
+}
+
+#s16 .s16-finish__panel > * {
+  background: var(--s16-panel);
+}
+
+#s16 .s16-finish__word {
+  padding: 0.55rem 0 0.1rem;
+  border: 5px solid var(--s16-ink);
+  border-bottom: 0;
+  color: var(--s16-red-ink);
+  font-family: var(--s16-display);
+  font-size: clamp(1.9rem, 1.4rem + 2vw, 2.9rem);
+  letter-spacing: 0.15em;
+  text-indent: 0.15em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+#s16 .s16-finish__art {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 5px solid var(--s16-ink);
+  border-top: 0;
+}
+
+#s16 .s16-seat__word {
+  fill: var(--s16-red-ink);
+  font-family: var(--s16-body);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 25px;
+}
+
+#s16 .s16-finish__title {
+  max-width: 20em;
+  margin: 0 auto 1.4rem;
+  font-size: clamp(1.5rem, 1.05rem + 1.9vw, 2.5rem);
+  line-height: 1.14;
+}
+
+#s16 .s16-finish__title em {
+  font-style: normal;
+  color: var(--s16-red-ink);
+}
+
+/* Narrow phones */
+
+@media (max-width: 520px) {
+  #s16 .s16-box {
+    grid-template-columns: 1fr;
+  }
+
+  #s16 .s16-box__cell {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    border-right: 0;
+    border-bottom: 2px solid var(--s16-ink);
+  }
+
+  #s16 .s16-box__cell:last-child {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  #s16 .s16-cta {
+    gap: 0.55rem;
+    padding: 0.6rem 1rem 0.65rem 0.75rem;
+  }
+
+  #s16 .s16-cta__icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  #s16 .s16-vibe__stamp {
+    display: none;
+  }
+
+  #s16 .s16-vibe label {
+    padding: 0.55rem 0.25rem 0.7rem;
+  }
+
+  #s16 .s16-vibe__pal {
+    width: 46px;
+  }
+}
+
+/* Container steps */
+
+@container (min-width: 520px) {
+  #s16 .s16-strip--four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #s16 .s16-strip--three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@container (min-width: 640px) {
+  #s16 .s16-ads {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@container (min-width: 880px) {
+  #s16 .s16-strip--four {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Wide screens: the road snakes down the sheet */
+
+@media (min-width: 860px) {
+  #s16 .s16-paper__inner {
+    --s16-u: var(--s16-cu);
+  }
+
+  #s16 .s16-link {
+    display: block;
+  }
+
+  #s16 .s16-hero {
+    grid-template-columns: 54fr 46fr;
+    align-items: stretch;
+  }
+
+  #s16 .s16-hero__copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #s16 .s16-hero__art {
+    align-self: start;
+    max-height: 520px;
+  }
+
+  #s16 .s16-stop {
+    padding: 1.6rem 2cqi 2.6rem 15cqi;
+  }
+
+  #s16 .s16-stop--right {
+    padding: 1.6rem 15cqi 2.6rem 2cqi;
+  }
+
+  #s16 .s16-lane {
+    left: calc(64 * var(--s16-u));
+  }
+
+  #s16 .s16-stop--right .s16-lane {
+    left: calc(1084 * var(--s16-u));
+  }
+
+  #s16 .s16-mile {
+    --s16-ms: max(60px, calc(118 * var(--s16-u)));
+    top: 1.3rem;
+    left: calc(90 * var(--s16-u) - var(--s16-ms) / 2);
+    width: var(--s16-ms);
+    height: var(--s16-ms);
+    font-size: calc(var(--s16-ms) * 0.34);
+  }
+
+  #s16 .s16-stop--right .s16-mile {
+    left: calc(1110 * var(--s16-u) - var(--s16-ms) / 2);
+  }
+
+  #s16 .s16-lane--finish {
+    left: calc(574 * var(--s16-u));
+  }
+
+  #s16 .s16-merge {
+    margin-top: -0.4rem;
+  }
+}
+
+/* Motion: 14's animations, kept. The signpost arms swing out, the chosen road's
+   centre line marches away from the crossroads, and the close-up pal waves. */
+
+@media (prefers-reduced-motion: no-preference) {
+  #s16 .s16-cta {
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  }
+
+  #s16 .s16-cta:hover {
+    transform: rotate(-1.2deg) translate(-2px, -3px);
+    box-shadow: 10px 11px 0 var(--s16-ink);
+  }
+
+  #s16 .s16-cta:active {
+    transform: rotate(-1.2deg) translate(3px, 3px);
+    box-shadow: 3px 3px 0 var(--s16-ink);
+  }
+
+  #s16 .s16-vibe label,
+  #s16 .s16-vibe__stamp,
+  #s16 .s16-ad {
+    transition: transform 0.3s cubic-bezier(0.3, 1.4, 0.5, 1), box-shadow 0.3s ease, background-color 0.25s ease, border-color 0.25s ease;
+  }
+
+  #s16 .s16-br,
+  #s16 .s16-ad__pic img,
+  #s16 .s16-ad__pic::after {
+    transition: opacity 0.35s ease, filter 0.35s ease;
+  }
+
+  #s16 .s16-post__arm {
+    transform-box: fill-box;
+    transform-origin: 0% 50%;
+    animation: s16-swing 0.9s cubic-bezier(0.3, 1.5, 0.5, 1) both;
+  }
+
+  #s16 .s16-post__arm--l,
+  #s16 .s16-post__arm--l2 {
+    transform-origin: 100% 50%;
+  }
+
+  #s16 .s16-post__arm--l { animation-delay: 0.15s; }
+  #s16 .s16-post__arm--r { animation-delay: 0.35s; }
+  #s16 .s16-post__arm--l2 { animation-delay: 0.55s; }
+
+  #s16 .s16-balloon {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: s16-pop 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) 0.8s both;
+  }
+
+  /* the raised hand of the close-up pal gives a slow wave */
+  #s16 .s16-wave {
+    transform-box: fill-box;
+    transform-origin: 50% 90%;
+    animation: s16-wave 2.4s ease-in-out 1s infinite;
+  }
+
+  #s16 .s16-br .s16-rd__line {
+    animation: s16-roll 2.6s linear infinite paused;
+  }
+
+  #s16 .s16-hook:has(#s16-vibe-strategy:checked) .s16-br--strategy .s16-rd__line,
+  #s16 .s16-hook:has(#s16-vibe-family:checked) .s16-br--family .s16-rd__line,
+  #s16 .s16-hook:has(#s16-vibe-friends:checked) .s16-br--friends .s16-rd__line,
+  #s16 .s16-paper__inner:has(#s16-vibe-strategy:checked) .s16-merge .s16-br--strategy .s16-rd__line,
+  #s16 .s16-paper__inner:has(#s16-vibe-family:checked) .s16-merge .s16-br--family .s16-rd__line,
+  #s16 .s16-paper__inner:has(#s16-vibe-friends:checked) .s16-merge .s16-br--friends .s16-rd__line {
+    animation-play-state: running;
+  }
+
+  #s16 .s16-seat path {
+    animation: s16-dash 3s linear infinite;
+  }
+}
+
+@keyframes s16-swing {
+  0% { transform: scaleX(0.2); opacity: 0; }
+  100% { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes s16-pop {
+  0% { transform: scale(0.2) rotate(-6deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes s16-wave {
+  0%, 100% { transform: rotate(-7deg); }
+  50% { transform: rotate(9deg); }
+}
+
+/* the chosen road's dashes march away from the crossroads */
+@keyframes s16-roll {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -42; }
+}
+
+@keyframes s16-dash {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -48; }
+}
+
+/* Landing-card preview: a calm, still final state */
+
+.is-thumb #s16 *,
+.is-thumb #s16 *::before,
+.is-thumb #s16 *::after {
+  animation: none !important;
+  transition: none !important;
+}

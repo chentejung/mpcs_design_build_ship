@@ -1,0 +1,1459 @@
+/* Changes from 20, all asked for: the masthead is now the h1 ("Welcome to Board
+   Game Arena!") with no small lines under it; the welcome copy and the sign-up
+   sheet are one panel; every outline, border and hard shadow is lighter; and the
+   top ten are drawn box covers, not photos of tables. The covers are original
+   artwork, not publisher box art. */
+/* 21 Welcome Sheet (iterates 20 Clubhouse Sign-Up): style 14's Sunday-comics crossroads moved into a backyard
+   clubhouse. The newspaper frame stays (newsprint on a wooden table, halftone
+   washes, wobbly panel borders, heavy banners with an italic kicker) and so does
+   the road: one colour of paving with an inked edge and a dashed centre line,
+   forking into three spot-colour roads, one per vibe. The drawing follows 16:
+   heavy outlines broken into segments of different weight so a contour swells and
+   thins, flat cel fills with no screen over the figures, big eye-whites, one slab
+   brow each, square-tooth grins, blush, freckles and oversized hands.
+   What is new here, all of it asked for:
+     - the hero reads "Welcome to Board Game Arena!" over the live page's own hook;
+     - the three numbers are a chalkboard tally in huge chalk numerals, not a
+       small box score, and they appear exactly once;
+     - the starting point is a sign-up sheet nailed to the clubhouse door, three
+       friends' names written in and one line left blank for you;
+     - "how to join" is three numbered arrow signs nailed up the path and
+       "house rules" is a painted four-slat plank sign on the fence.
+   Every character and word here is original.
+   Hook: pick your vibe ("Which way tonight?").
+   Fonts: Rye (masthead, h1, CTA label, banners, chalk figures, closing heading)
+   and Libre Baskerville for everything else, instructions included.
+   Every rule and custom property is scoped under #s21. */
+
+@font-face {
+  font-family: "s21 Rye";
+  src: url("../fonts/rye/rye-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s21 Libre Baskerville";
+  src: url("../fonts/librebaskerville/librebaskerville-var.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s21 Libre Baskerville";
+  src: url("../fonts/librebaskerville/librebaskerville-italic-var.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+#s21 {
+  --s21-ink: #1a1512;
+  --s21-ink-2: #473a29;
+  --s21-news: #efe6cd;
+  --s21-panel: #fcf6e6;
+  --s21-road: #f6edd4;
+  --s21-table: #8d7a4e;
+  --s21-table-2: #74633c;
+  --s21-wood: #c4934f;
+  --s21-wood-dk: #9c6f35;
+  --s21-plank: #ecd8ab;
+  --s21-slate: #2c3a31;
+  --s21-slate-2: #212c25;
+  --s21-chalk: #f6f2e2;
+  --s21-red: #c8372a;
+  --s21-red-ink: #9c2318;
+  --s21-red-deep: #7d1a11;
+  --s21-green: #3f7a4e;
+  --s21-green-ink: #2b5637;
+  --s21-yellow: #efc23f;
+  --s21-yellow-ink: #6b5007;
+  --s21-blue: #3f7fc0;
+  --s21-blue-ink: #255b93;
+  --s21-display: "s21 Rye", "Rockwell", "Clarendon", "Bookman Old Style", Georgia, serif;
+  --s21-body: "s21 Libre Baskerville", "Baskerville", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  /* Panel corners wobble like a hand-ruled border, gentler than 16's */
+  --s21-wob: 90px 12px 80px 14px / 12px 80px 14px 90px;
+  --s21-wob-sm: 36px 8px 32px 10px / 10px 32px 8px 36px;
+  --s21-halftone: radial-gradient(rgb(110 85 30 / 0.12) 1.1px, transparent 1.5px) 0 0 / 5px 5px;
+  --s21-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .25 0 0 0 0 .2 0 0 0 0 .1 0 0 0 .14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --s21-dust: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='d'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .9' numOctaves='3' seed='5' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 .95 0 0 0 .16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23d)'/%3E%3C/svg%3E");
+  --s21-woodgrain: repeating-linear-gradient(90deg, rgb(120 80 30 / 0.07) 0 3px, transparent 3px 12px);
+
+  background: var(--s21-table);
+  color: var(--s21-ink);
+  font-family: var(--s21-body);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+#s21 *,
+#s21 *::before,
+#s21 *::after {
+  box-sizing: border-box;
+}
+
+#s21 h1,
+#s21 h2,
+#s21 h3,
+#s21 h4,
+#s21 p,
+#s21 ol,
+#s21 ul,
+#s21 dl,
+#s21 dd,
+#s21 fieldset {
+  margin: 0;
+}
+
+#s21 ol,
+#s21 ul {
+  padding: 0;
+  list-style: none;
+}
+
+#s21 fieldset {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+
+#s21 [hidden] {
+  display: none !important;
+}
+
+#s21 .s21-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+#s21 .s21-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Links, buttons and focus */
+
+#s21 a {
+  color: var(--s21-green-ink);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 2px;
+}
+
+#s21 a:hover {
+  color: var(--s21-ink);
+}
+
+#s21 a:focus-visible,
+#s21 button:focus-visible {
+  outline: 3px solid var(--s21-ink);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Table and the newsprint sheet */
+
+#s21 .s21-table {
+  position: relative;
+  padding: clamp(6px, 2.6vw, 40px);
+  background:
+    var(--s21-grain),
+    repeating-linear-gradient(90deg, rgb(60 45 10 / 0.06) 0 2px, transparent 2px 8px),
+    radial-gradient(120% 60% at 30% 0%, #a3905f 0%, transparent 60%),
+    linear-gradient(180deg, var(--s21-table) 0%, var(--s21-table-2) 100%);
+}
+
+#s21 .s21-paper {
+  position: relative;
+  max-width: 1340px;
+  margin: 0 auto;
+  background:
+    var(--s21-halftone),
+    radial-gradient(ellipse at 50% 0%, transparent 55%, rgb(140 110 45 / 0.16) 100%),
+    var(--s21-news);
+  box-shadow:
+    0 0 0 1px rgb(60 45 10 / 0.25),
+    6px 8px 0 rgb(40 30 5 / 0.18),
+    14px 22px 34px rgb(40 30 5 / 0.38);
+}
+
+#s21 .s21-paper__inner {
+  position: relative;
+  container-type: inline-size;
+  padding: clamp(10px, 2.2vw, 26px) clamp(12px, 3vw, 44px) clamp(14px, 3vw, 34px);
+  /* Road geometry. --s21-cu is 1/1200 of the inner width, matching the SVG
+     roads; --s21-u drives the straight side lanes and is fixed when narrow. */
+  --s21-cu: calc(100cqi / 1200);
+  --s21-u: 0.62px;
+}
+
+/* Loose props beside the sheet, only where there is room */
+
+#s21 .s21-loose {
+  display: none;
+}
+
+@media (min-width: 1680px) {
+  #s21 .s21-loose {
+    display: block;
+  }
+
+  #s21 .s21-loose svg {
+    position: absolute;
+    z-index: 4;
+    pointer-events: none;
+    filter: drop-shadow(2px 4px 3px rgb(40 25 6 / 0.4));
+  }
+
+  #s21 .s21-loose__dice { width: 116px; left: -132px; top: 30%; }
+  #s21 .s21-loose__chalk { width: 142px; right: -158px; top: 58%; }
+}
+
+/* Masthead */
+
+#s21 .s21-mast {
+  padding-bottom: 0.45rem;
+  margin-bottom: clamp(0.8rem, 2vw, 1.3rem);
+  border-bottom: 4px double var(--s21-ink);
+  text-align: center;
+}
+
+#s21 .s21-mast__title {
+  font-family: var(--s21-display);
+  font-size: clamp(1.7rem, 0.7rem + 4.9vw, 4.4rem);
+  line-height: 1.04;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+  color: var(--s21-ink);
+  text-shadow:
+    3px 0 0 var(--s21-yellow),
+    5px 3px 0 var(--s21-green),
+    6px 5px 0 rgb(26 21 18 / 0.22);
+}
+
+/* Panels */
+
+#s21 .s21-panel {
+  position: relative;
+  border: 3px solid var(--s21-ink);
+  border-radius: var(--s21-wob);
+  background: var(--s21-panel);
+}
+
+/* Type */
+
+#s21 .s21-kicker {
+  align-self: flex-start;
+  display: inline-block;
+  margin-bottom: 0.6rem;
+  padding: 0.15rem 0.6rem 0.2rem;
+  border: 2px solid var(--s21-ink);
+  border-radius: var(--s21-wob-sm);
+  background: var(--s21-yellow);
+  color: var(--s21-ink);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform: rotate(-1.6deg);
+}
+
+#s21 .s21-h1 {
+  font-family: var(--s21-display);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 1rem + 3vw, 3.3rem);
+  line-height: 1.08;
+  letter-spacing: 0.005em;
+  text-wrap: balance;
+}
+
+#s21 .s21-h1 em {
+  font-style: normal;
+  color: var(--s21-red-ink);
+}
+
+#s21 .s21-h2 {
+  font-family: var(--s21-display);
+  font-weight: 400;
+  font-size: clamp(1.25rem, 0.9rem + 1.5vw, 2.05rem);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+
+#s21 .s21-lede {
+  max-width: 22em;
+  color: var(--s21-ink);
+  font-size: clamp(1.2rem, 1rem + 0.9vw, 1.65rem);
+  line-height: 1.35;
+}
+
+/* Section banners */
+
+#s21 .s21-band {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.1rem 1.1rem;
+  padding: 0.35rem 0.9rem 0.5rem;
+  margin-bottom: clamp(0.9rem, 2vw, 1.4rem);
+  background: var(--s21-ink);
+  color: var(--s21-panel);
+  border-radius: 3px;
+}
+
+#s21 .s21-band--green {
+  background: var(--s21-green-ink);
+}
+
+#s21 .s21-band__kick {
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* Primary CTA: a painted sign with a pencil on it */
+
+#s21 .s21-cta {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1.25rem;
+  padding: 0.7rem 1.4rem 0.75rem 1rem;
+  border: 3px solid var(--s21-ink);
+  border-radius: 20px 8px 18px 10px / 10px 18px 8px 20px;
+  background: var(--s21-red-ink);
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 5px 5px 0 var(--s21-ink);
+  transform: rotate(-1.2deg);
+}
+
+#s21 .s21-cta:hover {
+  color: #fff;
+  background: var(--s21-red-deep);
+}
+
+#s21 .s21-cta:focus-visible {
+  outline: 4px solid var(--s21-ink);
+  outline-offset: 7px;
+}
+
+#s21 .s21-cta__icon {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  color: var(--s21-yellow);
+}
+
+#s21 .s21-cta__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+#s21 .s21-cta__main {
+  font-family: var(--s21-display);
+  font-size: clamp(1.3rem, 1.1rem + 0.7vw, 1.65rem);
+  letter-spacing: 0.02em;
+}
+
+#s21 .s21-cta__sub {
+  margin-top: 0.3rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+/* Hero */
+
+#s21 .s21-hero {
+  display: grid;
+  overflow: hidden;
+}
+
+#s21 .s21-hero__copy {
+  padding: clamp(1rem, 2.4vw, 1.9rem);
+  background:
+    radial-gradient(rgb(63 122 78 / 0.14) 2.1px, transparent 2.5px) 0 0 / 10px 10px,
+    var(--s21-panel);
+}
+
+#s21 .s21-hero__art {
+  overflow: hidden;
+  border-top: 3px solid var(--s21-ink);
+}
+
+#s21 .s21-start {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* SVG lettering in the hero scene */
+
+#s21 .s21-sheet__head {
+  fill: var(--s21-ink);
+  font-family: var(--s21-display);
+  font-size: 21px;
+  letter-spacing: 2px;
+}
+
+#s21 .s21-sheet__name {
+  fill: #2f4a7a;
+  font-family: var(--s21-body);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 21px;
+}
+
+#s21 .s21-sheet__blank {
+  fill: var(--s21-red-ink);
+  font-family: var(--s21-body);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+#s21 .s21-balloon text {
+  fill: var(--s21-ink);
+  font-family: var(--s21-body);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 25px;
+}
+
+#s21 .s21-startsign text {
+  fill: var(--s21-ink);
+  font-family: var(--s21-display);
+  font-size: 19px;
+  letter-spacing: 1px;
+}
+
+/* The chalkboard tally: the three big numbers, the hero's second voice */
+
+#s21 .s21-chalk {
+  margin-top: clamp(0.9rem, 2vw, 1.3rem);
+}
+
+#s21 .s21-board {
+  position: relative;
+  padding: clamp(0.9rem, 2.2vw, 1.6rem) clamp(0.9rem, 2.4vw, 1.9rem) clamp(1rem, 2.4vw, 1.7rem);
+  border: clamp(8px, 1.1vw, 13px) solid var(--s21-wood-dk);
+  background:
+    var(--s21-dust),
+    radial-gradient(ellipse at 22% 10%, rgb(246 242 226 / 0.09), transparent 58%),
+    radial-gradient(ellipse at 80% 86%, rgb(246 242 226 / 0.07), transparent 55%),
+    linear-gradient(170deg, var(--s21-slate) 0%, var(--s21-slate-2) 100%);
+  box-shadow:
+    0 0 0 3px var(--s21-ink),
+    inset 0 0 0 3px rgb(0 0 0 / 0.38),
+    5px 5px 0 rgb(26 21 18 / 0.26);
+}
+
+/* nail heads in the board's wooden frame */
+#s21 .s21-board::before,
+#s21 .s21-board::after {
+  content: "";
+  position: absolute;
+  top: calc(clamp(8px, 1.1vw, 13px) / -1 + 2px);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--s21-ink);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.35);
+}
+
+#s21 .s21-board::before { left: -2px; }
+#s21 .s21-board::after { right: -2px; }
+
+#s21 .s21-board__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15rem 0.9rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: clamp(0.7rem, 1.8vw, 1.1rem);
+  border-bottom: 3px dashed rgb(246 242 226 / 0.4);
+}
+
+#s21 .s21-board__title {
+  color: var(--s21-chalk);
+}
+
+#s21 .s21-board__kick {
+  color: rgb(246 242 226 / 0.82);
+  font-size: 0.86rem;
+  font-style: italic;
+}
+
+#s21 .s21-tally {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+#s21 .s21-tally__cell {
+  padding: 0.2rem clamp(0.5rem, 1.4vw, 1.1rem) 0.3rem;
+  border-right: 3px dashed rgb(246 242 226 / 0.3);
+  text-align: center;
+}
+
+#s21 .s21-tally__cell:first-child {
+  padding-left: 0;
+}
+
+#s21 .s21-tally__cell:last-child {
+  padding-right: 0;
+  border-right: 0;
+}
+
+#s21 .s21-tally dt {
+  color: rgb(246 242 226 / 0.88);
+  font-size: clamp(0.7rem, 0.62rem + 0.3vw, 0.86rem);
+  font-style: italic;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* The figures themselves: huge, chalk-white, crisp. No blur or filter here. */
+#s21 .s21-tally dd {
+  margin-top: 0.15rem;
+  color: var(--s21-chalk);
+  font-family: var(--s21-display);
+  font-size: clamp(1.6rem, 0.5rem + 3.6vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 2px 2px 0 rgb(0 0 0 / 0.35);
+}
+
+#s21 .s21-tally__marks {
+  display: block;
+  width: clamp(54px, 7vw, 88px);
+  height: auto;
+  margin: 0.35rem auto 0;
+  color: rgb(246 242 226 / 0.72);
+}
+
+#s21 .s21-board__duster {
+  position: absolute;
+  right: clamp(8px, 2vw, 22px);
+  bottom: clamp(-10px, -1vw, -6px);
+  width: clamp(56px, 7vw, 96px);
+  height: auto;
+  pointer-events: none;
+}
+
+/* The road: pale paving, heavy inked edge, dashed centre line */
+
+#s21 .s21-link {
+  display: none;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#s21 .s21-rd__edge,
+#s21 .s21-rd__pave,
+#s21 .s21-rd__dots,
+#s21 .s21-rd__line {
+  fill: none;
+}
+
+#s21 .s21-rd__edge { stroke: var(--s21-ink); stroke-width: 56; }
+#s21 .s21-rd__pave { stroke: var(--s21-rc, var(--s21-road)); stroke-width: 48; }
+#s21 .s21-rd__dots { stroke: url(#s21-dotk); stroke-width: 48; opacity: 0.2; }
+#s21 .s21-rd__line { stroke: var(--s21-ink); stroke-width: 4; stroke-dasharray: 22 20; opacity: 0.6; }
+
+#s21 .s21-br--strategy { --s21-rc: var(--s21-blue); }
+#s21 .s21-br--family { --s21-rc: var(--s21-yellow); }
+#s21 .s21-br--friends { --s21-rc: var(--s21-red); }
+
+#s21 .s21-br .s21-rd__dots { opacity: 0.14; }
+#s21 .s21-br .s21-rd__line { opacity: 0.85; }
+
+/* Straight side lanes, used on narrow screens and beside the two stops */
+
+#s21 .s21-lane {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 6px;
+  width: calc(52 * var(--s21-u));
+  border-inline: calc(3 * var(--s21-u)) solid var(--s21-ink);
+  background:
+    repeating-linear-gradient(180deg, var(--s21-ink) 0 22px, transparent 22px 42px) 50% 0 / 5px 100% no-repeat,
+    radial-gradient(rgb(26 21 18 / 0.28) 1.1px, transparent 1.5px) 0 0 / 5px 5px,
+    var(--s21-road);
+}
+
+/* Milestone plaque where a stop meets its lane */
+
+#s21 .s21-mile {
+  position: absolute;
+  z-index: 1;
+  top: 1rem;
+  left: calc(6px + 26 * var(--s21-u) - 25px);
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border: 3px solid var(--s21-ink);
+  border-radius: 50%;
+  background:
+    radial-gradient(rgb(239 194 63 / 0.7) 2.2px, transparent 2.6px) 0 0 / 9px 9px,
+    var(--s21-panel);
+  box-shadow: 3px 4px 0 rgb(26 21 18 / 0.25);
+  font-family: var(--s21-display);
+  font-size: 1.3rem;
+  line-height: 1;
+  text-align: center;
+}
+
+/* The fork */
+
+#s21 .s21-fork {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#s21 .s21-fork__hub circle {
+  fill: var(--s21-wood);
+  stroke: var(--s21-ink);
+  stroke-width: 4;
+}
+
+#s21 .s21-fork__hub circle:nth-child(2) {
+  fill: none;
+  stroke-width: 3;
+}
+
+#s21 .s21-fork__hub circle:nth-child(3) {
+  fill: var(--s21-ink);
+  stroke: none;
+}
+
+/* The three vibe choices, one under the end of each road */
+
+#s21 .s21-pick__row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 clamp(4px, 1.2vw, 16px);
+}
+
+#s21 .s21-vibe {
+  --s21-vc: var(--s21-blue-ink);
+  --s21-vfill: var(--s21-blue);
+  position: relative;
+}
+
+#s21 .s21-vibe--family { --s21-vc: var(--s21-yellow-ink); --s21-vfill: var(--s21-yellow); }
+#s21 .s21-vibe--friends { --s21-vc: var(--s21-red-ink); --s21-vfill: var(--s21-red); }
+
+#s21 .s21-vibe label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  height: 100%;
+  padding: 0.7rem 0.5rem 0.9rem;
+  border: 3px solid var(--s21-ink);
+  border-radius: var(--s21-wob-sm);
+  background: var(--s21-panel);
+  box-shadow: 4px 4px 0 var(--s21-ink);
+  cursor: pointer;
+  text-align: center;
+}
+
+#s21 .s21-vibe label:hover {
+  background: #fffbec;
+}
+
+#s21 .s21-vibe__pal {
+  width: clamp(62px, 10.5vw, 118px);
+  height: auto;
+  margin-bottom: 0.15rem;
+}
+
+#s21 .s21-vibe__name {
+  font-family: var(--s21-display);
+  font-size: clamp(0.95rem, 0.7rem + 0.75vw, 1.3rem);
+  line-height: 1.1;
+}
+
+#s21 .s21-vibe__note {
+  color: var(--s21-ink-2);
+  font-size: clamp(0.72rem, 0.65rem + 0.25vw, 0.88rem);
+  font-style: italic;
+  line-height: 1.25;
+}
+
+#s21 .s21-vibe__stamp {
+  position: absolute;
+  top: -0.7rem;
+  right: -0.5rem;
+  padding: 0.1rem 0.5rem 0.15rem;
+  border: 3px solid var(--s21-ink);
+  border-radius: var(--s21-wob-sm);
+  background: var(--s21-vfill);
+  color: var(--s21-ink);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: rotate(7deg) scale(0);
+}
+
+#s21 .s21-vibe--strategy .s21-vibe__stamp,
+#s21 .s21-vibe--friends .s21-vibe__stamp {
+  color: #fff;
+}
+
+#s21 .s21-vibe input:checked + label {
+  background:
+    radial-gradient(rgb(26 21 18 / 0.1) 1.6px, transparent 2px) 0 0 / 8px 8px,
+    #fffbec;
+  box-shadow: 4px 4px 0 var(--s21-vc), 4px 4px 0 3px var(--s21-ink);
+}
+
+#s21 .s21-vibe input:checked + label .s21-vibe__stamp {
+  transform: rotate(7deg) scale(1);
+}
+
+#s21 .s21-pick:has(input:checked) .s21-vibe input:not(:checked) + label {
+  background: #e7dcbe;
+  box-shadow: 3px 3px 0 rgb(26 21 18 / 0.45);
+}
+
+#s21 .s21-pick:has(input:checked) .s21-vibe input:not(:checked) + label .s21-vibe__pal {
+  opacity: 0.4;
+}
+
+#s21 .s21-vibe input:focus-visible + label {
+  outline: 4px solid var(--s21-ink);
+  outline-offset: 5px;
+}
+
+/* Lit road: the other two roads fade back */
+
+#s21 .s21-hook:has(#s21-vibe-strategy:checked) .s21-br:not(.s21-br--strategy),
+#s21 .s21-hook:has(#s21-vibe-family:checked) .s21-br:not(.s21-br--family),
+#s21 .s21-hook:has(#s21-vibe-friends:checked) .s21-br:not(.s21-br--friends),
+#s21 .s21-paper__inner:has(#s21-vibe-strategy:checked) .s21-merge .s21-br:not(.s21-br--strategy),
+#s21 .s21-paper__inner:has(#s21-vibe-family:checked) .s21-merge .s21-br:not(.s21-br--family),
+#s21 .s21-paper__inner:has(#s21-vibe-friends:checked) .s21-merge .s21-br:not(.s21-br--friends) {
+  opacity: 0.2;
+}
+
+/* Status line */
+
+#s21 .s21-herald {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem 1.2rem;
+  min-height: 2.8rem;
+  margin: clamp(1.1rem, 2.4vw, 1.8rem) auto clamp(1rem, 2vw, 1.5rem);
+  text-align: center;
+}
+
+#s21 .s21-status {
+  color: var(--s21-ink-2);
+  font-size: 1rem;
+  font-style: italic;
+}
+
+#s21 .s21-reset {
+  flex: none;
+  padding: 0.3rem 0.9rem 0.35rem;
+  border: 2px solid var(--s21-ink);
+  border-radius: var(--s21-wob-sm);
+  background: var(--s21-yellow);
+  color: var(--s21-ink);
+  font: 700 0.9rem/1.2 var(--s21-body);
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--s21-ink);
+}
+
+#s21 .s21-reset:hover {
+  background: #ffd45c;
+}
+
+/* The top ten, set as classified ads */
+
+#s21 .s21-ads {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.6rem, 1.4vw, 0.95rem);
+}
+
+#s21 .s21-ad {
+  --s21-chip: var(--s21-blue-ink);
+  --s21-chip-ink: #fff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 7px 7px 9px;
+  border: 3px double var(--s21-ink);
+  background: var(--s21-panel);
+}
+
+#s21 .s21-ad--family { --s21-chip: var(--s21-yellow); --s21-chip-ink: var(--s21-ink); }
+#s21 .s21-ad--coop { --s21-chip: var(--s21-green-ink); --s21-chip-ink: #fff; }
+
+#s21 .s21-ad__pic {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+#s21 .s21-cover {
+  display: block;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}#s21 .s21-ad__name {
+  margin: 0.5rem 0.15rem 0.35rem;
+  font-weight: 700;
+  font-size: 0.92rem;
+  line-height: 1.25;
+}
+
+#s21 .s21-ad__tag {
+  align-self: flex-start;
+  margin: auto 0.15rem 0;
+  padding: 0.05rem 0.5rem 0.1rem;
+  background: var(--s21-chip);
+  color: var(--s21-chip-ink);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Lit games: the chosen road's games come up in full colour */
+
+#s21 .s21-hook:has(#s21-vibe-strategy:checked) { --s21-pick: var(--s21-blue-ink); }
+#s21 .s21-hook:has(#s21-vibe-family:checked) { --s21-pick: var(--s21-yellow-ink); }
+#s21 .s21-hook:has(#s21-vibe-friends:checked) { --s21-pick: var(--s21-red-ink); }
+
+#s21 .s21-hook:has(#s21-vibe-strategy:checked) .s21-fit-strategy,
+#s21 .s21-hook:has(#s21-vibe-family:checked) .s21-fit-family,
+#s21 .s21-hook:has(#s21-vibe-friends:checked) .s21-fit-friends {
+  z-index: 1;
+  border-color: var(--s21-pick);
+  box-shadow: 0 0 0 2px var(--s21-pick), 4px 5px 0 var(--s21-ink);
+  transform: translateY(-5px);
+}
+
+#s21 .s21-hook:has(#s21-vibe-strategy:checked) .s21-fit-strategy .s21-cover,
+#s21 .s21-hook:has(#s21-vibe-family:checked) .s21-fit-family .s21-cover,
+#s21 .s21-hook:has(#s21-vibe-friends:checked) .s21-fit-friends .s21-cover {
+  filter: none;
+}#s21 .s21-hook:has(#s21-vibe-strategy:checked) .s21-ad:not(.s21-fit-strategy),
+#s21 .s21-hook:has(#s21-vibe-family:checked) .s21-ad:not(.s21-fit-family),
+#s21 .s21-hook:has(#s21-vibe-friends:checked) .s21-ad:not(.s21-fit-friends) {
+  background: #e6dbbd;
+}
+
+#s21 .s21-hook:has(#s21-vibe-strategy:checked) .s21-ad:not(.s21-fit-strategy) .s21-cover,
+#s21 .s21-hook:has(#s21-vibe-family:checked) .s21-ad:not(.s21-fit-family) .s21-cover,
+#s21 .s21-hook:has(#s21-vibe-friends:checked) .s21-ad:not(.s21-fit-friends) .s21-cover {
+  filter: grayscale(1) contrast(0.95);
+  opacity: 0.5;
+}
+
+#s21 .s21-more {
+  margin-top: clamp(1.1rem, 2.2vw, 1.6rem);
+  text-align: center;
+}
+
+#s21 .s21-more a {
+  display: inline-block;
+  padding: 0.4rem 1rem 0.45rem;
+  border: 2.5px solid var(--s21-ink);
+  border-radius: var(--s21-wob-sm);
+  background: var(--s21-yellow);
+  color: var(--s21-ink);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 3px 3px 0 var(--s21-ink);
+}
+
+#s21 .s21-more a:hover {
+  background: #ffd45c;
+}
+
+/* Stops along the side lanes */
+
+#s21 .s21-stop {
+  position: relative;
+  padding: 1.1rem 0 2.4rem calc(6px + 52 * var(--s21-u) + 18px);
+}
+
+#s21 .s21-stop__body {
+  position: relative;
+}
+
+/* House rules: a painted four-slat plank sign nailed to the fence */
+
+#s21 .s21-fencesign {
+  position: relative;
+  padding: clamp(1.1rem, 2.6vw, 2.1rem) clamp(0.7rem, 2.2vw, 1.8rem);
+  border: 3px solid var(--s21-ink);
+  background:
+    var(--s21-halftone),
+    repeating-linear-gradient(
+      90deg,
+      var(--s21-wood) 0 48px,
+      var(--s21-wood-dk) 48px 54px,
+      rgb(26 21 18 / 0.5) 54px 57px,
+      var(--s21-wood) 57px 60px
+    );
+  box-shadow: 7px 8px 0 rgb(26 21 18 / 0.22);
+}
+
+/* two fence posts behind the slats */
+#s21 .s21-fencesign::before,
+#s21 .s21-fencesign::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(16px, 2.4vw, 30px);
+  background: var(--s21-wood-dk);
+  border-inline: 4px solid rgb(26 21 18 / 0.55);
+}
+
+#s21 .s21-fencesign::before { left: clamp(10px, 4vw, 54px); }
+#s21 .s21-fencesign::after { right: clamp(10px, 4vw, 54px); }
+
+#s21 .s21-slats {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: clamp(0.5rem, 1.3vw, 0.8rem);
+}
+
+#s21 .s21-slat {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.1rem 0.7rem;
+  padding: 0.5rem clamp(1.5rem, 3vw, 2.4rem) 0.6rem;
+  border: 3px solid var(--s21-ink);
+  background: var(--s21-woodgrain), var(--s21-plank);
+  box-shadow: 4px 5px 0 rgb(26 21 18 / 0.3);
+}
+
+#s21 .s21-slat:nth-child(1) { transform: rotate(-0.7deg); }
+#s21 .s21-slat:nth-child(2) { transform: rotate(0.5deg); }
+#s21 .s21-slat:nth-child(3) { transform: rotate(-0.45deg); }
+#s21 .s21-slat:nth-child(4) { transform: rotate(0.8deg); }
+
+/* nail heads at both ends of every slat */
+#s21 .s21-slat::before,
+#s21 .s21-slat::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: var(--s21-ink);
+  box-shadow: inset -1px -1px 0 rgb(255 255 255 / 0.4);
+}
+
+#s21 .s21-slat::before { left: clamp(0.4rem, 1vw, 0.8rem); }
+#s21 .s21-slat::after { right: clamp(0.4rem, 1vw, 0.8rem); }
+
+#s21 .s21-slat h3 {
+  font-family: var(--s21-display);
+  font-weight: 400;
+  font-size: clamp(1rem, 0.85rem + 0.5vw, 1.25rem);
+  line-height: 1.15;
+  color: var(--s21-ink);
+}
+
+#s21 .s21-slat p {
+  color: var(--s21-ink-2);
+  font-size: clamp(0.88rem, 0.84rem + 0.2vw, 1rem);
+  line-height: 1.4;
+}
+
+/* How to join: three numbered arrow signs nailed up the path */
+
+#s21 .s21-signs {
+  position: relative;
+  display: grid;
+  gap: clamp(0.8rem, 2vw, 1.3rem);
+  padding-bottom: 26px;
+}
+
+/* the dirt path they stand in */
+#s21 .s21-signs::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 26px;
+  border: 3px solid var(--s21-ink);
+  background:
+    radial-gradient(rgb(26 21 18 / 0.3) 1.3px, transparent 1.7px) 0 0 / 7px 7px,
+    var(--s21-wood);
+}
+
+#s21 .s21-sign {
+  --s21-lift: 0px;
+  position: relative;
+  margin-bottom: var(--s21-lift);
+}
+
+#s21 .s21-sign:nth-child(2) { --s21-lift: 20px; }
+#s21 .s21-sign:nth-child(3) { --s21-lift: 40px; }
+
+/* the post, running from under the plank down into the path */
+#s21 .s21-sign::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: clamp(26px, 5%, 48px);
+  top: 70%;
+  width: 20px;
+  height: calc(var(--s21-lift) + 34px);
+  background: var(--s21-woodgrain), var(--s21-wood-dk);
+  border: 3px solid var(--s21-ink);
+}
+
+#s21 .s21-sign__plank {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: clamp(0.6rem, 1.6vw, 1rem);
+  padding: 0.55rem 0.8rem 0.6rem 0.65rem;
+  border: 3px solid var(--s21-ink);
+  background: var(--s21-woodgrain), var(--s21-plank);
+  box-shadow: 5px 6px 0 rgb(26 21 18 / 0.3);
+}
+
+#s21 .s21-sign:nth-child(1) .s21-sign__plank { transform: rotate(-0.8deg); }
+#s21 .s21-sign:nth-child(2) .s21-sign__plank { transform: rotate(0.6deg); }
+#s21 .s21-sign:nth-child(3) .s21-sign__plank { transform: rotate(-0.5deg); }
+
+/* nail heads in the plank's top corners */
+#s21 .s21-sign__plank::before,
+#s21 .s21-sign__plank::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--s21-ink);
+  box-shadow: inset -1px -1px 0 rgb(255 255 255 / 0.4);
+}
+
+#s21 .s21-sign__plank::before { left: 7px; }
+#s21 .s21-sign__plank::after { right: 7px; }
+
+#s21 .s21-sign__no {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: clamp(42px, 5vw, 54px);
+  height: clamp(42px, 5vw, 54px);
+  border: 3px solid var(--s21-ink);
+  border-radius: 50%;
+  background: var(--s21-green);
+  color: #fff;
+  box-shadow: 2px 3px 0 rgb(26 21 18 / 0.3);
+  font-family: var(--s21-display);
+  font-size: clamp(1.15rem, 1rem + 0.5vw, 1.45rem);
+  line-height: 1;
+}
+
+/* Instructions stay in the body face so they read instantly */
+#s21 .s21-sign__text {
+  flex: 1;
+  min-width: 0;
+  font-weight: 700;
+  font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.08rem);
+  line-height: 1.3;
+}
+
+#s21 .s21-sign__arrow {
+  flex: none;
+  width: clamp(28px, 3.2vw, 40px);
+  height: auto;
+  color: var(--s21-red);
+}
+
+#s21 .s21-join__go {
+  margin-top: clamp(1rem, 2.2vw, 1.5rem);
+}
+
+/* Finish: the clubhouse table with a stool kept free */
+
+#s21 .s21-finish {
+  position: relative;
+  padding: 1.8rem 0 clamp(1.6rem, 3.4vw, 2.6rem);
+  text-align: center;
+}
+
+#s21 .s21-lane--finish {
+  bottom: auto;
+  height: 1.8rem;
+}
+
+#s21 .s21-finish__panel {
+  max-width: 540px;
+  margin: 0 auto 1.5rem;
+  padding: 12px;
+  border-width: 0;
+  border-radius: 0;
+  background: repeating-conic-gradient(var(--s21-ink) 0 25%, var(--s21-panel) 0 50%) 0 0 / 22px 22px;
+  box-shadow: 5px 6px 0 rgb(26 21 18 / 0.25);
+}
+
+#s21 .s21-finish__panel > * {
+  background: var(--s21-panel);
+}
+
+#s21 .s21-finish__word {
+  padding: 0.55rem 0 0.1rem;
+  border: 3px solid var(--s21-ink);
+  border-bottom: 0;
+  color: var(--s21-green-ink);
+  font-family: var(--s21-display);
+  font-size: clamp(1.8rem, 1.3rem + 2vw, 2.8rem);
+  letter-spacing: 0.14em;
+  text-indent: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+#s21 .s21-finish__art {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 3px solid var(--s21-ink);
+  border-top: 0;
+}
+
+#s21 .s21-seat__word {
+  fill: var(--s21-red-ink);
+  font-family: var(--s21-body);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 25px;
+}
+
+#s21 .s21-finish__title {
+  max-width: 20em;
+  margin: 0 auto 1.4rem;
+  font-size: clamp(1.5rem, 1.05rem + 1.9vw, 2.5rem);
+  line-height: 1.14;
+}
+
+#s21 .s21-finish__title em {
+  font-style: normal;
+  color: var(--s21-red-ink);
+}
+
+/* Narrow phones */
+
+@media (max-width: 560px) {
+  #s21 .s21-tally {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  #s21 .s21-tally__cell {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.6rem;
+    padding: 0.3rem 0;
+    border-right: 0;
+    border-bottom: 3px dashed rgb(246 242 226 / 0.3);
+    text-align: left;
+  }
+
+  #s21 .s21-tally__cell:last-child {
+    border-bottom: 0;
+  }
+
+  #s21 .s21-tally dd {
+    margin-top: 0;
+    font-size: clamp(1.5rem, 1rem + 5vw, 2.4rem);
+  }
+
+  #s21 .s21-tally__marks {
+    display: none;
+  }
+
+  #s21 .s21-board__duster {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  #s21 .s21-cta {
+    gap: 0.55rem;
+    padding: 0.6rem 1rem 0.65rem 0.75rem;
+  }
+
+  #s21 .s21-cta__icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  #s21 .s21-vibe__stamp {
+    display: none;
+  }
+
+  #s21 .s21-vibe label {
+    padding: 0.55rem 0.25rem 0.7rem;
+  }
+
+  #s21 .s21-vibe__pal {
+    width: 46px;
+  }
+
+  #s21 .s21-slat {
+    padding-inline: 1.2rem;
+  }
+
+  #s21 .s21-sign__plank {
+    gap: 0.5rem;
+  }
+}
+
+/* Container steps */
+
+@container (min-width: 560px) {
+  #s21 .s21-signs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: end;
+  }
+}
+
+@container (min-width: 640px) {
+  #s21 .s21-ads {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@container (min-width: 760px) {
+  #s21 .s21-slats {
+    gap: clamp(0.6rem, 1.4vw, 0.9rem);
+  }
+
+  #s21 .s21-slat {
+    padding-inline: clamp(2rem, 4vw, 3.2rem);
+  }
+}
+
+/* Wide screens: the road snakes down the sheet */
+
+@media (min-width: 860px) {
+  #s21 .s21-paper__inner {
+    --s21-u: var(--s21-cu);
+  }
+
+  #s21 .s21-link {
+    display: block;
+  }
+
+  #s21 .s21-hero {
+    grid-template-columns: 5fr 6fr;
+    align-items: stretch;
+  }
+
+  #s21 .s21-hero__copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #s21 .s21-hero__art {
+    border-top: 0;
+    border-left: 3px solid var(--s21-ink);
+  }
+
+  #s21 .s21-stop {
+    padding: 1.6rem 2cqi 2.6rem 15cqi;
+  }
+
+  #s21 .s21-stop--right {
+    padding: 1.6rem 15cqi 2.6rem 2cqi;
+  }
+
+  #s21 .s21-lane {
+    left: calc(64 * var(--s21-u));
+  }
+
+  #s21 .s21-stop--right .s21-lane {
+    left: calc(1084 * var(--s21-u));
+  }
+
+  #s21 .s21-mile {
+    --s21-ms: max(60px, calc(118 * var(--s21-u)));
+    top: 1.3rem;
+    left: calc(90 * var(--s21-u) - var(--s21-ms) / 2);
+    width: var(--s21-ms);
+    height: var(--s21-ms);
+    font-size: calc(var(--s21-ms) * 0.34);
+  }
+
+  #s21 .s21-stop--right .s21-mile {
+    left: calc(1110 * var(--s21-u) - var(--s21-ms) / 2);
+  }
+
+  #s21 .s21-lane--finish {
+    left: calc(574 * var(--s21-u));
+  }
+
+  #s21 .s21-merge {
+    margin-top: -0.4rem;
+  }
+}
+
+/* Motion: 14's animations, kept. The painted signs swing out as if nailed up,
+   the chosen road's centre line marches away from the crossroads, and the pal at
+   the clubhouse door jabs a finger at the blank line. */
+
+@media (prefers-reduced-motion: no-preference) {
+  #s21 .s21-cta {
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  }
+
+  #s21 .s21-cta:hover {
+    transform: rotate(-1.2deg) translate(-2px, -3px);
+    box-shadow: 6px 7px 0 var(--s21-ink);
+  }
+
+  #s21 .s21-cta:active {
+    transform: rotate(-1.2deg) translate(3px, 3px);
+    box-shadow: 3px 3px 0 var(--s21-ink);
+  }
+
+  #s21 .s21-vibe label,
+  #s21 .s21-vibe__stamp,
+  #s21 .s21-ad {
+    transition: transform 0.3s cubic-bezier(0.3, 1.4, 0.5, 1), box-shadow 0.3s ease, background-color 0.25s ease, border-color 0.25s ease;
+  }
+
+  #s21 .s21-br,
+  #s21 .s21-cover {
+    transition: opacity 0.35s ease, filter 0.35s ease;
+  }
+
+  /* the "Start here" plank swings out from its post */
+  #s21 .s21-startsign__arm {
+    transform-box: fill-box;
+    transform-origin: 0% 50%;
+    animation: s21-swing 0.9s cubic-bezier(0.3, 1.5, 0.5, 1) 0.2s both;
+  }
+
+  #s21 .s21-balloon {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: s21-pop 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) 0.8s both;
+  }
+
+  /* the pointing hand taps at the blank line */
+  #s21 .s21-point-g {
+    transform-box: fill-box;
+    transform-origin: 100% 50%;
+    animation: s21-jab 2.2s ease-in-out 1.1s infinite;
+  }
+
+  /* the three step signs are nailed up one after another */
+  #s21 .s21-sign__plank {
+    transform-origin: 18% 100%;
+    animation: s21-nail 0.7s cubic-bezier(0.3, 1.5, 0.5, 1) both;
+  }
+
+  #s21 .s21-sign:nth-child(1) .s21-sign__plank { animation-delay: 0.1s; }
+  #s21 .s21-sign:nth-child(2) .s21-sign__plank { animation-delay: 0.25s; }
+  #s21 .s21-sign:nth-child(3) .s21-sign__plank { animation-delay: 0.4s; }
+
+  #s21 .s21-br .s21-rd__line {
+    animation: s21-roll 2.6s linear infinite paused;
+  }
+
+  #s21 .s21-hook:has(#s21-vibe-strategy:checked) .s21-br--strategy .s21-rd__line,
+  #s21 .s21-hook:has(#s21-vibe-family:checked) .s21-br--family .s21-rd__line,
+  #s21 .s21-hook:has(#s21-vibe-friends:checked) .s21-br--friends .s21-rd__line,
+  #s21 .s21-paper__inner:has(#s21-vibe-strategy:checked) .s21-merge .s21-br--strategy .s21-rd__line,
+  #s21 .s21-paper__inner:has(#s21-vibe-family:checked) .s21-merge .s21-br--family .s21-rd__line,
+  #s21 .s21-paper__inner:has(#s21-vibe-friends:checked) .s21-merge .s21-br--friends .s21-rd__line {
+    animation-play-state: running;
+  }
+
+  #s21 .s21-seat path {
+    animation: s21-dash 3s linear infinite;
+  }
+}
+
+@keyframes s21-swing {
+  0% { transform: scaleX(0.2); opacity: 0; }
+  100% { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes s21-pop {
+  0% { transform: scale(0.2) rotate(-6deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes s21-jab {
+  0%, 100% { transform: translateX(0); }
+  45% { transform: translateX(-9px); }
+  60% { transform: translateX(-4px); }
+}
+
+/* each step sign settles as though just hammered onto its post */
+@keyframes s21-nail {
+  0% { transform: rotate(-7deg) translateY(-10px); opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* the chosen road's dashes march away from the crossroads */
+@keyframes s21-roll {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -42; }
+}
+
+@keyframes s21-dash {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -48; }
+}
+
+/* Landing-card preview: a calm, still final state */
+
+.is-thumb #s21 *,
+.is-thumb #s21 *::before,
+.is-thumb #s21 *::after {
+  animation: none !important;
+  transition: none !important;
+}
