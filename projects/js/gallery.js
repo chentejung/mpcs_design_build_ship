@@ -3,12 +3,12 @@
 //   index.html?view=sNN        that style's own page, with the gallery bar
 //   index.html?view=sNN&thumb  the bare style, loaded into a grid card's iframe
 (() => {
-  const PLANNED = 23;
+  const PLANNED = 24;
   const styles = [...document.querySelectorAll(".style")];
   const num = (s) => s.id.slice(1);
   const pageUrl = (s) => `index.html?view=${s.id}`;
 
-  const INITS = {s06: initS06, s07: initS07, s03: initS03, s01: initS01, s05: initS05, s11: initS11, s12: initS12, s13: initS13, s14: initS14, s15: initS15, s16: initS16, s17: initS17, s18: initS18, s19: initS19, s20: initS20, s21: initS21, s22: initS22, s23: initS23};
+  const INITS = {s06: initS06, s07: initS07, s03: initS03, s01: initS01, s05: initS05, s11: initS11, s12: initS12, s13: initS13, s14: initS14, s15: initS15, s16: initS16, s17: initS17, s18: initS18, s19: initS19, s20: initS20, s21: initS21, s22: initS22, s23: initS23, s24: initS24};
   styles.forEach((s) => INITS[s.id]?.(s));
 
   const params = new URLSearchParams(location.search);
@@ -921,6 +921,45 @@
       // Short line on screen; the matching names are for screen readers only.
       const more = document.createElement("span");
       more.className = "s23-sr";
+      more.textContent = `: ${listOf(names)}`;
+      status.textContent = `${picked.dataset.road} road: ${names.length} of ${ads.length} games in colour`;
+      status.append(more, ".");
+    };
+
+    radios.forEach((r) => r.addEventListener("change", update));
+    reset.addEventListener("click", () => {
+      radios.forEach((r) => (r.checked = false));
+      update();
+      radios[0].focus();
+    });
+    update();
+  }
+  function initS24(root) {
+    // 24 Funnies Board: "Which way tonight?" radio group. Lighting the chosen
+    // road and its ads is pure CSS (:has on the checked radio), so this only keeps
+    // the spoken status line in step and wires up the reset. State lives in the
+    // radios and resets on reload.
+    const radios = [...root.querySelectorAll('input[name="s24-vibe"]')];
+    const status = root.querySelector(".s24-status");
+    const reset = root.querySelector(".s24-reset");
+    const ads = [...root.querySelectorAll(".s24-ad")];
+    if (!radios.length || !status || !reset || !ads.length) return;
+
+    const nameOf = (ad) => ad.querySelector(".s24-ad__name").textContent;
+    const listOf = (names) =>
+      names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+
+    const update = () => {
+      const picked = radios.find((r) => r.checked);
+      reset.hidden = !picked;
+      if (!picked) {
+        status.textContent = "All ten games are on the road.";
+        return;
+      }
+      const names = ads.filter((a) => a.classList.contains(`s24-fit-${picked.value}`)).map(nameOf);
+      // Short line on screen; the matching names are for screen readers only.
+      const more = document.createElement("span");
+      more.className = "s24-sr";
       more.textContent = `: ${listOf(names)}`;
       status.textContent = `${picked.dataset.road} road: ${names.length} of ${ads.length} games in colour`;
       status.append(more, ".");
