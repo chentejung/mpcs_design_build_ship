@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A static concept gallery: 25 restyles of the Board Game Arena logged-out homepage, each judged by whether a first-time visitor wants to click the register CTA. Everything lives under `projects/` (the repo root holds only a stub README). Styles `01`–`25` are built; `00-baseline` is not yet present.
+A static concept gallery of restyles of the Board Game Arena logged-out homepage, each judged by whether a first-time visitor wants to click the register CTA. Everything lives under `projects/` (the repo root holds only a stub README). Ten styles are planned: `01` Hall of Banners, `02` Comic Crew, `03` Board Path, and `04`–`10` each drawn from one top-ten game; `00-baseline` is not yet present.
 
-The full rules are in `projects/AGENTS.md` (stack, layout, how to build a style, checklist, assets, deploy) and the 25 style briefs, game list and conversion hooks are in `projects/DIRECTIONS.md`. Read both before adding or changing a style.
+The full rules are in `projects/AGENTS.md` (stack, layout, how to build a style, checklist, assets, deploy) and the style briefs, game list and conversion hooks are in `projects/DIRECTIONS.md`. Read both before adding or changing a style.
 
 @projects/AGENTS.md
 
@@ -20,5 +20,5 @@ There is no build, lint or test tooling, and no package manager. Open `projects/
 - Page mode (landing grid, `?view=sNN`, `?view=sNN&thumb`) is set by a tiny inline script in `<head>` that adds `is-home`, `is-solo` or `is-thumb` to `<html>`. `js/gallery.js` then builds landing cards from the sections' `data-` attributes, each card an iframe of the `&thumb` URL, so a new section appears on the landing page automatically.
 - Style isolation relies on every selector and custom property in `css/NN-slug.css` being scoped under `#sNN`. Class names are prefixed `sNN-`. `css/gallery.css` holds only shell rules.
 - Stylesheet links use `?v=N` cache-busting (e.g. `gallery.css?v=5`). Bump it when editing that file.
-- `PLANNED = 25` in `gallery.js` drives the "N of 25 built" label.
+- `PLANNED = 10` in `gallery.js` drives the "N of 10 built" label.
 - Game photos in `img/games/` must each have a credit line in the `index.html` footer.

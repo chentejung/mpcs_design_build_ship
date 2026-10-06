@@ -3,12 +3,12 @@
 //   index.html?view=sNN        that style's own page, with the gallery bar
 //   index.html?view=sNN&thumb  the bare style, loaded into a grid card's iframe
 (() => {
-  const PLANNED = 25;
+  const PLANNED = 10;
   const styles = [...document.querySelectorAll(".style")];
   const num = (s) => s.id.slice(1);
   const pageUrl = (s) => `index.html?view=${s.id}`;
 
-  const INITS = {s08: initS08, s16: initS16, s20: initS20, s23: initS23, s25: initS25};
+  const INITS = {s01: initS01, s03: initS03, s05: initS05, s06: initS06, s07: initS07};
   styles.forEach((s) => INITS[s.id]?.(s));
 
   const params = new URLSearchParams(location.search);
@@ -91,204 +91,258 @@
     });
   }
 
-  function initS08(root) {
-    if (!root) return;
-    var btn = root.querySelector(".s08-spin");
-    var face = root.querySelector(".s08-face");
-    var covers = root.querySelectorAll(".s08-vc");
-    var result = root.querySelector(".s08-result");
-    if (!btn || !face || !covers.length || !result) return;
-    var label = result.querySelector(".s08-result-label");
-    var img = result.querySelector(".s08-result-img");
-    var nameEl = result.querySelector(".s08-result-name");
-    var tagEl = result.querySelector(".s08-result-tag");
-    var gameEl = result.querySelector(".s08-result-game");
-    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var current = 0, turns = 0, timer = null, busy = false;
-    btn.hidden = false;
+  function initS01(root) {
+    // 08 Hall of Banners: "Choose your banner" radio group. The highlighting itself is
+    // pure CSS (:has on the checked radio), so this only keeps the spoken status line
+    // in step and wires up the reset. State lives in the radios and resets on reload.
+    const radios = [...root.querySelectorAll('input[name="s01-vibe"]')];
+    const status = root.querySelector(".s01-status");
+    const reset = root.querySelector(".s01-reset");
+    const games = [...root.querySelectorAll(".s01-game")];
+    if (!radios.length || !status || !reset) return;
 
-    function show(i) {
-      var c = covers[i];
-      label.textContent = "Tonight the crew plays";
-      img.src = c.getAttribute("data-img");
-      nameEl.textContent = c.getAttribute("data-name");
-      tagEl.textContent = c.getAttribute("data-tag");
-      gameEl.textContent = c.getAttribute("data-name");
-      for (var k = 0; k < covers.length; k++) covers[k].classList.toggle("s08-picked", k === i);
-      result.classList.remove("s08-flash");
-      void result.offsetWidth;
-      if (!reduce) result.classList.add("s08-flash");
-      root.classList.remove("s08-spinning");
-      busy = false;
-      btn.removeAttribute("aria-disabled");
-      btn.textContent = "Spin again!";
-    }
+    const nameOf = (game) => game.querySelector(".s01-game__name").textContent;
+    const listOf = (names) =>
+      names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
 
-    btn.addEventListener("click", function () {
-      if (busy) return;
-      var n = covers.length, next;
-      do { next = Math.floor(Math.random() * n); } while (next === current && n > 1);
-      current = next;
-      clearTimeout(timer);
-      if (reduce) {
-        face.style.transform = "rotate(" + (-next * 36) + "deg)";
-        show(next);
+    const update = (lowered) => {
+      const picked = radios.find((r) => r.checked);
+      if (!picked) {
+        status.textContent = lowered
+          ? "Banner lowered. All ten games are lit again."
+          : "No banner raised yet, so all ten games are lit.";
         return;
       }
-      turns += 3;
-      face.style.transform = "rotate(" + (-next * 36 - turns * 360) + "deg)";
-      root.classList.add("s08-spinning");
-      busy = true;
-      btn.setAttribute("aria-disabled", "true");
-      timer = setTimeout(function () { show(next); }, 1700);
-    });
-  }
-
-  function initS16(root) {
-    if (!root || !root.querySelector) return;
-    var picker = root.querySelector(".s16-picker");
-    if (!picker) return;
-    var radios = picker.querySelectorAll(".s16-radio");
-    var status = picker.querySelector(".s16-status");
-    var reset = picker.querySelector(".s16-reset");
-    var pins = root.querySelectorAll(".s16-pin");
-    var idle = status ? status.textContent : "";
-    var leads = {
-      strategy: "Lead A: the planners. ",
-      family: "Lead B: the whole family. ",
-      friends: "Lead C: the party crowd. "
+      const names = games.filter((g) => g.classList.contains(`s01-fit-${picked.value}`)).map(nameOf);
+      status.textContent = `${picked.dataset.house} is raised. ${names.length} of ${games.length} games match: ${listOf(names)}.`;
     };
-    function apply(v) {
-      var names = [];
-      pins.forEach(function (p) {
-        if ((" " + p.getAttribute("data-vibes") + " ").indexOf(" " + v + " ") > -1) {
-          var n = p.querySelector(".s16-pin-name");
-          if (n) names.push(n.textContent);
+
+    radios.forEach((r) => r.addEventListener("change", () => update(false)));
+    reset.addEventListener("click", () => {
+      radios.forEach((r) => (r.checked = false));
+      update(true);
+    });
+    reset.hidden = false;
+    update(false);
+  }
+  function initS03(root) {
+    // 03 Board Path: "Roll for tonight". A ten-sided die marks one of the ten game
+    // cards (numbered 1 to 10). The tray stays hidden without JS; the pick lives in
+    // memory only and resets on reload. Tumble is skipped under reduced motion.
+    const tray = root.querySelector(".s03-roll");
+    const button = root.querySelector(".s03-roll__btn");
+    const face = root.querySelector(".s03-die__num");
+    const status = root.querySelector(".s03-roll__status");
+    const cards = [...root.querySelectorAll(".s03-card")];
+    if (!tray || !button || !face || !status || !cards.length) return;
+
+    const calm = () =>
+      document.documentElement.classList.contains("is-thumb") ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let last = -1;
+    let timer = 0;
+
+    const land = (pick) => {
+      timer = 0;
+      face.textContent = String(pick + 1);
+      button.classList.remove("s03-is-rolling");
+      cards.forEach((card, i) => card.classList.toggle("s03-is-picked", i === pick));
+      const name = cards[pick].querySelector(".s03-card__name").textContent;
+      status.textContent = `You rolled ${pick + 1}: ${name}. It’s marked on the board below.`;
+      cards[pick].scrollIntoView({ block: "nearest", behavior: calm() ? "auto" : "smooth" });
+    };
+
+    button.addEventListener("click", () => {
+      if (timer) return;
+      let pick;
+      do pick = Math.floor(Math.random() * cards.length);
+      while (pick === last && cards.length > 1);
+      last = pick;
+      if (calm()) {
+        land(pick);
+        return;
+      }
+      button.classList.remove("s03-is-rolling");
+      void button.offsetWidth;
+      button.classList.add("s03-is-rolling");
+      let ticks = 0;
+      timer = setInterval(() => {
+        face.textContent = String(1 + Math.floor(Math.random() * cards.length));
+        if (++ticks >= 9) {
+          clearInterval(timer);
+          land(pick);
         }
-      });
-      if (status) status.textContent = (leads[v] || "") + names.length + " of the ten match: " + names.join(", ") + ".";
-      if (reset) reset.hidden = false;
-    }
-    radios.forEach(function (r) {
-      r.addEventListener("change", function () { if (r.checked) apply(r.value); });
+      }, 80);
     });
-    if (reset) {
-      reset.addEventListener("click", function () {
-        radios.forEach(function (r) { r.checked = false; });
-        if (status) status.textContent = idle;
-        reset.hidden = true;
-        if (radios[0]) radios[0].focus();
-      });
-    }
-  }
 
-  function initS20(root) {
-    if (!root || !root.querySelector) return;
-    var picker = root.querySelector(".s20-picker");
-    if (!picker) return;
-    var radios = picker.querySelectorAll(".s20-radio");
-    var status = picker.querySelector(".s20-status");
-    var reset = picker.querySelector(".s20-reset");
-    var frames = root.querySelectorAll(".s20-frame");
-    var idle = status ? status.textContent : "";
-    var lines = {
-      strategy: "Brainy barn it is! ",
-      family: "Whole-family hoedown! ",
-      friends: "Rowdy bunch, here we go! "
+    tray.hidden = false;
+  }
+  function initS05(root) {
+    // 05 Red Planet Project: the big numbers are global parameter tracks. Each gauge
+    // ([data-s05-gauge]) counts up from zero and fills its track when it first comes
+    // into view. The HTML already holds the final values and the full tracks, so
+    // no JS, reduced motion and thumb mode all show the finished planet.
+    const gauges = [...root.querySelectorAll("[data-s05-gauge]")];
+    const calm =
+      document.documentElement.classList.contains("is-thumb") ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!gauges.length || calm || !("IntersectionObserver" in window)) return;
+
+    const DURATION = 1800;
+    const ease = (t) => 1 - Math.pow(1 - t, 3);
+
+    // Pad with leading zeros to the final string's shape, like an odometer, so the
+    // readout never changes width while it counts: 0 becomes "00,000,000".
+    const shape = (finalText, value) => {
+      const digits = String(value).split("");
+      return finalText.split("").reverse()
+        .map((ch) => (/\d/.test(ch) ? digits.pop() ?? "0" : ch))
+        .reverse().join("");
     };
-    function apply(v) {
-      var n = 0;
-      frames.forEach(function (f) {
-        if ((" " + f.getAttribute("data-vibes") + " ").indexOf(" " + v + " ") > -1) n++;
-      });
-      if (status) status.textContent = (lines[v] || "") + n + " of the ten fit your crew.";
-      if (reset) reset.hidden = false;
-    }
-    radios.forEach(function (r) {
-      r.addEventListener("change", function () { if (r.checked) apply(r.value); });
+
+    const prepare = (gauge) => {
+      const counts = [...gauge.querySelectorAll(".s05-count")].map((node) => ({
+        node,
+        to: Number(node.dataset.s05To),
+        text: node.textContent,
+      }));
+      const marks = [...gauge.querySelectorAll("[data-s05-at]")].map((node) => ({
+        node,
+        at: Number(node.dataset.s05At),
+      }));
+      const set = (p) => {
+        gauge.style.setProperty("--s05-p", p.toFixed(4));
+        counts.forEach((c) => (c.node.textContent = p >= 1 ? c.text : shape(c.text, Math.round(c.to * p))));
+        marks.forEach((m) => m.node.classList.toggle("s05-off", p < m.at - 0.0005));
+      };
+      set(0);
+      return set;
+    };
+
+    const run = (set) => {
+      let start = 0;
+      const frame = (now) => {
+        if (!start) start = now;
+        const t = Math.min(1, (now - start) / DURATION);
+        set(ease(t));
+        if (t < 1) requestAnimationFrame(frame);
+      };
+      requestAnimationFrame(frame);
+    };
+
+    const setters = new Map(gauges.map((g) => [g, prepare(g)]));
+    root.classList.add("s05-is-counting");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          observer.unobserve(e.target);
+          run(setters.get(e.target));
+        });
+      },
+      { threshold: 0.35 }
+    );
+    gauges.forEach((g) => observer.observe(g));
+  }
+  function initS06(root) {
+    // 06 Hex Island: "Roll for a game". Two six-sided dice; the sum lights the game on
+    // that number token (2 to 12), and a 7 brings the robber instead of a game. The
+    // tray stays hidden without JS; the roll lives in memory only and resets on reload.
+    // Dice tumble is skipped under reduced motion.
+    const tray = root.querySelector(".s06-roll");
+    const button = root.querySelector(".s06-roll__btn");
+    const status = root.querySelector(".s06-roll__status");
+    const dice = [...root.querySelectorAll(".s06-die")];
+    const tiles = [...root.querySelectorAll(".s06-tile")];
+    if (!tray || !button || !status || dice.length !== 2 || !tiles.length) return;
+
+    const calm = () =>
+      document.documentElement.classList.contains("is-thumb") ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const d6 = () => 1 + Math.floor(Math.random() * 6);
+    const show = (a, b) => {
+      dice[0].dataset.v = String(a);
+      dice[1].dataset.v = String(b);
+    };
+    let timer = 0;
+
+    const land = (a, b) => {
+      timer = 0;
+      show(a, b);
+      tray.classList.remove("s06-is-rolling");
+      const sum = a + b;
+      const seven = sum === 7;
+      tray.classList.toggle("s06-is-robbed", seven);
+      tiles.forEach((tile) => tile.classList.toggle("s06-is-picked", tile.dataset.roll === String(sum)));
+      if (seven) {
+        status.textContent = `You rolled ${a} and ${b}: 7. The robber steals your turn — roll again.`;
+        return;
+      }
+      const tile = tiles.find((t) => t.dataset.roll === String(sum));
+      const name = tile ? tile.querySelector(".s06-tile__name").textContent : "";
+      status.textContent = `You rolled ${a} and ${b}: ${sum}. Tonight the table plays ${name}.`;
+    };
+
+    button.addEventListener("click", () => {
+      if (timer) return;
+      const a = d6();
+      const b = d6();
+      if (calm()) {
+        land(a, b);
+        return;
+      }
+      tray.classList.remove("s06-is-rolling");
+      void tray.offsetWidth;
+      tray.classList.add("s06-is-rolling");
+      let ticks = 0;
+      timer = setInterval(() => {
+        show(d6(), d6());
+        if (++ticks >= 8) {
+          clearInterval(timer);
+          land(a, b);
+        }
+      }, 80);
     });
-    if (reset) {
-      reset.addEventListener("click", function () {
-        radios.forEach(function (r) { r.checked = false; });
-        if (status) status.textContent = idle;
-        reset.hidden = true;
-        if (radios[0]) radios[0].focus();
-      });
-    }
-  }
 
-  function initS23(root) {
-    if (!root || !root.querySelectorAll) return;
-    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    // Thumbnails and reduced motion keep the final numbers that are already in the HTML.
-    if (reduce || document.documentElement.classList.contains("is-thumb") || !("requestAnimationFrame" in window)) return;
-    var items = root.querySelectorAll("[data-count]");
-    function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
-    function run(el) {
-      if (el.getAttribute("data-run")) return;
-      el.setAttribute("data-run", "1");
-      var target = parseInt(el.getAttribute("data-count"), 10);
-      var suffix = el.getAttribute("data-suffix") || "";
-      var out = el.querySelector(".s23-n");
-      if (!out || isNaN(target)) return;
-      var dur = target > 100000 ? 1900 : 1300, t0 = null;
-      function step(t) {
-        if (t0 === null) t0 = t;
-        var p = Math.min(1, (t - t0) / dur);
-        var e = 1 - Math.pow(1 - p, 3);
-        out.textContent = fmt(Math.round(target * e)) + (p < 1 ? "" : suffix);
-        if (p < 1) window.requestAnimationFrame(step);
-      }
-      out.textContent = "0";
-      window.requestAnimationFrame(step);
-    }
-    if ("IntersectionObserver" in window) {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) {
-          if (en.isIntersecting) { run(en.target); io.unobserve(en.target); }
-        });
-      }, { threshold: 0.2 });
-      items.forEach(function (el) { io.observe(el); });
-    } else {
-      items.forEach(run);
-    }
+    tray.hidden = false;
   }
+  function initS07(root) {
+    // 07 Aviary Field Guide: "Pick your vibe" on the player mat. The three habitat rows
+    // are a radio group; the highlighting is pure CSS (:has on the checked radio), so
+    // this only keeps the spoken status line in step and wires up the reset button.
+    // State lives in the radios and resets on reload.
+    const radios = [...root.querySelectorAll('input[name="s07-vibe"]')];
+    const status = root.querySelector(".s07-status");
+    const reset = root.querySelector(".s07-reset");
+    const cards = [...root.querySelectorAll(".s07-card")];
+    if (!radios.length || !status || !reset || !cards.length) return;
 
-  function initS25(root) {
-    if (!root || !root.querySelectorAll) return;
-    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    // Thumbnails show the final numbers rather than a count-up caught mid-way.
-    var thumb = document.documentElement.classList.contains("is-thumb");
-    if (reduce || thumb || !("requestAnimationFrame" in window)) return;
-    var items = root.querySelectorAll("[data-count]");
-    function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
-    function run(el) {
-      if (el.getAttribute("data-run")) return;
-      el.setAttribute("data-run", "1");
-      var target = parseInt(el.getAttribute("data-count"), 10);
-      var suffix = el.getAttribute("data-suffix") || "";
-      var out = el.querySelector(".s25-n");
-      if (!out || isNaN(target)) return;
-      var dur = target > 100000 ? 1800 : 1300, t0 = null;
-      function step(t) {
-        if (t0 === null) t0 = t;
-        var p = Math.min(1, (t - t0) / dur);
-        var e = 1 - Math.pow(1 - p, 3);
-        out.textContent = fmt(Math.round(target * e)) + (p < 1 ? "" : suffix);
-        if (p < 1) window.requestAnimationFrame(step);
+    const nameOf = (card) => card.querySelector(".s07-card__name").textContent;
+    const listOf = (names) =>
+      names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+
+    const update = (cleared) => {
+      const picked = radios.find((r) => r.checked);
+      reset.disabled = !picked;
+      if (!picked) {
+        status.textContent = cleared
+          ? "Habitat cleared. All ten games are shown again."
+          : "All ten games are shown. Pick a habitat to mark the ones for you.";
+        return;
       }
-      out.textContent = "0";
-      window.requestAnimationFrame(step);
-    }
-    if ("IntersectionObserver" in window) {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) {
-          if (en.isIntersecting) { run(en.target); io.unobserve(en.target); }
-        });
-      }, { threshold: 0.2 });
-      items.forEach(function (el) { io.observe(el); });
-    } else {
-      items.forEach(run);
-    }
+      const names = cards.filter((c) => c.classList.contains(`s07-fit-${picked.value}`)).map(nameOf);
+      status.textContent = `${picked.dataset.habitat}, ${picked.dataset.vibe}: ${names.length} of the ten match: ${listOf(names)}.`;
+    };
+
+    radios.forEach((r) => r.addEventListener("change", () => update(false)));
+    reset.addEventListener("click", () => {
+      radios.forEach((r) => (r.checked = false));
+      update(true);
+      radios[0].focus();
+    });
+    reset.hidden = false;
+    update(false);
   }
+/*INITFNS*/
 })();

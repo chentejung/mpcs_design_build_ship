@@ -1,6 +1,6 @@
 # BGA landing page gallery
 
-Design exploration: 25 restyles of the logged-out homepage of https://en.boardgamearena.com/, aimed at getting more visitors to **register and start playing**. Every style is judged by one question: does a first-time visitor want to click the register CTA?
+Design exploration: restyles of the logged-out homepage of https://en.boardgamearena.com/, aimed at getting more visitors to **register and start playing**. Every style is judged by one question: does a first-time visitor want to click the register CTA?
 
 This is a personal concept study, not affiliated with Board Game Arena. Nothing ships to their site.
 
@@ -15,15 +15,15 @@ Plain HTML and CSS, with optional vanilla JS for interaction. No frameworks, no 
 ```
 index.html          landing grid plus one <section> per style, shown one per page
 css/gallery.css     page modes, landing grid, gallery bar and shared resets only
-css/NN-slug.css     one file per style, e.g. css/01-game-night-table.css
+css/NN-slug.css     one file per style, e.g. css/01-banner-hall.css
 js/gallery.js       page modes, landing cards, gallery bar, per-style interactions
 img/games/          licensed game photos, credited in the index.html footer
-DIRECTIONS.md       the 25 style briefs and conversion hooks
+DIRECTIONS.md       the style briefs and conversion hooks
 ```
 
-`index.html` is the only HTML file. Style `00-baseline` is a faithful recreation of the current page and acts as the control. Styles `01`–`25` follow `DIRECTIONS.md`.
+`index.html` is the only HTML file. Style `00-baseline` is a faithful recreation of the current page and acts as the control. The other styles (currently `01`–`10`) follow `DIRECTIONS.md`.
 
-Each style is `<section class="style" id="sNN" data-name="…" data-hook="…">`. Every rule in `css/NN-slug.css` is scoped under `#sNN`, and custom properties are declared on `#sNN` too. That keeps 26 stylesheets on one page from bleeding into each other. Per-style JS gets its own function in `gallery.js`, keyed by section id.
+Each style is `<section class="style" id="sNN" data-name="…" data-hook="…">`. Every rule in `css/NN-slug.css` is scoped under `#sNN`, and custom properties are declared on `#sNN` too. That keeps the stylesheets sharing one page from bleeding into each other. Per-style JS gets its own function in `gallery.js`, keyed by section id.
 
 `index.html` has three **page modes**, chosen by query string:
 

@@ -1,0 +1,1203 @@
+/* 09 Route Map: the page is a vintage railway board on a walnut table. Aged map
+   paper with a scoring track of numbered squares round the edge, invented cities
+   joined by routes of rounded coloured segments, friends' plastic train cars on
+   their claimed routes, a compass rose and a title cartouche. Content sits on
+   destination tickets and train cards.
+   Hook: invite your friends. The invite is a destination ticket from "You" to
+   "Your friends' table"; the one open route on the map is yours to claim.
+   Every rule and custom property is scoped under #s09. */
+
+#s09 {
+  --s09-paper: #efe1bd;
+  --s09-paper-2: #e6d2a3;
+  --s09-card: #f8efd8;
+  --s09-ink: #3b2414;
+  --s09-ink-2: #5a3a20;
+  --s09-brass: #b08a3e;
+  --s09-brass-deep: #6f5219;
+  --s09-crimson: #9e2a1f;
+  --s09-crimson-deep: #5f150e;
+  --s09-you: #2552b0;
+  --s09-r-red: #c2392b;
+  --s09-r-orange: #e07a24;
+  --s09-r-yellow: #e9c12f;
+  --s09-r-green: #3e8a3c;
+  --s09-r-blue: #2b5ca6;
+  --s09-r-purple: #7a3f8d;
+  --s09-r-black: #2b2622;
+  --s09-r-white: #f7f2e6;
+  --s09-r-grey: #9b968c;
+  --s09-rainbow: linear-gradient(90deg, #c2392b 0 14%, #e07a24 14% 28%, #e9c12f 28% 42%, #3e8a3c 42% 57%, #2b5ca6 57% 71%, #7a3f8d 71% 86%, #2b2622 86%);
+  --s09-head: "Rockwell", "Rockwell Nova", "Clarendon", "Century Schoolbook", "New Century Schoolbook", C059, "Bookman Old Style", "URW Bookman", Georgia, serif;
+  --s09-body: "Iowan Old Style", "Palatino Linotype", Palatino, P052, "Book Antiqua", Georgia, serif;
+  --s09-tw: clamp(10px, 1.3vw, 18px);
+  --s09-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .22 0 0 0 0 .08 0 0 0 .13 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --s09-stain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.006' numOctaves='3' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .3 0 0 0 0 .1 0 0 0 .5 -.18'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+
+  background: #3a2414;
+  color: var(--s09-ink);
+  font-family: var(--s09-body);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+#s09 *,
+#s09 *::before,
+#s09 *::after {
+  box-sizing: border-box;
+}
+
+#s09 h1,
+#s09 h2,
+#s09 h3,
+#s09 p,
+#s09 ol,
+#s09 ul,
+#s09 dl,
+#s09 dd {
+  margin: 0;
+}
+
+#s09 ol,
+#s09 ul {
+  padding: 0;
+  list-style: none;
+}
+
+#s09 img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#s09 .s09-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+#s09 .s09-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Links and focus */
+
+#s09 a {
+  color: var(--s09-ink);
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 2px;
+}
+
+#s09 a:hover {
+  color: var(--s09-crimson);
+}
+
+#s09 a:focus-visible {
+  outline: 3px solid var(--s09-you);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Walnut table, board and scoring track round the edge */
+
+#s09 .s09-table {
+  padding: clamp(6px, 2vw, 28px);
+  background:
+    repeating-linear-gradient(92deg, rgba(0, 0, 0, 0.12) 0 2px, transparent 2px 9px, rgba(255, 220, 170, 0.05) 9px 11px, transparent 11px 23px),
+    radial-gradient(140% 70% at 50% 0%, #6b4426 0%, #3a2414 70%);
+}
+
+#s09 .s09-board {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: var(--s09-tw);
+  border-radius: 6px;
+  background:
+    repeating-linear-gradient(90deg, #f3e6c6 0 calc(var(--s09-tw) * 1.6), #5a3a20 calc(var(--s09-tw) * 1.6) calc(var(--s09-tw) * 1.6 + 1.5px), #e2cd9c calc(var(--s09-tw) * 1.6 + 1.5px) calc(var(--s09-tw) * 3.2), #5a3a20 calc(var(--s09-tw) * 3.2) calc(var(--s09-tw) * 3.2 + 1.5px)) top / 100% var(--s09-tw) no-repeat,
+    repeating-linear-gradient(90deg, #f3e6c6 0 calc(var(--s09-tw) * 1.6), #5a3a20 calc(var(--s09-tw) * 1.6) calc(var(--s09-tw) * 1.6 + 1.5px), #e2cd9c calc(var(--s09-tw) * 1.6 + 1.5px) calc(var(--s09-tw) * 3.2), #5a3a20 calc(var(--s09-tw) * 3.2) calc(var(--s09-tw) * 3.2 + 1.5px)) bottom / 100% var(--s09-tw) no-repeat,
+    repeating-linear-gradient(180deg, #f3e6c6 0 calc(var(--s09-tw) * 1.6), #5a3a20 calc(var(--s09-tw) * 1.6) calc(var(--s09-tw) * 1.6 + 1.5px), #e2cd9c calc(var(--s09-tw) * 1.6 + 1.5px) calc(var(--s09-tw) * 3.2), #5a3a20 calc(var(--s09-tw) * 3.2) calc(var(--s09-tw) * 3.2 + 1.5px)) left / var(--s09-tw) 100% no-repeat,
+    repeating-linear-gradient(180deg, #f3e6c6 0 calc(var(--s09-tw) * 1.6), #5a3a20 calc(var(--s09-tw) * 1.6) calc(var(--s09-tw) * 1.6 + 1.5px), #e2cd9c calc(var(--s09-tw) * 1.6 + 1.5px) calc(var(--s09-tw) * 3.2), #5a3a20 calc(var(--s09-tw) * 3.2) calc(var(--s09-tw) * 3.2 + 1.5px)) right / var(--s09-tw) 100% no-repeat,
+    #5a3a20;
+  box-shadow:
+    0 0 0 2px #2a170b,
+    0 18px 40px rgba(10, 5, 0, 0.55),
+    0 3px 0 #1e1008;
+}
+
+#s09 .s09-board__inner {
+  position: relative;
+  padding: clamp(14px, 3.4vw, 48px) clamp(14px, 3.6vw, 56px);
+  background:
+    var(--s09-noise),
+    var(--s09-stain),
+    radial-gradient(130% 90% at 50% 40%, transparent 55%, rgba(120, 78, 30, 0.22) 100%),
+    var(--s09-paper);
+  box-shadow:
+    inset 0 0 0 2px var(--s09-ink-2),
+    inset 0 0 0 6px var(--s09-paper),
+    inset 0 0 0 7px var(--s09-brass);
+}
+
+/* Shared type */
+
+#s09 .s09-eyebrow {
+  display: block;
+}
+
+#s09 .s09-eyebrow__rule {
+  display: inline-block;
+  margin-right: 0.6rem;
+  vertical-align: 0.1em;
+}
+
+#s09 .s09-eyebrow,
+#s09 .s09-kicker {
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--s09-head);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--s09-brass-deep);
+}
+
+#s09 .s09-eyebrow__rule {
+  flex: none;
+  width: 2.25rem;
+  height: 8px;
+  border-radius: 2px;
+  background: repeating-linear-gradient(90deg, var(--s09-crimson) 0 9px, transparent 9px 12px);
+}
+
+#s09 .s09-kicker {
+  display: flex;
+}
+
+#s09 .s09-kicker::before,
+#s09 .s09-kicker::after {
+  content: "";
+  flex: none;
+  width: 1.75rem;
+  height: 2px;
+  background: currentColor;
+}
+
+#s09 .s09-kicker::after {
+  display: none;
+}
+
+#s09 .s09-h1 {
+  margin-top: 0.85rem;
+  font-family: var(--s09-head);
+  font-size: clamp(2rem, 4.3vw, 3.65rem);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  color: var(--s09-ink);
+  text-wrap: balance;
+}
+
+#s09 .s09-h1 em {
+  display: block;
+  margin-top: 0.2em;
+  font-style: italic;
+  color: var(--s09-crimson);
+}
+
+#s09 .s09-h2 {
+  margin-top: 0.6rem;
+  font-family: var(--s09-head);
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+#s09 .s09-lede,
+#s09 .s09-sub {
+  margin-top: 1rem;
+  max-width: 36rem;
+  font-size: clamp(1rem, 1.25vw, 1.1875rem);
+  color: var(--s09-ink-2);
+}
+
+/* Primary CTA: a locomotive card held out in your hand */
+
+#s09 .s09-act {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.1rem 1.6rem;
+  margin-top: clamp(1.25rem, 2.6vw, 2rem);
+}
+
+#s09 .s09-act--center {
+  justify-content: center;
+}
+
+#s09 .s09-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.95rem;
+  min-height: 4.5rem;
+  padding: 0.65rem 1.7rem 0.65rem 0.75rem;
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0) 45%),
+    var(--s09-crimson);
+  color: #fff8ea;
+  text-decoration: none;
+  box-shadow:
+    0 0 0 3px #f6e7c1,
+    0 0 0 5px var(--s09-brass),
+    0 6px 0 5px var(--s09-crimson-deep),
+    0 14px 26px 4px rgba(60, 25, 5, 0.38);
+}
+
+#s09 .s09-cta:hover {
+  color: #fff8ea;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0) 45%),
+    #b23224;
+}
+
+#s09 .s09-cta:focus-visible {
+  outline: 3px solid var(--s09-you);
+  outline-offset: 9px;
+  border-radius: 12px;
+}
+
+#s09 .s09-cta__loco {
+  position: relative;
+  flex: none;
+  width: 2.25rem;
+  height: 3.1rem;
+  border-radius: 5px;
+  background: var(--s09-rainbow);
+  box-shadow: 0 0 0 2.5px #fff8ea, 2px 3px 0 2.5px rgba(0, 0, 0, 0.25);
+  transform: rotate(-8deg);
+}
+
+#s09 .s09-cta__loco::after {
+  content: "";
+  position: absolute;
+  inset: 32% 14%;
+  border-radius: 3px;
+  background:
+    radial-gradient(circle at 25% 100%, #fff8ea 0 22%, transparent 24%),
+    radial-gradient(circle at 75% 100%, #fff8ea 0 22%, transparent 24%),
+    linear-gradient(#fff8ea, #fff8ea) 0 30% / 100% 45% no-repeat;
+  opacity: 0.92;
+}
+
+#s09 .s09-cta__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+#s09 .s09-cta__main {
+  font-family: var(--s09-head);
+  font-size: clamp(1.45rem, 2.2vw, 1.8rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+#s09 .s09-cta__sub {
+  margin-top: 0.3rem;
+  font-family: var(--s09-body);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* Secondary: "I have an invite" */
+
+#s09 .s09-invite-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  font-family: var(--s09-head);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--s09-ink);
+}
+
+#s09 .s09-invite-link__stub {
+  flex: none;
+  width: 1.75rem;
+  height: 1.125rem;
+  color: var(--s09-you);
+}
+
+#s09 .s09-invite-link--solid {
+  padding: 0.45rem 1.1rem;
+  border: 2px solid var(--s09-ink);
+  border-radius: 999px;
+  background: var(--s09-card);
+  text-decoration: none;
+}
+
+/* Hero */
+
+#s09 .s09-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+#s09 .s09-hero__copy {
+  align-self: center;
+}
+
+#s09 .s09-hero__art {
+  position: relative;
+  max-width: 660px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+#s09 .s09-map {
+  padding: 6px;
+  border-radius: 4px;
+  background: #f6ecd2;
+  box-shadow:
+    0 0 0 1px var(--s09-ink-2),
+    0 10px 24px rgba(70, 40, 10, 0.28);
+  transform: rotate(0.6deg);
+}
+
+#s09 .s09-map__svg {
+  width: 100%;
+  height: auto;
+}
+
+#s09 .s09-map__sea {
+  fill: #bfd2c4;
+}
+
+#s09 .s09-seg {
+  stroke: #1b130c;
+  stroke-opacity: 0.7;
+  stroke-width: 0.9;
+}
+
+#s09 .s09-rt--yours .s09-seg {
+  fill: #f6ecd2;
+  stroke: var(--s09-you);
+  stroke-opacity: 1;
+  stroke-width: 1.6;
+  stroke-dasharray: 3.2 2.2;
+}
+
+#s09 .s09-map__glow {
+  stroke: var(--s09-you);
+  stroke-width: 22;
+  stroke-linecap: round;
+  stroke-opacity: 0.16;
+}
+
+#s09 .s09-map__cities circle {
+  fill: #b8322a;
+  stroke: #1b130c;
+  stroke-width: 2;
+}
+
+#s09 .s09-map__labels text {
+  font-family: var(--s09-head);
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--s09-ink);
+  paint-order: stroke;
+  stroke: #efe1bd;
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+#s09 .s09-map__labels .s09-map__big {
+  font-size: 16px;
+}
+
+#s09 .s09-map__tags text {
+  font-family: var(--s09-head);
+  font-size: 11.5px;
+  font-weight: 700;
+  fill: #fff;
+}
+
+#s09 .s09-map__tags .s09-map__tag-dark,
+#s09 .s09-map__yourtag text {
+  fill: #1b130c;
+}
+
+#s09 .s09-map__yourtag text {
+  fill: var(--s09-you);
+  letter-spacing: 0.04em;
+}
+
+#s09 .s09-map__ct1 {
+  font-family: var(--s09-head);
+  font-size: 12px;
+  font-weight: 700;
+  fill: var(--s09-ink);
+  letter-spacing: 0.02em;
+}
+
+#s09 .s09-map__ct2 {
+  font-family: var(--s09-body);
+  font-size: 10px;
+  font-style: italic;
+  fill: var(--s09-ink-2);
+}
+
+/* Destination ticket (hero) */
+
+#s09 .s09-dticket {
+  position: relative;
+  width: min(17rem, 86%);
+  margin: -2.2rem auto 0 1rem;
+  padding: 0.75rem 3.6rem 0.85rem 1rem;
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, transparent calc(100% - 3.1rem), rgba(176, 138, 62, 0.16) calc(100% - 3.1rem)),
+    var(--s09-card);
+  box-shadow:
+    inset 0 0 0 1.5px var(--s09-ink-2),
+    inset 0 0 0 5px var(--s09-card),
+    inset 0 0 0 6px var(--s09-brass),
+    0 10px 20px rgba(60, 30, 5, 0.32);
+  transform: rotate(-3.5deg);
+}
+
+#s09 .s09-dticket__kind {
+  font-family: var(--s09-head);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--s09-brass-deep);
+}
+
+#s09 .s09-dticket__route {
+  margin-top: 0.2rem;
+  font-family: var(--s09-head);
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+#s09 .s09-dticket__dash {
+  color: var(--s09-crimson);
+}
+
+#s09 .s09-dticket__pts {
+  position: absolute;
+  top: 50%;
+  right: 0.6rem;
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  margin-top: -1.2rem;
+  border-radius: 50%;
+  background: var(--s09-ink);
+  box-shadow: 0 0 0 2px var(--s09-card), 0 0 0 3.5px var(--s09-ink);
+  font-family: var(--s09-head);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff8ea;
+}
+
+/* Scoreboard: the track, markers and the big numbers */
+
+#s09 .s09-score {
+  grid-column: 1 / -1;
+}
+
+#s09 .s09-score__track {
+  width: 100%;
+  height: auto;
+}
+
+#s09 .s09-score__track text {
+  font-family: var(--s09-head);
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--s09-ink-2);
+}
+
+#s09 .s09-score__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 0.6rem;
+  margin-top: 0.6rem;
+}
+
+#s09 .s09-score__item {
+  padding: 0.6rem 1rem 0.7rem;
+  border: 1.5px solid var(--s09-ink-2);
+  border-radius: 6px;
+  background: var(--s09-card);
+}
+
+#s09 .s09-score__item dt {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--s09-head);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--s09-brass-deep);
+}
+
+#s09 .s09-score__item dd {
+  font-family: var(--s09-head);
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+
+#s09 .s09-marker {
+  flex: none;
+  width: 0.95rem;
+  height: 0.95rem;
+  border-radius: 50%;
+  border: 1.5px solid #1b130c;
+  background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.6) 0 18%, transparent 22%), var(--s09-mk);
+}
+
+#s09 .s09-marker--red { --s09-mk: #d23a2c; }
+#s09 .s09-marker--green { --s09-mk: #2f8a3a; }
+#s09 .s09-marker--yellow { --s09-mk: #f0c419; }
+
+/* Sections, each opened by a strip of route segments */
+
+#s09 .s09-sec {
+  position: relative;
+  padding-top: clamp(3rem, 7vw, 5.5rem);
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+#s09 .s09-sec::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(30rem, 80%);
+  height: 10px;
+  transform: translateX(-50%);
+  background: repeating-linear-gradient(90deg, var(--s09-line, var(--s09-r-blue)) 0 34px, transparent 34px 39px);
+  border-block: 1px solid transparent;
+  filter: drop-shadow(0 1px 0 rgba(27, 19, 12, 0.6));
+}
+
+#s09 .s09-games { --s09-line: var(--s09-r-orange); }
+#s09 .s09-hand { --s09-line: var(--s09-r-purple); }
+#s09 .s09-final { --s09-line: var(--s09-r-green); }
+
+#s09 .s09-sec__head {
+  max-width: 46rem;
+  margin: 0 auto clamp(1.75rem, 3.5vw, 2.75rem);
+  text-align: center;
+}
+
+#s09 .s09-sec__head .s09-kicker {
+  justify-content: center;
+}
+
+#s09 .s09-sec__head .s09-kicker::after {
+  display: block;
+}
+
+#s09 .s09-sec__head .s09-sub {
+  margin-inline: auto;
+}
+
+/* The invitation: one big destination ticket */
+
+#s09 .s09-bigticket {
+  position: relative;
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: clamp(1.25rem, 3vw, 2.25rem) clamp(1.5rem, 4vw, 3.25rem);
+  border-radius: 14px;
+  background:
+    var(--s09-noise),
+    var(--s09-card);
+  box-shadow:
+    inset 0 0 0 2px var(--s09-ink-2),
+    inset 0 0 0 8px var(--s09-card),
+    inset 0 0 0 9.5px var(--s09-brass);
+  -webkit-mask:
+    radial-gradient(circle 15px at 0 50%, #0000 97%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle 15px at 100% 50%, #0000 97%, #000) right / 51% 100% no-repeat;
+  mask:
+    radial-gradient(circle 15px at 0 50%, #0000 97%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle 15px at 100% 50%, #0000 97%, #000) right / 51% 100% no-repeat;
+}
+
+#s09 .s09-bigticket__top {
+  padding-right: 4.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px dashed rgba(90, 58, 32, 0.45);
+}
+
+#s09 .s09-bigticket__kind {
+  font-family: var(--s09-head);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--s09-brass-deep);
+}
+
+#s09 .s09-bigticket__route {
+  margin-top: 0.3rem;
+  font-family: var(--s09-head);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+#s09 .s09-bigticket__arrow {
+  color: var(--s09-crimson);
+}
+
+#s09 .s09-bigticket__pts {
+  position: absolute;
+  top: clamp(1.1rem, 2.6vw, 1.9rem);
+  right: clamp(1.25rem, 3.4vw, 2.75rem);
+  display: grid;
+  place-items: center;
+  width: clamp(3rem, 6vw, 4rem);
+  height: clamp(3rem, 6vw, 4rem);
+  border-radius: 50%;
+  background: var(--s09-ink);
+  box-shadow: 0 0 0 3px var(--s09-card), 0 0 0 5px var(--s09-ink);
+  font-family: var(--s09-head);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: #fff8ea;
+}
+
+#s09 .s09-stops {
+  position: relative;
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  counter-reset: s09-stop;
+}
+
+#s09 .s09-stop {
+  position: relative;
+  padding-left: 3.75rem;
+}
+
+#s09 .s09-stop:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 3rem;
+  bottom: -1.5rem;
+  left: 1.05rem;
+  width: 9px;
+  background: repeating-linear-gradient(180deg, var(--s09-you) 0 18px, transparent 18px 22px);
+  border-radius: 2px;
+}
+
+#s09 .s09-stop__dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  background: #b8322a;
+  border: 3px solid #1b130c;
+  box-shadow: 0 0 0 3px var(--s09-card), 0 0 0 4.5px var(--s09-ink-2);
+  font-family: var(--s09-head);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fff8ea;
+}
+
+#s09 .s09-stop__t {
+  font-family: var(--s09-head);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  padding-top: 0.35rem;
+}
+
+#s09 .s09-stop p {
+  margin-top: 0.35rem;
+  color: var(--s09-ink-2);
+}
+
+#s09 .s09-bigticket__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 2px dashed rgba(90, 58, 32, 0.45);
+}
+
+#s09 .s09-bigticket__note {
+  max-width: 34rem;
+  font-style: italic;
+  color: var(--s09-ink-2);
+}
+
+/* Top ten: destination tickets */
+
+#s09 .s09-tickets {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 9rem), 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+#s09 .s09-ticket {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0.55rem;
+  border-radius: 10px;
+  background: var(--s09-card);
+  box-shadow:
+    inset 0 0 0 1.5px var(--s09-ink-2),
+    inset 0 0 0 4.5px var(--s09-card),
+    inset 0 0 0 5.5px var(--s09-brass),
+    0 6px 14px rgba(70, 40, 10, 0.2);
+}
+
+#s09 .s09-ticket:nth-child(odd) {
+  transform: rotate(-0.8deg);
+}
+
+#s09 .s09-ticket:nth-child(even) {
+  transform: rotate(0.7deg);
+}
+
+#s09 .s09-ticket__pic {
+  margin: 0.3rem;
+  border: 1.5px solid var(--s09-ink-2);
+  border-radius: 4px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--s09-paper-2);
+}
+
+#s09 .s09-ticket__pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.18) saturate(0.95);
+}
+
+#s09 .s09-ticket__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0.45rem 0.65rem 0.6rem;
+}
+
+#s09 .s09-ticket__from {
+  font-family: var(--s09-head);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--s09-brass-deep);
+}
+
+#s09 .s09-ticket__name {
+  margin-top: 0.1rem;
+  font-family: var(--s09-head);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+#s09 .s09-ticket__tag {
+  margin-top: auto;
+  padding: 0.12rem 0.6rem 0.14rem 0.5rem;
+  border-radius: 3px;
+  background: var(--s09-tag, var(--s09-r-blue));
+  font-family: var(--s09-head);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  box-shadow: inset 0 0 0 1px rgba(27, 19, 12, 0.5);
+}
+
+#s09 .s09-ticket__name + .s09-ticket__tag {
+  margin-top: 0.55rem;
+}
+
+#s09 .s09-ticket--family { --s09-tag: #2e6e2c; }
+#s09 .s09-ticket--coop { --s09-tag: var(--s09-r-purple); }
+
+#s09 .s09-ticket__no {
+  position: absolute;
+  top: -0.55rem;
+  right: -0.55rem;
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background: var(--s09-ink);
+  box-shadow: 0 0 0 2.5px var(--s09-card), 0 0 0 4px var(--s09-ink), 0 4px 8px rgba(40, 20, 5, 0.3);
+  font-family: var(--s09-head);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff8ea;
+}
+
+#s09 .s09-allgames {
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+  text-align: center;
+}
+
+#s09 .s09-allgames a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0.5rem 1.5rem;
+  border: 2px solid var(--s09-ink);
+  border-radius: 6px;
+  background: var(--s09-card);
+  box-shadow: 0 3px 0 var(--s09-ink-2);
+  font-family: var(--s09-head);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Your hand: train cards */
+
+#s09 .s09-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+#s09 .s09-tcard {
+  display: flex;
+  flex-direction: column;
+  padding: 7px;
+  border-radius: 14px;
+  background: #fbf6ea;
+  box-shadow:
+    0 0 0 1.5px var(--s09-ink-2),
+    0 8px 16px rgba(70, 40, 10, 0.22);
+}
+
+#s09 .s09-tcard__art {
+  width: 100%;
+  height: auto;
+  padding: 0.9rem 1.5rem 0.7rem;
+  border-radius: 9px;
+  color: #fbf6ea;
+  background:
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0 6px, transparent 6px 14px),
+    var(--s09-c);
+  box-shadow: inset 0 0 0 2px rgba(27, 19, 12, 0.35);
+}
+
+#s09 .s09-tcard--loco .s09-tcard__art {
+  color: #fbf6ea;
+  background: var(--s09-rainbow);
+  filter: none;
+}
+
+#s09 .s09-tcard--loco .s09-tcard__art use {
+  filter: drop-shadow(0 1.5px 0 rgba(27, 19, 12, 0.85));
+}
+
+#s09 .s09-tcard__t {
+  margin: 0.75rem 0.6rem 0;
+  font-family: var(--s09-head);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+#s09 .s09-tcard p {
+  margin: 0.3rem 0.6rem 0.6rem;
+  color: var(--s09-ink-2);
+  font-size: 0.975rem;
+}
+
+#s09 .s09-bonus {
+  position: relative;
+  max-width: 40rem;
+  margin: clamp(2rem, 4vw, 3rem) auto 0;
+  padding: 1.6rem clamp(1.25rem, 3vw, 2rem) 1.4rem;
+  border-radius: 12px;
+  background:
+    var(--s09-noise),
+    var(--s09-card);
+  box-shadow:
+    inset 0 0 0 2px var(--s09-ink-2),
+    inset 0 0 0 7px var(--s09-card),
+    inset 0 0 0 8.5px var(--s09-brass),
+    0 10px 22px rgba(70, 40, 10, 0.24);
+  text-align: center;
+}
+
+#s09 .s09-bonus__kind {
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  border-radius: 3px;
+  background: var(--s09-crimson);
+  font-family: var(--s09-head);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff8ea;
+}
+
+#s09 .s09-bonus__train {
+  width: min(100%, 20rem);
+  height: auto;
+  margin: 1rem auto 0;
+}
+
+#s09 .s09-bonus__num {
+  margin-top: 0.5rem;
+  font-family: var(--s09-head);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+#s09 .s09-bonus__txt {
+  max-width: 28rem;
+  margin: 0.5rem auto 0;
+  color: var(--s09-ink-2);
+}
+
+/* Final station */
+
+#s09 .s09-final {
+  padding-bottom: clamp(0.5rem, 2vw, 1.5rem);
+}
+
+#s09 .s09-final__ticket {
+  max-width: 50rem;
+  margin: 0 auto;
+  padding: clamp(1.75rem, 4vw, 3rem) clamp(1.25rem, 4vw, 3rem) clamp(2rem, 4vw, 3rem);
+  border-radius: 14px;
+  background:
+    var(--s09-noise),
+    var(--s09-card);
+  box-shadow:
+    inset 0 0 0 2px var(--s09-ink-2),
+    inset 0 0 0 8px var(--s09-card),
+    inset 0 0 0 9.5px var(--s09-brass);
+  text-align: center;
+}
+
+#s09 .s09-final__ticket .s09-kicker {
+  justify-content: center;
+}
+
+#s09 .s09-final__ticket .s09-kicker::after {
+  display: block;
+}
+
+#s09 .s09-final__ticket .s09-sub {
+  margin-inline: auto;
+}
+
+#s09 .s09-final .s09-act {
+  margin-top: 1.75rem;
+}
+
+/* Wider layouts */
+
+@media (max-width: 480px) {
+  #s09 .s09-ticket__name,
+  #s09 .s09-tcard__t {
+    font-size: 1.02rem;
+  }
+
+  #s09 .s09-tcard p {
+    font-size: 0.9rem;
+  }
+
+  #s09 .s09-tcard__art {
+    padding: 0.6rem 0.8rem 0.5rem;
+  }
+}
+
+@media (min-width: 640px) {
+  #s09 .s09-tickets {
+    grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));
+  }
+}
+
+@media (min-width: 720px) {
+  #s09 .s09-stops {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+  }
+
+  #s09 .s09-stop {
+    padding-left: 0;
+    padding-top: 3.6rem;
+  }
+
+  #s09 .s09-stop:not(:last-child)::after {
+    top: 0.85rem;
+    bottom: auto;
+    left: 3.4rem;
+    right: -1.6rem;
+    width: auto;
+    height: 9px;
+    background: repeating-linear-gradient(90deg, var(--s09-you) 0 22px, transparent 22px 26px);
+  }
+
+  #s09 .s09-dticket {
+    position: absolute;
+    left: -0.5rem;
+    bottom: -1.75rem;
+    width: 15rem;
+    margin: 0;
+  }
+}
+
+@media (min-width: 960px) {
+  #s09 .s09-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+    column-gap: clamp(2rem, 4vw, 4rem);
+  }
+
+  #s09 .s09-hero__art {
+    margin-right: 0;
+  }
+
+  #s09 .s09-dticket {
+    left: -2.75rem;
+  }
+
+  #s09 .s09-score {
+    margin-top: 0.5rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  #s09 .s09-cards {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  #s09 .s09-tcard:nth-child(1) { transform: rotate(-5deg) translateY(1.2rem); }
+  #s09 .s09-tcard:nth-child(2) { transform: rotate(-3deg) translateY(0.4rem); }
+  #s09 .s09-tcard:nth-child(3) { transform: rotate(-1deg); }
+  #s09 .s09-tcard:nth-child(4) { transform: rotate(1deg); }
+  #s09 .s09-tcard:nth-child(5) { transform: rotate(3deg) translateY(0.4rem); }
+  #s09 .s09-tcard:nth-child(6) { transform: rotate(5deg) translateY(1.2rem); }
+
+  #s09 .s09-tickets {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* Short desktop viewports: keep the CTA and numbers in the first screen */
+
+@media (min-width: 960px) and (max-height: 820px) {
+  #s09 .s09-h1 {
+    font-size: clamp(2rem, 3.6vw, 3rem);
+  }
+
+  #s09 .s09-hero__art {
+    max-width: 560px;
+  }
+}
+
+/* Motion */
+
+@media (prefers-reduced-motion: no-preference) {
+  #s09 .s09-cta,
+  #s09 .s09-tcard,
+  #s09 .s09-ticket,
+  #s09 .s09-allgames a {
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  #s09 .s09-cta:hover {
+    transform: translateY(-2px);
+  }
+
+  #s09 .s09-ticket:hover {
+    transform: rotate(0deg) translateY(-4px);
+  }
+
+  #s09 .s09-allgames a:hover {
+    transform: translateY(-1px);
+  }
+
+  #s09 .s09-map__glow {
+    animation: s09-glow 2.6s ease-in-out infinite;
+  }
+
+  #s09 .s09-rt--yours .s09-seg {
+    animation: s09-dash 1.4s linear infinite;
+  }
+
+  #s09 .s09-score__you {
+    animation: s09-dash 1.4s linear infinite;
+  }
+
+  @media (min-width: 1200px) {
+    #s09 .s09-tcard:hover {
+      transform: translateY(-0.9rem) rotate(0deg);
+    }
+  }
+}
+
+@keyframes s09-glow {
+  0%, 100% { stroke-opacity: 0.1; }
+  50% { stroke-opacity: 0.26; }
+}
+
+@keyframes s09-dash {
+  to { stroke-dashoffset: -10.8; }
+}
+
+/* Landing-card preview: calm, still final state */
+
+.is-thumb #s09 *,
+.is-thumb #s09 *::before,
+.is-thumb #s09 *::after {
+  animation: none !important;
+  transition: none !important;
+}

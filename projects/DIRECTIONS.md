@@ -1,6 +1,6 @@
 # Style directions
 
-The 25 style briefs for the gallery, plus `00-baseline` as the control. Each pairs a **visual style** with the **conversion hook** it suits best. The two axes are independent, so a hook can be reused or swapped.
+The style briefs for the gallery, plus `00-baseline` as the control. Each pairs a **visual style** with the **conversion hook** it suits best. The two axes are independent, so a hook can be reused or swapped.
 
 ## Baseline observations (live page, Oct 2026)
 
@@ -12,40 +12,25 @@ The 25 style briefs for the gallery, plus `00-baseline` as the control. Each pai
 
 ## Styles
 
-Each of the 25 styles is based on one show from [Looper's 25 best Cartoon Network shows](https://www.looper.com/787648/best-cartoon-network-shows-of-all-time-ranked/), in rank order (01 = #1). The show column is for our reference only: show names, characters, logos, catchphrases and title lettering never appear on the page. Evoke the show's *drawing technique, palette and mood*; every character, shape and word is original.
+The gallery holds ten styles. 01–03 are themed looks; 04–10 are each drawn from one game in the top ten below, using that game's scenes, props, cards and components. Earlier rounds (Cartoon Network shows, more *Game of Thrones* takes) were retired; only Hall of Banners survives, renumbered from 08 to 01.
+
+Reference shows, genres and games are for our reference only. Game names may appear (they are the top ten), but publisher logos, title lettering, box art and card art never do: draw every component in your own hand. Show names, characters, houses, sigils, place names, publishers, logos, catchphrases and title lettering never appear on the page. Evoke the *craft, palette and mood*; every character, shape and word is original. No violence or gore.
 
 **The through-line is playing together.** Every style is an invitation: copy speaks to "you and your friends", "your crew", "pull up a seat", "we saved you a spot"; art shows groups gathered around a game, an empty seat waiting, friends waving you over, hands reaching into the same pile of pieces. No lone hero. Solo-play claims are fine but never the lead.
 
-The ten styles marked *kept* were built in the comic-book round and moved to their show's rank; they get a play-together revision rather than a rebuild.
-
-| # | Show (reference only) | Slug | Look | Hook |
+| # | Reference | Slug | Look | Hook |
 |---|------|------|------|------|
 | 00 | – | baseline | Faithful recreation of the current page. | Start playing now |
-| 01 | Adventure Time | candy-kingdom-quest | Noodle-limbed rounded characters, pastel candy kingdom, treehouse hangout, simple bold shapes, whimsical flat colour. | Invite your friends |
-| 02 | The Powerpuff Girls | city-heroes-ink *(kept)* | Superhero splash page: thick uniform outlines, flat candy colour, starburst rays, round-faced hero trio over a city skyline. | Team up |
-| 03 | Samurai Jack | ronin-widescreen *(kept)* | Graphic-novel noir: cinemascope panels, flat geometry, stark silhouettes, bold sunset gradients, minimal captions. Now: the wanderer finds companions. | Accept the quest |
-| 04 | Courage the Cowardly Dog | pulp-horror *(kept)* | Horror-comic splash: spot blacks, dripping title, nervous hero, friendly monsters who just want a fourth player. | Seat at the table |
-| 05 | Steven Universe | crystal-beach-town | Soft painted pastel backgrounds, boardwalk beach town, gem facets and star motifs, gentle warm found-family mood. | Invite your friends |
-| 06 | Teen Titans | tower-team-anime | Anime-influenced Western action: T-shaped tower on an island, speed lines, chibi gag moments, team roll call. | Team up |
-| 07 | Dexter's Laboratory | lab-panel *(kept)* | Comic pages with a boxy retro lab, inked panels, pastel flats, gadget callouts, chunky red button. Now: "Player 2, press start". | Press start |
-| 08 | Ben 10 | hero-cover *(kept)* | Issue #1 superhero comic cover; a dial-watch that rolls a random game for the whole group. | Roll for a game |
-| 09 | Regular Show | park-slackers | Muted suburban park, flat thick outlines, retro 80s arcade/video-game references, cabinet screens, slacker buddies. | Live lobby |
-| 10 | Ed, Edd n Eddy | funnies-strip *(kept)* | Sunday newspaper funnies: wobbly boiling ink, four-panel strip on newsprint, scheming trio, candy-sphere gag. | Invite your friends |
-| 11 | Justice League | hall-of-heroes | Angular streamlined hero design, art-deco moderne architecture, bold shadow shapes, orbital meeting hall with a round table. | Team up |
-| 12 | Craig of the Creek | creek-adventure | Lush afternoon creek woods, kid-built forts, hand-drawn maps, trading-card swaps, warm golden light. | Seat at the table |
-| 13 | Codename: Kids Next Door | mission-briefing *(kept)* | Kid-operative spy comic: treehouse HQ, numbered mission files, TOP SECRET stamps, team badges. Now: recruit your squad. | Three-step start |
-| 14 | Infinity Train | endless-carriages | Mysterious train where every carriage is a different world, glowing number motifs, painterly corridors, fellow passengers. | Live lobby |
-| 15 | The Marvelous Misadventures of Flapjack | sea-yarn | Grimy textured painted nautical look, sepia-and-teal sea, candy-island legend, sailor's yarn told to a crew. | Accept the quest |
-| 16 | Scooby-Doo! Mystery Incorporated | mystery-van | Moody teal-and-orange 70s mystery: the gang's van, clue boards with red string, unmasking reveals. | Pick your vibe |
-| 17 | Chowder | bouncy-kitchen | Flat shapes filled with textile patterns, bustling fantasy kitchen, steaming pots, everyone squeezed round the dinner table. | Seat at the table |
-| 18 | The Grim Adventures of Billy & Mandy | gothic-gag *(kept)* | Gothic gag comic: crooked tombstones, purple-black inks, acid-green accents, deadpan captions; the graveyard game night. | Top ten shelf |
-| 19 | The Amazing World of Gumball | mixed-media-town | Mixed media: photographic-feeling backgrounds with flat 2D, 3D-ish and puppet-like characters side by side; school and family chaos. | Invite your friends |
-| 20 | Cow and Chicken | barnyard-crude | Crude scratchy linework, loud primary flats, absurd farmhouse, deliberately lumpy proportions. | Pick your vibe |
-| 21 | Foster's Home for Imaginary Friends | imaginary-house *(kept)* | Bright chunky cartoon annual: a mansion cutaway where doodled friends play games in every room. | Live lobby |
-| 22 | Sym-Bionic Titan | mecha-retro | Retro 80s sci-fi mecha and high-school drama: three pilots combine into one giant, cel shading, chrome and neon dusk. | Team up |
-| 23 | The Looney Tunes Show | toon-sitcom | Bright clean modern toon sitcom: suburban living room, couch game nights, neighbours dropping in, bold flat backgrounds. | Social proof hero |
-| 24 | Total Drama Island | reality-camp | Reality-TV summer camp: confessional-cam frames, lakeside campfire, team flags, challenge boards, on-screen lower thirds. | Three-step start |
-| 25 | Johnny Bravo | pompadour-pop *(kept)* | 1950s pop-art pin-up cover: halftone sky, swaggering silhouette, jukebox strips; now he's the host gathering a crowd. | Social proof hero |
+| 01 | Game of Thrones (great halls) | banner-hall | A candlelit stone feasting hall: long oak table, hanging heraldic banners, iron candelabra, deep crimson, oxblood, pewter and gold leaf on charcoal stone. Three original house banners stand for the three vibes (a tower for Strategy, a hearth for Family, linked hands for With friends); choosing one lights its matching games along the table. | Pick your vibe ("Choose your banner") |
+| 02 | American comic books (Silver/Bronze Age) | comic-crew | Four-colour newsstand comic: an issue #1 cover with price box and corner art, then interior pages. Thick brush-inked outlines, Ben-Day dot shading, slight CMYK misregistration, yellowed newsprint, panel grids with gutters, caption boxes, speech balloons, burst lettering. Original team of everyday friends (not superheroes in costume, or at most homemade capes) who need one more player; the visitor is drafted into the next issue. Closes with a back-page mail-in coupon ad. | Invite your friends |
+| 03 | Original: the page is the board | board-path | The whole page is a printed board game seen from above: kraft cardboard, a winding track of numbered spaces that runs down the page, enamel-painted wooden pawns, dice, cards and rulebook typography. Three friends' pawns wait at the start with an empty start space for yours; sections are spaces on the track (Create account → Pick a game → Play), and the track ends at the closing CTA. A die you can roll picks one of the ten games for tonight (in-memory, no storage). | Three-step start |
+| 04 | Ark Nova (game) | zoo-blueprint | A zoo planner's desk: a gridded blueprint map of hex enclosures, kiosks and paths in pale aqua and sand, animal and sponsor cards with icon rows, a conservation-points track, action cards in a row, wooden tokens. Original animal drawings. | Live lobby (example tables as enclosures being built by a crew) |
+| 05 | Terraforming Mars (game) | red-planet | Mission control over a hex map of a rust-red planet with ocean, greenery and city tiles, corporation and project cards with cost chips and tag icons, global parameter tracks (temperature, oxygen, oceans) and player cubes. | Social proof hero (the big numbers as global parameter tracks with an animated count-up) |
+| 06 | CATAN (game) | hex-island | A hex-tile island with five resource terrains, sea frame, round number tokens with probability pips, roads and settlements in four player colours, resource cards fanned in hand. | Roll for a game: roll two dice; the ten non-seven sums (2–6, 8–12) are the ten games, placed on number tokens |
+| 07 | Wingspan (game) | aviary-guide | Watercolour field guide: pastel player mat with three habitat rows (forest, grassland, wetland), bird cards with illustrated birds, eggs, food tokens and a birdfeeder dice tower. Original bird paintings in SVG. | Pick your vibe (the three habitats are Strategy, Family, With friends) |
+| 08 | Azul (game) | mosaic-tiles | Palace azulejo mosaic: glossy square tiles in cobalt, turquoise, amber, red and black-white, round factory displays, a player board with stair-shaped pattern lines and a 5×5 wall. | Three-step start (the pattern lines 1, 2, 3 are the steps) |
+| 09 | Ticket to Ride (game) | route-map | Vintage railway map: coloured route segments between city dots, plastic train cars, train cards and destination tickets with route points, scoring track round the board edge. Cities are invented. | Invite your friends (a destination ticket from "You" to "Your friends' table") |
+| 10 | Carcassonne (game) | tile-kingdom | Square landscape tiles fitted edge to edge (roads, walled cities, cloisters, fields), wooden meeples on features, a scoring track, a draw stack. | Seat at the table (one empty tile slot in the landscape is yours: "Take your seat") |
 
 ## Games
 
