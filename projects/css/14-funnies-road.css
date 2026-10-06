@@ -1,0 +1,1205 @@
+/* 14 Funnies Road: style 11's crossroads printed as a Sunday comics page. Aged
+   newsprint on a wooden table, four-colour halftone dots, wobbly ink panel
+   borders and heavy black section banners with an italic kicker. The road is one
+   colour throughout: ivory paving with an inked edge, halftone shading and a
+   dashed centre line. Just past START it forks at a signpost into three roads,
+   one per vibe, each in a single spot colour; picking one lights its road and
+   its games. "House rules" is a four-panel strip and "how to join" a three-panel
+   strip, each panel a drawing with its caption.
+   Hook: pick your vibe ("Which way tonight?").
+   Fonts: Rye (h1, CTA label, banners, closing heading) and Libre Baskerville.
+   Every rule and custom property is scoped under #s14. */
+
+@font-face {
+  font-family: "s14 Rye";
+  src: url("../fonts/rye/rye-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s14 Libre Baskerville";
+  src: url("../fonts/librebaskerville/librebaskerville-var.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s14 Libre Baskerville";
+  src: url("../fonts/librebaskerville/librebaskerville-italic-var.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+#s14 {
+  --s14-ink: #1d1712;
+  --s14-ink-2: #53452f;
+  --s14-news: #f2e7c8;
+  --s14-panel: #f9f1dc;
+  --s14-road: #f6edd6;
+  --s14-table: #9c8657;
+  --s14-table-2: #836d42;
+  --s14-red: #c8261c;
+  --s14-red-ink: #a01a12;
+  --s14-red-deep: #8c1610;
+  --s14-blue: #2f6fb8;
+  --s14-blue-ink: #1d5490;
+  --s14-yellow: #f2bd2e;
+  --s14-display: "s14 Rye", "Rockwell", "Clarendon", "Bookman Old Style", Georgia, serif;
+  --s14-body: "s14 Libre Baskerville", "Baskerville", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --s14-wob: 110px 12px 96px 14px / 12px 96px 14px 110px;
+  --s14-wob-sm: 40px 8px 34px 10px / 10px 34px 8px 40px;
+  /* halftone wash, laid over the paper */
+  --s14-halftone: radial-gradient(rgb(110 80 30 / 0.12) 1.1px, transparent 1.5px) 0 0 / 5px 5px;
+  --s14-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .25 0 0 0 0 .18 0 0 0 0 .08 0 0 0 .14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  background: var(--s14-table);
+  color: var(--s14-ink);
+  font-family: var(--s14-body);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+#s14 *,
+#s14 *::before,
+#s14 *::after {
+  box-sizing: border-box;
+}
+
+#s14 h1,
+#s14 h2,
+#s14 h3,
+#s14 h4,
+#s14 p,
+#s14 ol,
+#s14 ul,
+#s14 dl,
+#s14 dd,
+#s14 fieldset {
+  margin: 0;
+}
+
+#s14 ol,
+#s14 ul {
+  padding: 0;
+  list-style: none;
+}
+
+#s14 fieldset {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+
+#s14 [hidden] {
+  display: none !important;
+}
+
+#s14 .s14-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+#s14 .s14-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Links, buttons and focus */
+
+#s14 a {
+  color: var(--s14-blue-ink);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 2px;
+}
+
+#s14 a:hover {
+  color: var(--s14-ink);
+}
+
+#s14 a:focus-visible,
+#s14 button:focus-visible {
+  outline: 3px solid var(--s14-ink);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Table and the newsprint sheet */
+
+#s14 .s14-table {
+  position: relative;
+  padding: clamp(6px, 2.6vw, 40px);
+  background:
+    var(--s14-grain),
+    repeating-linear-gradient(90deg, rgb(60 40 10 / 0.06) 0 2px, transparent 2px 8px),
+    radial-gradient(120% 60% at 30% 0%, #b29a68 0%, transparent 60%),
+    linear-gradient(180deg, var(--s14-table) 0%, var(--s14-table-2) 100%);
+}
+
+#s14 .s14-paper {
+  position: relative;
+  max-width: 1340px;
+  margin: 0 auto;
+  background:
+    var(--s14-halftone),
+    radial-gradient(ellipse at 50% 0%, transparent 55%, rgb(150 110 45 / 0.16) 100%),
+    var(--s14-news);
+  box-shadow:
+    0 0 0 1px rgb(60 40 10 / 0.25),
+    6px 8px 0 rgb(40 25 5 / 0.18),
+    14px 22px 34px rgb(40 25 5 / 0.38);
+}
+
+#s14 .s14-paper__inner {
+  position: relative;
+  container-type: inline-size;
+  padding: clamp(10px, 2.2vw, 26px) clamp(12px, 3vw, 44px) clamp(14px, 3vw, 34px);
+  /* Road geometry. --s14-cu is 1/1200 of the inner width, matching the SVG
+     roads; --s14-u drives the straight side lanes and is fixed when narrow. */
+  --s14-cu: calc(100cqi / 1200);
+  --s14-u: 0.62px;
+}
+
+/* Loose props beside the sheet, only where there is room */
+
+#s14 .s14-loose {
+  display: none;
+}
+
+@media (min-width: 1680px) {
+  #s14 .s14-loose {
+    display: block;
+  }
+
+  #s14 .s14-loose svg {
+    position: absolute;
+    z-index: 4;
+    pointer-events: none;
+    filter: drop-shadow(2px 4px 3px rgb(40 22 6 / 0.4));
+  }
+
+  #s14 .s14-loose__dice { width: 112px; left: -128px; top: 30%; }
+  #s14 .s14-loose__cards { width: 140px; right: -156px; top: 58%; }
+}
+
+/* Masthead */
+
+#s14 .s14-mast {
+  padding-bottom: 0.45rem;
+  margin-bottom: clamp(0.8rem, 2vw, 1.3rem);
+  border-bottom: 5px double var(--s14-ink);
+  text-align: center;
+}
+
+#s14 .s14-mast__title {
+  font-family: var(--s14-display);
+  font-size: clamp(1.4rem, 0.7rem + 3.4vw, 3rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: var(--s14-ink);
+  text-shadow: 2px 2px 0 var(--s14-yellow), 4px 4px 0 rgb(29 23 18 / 0.2);
+}
+
+#s14 .s14-mast__line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.1rem 1.1rem;
+  margin-top: 0.4rem;
+  padding-top: 0.3rem;
+  border-top: 2px solid var(--s14-ink);
+  color: var(--s14-ink-2);
+  font-size: 0.78rem;
+  font-style: italic;
+  letter-spacing: 0.04em;
+}
+
+#s14 .s14-mast__line span + span::before {
+  content: "\2605";
+  margin-right: 1.1rem;
+  font-style: normal;
+  color: var(--s14-red);
+}
+
+/* Panels */
+
+#s14 .s14-panel {
+  position: relative;
+  border: 4px solid var(--s14-ink);
+  border-radius: var(--s14-wob);
+  background: var(--s14-panel);
+}
+
+/* Type */
+
+#s14 .s14-kicker {
+  align-self: flex-start;
+  display: inline-block;
+  margin-bottom: 0.6rem;
+  padding: 0.15rem 0.6rem 0.2rem;
+  border: 3px solid var(--s14-ink);
+  border-radius: var(--s14-wob-sm);
+  background: var(--s14-yellow);
+  color: var(--s14-ink);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform: rotate(-1.6deg);
+}
+
+#s14 .s14-h1 {
+  font-family: var(--s14-display);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 1rem + 2.9vw, 3.25rem);
+  line-height: 1.1;
+  letter-spacing: 0.005em;
+  text-wrap: balance;
+}
+
+#s14 .s14-h1 em {
+  display: block;
+  font-style: normal;
+  color: var(--s14-red-ink);
+}
+
+#s14 .s14-h2 {
+  font-family: var(--s14-display);
+  font-weight: 400;
+  font-size: clamp(1.25rem, 0.9rem + 1.5vw, 2.05rem);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+
+#s14 .s14-lede {
+  margin-top: 0.85rem;
+  max-width: 32em;
+  color: var(--s14-ink-2);
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.12rem);
+}
+
+/* Section banners */
+
+#s14 .s14-band {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.1rem 1.1rem;
+  padding: 0.35rem 0.9rem 0.5rem;
+  margin-bottom: clamp(0.9rem, 2vw, 1.4rem);
+  background: var(--s14-ink);
+  color: var(--s14-panel);
+  border-radius: 3px;
+}
+
+#s14 .s14-band--red {
+  background: var(--s14-red-ink);
+}
+
+#s14 .s14-band__kick {
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* Primary CTA: an inked newsprint button */
+
+#s14 .s14-cta {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1.25rem;
+  padding: 0.7rem 1.4rem 0.75rem 1rem;
+  border: 4px solid var(--s14-ink);
+  border-radius: 20px 7px 18px 9px / 9px 18px 7px 20px;
+  background: var(--s14-red-ink);
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 7px 7px 0 var(--s14-ink);
+  transform: rotate(-1.2deg);
+}
+
+#s14 .s14-cta:hover {
+  color: #fff;
+  background: var(--s14-red-deep);
+}
+
+#s14 .s14-cta:focus-visible {
+  outline: 4px solid var(--s14-ink);
+  outline-offset: 7px;
+}
+
+#s14 .s14-cta__icon {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  color: var(--s14-yellow);
+}
+
+#s14 .s14-cta__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+#s14 .s14-cta__main {
+  font-family: var(--s14-display);
+  font-size: clamp(1.3rem, 1.1rem + 0.7vw, 1.65rem);
+  letter-spacing: 0.02em;
+}
+
+#s14 .s14-cta__sub {
+  margin-top: 0.3rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+/* Box score: the three big numbers as a newspaper table */
+
+#s14 .s14-box {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 1.5rem;
+  border: 4px solid var(--s14-ink);
+  background: var(--s14-panel);
+}
+
+#s14 .s14-box__cell {
+  padding: 0.5rem 0.7rem 0.6rem;
+  border-right: 2px solid var(--s14-ink);
+}
+
+#s14 .s14-box__cell:last-child {
+  border-right: 0;
+}
+
+#s14 .s14-box dt {
+  color: var(--s14-ink-2);
+  font-size: 0.7rem;
+  font-style: italic;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+#s14 .s14-box dd {
+  font-family: var(--s14-display);
+  font-size: clamp(1.05rem, 0.4rem + 1.2vw, 1.6rem);
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 2px 2px 0 var(--s14-yellow);
+}
+
+#s14 .s14-box__cell:nth-child(1) dd {
+  color: var(--s14-red-ink);
+}
+
+/* The road. One colour: ivory paving, inked edge, halftone, dashed centre line. */
+
+#s14 .s14-link {
+  display: none;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#s14 .s14-rd__edge,
+#s14 .s14-rd__pave,
+#s14 .s14-rd__dots,
+#s14 .s14-rd__line {
+  fill: none;
+}
+
+#s14 .s14-rd__edge { stroke: var(--s14-ink); stroke-width: 58; }
+#s14 .s14-rd__pave { stroke: var(--s14-rc, var(--s14-road)); stroke-width: 48; }
+#s14 .s14-rd__dots { stroke: url(#s14-dotk); stroke-width: 48; opacity: 0.22; }
+#s14 .s14-rd__line { stroke: var(--s14-ink); stroke-width: 5; stroke-dasharray: 22 20; opacity: 0.6; }
+
+#s14 .s14-br--strategy { --s14-rc: var(--s14-blue); }
+#s14 .s14-br--family { --s14-rc: var(--s14-yellow); }
+#s14 .s14-br--friends { --s14-rc: var(--s14-red); }
+
+#s14 .s14-br .s14-rd__dots { opacity: 0.16; }
+#s14 .s14-br .s14-rd__line { opacity: 0.8; }
+
+/* Straight side lanes, used on narrow screens and beside the two stops */
+
+#s14 .s14-lane {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 6px;
+  width: calc(52 * var(--s14-u));
+  border-inline: calc(4 * var(--s14-u)) solid var(--s14-ink);
+  background:
+    repeating-linear-gradient(180deg, var(--s14-ink) 0 22px, transparent 22px 42px) 50% 0 / 5px 100% no-repeat,
+    radial-gradient(rgb(29 23 18 / 0.3) 1.1px, transparent 1.5px) 0 0 / 5px 5px,
+    var(--s14-road);
+}
+
+/* Milestone plaque where a stop meets its lane */
+
+#s14 .s14-mile {
+  position: absolute;
+  z-index: 1;
+  top: 1rem;
+  left: calc(6px + 26 * var(--s14-u) - 25px);
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--s14-ink);
+  border-radius: 50%;
+  background:
+    radial-gradient(rgb(242 189 46 / 0.75) 2.2px, transparent 2.6px) 0 0 / 9px 9px,
+    var(--s14-panel);
+  box-shadow: 3px 4px 0 rgb(29 23 18 / 0.25);
+  font-family: var(--s14-display);
+  font-size: 1.3rem;
+  line-height: 1;
+  text-align: center;
+}
+
+/* Hero */
+
+#s14 .s14-hero {
+  display: grid;
+  gap: clamp(0.8rem, 1.8vw, 1.1rem);
+}
+
+#s14 .s14-hero__copy {
+  padding: clamp(1rem, 2.4vw, 1.9rem) clamp(1rem, 2.4vw, 1.9rem) clamp(1.1rem, 2.4vw, 1.9rem);
+  background:
+    radial-gradient(rgb(47 111 184 / 0.16) 2.1px, transparent 2.5px) 0 0 / 10px 10px,
+    var(--s14-panel);
+}
+
+#s14 .s14-hero__art {
+  overflow: hidden;
+}
+
+#s14 .s14-start {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+#s14 .s14-start__word {
+  fill: var(--s14-ink);
+  font-family: var(--s14-display);
+  font-size: 44px;
+  letter-spacing: 5px;
+}
+
+#s14 .s14-post__arm text {
+  fill: #fff;
+  font-family: var(--s14-body);
+  font-weight: 700;
+  font-size: 20px;
+}
+
+#s14 .s14-post__arm text.s14-post__dark {
+  fill: var(--s14-ink);
+}
+
+#s14 .s14-balloon text {
+  fill: var(--s14-ink);
+  font-family: var(--s14-body);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 27px;
+}
+
+#s14 .s14-art__word {
+  fill: var(--s14-ink);
+  font-family: var(--s14-display);
+  font-size: 34px;
+  letter-spacing: 2px;
+}
+
+/* The fork */
+
+#s14 .s14-fork {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#s14 .s14-fork__hub circle {
+  fill: var(--s14-panel);
+  stroke: var(--s14-ink);
+  stroke-width: 5;
+}
+
+#s14 .s14-fork__hub path {
+  fill: var(--s14-red);
+  stroke: var(--s14-ink);
+  stroke-width: 3;
+}
+
+/* The three vibe choices, one under the end of each road */
+
+#s14 .s14-pick__row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 clamp(4px, 1.2vw, 16px);
+}
+
+#s14 .s14-vibe {
+  --s14-vc: var(--s14-blue-ink);
+  --s14-vfill: var(--s14-blue);
+  position: relative;
+}
+
+#s14 .s14-vibe--family { --s14-vc: #7a5c06; --s14-vfill: var(--s14-yellow); }
+#s14 .s14-vibe--friends { --s14-vc: var(--s14-red-ink); --s14-vfill: var(--s14-red); }
+
+#s14 .s14-vibe label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  height: 100%;
+  padding: 0.75rem 0.5rem 0.9rem;
+  border: 4px solid var(--s14-ink);
+  border-radius: var(--s14-wob-sm);
+  background: var(--s14-panel);
+  box-shadow: 5px 5px 0 var(--s14-ink);
+  cursor: pointer;
+  text-align: center;
+}
+
+#s14 .s14-vibe label:hover {
+  background: #fffaea;
+}
+
+#s14 .s14-vibe__mark {
+  width: clamp(26px, 4.4vw, 40px);
+  height: clamp(26px, 4.4vw, 40px);
+  color: var(--s14-vc);
+}
+
+#s14 .s14-vibe__name {
+  font-family: var(--s14-display);
+  font-size: clamp(0.95rem, 0.7rem + 0.75vw, 1.3rem);
+  line-height: 1.1;
+}
+
+#s14 .s14-vibe__note {
+  color: var(--s14-ink-2);
+  font-size: clamp(0.72rem, 0.65rem + 0.25vw, 0.88rem);
+  font-style: italic;
+  line-height: 1.25;
+}
+
+#s14 .s14-vibe__stamp {
+  position: absolute;
+  top: -0.7rem;
+  right: -0.5rem;
+  padding: 0.1rem 0.5rem 0.15rem;
+  border: 3px solid var(--s14-ink);
+  border-radius: var(--s14-wob-sm);
+  background: var(--s14-vfill);
+  color: var(--s14-ink);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: rotate(7deg) scale(0);
+}
+
+#s14 .s14-vibe--strategy .s14-vibe__stamp,
+#s14 .s14-vibe--friends .s14-vibe__stamp {
+  color: #fff;
+}
+
+#s14 .s14-vibe input:checked + label {
+  background:
+    radial-gradient(rgb(29 23 18 / 0.1) 1.6px, transparent 2px) 0 0 / 8px 8px,
+    #fffaea;
+  box-shadow: 5px 5px 0 var(--s14-vc), 5px 5px 0 4px var(--s14-ink);
+}
+
+#s14 .s14-vibe input:checked + label .s14-vibe__stamp {
+  transform: rotate(7deg) scale(1);
+}
+
+#s14 .s14-pick:has(input:checked) .s14-vibe input:not(:checked) + label {
+  background: #efe6cc;
+  box-shadow: 3px 3px 0 rgb(29 23 18 / 0.45);
+}
+
+#s14 .s14-pick:has(input:checked) .s14-vibe input:not(:checked) + label .s14-vibe__mark {
+  opacity: 0.45;
+}
+
+#s14 .s14-vibe input:focus-visible + label {
+  outline: 4px solid var(--s14-ink);
+  outline-offset: 5px;
+}
+
+/* Lit road: the other two roads fade back */
+
+#s14 .s14-hook:has(#s14-vibe-strategy:checked) .s14-br:not(.s14-br--strategy),
+#s14 .s14-hook:has(#s14-vibe-family:checked) .s14-br:not(.s14-br--family),
+#s14 .s14-hook:has(#s14-vibe-friends:checked) .s14-br:not(.s14-br--friends),
+#s14 .s14-paper__inner:has(#s14-vibe-strategy:checked) .s14-merge .s14-br:not(.s14-br--strategy),
+#s14 .s14-paper__inner:has(#s14-vibe-family:checked) .s14-merge .s14-br:not(.s14-br--family),
+#s14 .s14-paper__inner:has(#s14-vibe-friends:checked) .s14-merge .s14-br:not(.s14-br--friends) {
+  opacity: 0.22;
+}
+
+/* Status line */
+
+#s14 .s14-herald {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem 1.2rem;
+  min-height: 2.8rem;
+  margin: clamp(1.1rem, 2.4vw, 1.8rem) auto clamp(1rem, 2vw, 1.5rem);
+  text-align: center;
+}
+
+#s14 .s14-status {
+  color: var(--s14-ink-2);
+  font-size: 1rem;
+  font-style: italic;
+}
+
+#s14 .s14-reset {
+  flex: none;
+  padding: 0.3rem 0.9rem 0.35rem;
+  border: 3px solid var(--s14-ink);
+  border-radius: var(--s14-wob-sm);
+  background: var(--s14-yellow);
+  color: var(--s14-ink);
+  font: 700 0.9rem/1.2 var(--s14-body);
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--s14-ink);
+}
+
+#s14 .s14-reset:hover {
+  background: #ffd45c;
+}
+
+/* The top ten, set as classified ads */
+
+#s14 .s14-ads {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.6rem, 1.4vw, 0.95rem);
+}
+
+#s14 .s14-ad {
+  --s14-chip: var(--s14-blue-ink);
+  --s14-chip-ink: #fff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 7px 7px 9px;
+  border: 4px double var(--s14-ink);
+  background: var(--s14-panel);
+}
+
+#s14 .s14-ad--family { --s14-chip: var(--s14-yellow); --s14-chip-ink: var(--s14-ink); }
+#s14 .s14-ad--coop { --s14-chip: var(--s14-ink); --s14-chip-ink: var(--s14-panel); }
+
+#s14 .s14-ad__pic {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 2px solid var(--s14-ink);
+  background: #ddd0ae;
+}
+
+#s14 .s14-ad__pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.28) sepia(0.18) contrast(1.04);
+}
+
+/* halftone screen over the photo, as a newspaper picture */
+#s14 .s14-ad__pic::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(rgb(29 23 18 / 0.26) 1.1px, transparent 1.5px) 0 0 / 4px 4px;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+#s14 .s14-ad__name {
+  margin: 0.5rem 0.15rem 0.35rem;
+  font-weight: 700;
+  font-size: 0.92rem;
+  line-height: 1.25;
+}
+
+#s14 .s14-ad__tag {
+  align-self: flex-start;
+  margin: auto 0.15rem 0;
+  padding: 0.05rem 0.5rem 0.1rem;
+  background: var(--s14-chip);
+  color: var(--s14-chip-ink);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Lit games: the chosen road's games come up in full colour */
+
+#s14 .s14-hook:has(#s14-vibe-strategy:checked) { --s14-pick: var(--s14-blue-ink); }
+#s14 .s14-hook:has(#s14-vibe-family:checked) { --s14-pick: #7a5c06; }
+#s14 .s14-hook:has(#s14-vibe-friends:checked) { --s14-pick: var(--s14-red-ink); }
+
+#s14 .s14-hook:has(#s14-vibe-strategy:checked) .s14-fit-strategy,
+#s14 .s14-hook:has(#s14-vibe-family:checked) .s14-fit-family,
+#s14 .s14-hook:has(#s14-vibe-friends:checked) .s14-fit-friends {
+  z-index: 1;
+  border-color: var(--s14-pick);
+  box-shadow: 0 0 0 4px var(--s14-pick), 6px 7px 0 var(--s14-ink);
+  transform: translateY(-5px);
+}
+
+#s14 .s14-hook:has(#s14-vibe-strategy:checked) .s14-fit-strategy .s14-ad__pic img,
+#s14 .s14-hook:has(#s14-vibe-family:checked) .s14-fit-family .s14-ad__pic img,
+#s14 .s14-hook:has(#s14-vibe-friends:checked) .s14-fit-friends .s14-ad__pic img {
+  filter: none;
+}
+
+#s14 .s14-hook:has(#s14-vibe-strategy:checked) .s14-fit-strategy .s14-ad__pic::after,
+#s14 .s14-hook:has(#s14-vibe-family:checked) .s14-fit-family .s14-ad__pic::after,
+#s14 .s14-hook:has(#s14-vibe-friends:checked) .s14-fit-friends .s14-ad__pic::after {
+  opacity: 0.3;
+}
+
+#s14 .s14-hook:has(#s14-vibe-strategy:checked) .s14-ad:not(.s14-fit-strategy),
+#s14 .s14-hook:has(#s14-vibe-family:checked) .s14-ad:not(.s14-fit-family),
+#s14 .s14-hook:has(#s14-vibe-friends:checked) .s14-ad:not(.s14-fit-friends) {
+  background: #ece2c6;
+}
+
+#s14 .s14-hook:has(#s14-vibe-strategy:checked) .s14-ad:not(.s14-fit-strategy) .s14-ad__pic img,
+#s14 .s14-hook:has(#s14-vibe-family:checked) .s14-ad:not(.s14-fit-family) .s14-ad__pic img,
+#s14 .s14-hook:has(#s14-vibe-friends:checked) .s14-ad:not(.s14-fit-friends) .s14-ad__pic img {
+  filter: grayscale(1) contrast(0.95);
+  opacity: 0.5;
+}
+
+#s14 .s14-more {
+  margin-top: clamp(1.1rem, 2.2vw, 1.6rem);
+  text-align: center;
+}
+
+#s14 .s14-more a {
+  display: inline-block;
+  padding: 0.4rem 1rem 0.45rem;
+  border: 3px solid var(--s14-ink);
+  border-radius: var(--s14-wob-sm);
+  background: var(--s14-yellow);
+  color: var(--s14-ink);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 4px 4px 0 var(--s14-ink);
+}
+
+#s14 .s14-more a:hover {
+  background: #ffd45c;
+}
+
+/* Stops along the side lanes */
+
+#s14 .s14-stop {
+  position: relative;
+  padding: 1.1rem 0 2.4rem calc(6px + 52 * var(--s14-u) + 18px);
+}
+
+#s14 .s14-stop__body {
+  position: relative;
+}
+
+/* The two comic strips */
+
+#s14 .s14-strip {
+  display: grid;
+  gap: clamp(0.6rem, 1.4vw, 0.95rem);
+}
+
+#s14 .s14-cell {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--s14-wob-sm);
+  padding-bottom: 0.8rem;
+}
+
+#s14 .s14-cell__art svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-bottom: 4px solid var(--s14-ink);
+}
+
+#s14 .s14-cell h3 {
+  margin: 0.7rem 0.85rem 0.2rem;
+  font-family: var(--s14-display);
+  font-weight: 400;
+  font-size: 1.1rem;
+  line-height: 1.15;
+  color: var(--s14-red-ink);
+}
+
+#s14 .s14-cell p {
+  margin: 0 0.85rem;
+  color: var(--s14-ink-2);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+/* Numbered step panels */
+
+#s14 .s14-cell--step h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.8rem 0.85rem 0;
+  color: var(--s14-ink);
+  font-family: var(--s14-body);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+#s14 .s14-no {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 4px solid var(--s14-ink);
+  border-radius: 50%;
+  background: var(--s14-yellow);
+  box-shadow: 2px 3px 0 rgb(29 23 18 / 0.3);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+#s14 .s14-join__go {
+  margin-top: 0.4rem;
+}
+
+/* Finish */
+
+#s14 .s14-finish {
+  position: relative;
+  padding: 1.8rem 0 clamp(1.6rem, 3.4vw, 2.6rem);
+  text-align: center;
+}
+
+#s14 .s14-lane--finish {
+  bottom: auto;
+  height: 1.8rem;
+}
+
+#s14 .s14-finish__panel {
+  max-width: 520px;
+  margin: 0 auto 1.5rem;
+  padding: 11px;
+  border-width: 0;
+  border-radius: 0;
+  background: repeating-conic-gradient(var(--s14-ink) 0 25%, var(--s14-panel) 0 50%) 0 0 / 22px 22px;
+  box-shadow: 5px 6px 0 rgb(29 23 18 / 0.25);
+}
+
+#s14 .s14-finish__panel > * {
+  background: var(--s14-panel);
+}
+
+#s14 .s14-finish__word {
+  padding: 0.55rem 0 0.1rem;
+  border: 4px solid var(--s14-ink);
+  border-bottom: 0;
+  color: var(--s14-red-ink);
+  font-family: var(--s14-display);
+  font-size: clamp(1.9rem, 1.4rem + 2vw, 2.9rem);
+  letter-spacing: 0.15em;
+  text-indent: 0.15em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+#s14 .s14-finish__art {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 4px solid var(--s14-ink);
+  border-top: 0;
+}
+
+#s14 .s14-seat__word {
+  fill: var(--s14-red-ink);
+  font-family: var(--s14-body);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 25px;
+}
+
+#s14 .s14-finish__title {
+  max-width: 20em;
+  margin: 0 auto 1.4rem;
+  font-size: clamp(1.5rem, 1.05rem + 1.9vw, 2.5rem);
+  line-height: 1.14;
+}
+
+#s14 .s14-finish__title em {
+  font-style: normal;
+  color: var(--s14-red-ink);
+}
+
+/* Narrow phones */
+
+@media (max-width: 520px) {
+  #s14 .s14-box {
+    grid-template-columns: 1fr;
+  }
+
+  #s14 .s14-box__cell {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    border-right: 0;
+    border-bottom: 2px solid var(--s14-ink);
+  }
+
+  #s14 .s14-box__cell:last-child {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  #s14 .s14-cta {
+    gap: 0.55rem;
+    padding: 0.6rem 1rem 0.65rem 0.75rem;
+  }
+
+  #s14 .s14-cta__icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  #s14 .s14-vibe__stamp {
+    display: none;
+  }
+
+  #s14 .s14-vibe label {
+    padding: 0.6rem 0.3rem 0.7rem;
+  }
+}
+
+/* Container steps */
+
+@container (min-width: 520px) {
+  #s14 .s14-strip--four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #s14 .s14-strip--three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@container (min-width: 640px) {
+  #s14 .s14-ads {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@container (min-width: 880px) {
+  #s14 .s14-strip--four {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Wide screens: the road snakes down the sheet */
+
+@media (min-width: 860px) {
+  #s14 .s14-paper__inner {
+    --s14-u: var(--s14-cu);
+  }
+
+  #s14 .s14-link {
+    display: block;
+  }
+
+  #s14 .s14-hero {
+    grid-template-columns: 56fr 44fr;
+    align-items: stretch;
+  }
+
+  #s14 .s14-hero__copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #s14 .s14-hero__art {
+    align-self: start;
+    max-height: 520px;
+  }
+
+  #s14 .s14-stop {
+    padding: 1.6rem 2cqi 2.6rem 15cqi;
+  }
+
+  #s14 .s14-stop--right {
+    padding: 1.6rem 15cqi 2.6rem 2cqi;
+  }
+
+  #s14 .s14-lane {
+    left: calc(64 * var(--s14-u));
+  }
+
+  #s14 .s14-stop--right .s14-lane {
+    left: calc(1084 * var(--s14-u));
+  }
+
+  #s14 .s14-mile {
+    --s14-ms: max(60px, calc(118 * var(--s14-u)));
+    top: 1.3rem;
+    left: calc(90 * var(--s14-u) - var(--s14-ms) / 2);
+    width: var(--s14-ms);
+    height: var(--s14-ms);
+    font-size: calc(var(--s14-ms) * 0.34);
+  }
+
+  #s14 .s14-stop--right .s14-mile {
+    left: calc(1110 * var(--s14-u) - var(--s14-ms) / 2);
+  }
+
+  #s14 .s14-lane--finish {
+    left: calc(574 * var(--s14-u));
+  }
+
+  #s14 .s14-merge {
+    margin-top: -0.4rem;
+  }
+}
+
+/* Motion. The user asked for 11's animations: the signpost arms swing in and the
+   chosen road's centre line marches away from the crossroads. */
+
+@media (prefers-reduced-motion: no-preference) {
+  #s14 .s14-cta {
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  }
+
+  #s14 .s14-cta:hover {
+    transform: rotate(-1.2deg) translate(-2px, -3px);
+    box-shadow: 9px 10px 0 var(--s14-ink);
+  }
+
+  #s14 .s14-cta:active {
+    transform: rotate(-1.2deg) translate(3px, 3px);
+    box-shadow: 3px 3px 0 var(--s14-ink);
+  }
+
+  #s14 .s14-vibe label,
+  #s14 .s14-vibe__stamp,
+  #s14 .s14-ad {
+    transition: transform 0.3s cubic-bezier(0.3, 1.4, 0.5, 1), box-shadow 0.3s ease, background-color 0.25s ease, border-color 0.25s ease;
+  }
+
+  #s14 .s14-br,
+  #s14 .s14-ad__pic img,
+  #s14 .s14-ad__pic::after {
+    transition: opacity 0.35s ease, filter 0.35s ease;
+  }
+
+  #s14 .s14-post__arm {
+    transform-box: fill-box;
+    transform-origin: 0% 50%;
+    animation: s14-swing 0.9s cubic-bezier(0.3, 1.5, 0.5, 1) both;
+  }
+
+  #s14 .s14-post__arm--l,
+  #s14 .s14-post__arm--l2 {
+    transform-origin: 100% 50%;
+  }
+
+  #s14 .s14-post__arm--l { animation-delay: 0.15s; }
+  #s14 .s14-post__arm--r { animation-delay: 0.35s; }
+  #s14 .s14-post__arm--l2 { animation-delay: 0.55s; }
+
+  #s14 .s14-balloon {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: s14-pop 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) 0.8s both;
+  }
+
+  #s14 .s14-br .s14-rd__line {
+    animation: s14-roll 2.6s linear infinite paused;
+  }
+
+  #s14 .s14-hook:has(#s14-vibe-strategy:checked) .s14-br--strategy .s14-rd__line,
+  #s14 .s14-hook:has(#s14-vibe-family:checked) .s14-br--family .s14-rd__line,
+  #s14 .s14-hook:has(#s14-vibe-friends:checked) .s14-br--friends .s14-rd__line,
+  #s14 .s14-paper__inner:has(#s14-vibe-strategy:checked) .s14-merge .s14-br--strategy .s14-rd__line,
+  #s14 .s14-paper__inner:has(#s14-vibe-family:checked) .s14-merge .s14-br--family .s14-rd__line,
+  #s14 .s14-paper__inner:has(#s14-vibe-friends:checked) .s14-merge .s14-br--friends .s14-rd__line {
+    animation-play-state: running;
+  }
+
+  #s14 .s14-seat path {
+    animation: s14-dash 3s linear infinite;
+  }
+}
+
+@keyframes s14-swing {
+  0% { transform: scaleX(0.2); opacity: 0; }
+  100% { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes s14-pop {
+  0% { transform: scale(0.2) rotate(-6deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* the chosen road's dashes march away from the crossroads */
+@keyframes s14-roll {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -42; }
+}
+
+@keyframes s14-dash {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -48; }
+}
+
+/* Landing-card preview: a calm, still final state */
+
+.is-thumb #s14 *,
+.is-thumb #s14 *::before,
+.is-thumb #s14 *::after {
+  animation: none !important;
+  transition: none !important;
+}
