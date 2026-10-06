@@ -19,6 +19,6 @@ There is no build, lint or test tooling, and no package manager. Open `projects/
 - `projects/index.html` is the only HTML file. It holds the gallery shell plus one `<section class="style" id="sNN" data-name data-hook>` per style, and a `<link>` per `css/NN-slug.css` in `<head>`.
 - Page mode (landing grid, `?view=sNN`, `?view=sNN&thumb`) is set by a tiny inline script in `<head>` that adds `is-home`, `is-solo` or `is-thumb` to `<html>`. `js/gallery.js` then builds landing cards from the sections' `data-` attributes, each card an iframe of the `&thumb` URL, so a new section appears on the landing page automatically.
 - Style isolation relies on every selector and custom property in `css/NN-slug.css` being scoped under `#sNN`. Class names are prefixed `sNN-`. `css/gallery.css` holds only shell rules.
-- Stylesheet links use `?v=N` cache-busting (e.g. `gallery.css?v=5`). Bump it when editing that file.
+- Stylesheet links use `?v=N` cache-busting (e.g. `gallery.css?v=6`). Bump it when editing that file.
 - `PLANNED = 24` in `gallery.js` drives the "N of 24 built" label.
 - Game photos in `img/games/` must each have a credit line in the `index.html` footer. Styles `21`–`23` instead show the real box covers in `img/covers/`, each credited under **Cover credits**.
