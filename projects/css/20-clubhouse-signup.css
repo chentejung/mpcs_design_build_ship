@@ -1,0 +1,1494 @@
+/* 20 Clubhouse Sign-Up: style 14's Sunday-comics crossroads moved into a backyard
+   clubhouse. The newspaper frame stays (newsprint on a wooden table, halftone
+   washes, wobbly panel borders, heavy banners with an italic kicker) and so does
+   the road: one colour of paving with an inked edge and a dashed centre line,
+   forking into three spot-colour roads, one per vibe. The drawing follows 16:
+   heavy outlines broken into segments of different weight so a contour swells and
+   thins, flat cel fills with no screen over the figures, big eye-whites, one slab
+   brow each, square-tooth grins, blush, freckles and oversized hands.
+   What is new here, all of it asked for:
+     - the hero reads "Welcome to Board Game Arena!" over the live page's own hook;
+     - the three numbers are a chalkboard tally in huge chalk numerals, not a
+       small box score, and they appear exactly once;
+     - the starting point is a sign-up sheet nailed to the clubhouse door, three
+       friends' names written in and one line left blank for you;
+     - "how to join" is three numbered arrow signs nailed up the path and
+       "house rules" is a painted four-slat plank sign on the fence.
+   Every character and word here is original.
+   Hook: pick your vibe ("Which way tonight?").
+   Fonts: Rye (masthead, h1, CTA label, banners, chalk figures, closing heading)
+   and Libre Baskerville for everything else, instructions included.
+   Every rule and custom property is scoped under #s20. */
+
+@font-face {
+  font-family: "s20 Rye";
+  src: url("../fonts/rye/rye-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s20 Libre Baskerville";
+  src: url("../fonts/librebaskerville/librebaskerville-var.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s20 Libre Baskerville";
+  src: url("../fonts/librebaskerville/librebaskerville-italic-var.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+#s20 {
+  --s20-ink: #1a1512;
+  --s20-ink-2: #473a29;
+  --s20-news: #efe6cd;
+  --s20-panel: #fcf6e6;
+  --s20-road: #f6edd4;
+  --s20-table: #8d7a4e;
+  --s20-table-2: #74633c;
+  --s20-wood: #c4934f;
+  --s20-wood-dk: #9c6f35;
+  --s20-plank: #ecd8ab;
+  --s20-slate: #2c3a31;
+  --s20-slate-2: #212c25;
+  --s20-chalk: #f6f2e2;
+  --s20-red: #c8372a;
+  --s20-red-ink: #9c2318;
+  --s20-red-deep: #7d1a11;
+  --s20-green: #3f7a4e;
+  --s20-green-ink: #2b5637;
+  --s20-yellow: #efc23f;
+  --s20-yellow-ink: #6b5007;
+  --s20-blue: #3f7fc0;
+  --s20-blue-ink: #255b93;
+  --s20-display: "s20 Rye", "Rockwell", "Clarendon", "Bookman Old Style", Georgia, serif;
+  --s20-body: "s20 Libre Baskerville", "Baskerville", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  /* Panel corners wobble like a hand-ruled border, gentler than 16's */
+  --s20-wob: 90px 12px 80px 14px / 12px 80px 14px 90px;
+  --s20-wob-sm: 36px 8px 32px 10px / 10px 32px 8px 36px;
+  --s20-halftone: radial-gradient(rgb(110 85 30 / 0.12) 1.1px, transparent 1.5px) 0 0 / 5px 5px;
+  --s20-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .25 0 0 0 0 .2 0 0 0 0 .1 0 0 0 .14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --s20-dust: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='d'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .9' numOctaves='3' seed='5' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 .95 0 0 0 .16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23d)'/%3E%3C/svg%3E");
+  --s20-woodgrain: repeating-linear-gradient(90deg, rgb(120 80 30 / 0.07) 0 3px, transparent 3px 12px);
+
+  background: var(--s20-table);
+  color: var(--s20-ink);
+  font-family: var(--s20-body);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+#s20 *,
+#s20 *::before,
+#s20 *::after {
+  box-sizing: border-box;
+}
+
+#s20 h1,
+#s20 h2,
+#s20 h3,
+#s20 h4,
+#s20 p,
+#s20 ol,
+#s20 ul,
+#s20 dl,
+#s20 dd,
+#s20 fieldset {
+  margin: 0;
+}
+
+#s20 ol,
+#s20 ul {
+  padding: 0;
+  list-style: none;
+}
+
+#s20 fieldset {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+
+#s20 [hidden] {
+  display: none !important;
+}
+
+#s20 .s20-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+#s20 .s20-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Links, buttons and focus */
+
+#s20 a {
+  color: var(--s20-green-ink);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 2px;
+}
+
+#s20 a:hover {
+  color: var(--s20-ink);
+}
+
+#s20 a:focus-visible,
+#s20 button:focus-visible {
+  outline: 3px solid var(--s20-ink);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Table and the newsprint sheet */
+
+#s20 .s20-table {
+  position: relative;
+  padding: clamp(6px, 2.6vw, 40px);
+  background:
+    var(--s20-grain),
+    repeating-linear-gradient(90deg, rgb(60 45 10 / 0.06) 0 2px, transparent 2px 8px),
+    radial-gradient(120% 60% at 30% 0%, #a3905f 0%, transparent 60%),
+    linear-gradient(180deg, var(--s20-table) 0%, var(--s20-table-2) 100%);
+}
+
+#s20 .s20-paper {
+  position: relative;
+  max-width: 1340px;
+  margin: 0 auto;
+  background:
+    var(--s20-halftone),
+    radial-gradient(ellipse at 50% 0%, transparent 55%, rgb(140 110 45 / 0.16) 100%),
+    var(--s20-news);
+  box-shadow:
+    0 0 0 1px rgb(60 45 10 / 0.25),
+    6px 8px 0 rgb(40 30 5 / 0.18),
+    14px 22px 34px rgb(40 30 5 / 0.38);
+}
+
+#s20 .s20-paper__inner {
+  position: relative;
+  container-type: inline-size;
+  padding: clamp(10px, 2.2vw, 26px) clamp(12px, 3vw, 44px) clamp(14px, 3vw, 34px);
+  /* Road geometry. --s20-cu is 1/1200 of the inner width, matching the SVG
+     roads; --s20-u drives the straight side lanes and is fixed when narrow. */
+  --s20-cu: calc(100cqi / 1200);
+  --s20-u: 0.62px;
+}
+
+/* Loose props beside the sheet, only where there is room */
+
+#s20 .s20-loose {
+  display: none;
+}
+
+@media (min-width: 1680px) {
+  #s20 .s20-loose {
+    display: block;
+  }
+
+  #s20 .s20-loose svg {
+    position: absolute;
+    z-index: 4;
+    pointer-events: none;
+    filter: drop-shadow(2px 4px 3px rgb(40 25 6 / 0.4));
+  }
+
+  #s20 .s20-loose__dice { width: 116px; left: -132px; top: 30%; }
+  #s20 .s20-loose__chalk { width: 142px; right: -158px; top: 58%; }
+}
+
+/* Masthead */
+
+#s20 .s20-mast {
+  padding-bottom: 0.45rem;
+  margin-bottom: clamp(0.8rem, 2vw, 1.3rem);
+  border-bottom: 6px double var(--s20-ink);
+  text-align: center;
+}
+
+#s20 .s20-mast__title {
+  font-family: var(--s20-display);
+  font-size: clamp(1.3rem, 0.6rem + 3.3vw, 2.9rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: var(--s20-ink);
+  text-shadow:
+    3px 0 0 var(--s20-yellow),
+    5px 3px 0 var(--s20-green),
+    6px 5px 0 rgb(26 21 18 / 0.22);
+}
+
+#s20 .s20-mast__line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.1rem 1.1rem;
+  margin-top: 0.45rem;
+  padding-top: 0.3rem;
+  border-top: 2px solid var(--s20-ink);
+  color: var(--s20-ink-2);
+  font-size: 0.78rem;
+  font-style: italic;
+  letter-spacing: 0.04em;
+}
+
+#s20 .s20-mast__line span + span::before {
+  content: "\2605";
+  margin-right: 1.1rem;
+  font-style: normal;
+  color: var(--s20-green);
+}
+
+/* Panels */
+
+#s20 .s20-panel {
+  position: relative;
+  border: 5px solid var(--s20-ink);
+  border-radius: var(--s20-wob);
+  background: var(--s20-panel);
+}
+
+/* Type */
+
+#s20 .s20-kicker {
+  align-self: flex-start;
+  display: inline-block;
+  margin-bottom: 0.6rem;
+  padding: 0.15rem 0.6rem 0.2rem;
+  border: 3px solid var(--s20-ink);
+  border-radius: var(--s20-wob-sm);
+  background: var(--s20-yellow);
+  color: var(--s20-ink);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform: rotate(-1.6deg);
+}
+
+#s20 .s20-h1 {
+  font-family: var(--s20-display);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 1rem + 3vw, 3.3rem);
+  line-height: 1.08;
+  letter-spacing: 0.005em;
+  text-wrap: balance;
+}
+
+#s20 .s20-h1 em {
+  font-style: normal;
+  color: var(--s20-red-ink);
+}
+
+#s20 .s20-h2 {
+  font-family: var(--s20-display);
+  font-weight: 400;
+  font-size: clamp(1.25rem, 0.9rem + 1.5vw, 2.05rem);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+
+#s20 .s20-lede {
+  margin-top: 0.85rem;
+  max-width: 30em;
+  color: var(--s20-ink-2);
+  font-size: clamp(1.02rem, 0.95rem + 0.35vw, 1.2rem);
+}
+
+/* Section banners */
+
+#s20 .s20-band {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.1rem 1.1rem;
+  padding: 0.35rem 0.9rem 0.5rem;
+  margin-bottom: clamp(0.9rem, 2vw, 1.4rem);
+  background: var(--s20-ink);
+  color: var(--s20-panel);
+  border-radius: 3px;
+}
+
+#s20 .s20-band--green {
+  background: var(--s20-green-ink);
+}
+
+#s20 .s20-band__kick {
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* Primary CTA: a painted sign with a pencil on it */
+
+#s20 .s20-cta {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1.25rem;
+  padding: 0.7rem 1.4rem 0.75rem 1rem;
+  border: 5px solid var(--s20-ink);
+  border-radius: 20px 8px 18px 10px / 10px 18px 8px 20px;
+  background: var(--s20-red-ink);
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 8px 8px 0 var(--s20-ink);
+  transform: rotate(-1.2deg);
+}
+
+#s20 .s20-cta:hover {
+  color: #fff;
+  background: var(--s20-red-deep);
+}
+
+#s20 .s20-cta:focus-visible {
+  outline: 4px solid var(--s20-ink);
+  outline-offset: 7px;
+}
+
+#s20 .s20-cta__icon {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  color: var(--s20-yellow);
+}
+
+#s20 .s20-cta__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+#s20 .s20-cta__main {
+  font-family: var(--s20-display);
+  font-size: clamp(1.3rem, 1.1rem + 0.7vw, 1.65rem);
+  letter-spacing: 0.02em;
+}
+
+#s20 .s20-cta__sub {
+  margin-top: 0.3rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+/* Hero */
+
+#s20 .s20-hero {
+  display: grid;
+  gap: clamp(0.8rem, 1.8vw, 1.1rem);
+}
+
+#s20 .s20-hero__copy {
+  padding: clamp(1rem, 2.4vw, 1.9rem);
+  background:
+    radial-gradient(rgb(63 122 78 / 0.14) 2.1px, transparent 2.5px) 0 0 / 10px 10px,
+    var(--s20-panel);
+}
+
+#s20 .s20-hero__art {
+  overflow: hidden;
+}
+
+#s20 .s20-start {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* SVG lettering in the hero scene */
+
+#s20 .s20-sheet__head {
+  fill: var(--s20-ink);
+  font-family: var(--s20-display);
+  font-size: 21px;
+  letter-spacing: 2px;
+}
+
+#s20 .s20-sheet__name {
+  fill: #2f4a7a;
+  font-family: var(--s20-body);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 21px;
+}
+
+#s20 .s20-sheet__blank {
+  fill: var(--s20-red-ink);
+  font-family: var(--s20-body);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+#s20 .s20-balloon text {
+  fill: var(--s20-ink);
+  font-family: var(--s20-body);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 25px;
+}
+
+#s20 .s20-startsign text {
+  fill: var(--s20-ink);
+  font-family: var(--s20-display);
+  font-size: 19px;
+  letter-spacing: 1px;
+}
+
+/* The chalkboard tally: the three big numbers, the hero's second voice */
+
+#s20 .s20-chalk {
+  margin-top: clamp(0.9rem, 2vw, 1.3rem);
+}
+
+#s20 .s20-board {
+  position: relative;
+  padding: clamp(0.9rem, 2.2vw, 1.6rem) clamp(0.9rem, 2.4vw, 1.9rem) clamp(1rem, 2.4vw, 1.7rem);
+  border: clamp(8px, 1.1vw, 13px) solid var(--s20-wood-dk);
+  background:
+    var(--s20-dust),
+    radial-gradient(ellipse at 22% 10%, rgb(246 242 226 / 0.09), transparent 58%),
+    radial-gradient(ellipse at 80% 86%, rgb(246 242 226 / 0.07), transparent 55%),
+    linear-gradient(170deg, var(--s20-slate) 0%, var(--s20-slate-2) 100%);
+  box-shadow:
+    0 0 0 5px var(--s20-ink),
+    inset 0 0 0 3px rgb(0 0 0 / 0.38),
+    8px 9px 0 rgb(26 21 18 / 0.26);
+}
+
+/* nail heads in the board's wooden frame */
+#s20 .s20-board::before,
+#s20 .s20-board::after {
+  content: "";
+  position: absolute;
+  top: calc(clamp(8px, 1.1vw, 13px) / -1 + 2px);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--s20-ink);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.35);
+}
+
+#s20 .s20-board::before { left: -2px; }
+#s20 .s20-board::after { right: -2px; }
+
+#s20 .s20-board__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15rem 0.9rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: clamp(0.7rem, 1.8vw, 1.1rem);
+  border-bottom: 3px dashed rgb(246 242 226 / 0.4);
+}
+
+#s20 .s20-board__title {
+  color: var(--s20-chalk);
+}
+
+#s20 .s20-board__kick {
+  color: rgb(246 242 226 / 0.82);
+  font-size: 0.86rem;
+  font-style: italic;
+}
+
+#s20 .s20-tally {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+#s20 .s20-tally__cell {
+  padding: 0.2rem clamp(0.5rem, 1.4vw, 1.1rem) 0.3rem;
+  border-right: 3px dashed rgb(246 242 226 / 0.3);
+  text-align: center;
+}
+
+#s20 .s20-tally__cell:first-child {
+  padding-left: 0;
+}
+
+#s20 .s20-tally__cell:last-child {
+  padding-right: 0;
+  border-right: 0;
+}
+
+#s20 .s20-tally dt {
+  color: rgb(246 242 226 / 0.88);
+  font-size: clamp(0.7rem, 0.62rem + 0.3vw, 0.86rem);
+  font-style: italic;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* The figures themselves: huge, chalk-white, crisp. No blur or filter here. */
+#s20 .s20-tally dd {
+  margin-top: 0.15rem;
+  color: var(--s20-chalk);
+  font-family: var(--s20-display);
+  font-size: clamp(1.6rem, 0.5rem + 3.6vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 2px 2px 0 rgb(0 0 0 / 0.35);
+}
+
+#s20 .s20-tally__marks {
+  display: block;
+  width: clamp(54px, 7vw, 88px);
+  height: auto;
+  margin: 0.35rem auto 0;
+  color: rgb(246 242 226 / 0.72);
+}
+
+#s20 .s20-board__duster {
+  position: absolute;
+  right: clamp(8px, 2vw, 22px);
+  bottom: clamp(-10px, -1vw, -6px);
+  width: clamp(56px, 7vw, 96px);
+  height: auto;
+  pointer-events: none;
+}
+
+/* The road: pale paving, heavy inked edge, dashed centre line */
+
+#s20 .s20-link {
+  display: none;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#s20 .s20-rd__edge,
+#s20 .s20-rd__pave,
+#s20 .s20-rd__dots,
+#s20 .s20-rd__line {
+  fill: none;
+}
+
+#s20 .s20-rd__edge { stroke: var(--s20-ink); stroke-width: 62; }
+#s20 .s20-rd__pave { stroke: var(--s20-rc, var(--s20-road)); stroke-width: 48; }
+#s20 .s20-rd__dots { stroke: url(#s20-dotk); stroke-width: 48; opacity: 0.2; }
+#s20 .s20-rd__line { stroke: var(--s20-ink); stroke-width: 5.5; stroke-dasharray: 22 20; opacity: 0.6; }
+
+#s20 .s20-br--strategy { --s20-rc: var(--s20-blue); }
+#s20 .s20-br--family { --s20-rc: var(--s20-yellow); }
+#s20 .s20-br--friends { --s20-rc: var(--s20-red); }
+
+#s20 .s20-br .s20-rd__dots { opacity: 0.14; }
+#s20 .s20-br .s20-rd__line { opacity: 0.85; }
+
+/* Straight side lanes, used on narrow screens and beside the two stops */
+
+#s20 .s20-lane {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 6px;
+  width: calc(52 * var(--s20-u));
+  border-inline: calc(5 * var(--s20-u)) solid var(--s20-ink);
+  background:
+    repeating-linear-gradient(180deg, var(--s20-ink) 0 22px, transparent 22px 42px) 50% 0 / 5px 100% no-repeat,
+    radial-gradient(rgb(26 21 18 / 0.28) 1.1px, transparent 1.5px) 0 0 / 5px 5px,
+    var(--s20-road);
+}
+
+/* Milestone plaque where a stop meets its lane */
+
+#s20 .s20-mile {
+  position: absolute;
+  z-index: 1;
+  top: 1rem;
+  left: calc(6px + 26 * var(--s20-u) - 25px);
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--s20-ink);
+  border-radius: 50%;
+  background:
+    radial-gradient(rgb(239 194 63 / 0.7) 2.2px, transparent 2.6px) 0 0 / 9px 9px,
+    var(--s20-panel);
+  box-shadow: 3px 4px 0 rgb(26 21 18 / 0.25);
+  font-family: var(--s20-display);
+  font-size: 1.3rem;
+  line-height: 1;
+  text-align: center;
+}
+
+/* The fork */
+
+#s20 .s20-fork {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#s20 .s20-fork__hub circle {
+  fill: var(--s20-wood);
+  stroke: var(--s20-ink);
+  stroke-width: 6;
+}
+
+#s20 .s20-fork__hub circle:nth-child(2) {
+  fill: none;
+  stroke-width: 4;
+}
+
+#s20 .s20-fork__hub circle:nth-child(3) {
+  fill: var(--s20-ink);
+  stroke: none;
+}
+
+/* The three vibe choices, one under the end of each road */
+
+#s20 .s20-pick__row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 clamp(4px, 1.2vw, 16px);
+}
+
+#s20 .s20-vibe {
+  --s20-vc: var(--s20-blue-ink);
+  --s20-vfill: var(--s20-blue);
+  position: relative;
+}
+
+#s20 .s20-vibe--family { --s20-vc: var(--s20-yellow-ink); --s20-vfill: var(--s20-yellow); }
+#s20 .s20-vibe--friends { --s20-vc: var(--s20-red-ink); --s20-vfill: var(--s20-red); }
+
+#s20 .s20-vibe label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  height: 100%;
+  padding: 0.7rem 0.5rem 0.9rem;
+  border: 5px solid var(--s20-ink);
+  border-radius: var(--s20-wob-sm);
+  background: var(--s20-panel);
+  box-shadow: 6px 6px 0 var(--s20-ink);
+  cursor: pointer;
+  text-align: center;
+}
+
+#s20 .s20-vibe label:hover {
+  background: #fffbec;
+}
+
+#s20 .s20-vibe__pal {
+  width: clamp(62px, 10.5vw, 118px);
+  height: auto;
+  margin-bottom: 0.15rem;
+}
+
+#s20 .s20-vibe__name {
+  font-family: var(--s20-display);
+  font-size: clamp(0.95rem, 0.7rem + 0.75vw, 1.3rem);
+  line-height: 1.1;
+}
+
+#s20 .s20-vibe__note {
+  color: var(--s20-ink-2);
+  font-size: clamp(0.72rem, 0.65rem + 0.25vw, 0.88rem);
+  font-style: italic;
+  line-height: 1.25;
+}
+
+#s20 .s20-vibe__stamp {
+  position: absolute;
+  top: -0.7rem;
+  right: -0.5rem;
+  padding: 0.1rem 0.5rem 0.15rem;
+  border: 3px solid var(--s20-ink);
+  border-radius: var(--s20-wob-sm);
+  background: var(--s20-vfill);
+  color: var(--s20-ink);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: rotate(7deg) scale(0);
+}
+
+#s20 .s20-vibe--strategy .s20-vibe__stamp,
+#s20 .s20-vibe--friends .s20-vibe__stamp {
+  color: #fff;
+}
+
+#s20 .s20-vibe input:checked + label {
+  background:
+    radial-gradient(rgb(26 21 18 / 0.1) 1.6px, transparent 2px) 0 0 / 8px 8px,
+    #fffbec;
+  box-shadow: 6px 6px 0 var(--s20-vc), 6px 6px 0 5px var(--s20-ink);
+}
+
+#s20 .s20-vibe input:checked + label .s20-vibe__stamp {
+  transform: rotate(7deg) scale(1);
+}
+
+#s20 .s20-pick:has(input:checked) .s20-vibe input:not(:checked) + label {
+  background: #e7dcbe;
+  box-shadow: 3px 3px 0 rgb(26 21 18 / 0.45);
+}
+
+#s20 .s20-pick:has(input:checked) .s20-vibe input:not(:checked) + label .s20-vibe__pal {
+  opacity: 0.4;
+}
+
+#s20 .s20-vibe input:focus-visible + label {
+  outline: 4px solid var(--s20-ink);
+  outline-offset: 5px;
+}
+
+/* Lit road: the other two roads fade back */
+
+#s20 .s20-hook:has(#s20-vibe-strategy:checked) .s20-br:not(.s20-br--strategy),
+#s20 .s20-hook:has(#s20-vibe-family:checked) .s20-br:not(.s20-br--family),
+#s20 .s20-hook:has(#s20-vibe-friends:checked) .s20-br:not(.s20-br--friends),
+#s20 .s20-paper__inner:has(#s20-vibe-strategy:checked) .s20-merge .s20-br:not(.s20-br--strategy),
+#s20 .s20-paper__inner:has(#s20-vibe-family:checked) .s20-merge .s20-br:not(.s20-br--family),
+#s20 .s20-paper__inner:has(#s20-vibe-friends:checked) .s20-merge .s20-br:not(.s20-br--friends) {
+  opacity: 0.2;
+}
+
+/* Status line */
+
+#s20 .s20-herald {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem 1.2rem;
+  min-height: 2.8rem;
+  margin: clamp(1.1rem, 2.4vw, 1.8rem) auto clamp(1rem, 2vw, 1.5rem);
+  text-align: center;
+}
+
+#s20 .s20-status {
+  color: var(--s20-ink-2);
+  font-size: 1rem;
+  font-style: italic;
+}
+
+#s20 .s20-reset {
+  flex: none;
+  padding: 0.3rem 0.9rem 0.35rem;
+  border: 3px solid var(--s20-ink);
+  border-radius: var(--s20-wob-sm);
+  background: var(--s20-yellow);
+  color: var(--s20-ink);
+  font: 700 0.9rem/1.2 var(--s20-body);
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--s20-ink);
+}
+
+#s20 .s20-reset:hover {
+  background: #ffd45c;
+}
+
+/* The top ten, set as classified ads */
+
+#s20 .s20-ads {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.6rem, 1.4vw, 0.95rem);
+}
+
+#s20 .s20-ad {
+  --s20-chip: var(--s20-blue-ink);
+  --s20-chip-ink: #fff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 7px 7px 9px;
+  border: 4px double var(--s20-ink);
+  background: var(--s20-panel);
+}
+
+#s20 .s20-ad--family { --s20-chip: var(--s20-yellow); --s20-chip-ink: var(--s20-ink); }
+#s20 .s20-ad--coop { --s20-chip: var(--s20-green-ink); --s20-chip-ink: #fff; }
+
+#s20 .s20-ad__pic {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 3px solid var(--s20-ink);
+  background: #d8cba9;
+}
+
+#s20 .s20-ad__pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.3) sepia(0.18) contrast(1.05);
+}
+
+/* halftone screen over the photo, as a newspaper picture */
+#s20 .s20-ad__pic::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(rgb(26 21 18 / 0.26) 1.1px, transparent 1.5px) 0 0 / 4px 4px;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+#s20 .s20-ad__name {
+  margin: 0.5rem 0.15rem 0.35rem;
+  font-weight: 700;
+  font-size: 0.92rem;
+  line-height: 1.25;
+}
+
+#s20 .s20-ad__tag {
+  align-self: flex-start;
+  margin: auto 0.15rem 0;
+  padding: 0.05rem 0.5rem 0.1rem;
+  background: var(--s20-chip);
+  color: var(--s20-chip-ink);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Lit games: the chosen road's games come up in full colour */
+
+#s20 .s20-hook:has(#s20-vibe-strategy:checked) { --s20-pick: var(--s20-blue-ink); }
+#s20 .s20-hook:has(#s20-vibe-family:checked) { --s20-pick: var(--s20-yellow-ink); }
+#s20 .s20-hook:has(#s20-vibe-friends:checked) { --s20-pick: var(--s20-red-ink); }
+
+#s20 .s20-hook:has(#s20-vibe-strategy:checked) .s20-fit-strategy,
+#s20 .s20-hook:has(#s20-vibe-family:checked) .s20-fit-family,
+#s20 .s20-hook:has(#s20-vibe-friends:checked) .s20-fit-friends {
+  z-index: 1;
+  border-color: var(--s20-pick);
+  box-shadow: 0 0 0 4px var(--s20-pick), 7px 8px 0 var(--s20-ink);
+  transform: translateY(-5px);
+}
+
+#s20 .s20-hook:has(#s20-vibe-strategy:checked) .s20-fit-strategy .s20-ad__pic img,
+#s20 .s20-hook:has(#s20-vibe-family:checked) .s20-fit-family .s20-ad__pic img,
+#s20 .s20-hook:has(#s20-vibe-friends:checked) .s20-fit-friends .s20-ad__pic img {
+  filter: none;
+}
+
+#s20 .s20-hook:has(#s20-vibe-strategy:checked) .s20-fit-strategy .s20-ad__pic::after,
+#s20 .s20-hook:has(#s20-vibe-family:checked) .s20-fit-family .s20-ad__pic::after,
+#s20 .s20-hook:has(#s20-vibe-friends:checked) .s20-fit-friends .s20-ad__pic::after {
+  opacity: 0.3;
+}
+
+#s20 .s20-hook:has(#s20-vibe-strategy:checked) .s20-ad:not(.s20-fit-strategy),
+#s20 .s20-hook:has(#s20-vibe-family:checked) .s20-ad:not(.s20-fit-family),
+#s20 .s20-hook:has(#s20-vibe-friends:checked) .s20-ad:not(.s20-fit-friends) {
+  background: #e6dbbd;
+}
+
+#s20 .s20-hook:has(#s20-vibe-strategy:checked) .s20-ad:not(.s20-fit-strategy) .s20-ad__pic img,
+#s20 .s20-hook:has(#s20-vibe-family:checked) .s20-ad:not(.s20-fit-family) .s20-ad__pic img,
+#s20 .s20-hook:has(#s20-vibe-friends:checked) .s20-ad:not(.s20-fit-friends) .s20-ad__pic img {
+  filter: grayscale(1) contrast(0.95);
+  opacity: 0.5;
+}
+
+#s20 .s20-more {
+  margin-top: clamp(1.1rem, 2.2vw, 1.6rem);
+  text-align: center;
+}
+
+#s20 .s20-more a {
+  display: inline-block;
+  padding: 0.4rem 1rem 0.45rem;
+  border: 4px solid var(--s20-ink);
+  border-radius: var(--s20-wob-sm);
+  background: var(--s20-yellow);
+  color: var(--s20-ink);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 5px 5px 0 var(--s20-ink);
+}
+
+#s20 .s20-more a:hover {
+  background: #ffd45c;
+}
+
+/* Stops along the side lanes */
+
+#s20 .s20-stop {
+  position: relative;
+  padding: 1.1rem 0 2.4rem calc(6px + 52 * var(--s20-u) + 18px);
+}
+
+#s20 .s20-stop__body {
+  position: relative;
+}
+
+/* House rules: a painted four-slat plank sign nailed to the fence */
+
+#s20 .s20-fencesign {
+  position: relative;
+  padding: clamp(1.1rem, 2.6vw, 2.1rem) clamp(0.7rem, 2.2vw, 1.8rem);
+  border: 5px solid var(--s20-ink);
+  background:
+    var(--s20-halftone),
+    repeating-linear-gradient(
+      90deg,
+      var(--s20-wood) 0 48px,
+      var(--s20-wood-dk) 48px 54px,
+      rgb(26 21 18 / 0.5) 54px 57px,
+      var(--s20-wood) 57px 60px
+    );
+  box-shadow: 7px 8px 0 rgb(26 21 18 / 0.22);
+}
+
+/* two fence posts behind the slats */
+#s20 .s20-fencesign::before,
+#s20 .s20-fencesign::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(16px, 2.4vw, 30px);
+  background: var(--s20-wood-dk);
+  border-inline: 4px solid rgb(26 21 18 / 0.55);
+}
+
+#s20 .s20-fencesign::before { left: clamp(10px, 4vw, 54px); }
+#s20 .s20-fencesign::after { right: clamp(10px, 4vw, 54px); }
+
+#s20 .s20-slats {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: clamp(0.5rem, 1.3vw, 0.8rem);
+}
+
+#s20 .s20-slat {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.1rem 0.7rem;
+  padding: 0.5rem clamp(1.5rem, 3vw, 2.4rem) 0.6rem;
+  border: 5px solid var(--s20-ink);
+  background: var(--s20-woodgrain), var(--s20-plank);
+  box-shadow: 4px 5px 0 rgb(26 21 18 / 0.3);
+}
+
+#s20 .s20-slat:nth-child(1) { transform: rotate(-0.7deg); }
+#s20 .s20-slat:nth-child(2) { transform: rotate(0.5deg); }
+#s20 .s20-slat:nth-child(3) { transform: rotate(-0.45deg); }
+#s20 .s20-slat:nth-child(4) { transform: rotate(0.8deg); }
+
+/* nail heads at both ends of every slat */
+#s20 .s20-slat::before,
+#s20 .s20-slat::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: var(--s20-ink);
+  box-shadow: inset -1px -1px 0 rgb(255 255 255 / 0.4);
+}
+
+#s20 .s20-slat::before { left: clamp(0.4rem, 1vw, 0.8rem); }
+#s20 .s20-slat::after { right: clamp(0.4rem, 1vw, 0.8rem); }
+
+#s20 .s20-slat h3 {
+  font-family: var(--s20-display);
+  font-weight: 400;
+  font-size: clamp(1rem, 0.85rem + 0.5vw, 1.25rem);
+  line-height: 1.15;
+  color: var(--s20-ink);
+}
+
+#s20 .s20-slat p {
+  color: var(--s20-ink-2);
+  font-size: clamp(0.88rem, 0.84rem + 0.2vw, 1rem);
+  line-height: 1.4;
+}
+
+/* How to join: three numbered arrow signs nailed up the path */
+
+#s20 .s20-signs {
+  position: relative;
+  display: grid;
+  gap: clamp(0.8rem, 2vw, 1.3rem);
+  padding-bottom: 26px;
+}
+
+/* the dirt path they stand in */
+#s20 .s20-signs::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 26px;
+  border: 5px solid var(--s20-ink);
+  background:
+    radial-gradient(rgb(26 21 18 / 0.3) 1.3px, transparent 1.7px) 0 0 / 7px 7px,
+    var(--s20-wood);
+}
+
+#s20 .s20-sign {
+  --s20-lift: 0px;
+  position: relative;
+  margin-bottom: var(--s20-lift);
+}
+
+#s20 .s20-sign:nth-child(2) { --s20-lift: 20px; }
+#s20 .s20-sign:nth-child(3) { --s20-lift: 40px; }
+
+/* the post, running from under the plank down into the path */
+#s20 .s20-sign::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: clamp(26px, 5%, 48px);
+  top: 70%;
+  width: 20px;
+  height: calc(var(--s20-lift) + 34px);
+  background: var(--s20-woodgrain), var(--s20-wood-dk);
+  border: 5px solid var(--s20-ink);
+}
+
+#s20 .s20-sign__plank {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: clamp(0.6rem, 1.6vw, 1rem);
+  padding: 0.55rem 0.8rem 0.6rem 0.65rem;
+  border: 5px solid var(--s20-ink);
+  background: var(--s20-woodgrain), var(--s20-plank);
+  box-shadow: 5px 6px 0 rgb(26 21 18 / 0.3);
+}
+
+#s20 .s20-sign:nth-child(1) .s20-sign__plank { transform: rotate(-0.8deg); }
+#s20 .s20-sign:nth-child(2) .s20-sign__plank { transform: rotate(0.6deg); }
+#s20 .s20-sign:nth-child(3) .s20-sign__plank { transform: rotate(-0.5deg); }
+
+/* nail heads in the plank's top corners */
+#s20 .s20-sign__plank::before,
+#s20 .s20-sign__plank::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--s20-ink);
+  box-shadow: inset -1px -1px 0 rgb(255 255 255 / 0.4);
+}
+
+#s20 .s20-sign__plank::before { left: 7px; }
+#s20 .s20-sign__plank::after { right: 7px; }
+
+#s20 .s20-sign__no {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: clamp(42px, 5vw, 54px);
+  height: clamp(42px, 5vw, 54px);
+  border: 5px solid var(--s20-ink);
+  border-radius: 50%;
+  background: var(--s20-green);
+  color: #fff;
+  box-shadow: 2px 3px 0 rgb(26 21 18 / 0.3);
+  font-family: var(--s20-display);
+  font-size: clamp(1.15rem, 1rem + 0.5vw, 1.45rem);
+  line-height: 1;
+}
+
+/* Instructions stay in the body face so they read instantly */
+#s20 .s20-sign__text {
+  flex: 1;
+  min-width: 0;
+  font-weight: 700;
+  font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.08rem);
+  line-height: 1.3;
+}
+
+#s20 .s20-sign__arrow {
+  flex: none;
+  width: clamp(28px, 3.2vw, 40px);
+  height: auto;
+  color: var(--s20-red);
+}
+
+#s20 .s20-join__go {
+  margin-top: clamp(1rem, 2.2vw, 1.5rem);
+}
+
+/* Finish: the clubhouse table with a stool kept free */
+
+#s20 .s20-finish {
+  position: relative;
+  padding: 1.8rem 0 clamp(1.6rem, 3.4vw, 2.6rem);
+  text-align: center;
+}
+
+#s20 .s20-lane--finish {
+  bottom: auto;
+  height: 1.8rem;
+}
+
+#s20 .s20-finish__panel {
+  max-width: 540px;
+  margin: 0 auto 1.5rem;
+  padding: 12px;
+  border-width: 0;
+  border-radius: 0;
+  background: repeating-conic-gradient(var(--s20-ink) 0 25%, var(--s20-panel) 0 50%) 0 0 / 22px 22px;
+  box-shadow: 5px 6px 0 rgb(26 21 18 / 0.25);
+}
+
+#s20 .s20-finish__panel > * {
+  background: var(--s20-panel);
+}
+
+#s20 .s20-finish__word {
+  padding: 0.55rem 0 0.1rem;
+  border: 5px solid var(--s20-ink);
+  border-bottom: 0;
+  color: var(--s20-green-ink);
+  font-family: var(--s20-display);
+  font-size: clamp(1.8rem, 1.3rem + 2vw, 2.8rem);
+  letter-spacing: 0.14em;
+  text-indent: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+#s20 .s20-finish__art {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 5px solid var(--s20-ink);
+  border-top: 0;
+}
+
+#s20 .s20-seat__word {
+  fill: var(--s20-red-ink);
+  font-family: var(--s20-body);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 25px;
+}
+
+#s20 .s20-finish__title {
+  max-width: 20em;
+  margin: 0 auto 1.4rem;
+  font-size: clamp(1.5rem, 1.05rem + 1.9vw, 2.5rem);
+  line-height: 1.14;
+}
+
+#s20 .s20-finish__title em {
+  font-style: normal;
+  color: var(--s20-red-ink);
+}
+
+/* Narrow phones */
+
+@media (max-width: 560px) {
+  #s20 .s20-tally {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  #s20 .s20-tally__cell {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.6rem;
+    padding: 0.3rem 0;
+    border-right: 0;
+    border-bottom: 3px dashed rgb(246 242 226 / 0.3);
+    text-align: left;
+  }
+
+  #s20 .s20-tally__cell:last-child {
+    border-bottom: 0;
+  }
+
+  #s20 .s20-tally dd {
+    margin-top: 0;
+    font-size: clamp(1.5rem, 1rem + 5vw, 2.4rem);
+  }
+
+  #s20 .s20-tally__marks {
+    display: none;
+  }
+
+  #s20 .s20-board__duster {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  #s20 .s20-cta {
+    gap: 0.55rem;
+    padding: 0.6rem 1rem 0.65rem 0.75rem;
+  }
+
+  #s20 .s20-cta__icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  #s20 .s20-vibe__stamp {
+    display: none;
+  }
+
+  #s20 .s20-vibe label {
+    padding: 0.55rem 0.25rem 0.7rem;
+  }
+
+  #s20 .s20-vibe__pal {
+    width: 46px;
+  }
+
+  #s20 .s20-slat {
+    padding-inline: 1.2rem;
+  }
+
+  #s20 .s20-sign__plank {
+    gap: 0.5rem;
+  }
+}
+
+/* Container steps */
+
+@container (min-width: 560px) {
+  #s20 .s20-signs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: end;
+  }
+}
+
+@container (min-width: 640px) {
+  #s20 .s20-ads {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@container (min-width: 760px) {
+  #s20 .s20-slats {
+    gap: clamp(0.6rem, 1.4vw, 0.9rem);
+  }
+
+  #s20 .s20-slat {
+    padding-inline: clamp(2rem, 4vw, 3.2rem);
+  }
+}
+
+/* Wide screens: the road snakes down the sheet */
+
+@media (min-width: 860px) {
+  #s20 .s20-paper__inner {
+    --s20-u: var(--s20-cu);
+  }
+
+  #s20 .s20-link {
+    display: block;
+  }
+
+  #s20 .s20-hero {
+    grid-template-columns: 54fr 46fr;
+    align-items: stretch;
+  }
+
+  #s20 .s20-hero__copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #s20 .s20-hero__art {
+    align-self: start;
+    max-height: 460px;
+  }
+
+  #s20 .s20-stop {
+    padding: 1.6rem 2cqi 2.6rem 15cqi;
+  }
+
+  #s20 .s20-stop--right {
+    padding: 1.6rem 15cqi 2.6rem 2cqi;
+  }
+
+  #s20 .s20-lane {
+    left: calc(64 * var(--s20-u));
+  }
+
+  #s20 .s20-stop--right .s20-lane {
+    left: calc(1084 * var(--s20-u));
+  }
+
+  #s20 .s20-mile {
+    --s20-ms: max(60px, calc(118 * var(--s20-u)));
+    top: 1.3rem;
+    left: calc(90 * var(--s20-u) - var(--s20-ms) / 2);
+    width: var(--s20-ms);
+    height: var(--s20-ms);
+    font-size: calc(var(--s20-ms) * 0.34);
+  }
+
+  #s20 .s20-stop--right .s20-mile {
+    left: calc(1110 * var(--s20-u) - var(--s20-ms) / 2);
+  }
+
+  #s20 .s20-lane--finish {
+    left: calc(574 * var(--s20-u));
+  }
+
+  #s20 .s20-merge {
+    margin-top: -0.4rem;
+  }
+}
+
+/* Motion: 14's animations, kept. The painted signs swing out as if nailed up,
+   the chosen road's centre line marches away from the crossroads, and the pal at
+   the clubhouse door jabs a finger at the blank line. */
+
+@media (prefers-reduced-motion: no-preference) {
+  #s20 .s20-cta {
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  }
+
+  #s20 .s20-cta:hover {
+    transform: rotate(-1.2deg) translate(-2px, -3px);
+    box-shadow: 10px 11px 0 var(--s20-ink);
+  }
+
+  #s20 .s20-cta:active {
+    transform: rotate(-1.2deg) translate(3px, 3px);
+    box-shadow: 3px 3px 0 var(--s20-ink);
+  }
+
+  #s20 .s20-vibe label,
+  #s20 .s20-vibe__stamp,
+  #s20 .s20-ad {
+    transition: transform 0.3s cubic-bezier(0.3, 1.4, 0.5, 1), box-shadow 0.3s ease, background-color 0.25s ease, border-color 0.25s ease;
+  }
+
+  #s20 .s20-br,
+  #s20 .s20-ad__pic img,
+  #s20 .s20-ad__pic::after {
+    transition: opacity 0.35s ease, filter 0.35s ease;
+  }
+
+  /* the "Start here" plank swings out from its post */
+  #s20 .s20-startsign__arm {
+    transform-box: fill-box;
+    transform-origin: 0% 50%;
+    animation: s20-swing 0.9s cubic-bezier(0.3, 1.5, 0.5, 1) 0.2s both;
+  }
+
+  #s20 .s20-balloon {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: s20-pop 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) 0.8s both;
+  }
+
+  /* the pointing hand taps at the blank line */
+  #s20 .s20-point-g {
+    transform-box: fill-box;
+    transform-origin: 100% 50%;
+    animation: s20-jab 2.2s ease-in-out 1.1s infinite;
+  }
+
+  /* the three step signs are nailed up one after another */
+  #s20 .s20-sign__plank {
+    transform-origin: 18% 100%;
+    animation: s20-nail 0.7s cubic-bezier(0.3, 1.5, 0.5, 1) both;
+  }
+
+  #s20 .s20-sign:nth-child(1) .s20-sign__plank { animation-delay: 0.1s; }
+  #s20 .s20-sign:nth-child(2) .s20-sign__plank { animation-delay: 0.25s; }
+  #s20 .s20-sign:nth-child(3) .s20-sign__plank { animation-delay: 0.4s; }
+
+  #s20 .s20-br .s20-rd__line {
+    animation: s20-roll 2.6s linear infinite paused;
+  }
+
+  #s20 .s20-hook:has(#s20-vibe-strategy:checked) .s20-br--strategy .s20-rd__line,
+  #s20 .s20-hook:has(#s20-vibe-family:checked) .s20-br--family .s20-rd__line,
+  #s20 .s20-hook:has(#s20-vibe-friends:checked) .s20-br--friends .s20-rd__line,
+  #s20 .s20-paper__inner:has(#s20-vibe-strategy:checked) .s20-merge .s20-br--strategy .s20-rd__line,
+  #s20 .s20-paper__inner:has(#s20-vibe-family:checked) .s20-merge .s20-br--family .s20-rd__line,
+  #s20 .s20-paper__inner:has(#s20-vibe-friends:checked) .s20-merge .s20-br--friends .s20-rd__line {
+    animation-play-state: running;
+  }
+
+  #s20 .s20-seat path {
+    animation: s20-dash 3s linear infinite;
+  }
+}
+
+@keyframes s20-swing {
+  0% { transform: scaleX(0.2); opacity: 0; }
+  100% { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes s20-pop {
+  0% { transform: scale(0.2) rotate(-6deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes s20-jab {
+  0%, 100% { transform: translateX(0); }
+  45% { transform: translateX(-9px); }
+  60% { transform: translateX(-4px); }
+}
+
+/* each step sign settles as though just hammered onto its post */
+@keyframes s20-nail {
+  0% { transform: rotate(-7deg) translateY(-10px); opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* the chosen road's dashes march away from the crossroads */
+@keyframes s20-roll {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -42; }
+}
+
+@keyframes s20-dash {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -48; }
+}
+
+/* Landing-card preview: a calm, still final state */
+
+.is-thumb #s20 *,
+.is-thumb #s20 *::before,
+.is-thumb #s20 *::after {
+  animation: none !important;
+  transition: none !important;
+}

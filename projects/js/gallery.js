@@ -3,12 +3,12 @@
 //   index.html?view=sNN        that style's own page, with the gallery bar
 //   index.html?view=sNN&thumb  the bare style, loaded into a grid card's iframe
 (() => {
-  const PLANNED = 17;
+  const PLANNED = 20;
   const styles = [...document.querySelectorAll(".style")];
   const num = (s) => s.id.slice(1);
   const pageUrl = (s) => `index.html?view=${s.id}`;
 
-  const INITS = {s06: initS06, s07: initS07, s03: initS03, s01: initS01, s05: initS05, s11: initS11, s12: initS12, s13: initS13, s14: initS14, s15: initS15, s16: initS16, s17: initS17};
+  const INITS = {s06: initS06, s07: initS07, s03: initS03, s01: initS01, s05: initS05, s11: initS11, s12: initS12, s13: initS13, s14: initS14, s15: initS15, s16: initS16, s17: initS17, s18: initS18, s19: initS19, s20: initS20};
   styles.forEach((s) => INITS[s.id]?.(s));
 
   const params = new URLSearchParams(location.search);
@@ -635,6 +635,177 @@
       more.className = "s17-sr";
       more.textContent = `: ${listOf(names)}`;
       status.textContent = `${picked.dataset.vibe}: ${names.length} of ${ads.length} ads in colour`;
+      status.append(more, ".");
+    };
+
+    radios.forEach((r) => r.addEventListener("change", update));
+    reset.addEventListener("click", () => {
+      radios.forEach((r) => (r.checked = false));
+      update();
+      radios[0].focus();
+    });
+    update();
+  }
+  function initS18(root) {
+    // 18 Extra Edition: "Which way tonight?" radio group, as in 14 and 16.
+    // Lighting the chosen road and its classified ads is pure CSS (:has on the
+    // checked radio), so this only keeps the spoken status line in step and
+    // wires up the reset. State lives in the radios and resets on reload.
+    const radios = [...root.querySelectorAll('input[name="s18-vibe"]')];
+    const status = root.querySelector(".s18-status");
+    const reset = root.querySelector(".s18-reset");
+    const ads = [...root.querySelectorAll(".s18-ad")];
+    if (!radios.length || !status || !reset || !ads.length) return;
+
+    const nameOf = (ad) => ad.querySelector(".s18-ad__name").textContent;
+    const listOf = (names) =>
+      names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+
+    const update = () => {
+      const picked = radios.find((r) => r.checked);
+      reset.hidden = !picked;
+      if (!picked) {
+        status.textContent = "All ten games are on the road.";
+        return;
+      }
+      const names = ads.filter((a) => a.classList.contains(`s18-fit-${picked.value}`)).map(nameOf);
+      // Short line on screen; the matching names are for screen readers only.
+      const more = document.createElement("span");
+      more.className = "s18-sr";
+      more.textContent = `: ${listOf(names)}`;
+      status.textContent = `${picked.dataset.road} road: ${names.length} of ${ads.length} games in colour`;
+      status.append(more, ".");
+    };
+
+    radios.forEach((r) => r.addEventListener("change", update));
+    reset.addEventListener("click", () => {
+      radios.forEach((r) => (r.checked = false));
+      update();
+      radios[0].focus();
+    });
+    update();
+  }
+  function initS19(root) {
+    // 19 Scoreboard Night. Two jobs.
+    //
+    // The scoreboard: each row ([data-s19-row]) is a figure spelled out in flip
+    // tiles, one digit per tile. The true figures are in the markup, so no JS,
+    // reduced motion and thumb mode all show the finished board; here each row
+    // counts up from zero when it first comes into view. The value is read off
+    // the tiles themselves and written back one character per tile, padded with
+    // leading zeros like an odometer, so the board never changes width.
+    //
+    // The vibe picker: lighting the chosen road and its games is pure CSS (:has
+    // on the checked radio), so this only keeps the spoken status line in step
+    // and wires up the reset. State lives in the radios and resets on reload.
+    const calm =
+      document.documentElement.classList.contains("is-thumb") ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const rows = [...root.querySelectorAll("[data-s19-row]")];
+    if (rows.length && !calm && "IntersectionObserver" in window) {
+      const DURATION = 1900;
+      const ease = (t) => 1 - Math.pow(1 - t, 3);
+
+      const prepare = (row) => {
+        const tiles = [...row.querySelectorAll(".s19-dig")];
+        const final = tiles.map((t) => t.textContent).join("");
+        const to = Number(final);
+        const set = (p) => {
+          const text = p >= 1 ? final : String(Math.round(to * p)).padStart(tiles.length, "0");
+          tiles.forEach((tile, i) => (tile.textContent = text[i]));
+        };
+        set(0);
+        return set;
+      };
+
+      const run = (set) => {
+        let start = 0;
+        const frame = (now) => {
+          if (!start) start = now;
+          const t = Math.min(1, (now - start) / DURATION);
+          set(ease(t));
+          if (t < 1) requestAnimationFrame(frame);
+        };
+        requestAnimationFrame(frame);
+      };
+
+      const setters = new Map(rows.map((r) => [r, prepare(r)]));
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            observer.unobserve(e.target);
+            run(setters.get(e.target));
+          });
+        },
+        { threshold: 0.35 }
+      );
+      rows.forEach((r) => observer.observe(r));
+    }
+
+    const radios = [...root.querySelectorAll('input[name="s19-vibe"]')];
+    const status = root.querySelector(".s19-status");
+    const reset = root.querySelector(".s19-reset");
+    const ads = [...root.querySelectorAll(".s19-ad")];
+    if (!radios.length || !status || !reset || !ads.length) return;
+
+    const nameOf = (ad) => ad.querySelector(".s19-ad__name").textContent;
+    const listOf = (names) =>
+      names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+
+    const update = () => {
+      const picked = radios.find((r) => r.checked);
+      reset.hidden = !picked;
+      if (!picked) {
+        status.textContent = "All ten games are on the road.";
+        return;
+      }
+      const names = ads.filter((a) => a.classList.contains(`s19-fit-${picked.value}`)).map(nameOf);
+      // Short line on screen; the matching names are for screen readers only.
+      const more = document.createElement("span");
+      more.className = "s19-sr";
+      more.textContent = `: ${listOf(names)}`;
+      status.textContent = `${picked.dataset.road} road: ${names.length} of ${ads.length} games in colour`;
+      status.append(more, ".");
+    };
+
+    radios.forEach((r) => r.addEventListener("change", update));
+    reset.addEventListener("click", () => {
+      radios.forEach((r) => (r.checked = false));
+      update();
+      radios[0].focus();
+    });
+    update();
+  }
+  function initS20(root) {
+    // 20 Clubhouse Sign-Up: "Which way tonight?" radio group. Lighting the chosen
+    // road and its ads is pure CSS (:has on the checked radio), so this only keeps
+    // the spoken status line in step and wires up the reset. State lives in the
+    // radios and resets on reload.
+    const radios = [...root.querySelectorAll('input[name="s20-vibe"]')];
+    const status = root.querySelector(".s20-status");
+    const reset = root.querySelector(".s20-reset");
+    const ads = [...root.querySelectorAll(".s20-ad")];
+    if (!radios.length || !status || !reset || !ads.length) return;
+
+    const nameOf = (ad) => ad.querySelector(".s20-ad__name").textContent;
+    const listOf = (names) =>
+      names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+
+    const update = () => {
+      const picked = radios.find((r) => r.checked);
+      reset.hidden = !picked;
+      if (!picked) {
+        status.textContent = "All ten games are on the road.";
+        return;
+      }
+      const names = ads.filter((a) => a.classList.contains(`s20-fit-${picked.value}`)).map(nameOf);
+      // Short line on screen; the matching names are for screen readers only.
+      const more = document.createElement("span");
+      more.className = "s20-sr";
+      more.textContent = `: ${listOf(names)}`;
+      status.textContent = `${picked.dataset.road} road: ${names.length} of ${ads.length} games in colour`;
       status.append(more, ".");
     };
 

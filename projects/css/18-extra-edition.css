@@ -1,0 +1,1411 @@
+/* 18 Extra Edition: style 14's Sunday-comics crossroads run as a broadsheet
+   front page, drawn with 16's heavier ink. The newspaper frame stays (newsprint
+   on a wooden table, halftone washes, wobbly panels, heavy banners with an
+   italic kicker) and so does the road: ivory paving with an inked edge and a
+   dashed centre line, forking at a signpost into three spot-colour roads.
+   What is new is the front-page furniture. The three big numbers are the lead
+   headline: one giant deck of figures between heavy rules, the loudest thing on
+   the sheet after the h1. The starting point is an "Extra!" starburst with a
+   newsboy holding the paper out to the reader. "House rules" is four rubber
+   stamps and "how to join" is a clip-out mail-in coupon.
+   Every character and word here is original.
+   Hook: pick your vibe.
+   Fonts: Rye (masthead, h1, the figures, CTA label, banners, closing heading)
+   and Libre Baskerville for everything else, instructions included.
+   Every rule and custom property is scoped under #s18. */
+
+@font-face {
+  font-family: "s18 Rye";
+  src: url("../fonts/rye/rye-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s18 Libre Baskerville";
+  src: url("../fonts/librebaskerville/librebaskerville-var.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "s18 Libre Baskerville";
+  src: url("../fonts/librebaskerville/librebaskerville-italic-var.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+#s18 {
+  --s18-ink: #1a1410;
+  --s18-ink-2: #4a3b26;
+  --s18-news: #f1e5c6;
+  --s18-panel: #fbf4e0;
+  --s18-road: #f7eed7;
+  --s18-table: #9a8453;
+  --s18-table-2: #806a40;
+  --s18-red: #d02a1c;
+  --s18-red-ink: #a3180f;
+  --s18-red-deep: #8a130c;
+  --s18-blue: #2a6cc0;
+  --s18-blue-ink: #1a4e93;
+  --s18-yellow: #f5c22e;
+  --s18-yellow-ink: #755606;
+  --s18-olive: #8a9a4a;
+  --s18-display: "s18 Rye", "Rockwell", "Clarendon", "Bookman Old Style", Georgia, serif;
+  --s18-body: "s18 Libre Baskerville", "Baskerville", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  /* Panel corners wobble like a hand-ruled border */
+  --s18-wob: 120px 14px 104px 16px / 14px 104px 16px 120px;
+  --s18-wob-sm: 44px 9px 38px 11px / 11px 38px 9px 44px;
+  --s18-halftone: radial-gradient(rgb(110 80 30 / 0.13) 1.1px, transparent 1.5px) 0 0 / 5px 5px;
+  --s18-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .25 0 0 0 0 .18 0 0 0 0 .08 0 0 0 .14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  background: var(--s18-table);
+  color: var(--s18-ink);
+  font-family: var(--s18-body);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+#s18 *,
+#s18 *::before,
+#s18 *::after {
+  box-sizing: border-box;
+}
+
+#s18 h1,
+#s18 h2,
+#s18 h3,
+#s18 h4,
+#s18 p,
+#s18 ol,
+#s18 ul,
+#s18 dl,
+#s18 dd,
+#s18 fieldset {
+  margin: 0;
+}
+
+#s18 ol,
+#s18 ul {
+  padding: 0;
+  list-style: none;
+}
+
+#s18 fieldset {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+
+#s18 [hidden] {
+  display: none !important;
+}
+
+#s18 .s18-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+#s18 .s18-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Links, buttons and focus */
+
+#s18 a {
+  color: var(--s18-blue-ink);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 2px;
+}
+
+#s18 a:hover {
+  color: var(--s18-ink);
+}
+
+#s18 a:focus-visible,
+#s18 button:focus-visible {
+  outline: 3px solid var(--s18-ink);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Table and the newsprint sheet */
+
+#s18 .s18-table {
+  position: relative;
+  padding: clamp(6px, 2.6vw, 40px);
+  background:
+    var(--s18-grain),
+    repeating-linear-gradient(90deg, rgb(60 40 10 / 0.06) 0 2px, transparent 2px 8px),
+    radial-gradient(120% 60% at 30% 0%, #b09765 0%, transparent 60%),
+    linear-gradient(180deg, var(--s18-table) 0%, var(--s18-table-2) 100%);
+}
+
+#s18 .s18-paper {
+  position: relative;
+  max-width: 1340px;
+  margin: 0 auto;
+  background:
+    var(--s18-halftone),
+    radial-gradient(ellipse at 50% 0%, transparent 55%, rgb(150 110 45 / 0.16) 100%),
+    var(--s18-news);
+  box-shadow:
+    0 0 0 1px rgb(60 40 10 / 0.25),
+    6px 8px 0 rgb(40 25 5 / 0.18),
+    14px 22px 34px rgb(40 25 5 / 0.38);
+}
+
+#s18 .s18-paper__inner {
+  position: relative;
+  container-type: inline-size;
+  padding: clamp(10px, 2.2vw, 24px) clamp(12px, 3vw, 44px) clamp(14px, 3vw, 34px);
+  /* Road geometry. --s18-cu is 1/1200 of the inner width, matching the SVG
+     roads; --s18-u drives the straight side lanes and is fixed when narrow. */
+  --s18-cu: calc(100cqi / 1200);
+  --s18-u: 0.62px;
+}
+
+/* Loose props beside the sheet, only where there is room */
+
+#s18 .s18-loose {
+  display: none;
+}
+
+@media (min-width: 1680px) {
+  #s18 .s18-loose {
+    display: block;
+  }
+
+  #s18 .s18-loose svg {
+    position: absolute;
+    z-index: 4;
+    pointer-events: none;
+    filter: drop-shadow(2px 4px 3px rgb(40 22 6 / 0.4));
+  }
+
+  #s18 .s18-loose__papers { width: 150px; left: -168px; top: 24%; }
+  #s18 .s18-loose__dice { width: 118px; right: -132px; top: 58%; }
+}
+
+/* Broadsheet masthead: two ears either side of the title */
+
+#s18 .s18-mast {
+  padding-bottom: 0.4rem;
+  margin-bottom: clamp(0.7rem, 1.8vw, 1.1rem);
+  border-bottom: 7px double var(--s18-ink);
+}
+
+#s18 .s18-mast__row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.5rem, 2vw, 1.6rem);
+}
+
+#s18 .s18-mast__title {
+  flex: 1 1 auto;
+  font-family: var(--s18-display);
+  font-size: clamp(1.3rem, 0.45rem + 3.5vw, 3.05rem);
+  line-height: 1;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: var(--s18-ink);
+  text-shadow:
+    3px 0 0 var(--s18-yellow),
+    5px 3px 0 var(--s18-red),
+    6px 5px 0 rgb(26 20 16 / 0.22);
+}
+
+#s18 .s18-ear {
+  flex: 0 0 auto;
+  max-width: 7.5rem;
+  padding: 0.25rem 0.5rem 0.3rem;
+  border: 3px solid var(--s18-ink);
+  border-radius: var(--s18-wob-sm);
+  color: var(--s18-ink-2);
+  font-size: 0.68rem;
+  font-style: italic;
+  line-height: 1.25;
+  text-align: center;
+}
+
+#s18 .s18-mast__line {
+  margin-top: 0.4rem;
+  padding-top: 0.3rem;
+  border-top: 2px solid var(--s18-ink);
+  color: var(--s18-ink-2);
+  font-size: 0.78rem;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+#s18 .s18-mast__line::before,
+#s18 .s18-mast__line::after {
+  content: "\2605";
+  margin: 0 0.7rem;
+  font-style: normal;
+  color: var(--s18-red);
+}
+
+/* Panels */
+
+#s18 .s18-panel {
+  position: relative;
+  border: 5px solid var(--s18-ink);
+  border-radius: var(--s18-wob);
+  background: var(--s18-panel);
+}
+
+/* Type */
+
+#s18 .s18-kicker {
+  align-self: flex-start;
+  display: inline-block;
+  margin-bottom: 0.55rem;
+  padding: 0.15rem 0.6rem 0.2rem;
+  border: 3px solid var(--s18-ink);
+  border-radius: var(--s18-wob-sm);
+  background: var(--s18-yellow);
+  color: var(--s18-ink);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform: rotate(-1.6deg);
+}
+
+#s18 .s18-h1 {
+  font-family: var(--s18-display);
+  font-weight: 400;
+  font-size: clamp(1.65rem, 0.95rem + 2.9vw, 3.1rem);
+  line-height: 1.1;
+  letter-spacing: 0.005em;
+  text-wrap: balance;
+}
+
+#s18 .s18-h1 em {
+  font-style: normal;
+  color: var(--s18-red-ink);
+}
+
+#s18 .s18-h2 {
+  font-family: var(--s18-display);
+  font-weight: 400;
+  font-size: clamp(1.25rem, 0.9rem + 1.5vw, 2.05rem);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+
+#s18 .s18-lede {
+  margin-top: 0.8rem;
+  max-width: 32em;
+  color: var(--s18-ink-2);
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.12rem);
+}
+
+/* Section banners */
+
+#s18 .s18-band {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.1rem 1.1rem;
+  padding: 0.35rem 0.9rem 0.5rem;
+  margin-bottom: clamp(0.9rem, 2vw, 1.4rem);
+  background: var(--s18-ink);
+  color: var(--s18-panel);
+  border-radius: 3px;
+}
+
+#s18 .s18-band--red {
+  background: var(--s18-red-ink);
+}
+
+#s18 .s18-band__kick {
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* Primary CTA */
+
+#s18 .s18-cta {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1.1rem;
+  padding: 0.7rem 1.4rem 0.75rem 1rem;
+  border: 5px solid var(--s18-ink);
+  border-radius: 22px 8px 20px 10px / 10px 20px 8px 22px;
+  background: var(--s18-red-ink);
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 8px 8px 0 var(--s18-ink);
+  transform: rotate(-1.2deg);
+}
+
+#s18 .s18-cta:hover {
+  color: #fff;
+  background: var(--s18-red-deep);
+}
+
+#s18 .s18-cta:focus-visible {
+  outline: 4px solid var(--s18-ink);
+  outline-offset: 7px;
+}
+
+#s18 .s18-cta__icon {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  color: var(--s18-yellow);
+}
+
+#s18 .s18-cta__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+#s18 .s18-cta__main {
+  font-family: var(--s18-display);
+  font-size: clamp(1.3rem, 1.1rem + 0.7vw, 1.65rem);
+  letter-spacing: 0.02em;
+}
+
+#s18 .s18-cta__sub {
+  margin-top: 0.3rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+/* ---------------------------------------------------------------------------
+   The lead headline: the three big numbers, set as the paper's banner story.
+   Heavy rule above and below, giant figures, labels kept quiet underneath.
+   These figures appear nowhere else on the page.
+   --------------------------------------------------------------------------- */
+
+#s18 .s18-lead {
+  margin-top: clamp(0.9rem, 2vw, 1.3rem);
+  padding: clamp(0.5rem, 1.4vw, 0.9rem) 0 clamp(0.4rem, 1.2vw, 0.7rem);
+  border-top: 9px solid var(--s18-ink);
+  border-bottom: 7px double var(--s18-ink);
+  background:
+    radial-gradient(rgb(245 194 46 / 0.3) 2.2px, transparent 2.6px) 0 0 / 11px 11px,
+    var(--s18-panel);
+}
+
+#s18 .s18-deck {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+#s18 .s18-deck__cell {
+  padding: 0.15rem clamp(0.3rem, 1vw, 0.9rem) 0.2rem;
+  border-right: 3px solid var(--s18-ink);
+  text-align: center;
+}
+
+#s18 .s18-deck__cell:last-child {
+  border-right: 0;
+}
+
+#s18 .s18-deck dd {
+  font-family: var(--s18-display);
+  /* sized off the sheet, not the viewport, so the longest figure always
+     clears its divider rule */
+  font-size: clamp(1.6rem, 5.1cqi, 3.9rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--s18-ink);
+  text-shadow: 3px 3px 0 var(--s18-yellow);
+}
+
+#s18 .s18-deck__cell:nth-child(1) dd {
+  color: var(--s18-red-ink);
+}
+
+#s18 .s18-deck__cell:nth-child(3) dd {
+  color: var(--s18-blue-ink);
+}
+
+#s18 .s18-deck dt {
+  margin-top: 0.1rem;
+  color: var(--s18-ink-2);
+  font-size: clamp(0.66rem, 0.6rem + 0.2vw, 0.8rem);
+  font-style: italic;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* The road: ivory paving, heavy inked edge, dashed centre line */
+
+#s18 .s18-link {
+  display: none;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#s18 .s18-rd__edge,
+#s18 .s18-rd__pave,
+#s18 .s18-rd__dots,
+#s18 .s18-rd__line {
+  fill: none;
+}
+
+#s18 .s18-rd__edge { stroke: var(--s18-ink); stroke-width: 62; }
+#s18 .s18-rd__pave { stroke: var(--s18-rc, var(--s18-road)); stroke-width: 48; }
+#s18 .s18-rd__dots { stroke: url(#s18-dotk); stroke-width: 48; opacity: 0.2; }
+#s18 .s18-rd__line { stroke: var(--s18-ink); stroke-width: 5.5; stroke-dasharray: 22 20; opacity: 0.6; }
+
+#s18 .s18-br--strategy { --s18-rc: var(--s18-blue); }
+#s18 .s18-br--family { --s18-rc: var(--s18-yellow); }
+#s18 .s18-br--friends { --s18-rc: var(--s18-red); }
+
+#s18 .s18-br .s18-rd__dots { opacity: 0.14; }
+#s18 .s18-br .s18-rd__line { opacity: 0.85; }
+
+/* Straight side lanes, used on narrow screens and beside the two stops */
+
+#s18 .s18-lane {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 6px;
+  width: calc(52 * var(--s18-u));
+  border-inline: calc(5 * var(--s18-u)) solid var(--s18-ink);
+  background:
+    repeating-linear-gradient(180deg, var(--s18-ink) 0 22px, transparent 22px 42px) 50% 0 / 5px 100% no-repeat,
+    radial-gradient(rgb(26 20 16 / 0.28) 1.1px, transparent 1.5px) 0 0 / 5px 5px,
+    var(--s18-road);
+}
+
+/* Milestone plaque where a stop meets its lane */
+
+#s18 .s18-mile {
+  position: absolute;
+  z-index: 1;
+  top: 1rem;
+  left: calc(6px + 26 * var(--s18-u) - 25px);
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--s18-ink);
+  border-radius: 50%;
+  background:
+    radial-gradient(rgb(245 194 46 / 0.75) 2.2px, transparent 2.6px) 0 0 / 9px 9px,
+    var(--s18-panel);
+  box-shadow: 3px 4px 0 rgb(26 20 16 / 0.25);
+  font-family: var(--s18-display);
+  font-size: 1.3rem;
+  line-height: 1;
+  text-align: center;
+}
+
+/* Hero */
+
+#s18 .s18-hero {
+  display: grid;
+  gap: clamp(0.8rem, 1.8vw, 1.1rem);
+}
+
+#s18 .s18-hero__copy {
+  padding: clamp(0.9rem, 2.2vw, 1.7rem);
+  background:
+    radial-gradient(rgb(42 108 192 / 0.15) 2.1px, transparent 2.5px) 0 0 / 10px 10px,
+    var(--s18-panel);
+}
+
+#s18 .s18-hero__art {
+  overflow: hidden;
+}
+
+#s18 .s18-start {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The "Extra!" starburst and the newsboy who hands you the paper */
+
+#s18 .s18-burst__word {
+  fill: var(--s18-panel);
+  font-family: var(--s18-display);
+  font-size: 30px;
+  letter-spacing: 1px;
+}
+
+#s18 .s18-post__arm text {
+  fill: #fff;
+  font-family: var(--s18-body);
+  font-weight: 700;
+  font-size: 19px;
+}
+
+#s18 .s18-post__arm text.s18-post__dark {
+  fill: var(--s18-ink);
+}
+
+#s18 .s18-balloon text {
+  fill: var(--s18-ink);
+  font-family: var(--s18-body);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 25px;
+}
+
+#s18 .s18-art__word {
+  fill: var(--s18-ink);
+  font-family: var(--s18-display);
+  font-size: 30px;
+  letter-spacing: 1px;
+}
+
+/* The fork */
+
+#s18 .s18-fork {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#s18 .s18-fork__hub circle {
+  fill: var(--s18-panel);
+  stroke: var(--s18-ink);
+  stroke-width: 6;
+}
+
+#s18 .s18-fork__hub path {
+  fill: var(--s18-red);
+  stroke: var(--s18-ink);
+  stroke-width: 3.5;
+}
+
+/* The three vibe choices, one under the end of each road */
+
+#s18 .s18-pick__row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 clamp(4px, 1.2vw, 16px);
+}
+
+#s18 .s18-vibe {
+  --s18-vc: var(--s18-blue-ink);
+  --s18-vfill: var(--s18-blue);
+  position: relative;
+}
+
+#s18 .s18-vibe--family { --s18-vc: var(--s18-yellow-ink); --s18-vfill: var(--s18-yellow); }
+#s18 .s18-vibe--friends { --s18-vc: var(--s18-red-ink); --s18-vfill: var(--s18-red); }
+
+#s18 .s18-vibe label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  height: 100%;
+  padding: 0.7rem 0.5rem 0.9rem;
+  border: 5px solid var(--s18-ink);
+  border-radius: var(--s18-wob-sm);
+  background: var(--s18-panel);
+  box-shadow: 6px 6px 0 var(--s18-ink);
+  cursor: pointer;
+  text-align: center;
+}
+
+#s18 .s18-vibe label:hover {
+  background: #fffaea;
+}
+
+#s18 .s18-vibe__pal {
+  width: clamp(62px, 10.5vw, 118px);
+  height: auto;
+  margin-bottom: 0.15rem;
+}
+
+#s18 .s18-vibe__name {
+  font-family: var(--s18-display);
+  font-size: clamp(0.95rem, 0.7rem + 0.75vw, 1.3rem);
+  line-height: 1.1;
+}
+
+#s18 .s18-vibe__note {
+  color: var(--s18-ink-2);
+  font-size: clamp(0.72rem, 0.65rem + 0.25vw, 0.88rem);
+  font-style: italic;
+  line-height: 1.25;
+}
+
+#s18 .s18-vibe__stamp {
+  position: absolute;
+  top: -0.7rem;
+  right: -0.5rem;
+  padding: 0.1rem 0.5rem 0.15rem;
+  border: 3px solid var(--s18-ink);
+  border-radius: var(--s18-wob-sm);
+  background: var(--s18-vfill);
+  color: var(--s18-ink);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: rotate(7deg) scale(0);
+}
+
+#s18 .s18-vibe--strategy .s18-vibe__stamp,
+#s18 .s18-vibe--friends .s18-vibe__stamp {
+  color: #fff;
+}
+
+#s18 .s18-vibe input:checked + label {
+  background:
+    radial-gradient(rgb(26 20 16 / 0.1) 1.6px, transparent 2px) 0 0 / 8px 8px,
+    #fffaea;
+  box-shadow: 6px 6px 0 var(--s18-vc), 6px 6px 0 5px var(--s18-ink);
+}
+
+#s18 .s18-vibe input:checked + label .s18-vibe__stamp {
+  transform: rotate(7deg) scale(1);
+}
+
+#s18 .s18-pick:has(input:checked) .s18-vibe input:not(:checked) + label {
+  background: #ede3c6;
+  box-shadow: 3px 3px 0 rgb(26 20 16 / 0.45);
+}
+
+#s18 .s18-pick:has(input:checked) .s18-vibe input:not(:checked) + label .s18-vibe__pal {
+  opacity: 0.4;
+}
+
+#s18 .s18-vibe input:focus-visible + label {
+  outline: 4px solid var(--s18-ink);
+  outline-offset: 5px;
+}
+
+/* Lit road: the other two roads fade back */
+
+#s18 .s18-hook:has(#s18-vibe-strategy:checked) .s18-br:not(.s18-br--strategy),
+#s18 .s18-hook:has(#s18-vibe-family:checked) .s18-br:not(.s18-br--family),
+#s18 .s18-hook:has(#s18-vibe-friends:checked) .s18-br:not(.s18-br--friends),
+#s18 .s18-paper__inner:has(#s18-vibe-strategy:checked) .s18-merge .s18-br:not(.s18-br--strategy),
+#s18 .s18-paper__inner:has(#s18-vibe-family:checked) .s18-merge .s18-br:not(.s18-br--family),
+#s18 .s18-paper__inner:has(#s18-vibe-friends:checked) .s18-merge .s18-br:not(.s18-br--friends) {
+  opacity: 0.2;
+}
+
+/* Status line */
+
+#s18 .s18-herald {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem 1.2rem;
+  min-height: 2.8rem;
+  margin: clamp(1.1rem, 2.4vw, 1.8rem) auto clamp(1rem, 2vw, 1.5rem);
+  text-align: center;
+}
+
+#s18 .s18-status {
+  color: var(--s18-ink-2);
+  font-size: 1rem;
+  font-style: italic;
+}
+
+#s18 .s18-reset {
+  flex: none;
+  padding: 0.3rem 0.9rem 0.35rem;
+  border: 3px solid var(--s18-ink);
+  border-radius: var(--s18-wob-sm);
+  background: var(--s18-yellow);
+  color: var(--s18-ink);
+  font: 700 0.9rem/1.2 var(--s18-body);
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--s18-ink);
+}
+
+#s18 .s18-reset:hover {
+  background: #ffd45c;
+}
+
+/* The top ten, set as classified ads */
+
+#s18 .s18-ads {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.6rem, 1.4vw, 0.95rem);
+}
+
+#s18 .s18-ad {
+  --s18-chip: var(--s18-blue-ink);
+  --s18-chip-ink: #fff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 7px 7px 9px;
+  border: 4px double var(--s18-ink);
+  background: var(--s18-panel);
+}
+
+#s18 .s18-ad--family { --s18-chip: var(--s18-yellow); --s18-chip-ink: var(--s18-ink); }
+#s18 .s18-ad--coop { --s18-chip: var(--s18-ink); --s18-chip-ink: var(--s18-panel); }
+
+#s18 .s18-ad__pic {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 3px solid var(--s18-ink);
+  background: #ddd0ae;
+}
+
+#s18 .s18-ad__pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.3) sepia(0.18) contrast(1.05);
+}
+
+/* halftone screen over the photo, as a newspaper picture */
+#s18 .s18-ad__pic::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(rgb(26 20 16 / 0.26) 1.1px, transparent 1.5px) 0 0 / 4px 4px;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+#s18 .s18-ad__name {
+  margin: 0.5rem 0.15rem 0.35rem;
+  font-weight: 700;
+  font-size: 0.92rem;
+  line-height: 1.25;
+}
+
+#s18 .s18-ad__tag {
+  align-self: flex-start;
+  margin: auto 0.15rem 0;
+  padding: 0.05rem 0.5rem 0.1rem;
+  background: var(--s18-chip);
+  color: var(--s18-chip-ink);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Lit games: the chosen road's games come up in full colour */
+
+#s18 .s18-hook:has(#s18-vibe-strategy:checked) { --s18-pick: var(--s18-blue-ink); }
+#s18 .s18-hook:has(#s18-vibe-family:checked) { --s18-pick: var(--s18-yellow-ink); }
+#s18 .s18-hook:has(#s18-vibe-friends:checked) { --s18-pick: var(--s18-red-ink); }
+
+#s18 .s18-hook:has(#s18-vibe-strategy:checked) .s18-fit-strategy,
+#s18 .s18-hook:has(#s18-vibe-family:checked) .s18-fit-family,
+#s18 .s18-hook:has(#s18-vibe-friends:checked) .s18-fit-friends {
+  z-index: 1;
+  border-color: var(--s18-pick);
+  box-shadow: 0 0 0 4px var(--s18-pick), 7px 8px 0 var(--s18-ink);
+  transform: translateY(-5px);
+}
+
+#s18 .s18-hook:has(#s18-vibe-strategy:checked) .s18-fit-strategy .s18-ad__pic img,
+#s18 .s18-hook:has(#s18-vibe-family:checked) .s18-fit-family .s18-ad__pic img,
+#s18 .s18-hook:has(#s18-vibe-friends:checked) .s18-fit-friends .s18-ad__pic img {
+  filter: none;
+}
+
+#s18 .s18-hook:has(#s18-vibe-strategy:checked) .s18-fit-strategy .s18-ad__pic::after,
+#s18 .s18-hook:has(#s18-vibe-family:checked) .s18-fit-family .s18-ad__pic::after,
+#s18 .s18-hook:has(#s18-vibe-friends:checked) .s18-fit-friends .s18-ad__pic::after {
+  opacity: 0.3;
+}
+
+#s18 .s18-hook:has(#s18-vibe-strategy:checked) .s18-ad:not(.s18-fit-strategy),
+#s18 .s18-hook:has(#s18-vibe-family:checked) .s18-ad:not(.s18-fit-family),
+#s18 .s18-hook:has(#s18-vibe-friends:checked) .s18-ad:not(.s18-fit-friends) {
+  background: #eae0c2;
+}
+
+#s18 .s18-hook:has(#s18-vibe-strategy:checked) .s18-ad:not(.s18-fit-strategy) .s18-ad__pic img,
+#s18 .s18-hook:has(#s18-vibe-family:checked) .s18-ad:not(.s18-fit-family) .s18-ad__pic img,
+#s18 .s18-hook:has(#s18-vibe-friends:checked) .s18-ad:not(.s18-fit-friends) .s18-ad__pic img {
+  filter: grayscale(1) contrast(0.95);
+  opacity: 0.5;
+}
+
+#s18 .s18-more {
+  margin-top: clamp(1.1rem, 2.2vw, 1.6rem);
+  text-align: center;
+}
+
+#s18 .s18-more a {
+  display: inline-block;
+  padding: 0.4rem 1rem 0.45rem;
+  border: 4px solid var(--s18-ink);
+  border-radius: var(--s18-wob-sm);
+  background: var(--s18-yellow);
+  color: var(--s18-ink);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 5px 5px 0 var(--s18-ink);
+}
+
+#s18 .s18-more a:hover {
+  background: #ffd45c;
+}
+
+/* Stops along the side lanes */
+
+#s18 .s18-stop {
+  position: relative;
+  padding: 1.1rem 0 2.4rem calc(6px + 52 * var(--s18-u) + 18px);
+}
+
+#s18 .s18-stop__body {
+  position: relative;
+}
+
+/* ---------------------------------------------------------------------------
+   House rules: four rubber stamps. Each is an ink badge with a double ring,
+   a wobbly edge, a speckled face where the ink took unevenly and a smudge
+   where the stamp rocked. The reading line sits underneath in the body face.
+   --------------------------------------------------------------------------- */
+
+#s18 .s18-stamps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.1rem, 2.6vw, 1.9rem) clamp(0.8rem, 2vw, 1.6rem);
+}
+
+#s18 .s18-rule {
+  text-align: center;
+}
+
+#s18 .s18-stamp {
+  --s18-sc: var(--s18-red-ink);
+  --s18-rot: -4deg;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 5.3rem;
+  padding: 0.7rem 0.85rem 0.75rem;
+  border: 6px solid var(--s18-sc);
+  border-radius: 34px 10px 28px 12px / 12px 28px 10px 34px;
+  box-shadow:
+    inset 0 0 0 3px var(--s18-panel),
+    inset 0 0 0 7px var(--s18-sc);
+  color: var(--s18-sc);
+  font-family: var(--s18-display);
+  font-size: clamp(0.85rem, 0.68rem + 0.42vw, 1rem);
+  line-height: 1.12;
+  letter-spacing: 0.02em;
+  text-align: center;
+  text-transform: uppercase;
+  overflow-wrap: break-word;
+  transform: rotate(var(--s18-rot));
+}
+
+#s18 .s18-rule:nth-child(2) .s18-stamp { --s18-sc: var(--s18-blue-ink); --s18-rot: 3deg; border-radius: 12px 30px 10px 26px / 26px 10px 30px 12px; }
+#s18 .s18-rule:nth-child(3) .s18-stamp { --s18-sc: var(--s18-ink); --s18-rot: -2.2deg; border-radius: 26px 12px 32px 9px / 9px 32px 12px 26px; }
+#s18 .s18-rule:nth-child(4) .s18-stamp { --s18-sc: var(--s18-red-ink); --s18-rot: 4.5deg; border-radius: 10px 28px 12px 30px / 30px 12px 28px 10px; }
+
+/* patchy ink: paper-coloured speckle over the stamp face */
+#s18 .s18-stamp::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: radial-gradient(rgb(251 244 224 / 0.7) 1.5px, transparent 1.9px) 0 0 / 6px 6px;
+  pointer-events: none;
+}
+
+/* the smudge where the stamp rocked: sits over its own bottom edge, not outside */
+#s18 .s18-stamp::after {
+  content: "";
+  position: absolute;
+  right: 14%;
+  bottom: -3px;
+  width: 34%;
+  height: 11px;
+  background: currentColor;
+  opacity: 0.16;
+  border-radius: 60% 40% 55% 45% / 70% 50% 50% 30%;
+  transform: rotate(-3deg);
+  pointer-events: none;
+}
+
+#s18 .s18-rule p {
+  margin: 0.65rem 0.2rem 0;
+  color: var(--s18-ink-2);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+/* ---------------------------------------------------------------------------
+   How to join: a clip-out mail-in coupon. Dashed cut line, a scissors mark on
+   the edge, three ticked boxes and the CTA inside the coupon itself.
+   --------------------------------------------------------------------------- */
+
+#s18 .s18-coupon {
+  position: relative;
+  max-width: 44rem;
+  margin-top: 0.3rem;
+  padding: clamp(1rem, 2.4vw, 1.7rem) clamp(0.9rem, 2.2vw, 1.6rem) clamp(1rem, 2.4vw, 1.5rem);
+  border: 5px dashed var(--s18-ink);
+  border-radius: 6px;
+  background:
+    radial-gradient(rgb(245 194 46 / 0.26) 2.1px, transparent 2.5px) 0 0 / 12px 12px,
+    var(--s18-panel);
+  box-shadow: 7px 8px 0 rgb(26 20 16 / 0.22);
+  transform: rotate(-0.8deg);
+}
+
+#s18 .s18-coupon__cut {
+  position: absolute;
+  top: -20px;
+  left: clamp(14px, 4vw, 34px);
+  width: 42px;
+  height: 42px;
+  color: var(--s18-ink);
+}
+
+#s18 .s18-coupon__head {
+  margin-bottom: 0.5rem;
+  color: var(--s18-red-ink);
+  font-family: var(--s18-display);
+  font-size: clamp(1.05rem, 0.85rem + 0.6vw, 1.35rem);
+  line-height: 1.15;
+}
+
+#s18 .s18-steps li {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.6rem 0;
+  border-bottom: 3px dotted rgb(26 20 16 / 0.45);
+}
+
+#s18 .s18-steps li:last-child {
+  border-bottom: 0;
+}
+
+#s18 .s18-tick {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 5px solid var(--s18-ink);
+  border-radius: 9px 4px 8px 5px / 5px 8px 4px 9px;
+  background: var(--s18-panel);
+}
+
+#s18 .s18-tick svg {
+  width: 34px;
+  height: 34px;
+  color: var(--s18-red);
+}
+
+#s18 .s18-steps__no {
+  flex: none;
+  color: var(--s18-ink-2);
+  font-family: var(--s18-display);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* Instructions stay in the body face so they read fast. */
+#s18 .s18-steps__text {
+  font-weight: 700;
+  font-size: clamp(0.98rem, 0.92rem + 0.25vw, 1.1rem);
+  line-height: 1.3;
+}
+
+#s18 .s18-coupon .s18-cta {
+  margin-top: 1.1rem;
+}
+
+/* Finish */
+
+#s18 .s18-finish {
+  position: relative;
+  padding: 1.8rem 0 clamp(1.6rem, 3.4vw, 2.6rem);
+  text-align: center;
+}
+
+#s18 .s18-lane--finish {
+  bottom: auto;
+  height: 1.8rem;
+}
+
+#s18 .s18-finish__panel {
+  max-width: 540px;
+  margin: 0 auto 1.5rem;
+  padding: 12px;
+  border-width: 0;
+  border-radius: 0;
+  background: repeating-conic-gradient(var(--s18-ink) 0 25%, var(--s18-panel) 0 50%) 0 0 / 22px 22px;
+  box-shadow: 5px 6px 0 rgb(26 20 16 / 0.25);
+}
+
+#s18 .s18-finish__panel > * {
+  background: var(--s18-panel);
+}
+
+#s18 .s18-finish__word {
+  padding: 0.55rem 0 0.1rem;
+  border: 5px solid var(--s18-ink);
+  border-bottom: 0;
+  color: var(--s18-red-ink);
+  font-family: var(--s18-display);
+  font-size: clamp(1.9rem, 1.4rem + 2vw, 2.9rem);
+  letter-spacing: 0.15em;
+  text-indent: 0.15em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+#s18 .s18-finish__art {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 5px solid var(--s18-ink);
+  border-top: 0;
+}
+
+#s18 .s18-seat__word {
+  fill: var(--s18-red-ink);
+  font-family: var(--s18-body);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 25px;
+}
+
+#s18 .s18-finish__title {
+  max-width: 20em;
+  margin: 0 auto 1.4rem;
+  font-size: clamp(1.5rem, 1.05rem + 1.9vw, 2.5rem);
+  line-height: 1.14;
+}
+
+#s18 .s18-finish__title em {
+  font-style: normal;
+  color: var(--s18-red-ink);
+}
+
+#s18 .s18-finish .s18-cta {
+  align-self: center;
+}
+
+/* Narrow phones */
+
+@media (max-width: 560px) {
+  #s18 .s18-ear {
+    display: none;
+  }
+}
+
+/* The banner figures need real room; stack them before they crowd the rules. */
+@media (max-width: 700px) {
+  #s18 .s18-deck {
+    grid-template-columns: 1fr;
+  }
+
+  #s18 .s18-deck__cell {
+    padding: 0.3rem 0.4rem 0.4rem;
+    border-right: 0;
+    border-bottom: 3px solid var(--s18-ink);
+  }
+
+  #s18 .s18-deck__cell:last-child {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  #s18 .s18-stamps {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 400px) {
+  #s18 .s18-cta {
+    gap: 0.55rem;
+    padding: 0.6rem 1rem 0.65rem 0.75rem;
+  }
+
+  #s18 .s18-cta__icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  #s18 .s18-vibe__stamp {
+    display: none;
+  }
+
+  #s18 .s18-vibe label {
+    padding: 0.55rem 0.25rem 0.7rem;
+  }
+
+  #s18 .s18-vibe__pal {
+    width: 46px;
+  }
+
+  #s18 .s18-steps li {
+    gap: 0.6rem;
+  }
+
+  #s18 .s18-tick {
+    width: 34px;
+    height: 34px;
+    border-width: 4px;
+  }
+
+  #s18 .s18-tick svg {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+/* Container steps */
+
+@container (min-width: 640px) {
+  #s18 .s18-ads {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@container (min-width: 760px) {
+  #s18 .s18-stamps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Wide screens: the road snakes down the sheet */
+
+@media (min-width: 860px) {
+  #s18 .s18-paper__inner {
+    --s18-u: var(--s18-cu);
+  }
+
+  #s18 .s18-link {
+    display: block;
+  }
+
+  #s18 .s18-hero {
+    grid-template-columns: 56fr 44fr;
+    align-items: stretch;
+  }
+
+  #s18 .s18-hero__copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #s18 .s18-hero__art {
+    align-self: start;
+  }
+
+  #s18 .s18-stop {
+    padding: 1.6rem 2cqi 2.6rem 15cqi;
+  }
+
+  #s18 .s18-stop--right {
+    padding: 1.6rem 15cqi 2.6rem 2cqi;
+  }
+
+  #s18 .s18-lane {
+    left: calc(64 * var(--s18-u));
+  }
+
+  #s18 .s18-stop--right .s18-lane {
+    left: calc(1084 * var(--s18-u));
+  }
+
+  #s18 .s18-mile {
+    --s18-ms: max(60px, calc(118 * var(--s18-u)));
+    top: 1.3rem;
+    left: calc(90 * var(--s18-u) - var(--s18-ms) / 2);
+    width: var(--s18-ms);
+    height: var(--s18-ms);
+    font-size: calc(var(--s18-ms) * 0.34);
+  }
+
+  #s18 .s18-stop--right .s18-mile {
+    left: calc(1110 * var(--s18-u) - var(--s18-ms) / 2);
+  }
+
+  #s18 .s18-lane--finish {
+    left: calc(574 * var(--s18-u));
+  }
+
+  #s18 .s18-merge {
+    margin-top: -0.4rem;
+  }
+}
+
+/* Keep the hero compact on short desktop windows so the figures stay in view */
+
+@media (min-width: 860px) and (max-height: 920px) {
+  #s18 .s18-hero {
+    grid-template-columns: 62fr 38fr;
+  }
+
+  #s18 .s18-lede {
+    margin-top: 0.6rem;
+  }
+
+  #s18 .s18-cta {
+    margin-top: 0.9rem;
+  }
+}
+
+/* Motion: 14's animations, kept. The signpost arms swing out, the chosen road's
+   centre line marches away from the crossroads, the newsboy waves his paper and
+   the starburst pops in. */
+
+@media (prefers-reduced-motion: no-preference) {
+  #s18 .s18-cta {
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  }
+
+  #s18 .s18-cta:hover {
+    transform: rotate(-1.2deg) translate(-2px, -3px);
+    box-shadow: 10px 11px 0 var(--s18-ink);
+  }
+
+  #s18 .s18-cta:active {
+    transform: rotate(-1.2deg) translate(3px, 3px);
+    box-shadow: 3px 3px 0 var(--s18-ink);
+  }
+
+  #s18 .s18-vibe label,
+  #s18 .s18-vibe__stamp,
+  #s18 .s18-ad {
+    transition: transform 0.3s cubic-bezier(0.3, 1.4, 0.5, 1), box-shadow 0.3s ease, background-color 0.25s ease, border-color 0.25s ease;
+  }
+
+  #s18 .s18-br,
+  #s18 .s18-ad__pic img,
+  #s18 .s18-ad__pic::after {
+    transition: opacity 0.35s ease, filter 0.35s ease;
+  }
+
+  #s18 .s18-post__arm {
+    transform-box: fill-box;
+    transform-origin: 0% 50%;
+    animation: s18-swing 0.9s cubic-bezier(0.3, 1.5, 0.5, 1) both;
+  }
+
+  #s18 .s18-post__arm--l,
+  #s18 .s18-post__arm--l2 {
+    transform-origin: 100% 50%;
+  }
+
+  #s18 .s18-post__arm--l { animation-delay: 0.15s; }
+  #s18 .s18-post__arm--r { animation-delay: 0.35s; }
+  #s18 .s18-post__arm--l2 { animation-delay: 0.55s; }
+
+  #s18 .s18-burst {
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+    animation: s18-slam 0.55s cubic-bezier(0.3, 1.7, 0.5, 1) 0.25s both;
+  }
+
+  #s18 .s18-balloon {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: s18-pop 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) 0.85s both;
+  }
+
+  /* the newsboy jogs the paper he is holding out */
+  #s18 .s18-offer {
+    transform-box: fill-box;
+    transform-origin: 40% 90%;
+    animation: s18-offer 2.6s ease-in-out 1s infinite;
+  }
+
+  #s18 .s18-br .s18-rd__line {
+    animation: s18-roll 2.6s linear infinite paused;
+  }
+
+  #s18 .s18-hook:has(#s18-vibe-strategy:checked) .s18-br--strategy .s18-rd__line,
+  #s18 .s18-hook:has(#s18-vibe-family:checked) .s18-br--family .s18-rd__line,
+  #s18 .s18-hook:has(#s18-vibe-friends:checked) .s18-br--friends .s18-rd__line,
+  #s18 .s18-paper__inner:has(#s18-vibe-strategy:checked) .s18-merge .s18-br--strategy .s18-rd__line,
+  #s18 .s18-paper__inner:has(#s18-vibe-family:checked) .s18-merge .s18-br--family .s18-rd__line,
+  #s18 .s18-paper__inner:has(#s18-vibe-friends:checked) .s18-merge .s18-br--friends .s18-rd__line {
+    animation-play-state: running;
+  }
+
+  #s18 .s18-seat path {
+    animation: s18-dash 3s linear infinite;
+  }
+}
+
+@keyframes s18-swing {
+  0% { transform: scaleX(0.2); opacity: 0; }
+  100% { transform: scaleX(1); opacity: 1; }
+}
+
+/* the starburst lands like a hand stamp */
+@keyframes s18-slam {
+  0% { transform: scale(2.1) rotate(-14deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes s18-pop {
+  0% { transform: scale(0.2) rotate(-6deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes s18-offer {
+  0%, 100% { transform: rotate(-5deg) translateY(0); }
+  50% { transform: rotate(4deg) translateY(-6px); }
+}
+
+/* the chosen road's dashes march away from the crossroads */
+@keyframes s18-roll {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -42; }
+}
+
+@keyframes s18-dash {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -48; }
+}
+
+/* Landing-card preview: a calm, still final state */
+
+.is-thumb #s18 *,
+.is-thumb #s18 *::before,
+.is-thumb #s18 *::after {
+  animation: none !important;
+  transition: none !important;
+}
