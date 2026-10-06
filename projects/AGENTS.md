@@ -8,7 +8,7 @@ This is a personal concept study, not affiliated with Board Game Arena. Nothing 
 
 Plain HTML and CSS, with optional vanilla JS for interaction. No frameworks, no build step, no package manager. The page opens straight from the filesystem and deploys as-is.
 
-**Self-contained** is the rule: every file the page loads lives in this folder. That means system font stacks, local or inline SVG, and no CDNs, web fonts, analytics or API calls. Links that leave the site go only to Board Game Arena: the register CTA to https://en.boardgamearena.com/account?page=newuser, and "see all games" to https://en.boardgamearena.com/gamelist. Nothing persists: no cookies, `localStorage`, `sessionStorage` or form submissions. Interactive state (a quiz answer, a die roll) lives in memory and resets on reload.
+**Self-contained** is the rule: every file the page loads lives in this folder. That means bundled or system fonts, local or inline SVG, and no CDNs, remote web fonts, analytics or API calls. Links that leave the site go only to Board Game Arena: the register CTA to https://en.boardgamearena.com/account?page=newuser, and "see all games" to https://en.boardgamearena.com/gamelist. Nothing persists: no cookies, `localStorage`, `sessionStorage` or form submissions. Interactive state (a quiz answer, a die roll) lives in memory and resets on reload.
 
 ## Layout
 
@@ -18,6 +18,7 @@ css/gallery.css     page modes, landing grid, gallery bar and shared resets only
 css/NN-slug.css     one file per style, e.g. css/01-banner-hall.css
 js/gallery.js       page modes, landing cards, gallery bar, per-style interactions
 img/games/          licensed game photos, credited in the index.html footer
+fonts/<family>/     open-licence (SIL OFL) fonts as Latin-subset .woff2, each folder with its OFL.txt
 DIRECTIONS.md       the style briefs and conversion hooks
 ```
 
@@ -42,6 +43,22 @@ Each style is `<section class="style" id="sNN" data-name="…" data-hook="…">`
 5. Run the checklist on this style and on the gallery as a whole.
 
 Done means every checklist item passes for every style touched.
+
+## Fonts
+
+Each style may load up to two families from `fonts/` with `@font-face` at the top of its own stylesheet. Name the family with the style prefix (`font-family: "s01 Cinzel"`) so styles never share or override each other's faces, use `font-display: swap`, and keep a system fallback stack after it. Only fonts actually used are downloaded, because hidden sections don't render. New families must be SIL OFL, subset to Latin, saved as `.woff2` with the family's `OFL.txt`, and listed under **Font credits** in the `index.html` footer.
+
+## Keep it concise
+
+A first-time visitor should be able to scan the page and get three answers fast: why play here, what they can play, and how to join. Everything else is cut.
+
+- Sections, in this order: hero, the style's hook, why play here, how to join, the top ten, closing CTA. Merge sections when the hook already covers one (a three-step hook is "how to join").
+- Hero: an h1 of at most 10 words, one supporting sentence, the CTA, and the three big numbers in one row. Nothing else competes with the CTA.
+- Why play here: 3 or 4 points, each a short title plus at most 8 words (free, nothing to download, any device, 42 languages and 200+ countries, real friends at the table).
+- How to join: 3 steps, each at most 8 words, ending in the register CTA. State only what's true: a free account, then pick a game and play in the browser. No invented details like sign-in providers or timings.
+- Top ten: photo, name and tag only. No blurbs.
+- One idea per section, no repeated numbers, no decorative paragraphs, no fine print beyond the "example tables" label. Aim for roughly 150 words of body copy per page, game names excluded.
+- Give it room: generous section spacing, text measure under about 60ch, and no more than five items in a row.
 
 ## Checklist
 

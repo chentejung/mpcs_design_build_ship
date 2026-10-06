@@ -8,7 +8,7 @@
   const num = (s) => s.id.slice(1);
   const pageUrl = (s) => `index.html?view=${s.id}`;
 
-  const INITS = {s01: initS01, s03: initS03, s05: initS05, s06: initS06, s07: initS07};
+  const INITS = {s06: initS06, s07: initS07, s03: initS03, s01: initS01, s05: initS05};
   styles.forEach((s) => INITS[s.id]?.(s));
 
   const params = new URLSearchParams(location.search);
@@ -91,36 +91,101 @@
     });
   }
 
-  function initS01(root) {
-    // 08 Hall of Banners: "Choose your banner" radio group. The highlighting itself is
-    // pure CSS (:has on the checked radio), so this only keeps the spoken status line
-    // in step and wires up the reset. State lives in the radios and resets on reload.
-    const radios = [...root.querySelectorAll('input[name="s01-vibe"]')];
-    const status = root.querySelector(".s01-status");
-    const reset = root.querySelector(".s01-reset");
-    const games = [...root.querySelectorAll(".s01-game")];
-    if (!radios.length || !status || !reset) return;
+  function initS06(root) {
+    // 06 Hex Island: "Roll for a game". Two six-sided dice; the sum lights the game on
+    // that number token (2 to 6, 8 to 12), and a 7 brings the robber instead. The
+    // tray stays hidden without JS; the roll lives in memory only and resets on reload.
+    // Dice tumble is skipped under reduced motion.
+    const tray = root.querySelector(".s06-roll");
+    const button = root.querySelector(".s06-roll__btn");
+    const status = root.querySelector(".s06-roll__status");
+    const dice = [...root.querySelectorAll(".s06-die")];
+    const tiles = [...root.querySelectorAll(".s06-tile")];
+    if (!tray || !button || !status || dice.length !== 2 || !tiles.length) return;
 
-    const nameOf = (game) => game.querySelector(".s01-game__name").textContent;
+    const calm = () =>
+      document.documentElement.classList.contains("is-thumb") ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const d6 = () => 1 + Math.floor(Math.random() * 6);
+    const show = (a, b) => {
+      dice[0].dataset.v = String(a);
+      dice[1].dataset.v = String(b);
+    };
+    let timer = 0;
+
+    const land = (a, b) => {
+      timer = 0;
+      show(a, b);
+      tray.classList.remove("s06-is-rolling");
+      const sum = a + b;
+      const seven = sum === 7;
+      tray.classList.toggle("s06-is-robbed", seven);
+      tiles.forEach((tile) => tile.classList.toggle("s06-is-picked", tile.dataset.roll === String(sum)));
+      if (seven) {
+        status.textContent = `${a} + ${b} = 7. The robber! Roll again.`;
+        return;
+      }
+      const tile = tiles.find((t) => t.dataset.roll === String(sum));
+      const name = tile ? tile.querySelector(".s06-tile__name").textContent : "";
+      status.textContent = `${a} + ${b} = ${sum}. Tonight: ${name}.`;
+    };
+
+    button.addEventListener("click", () => {
+      if (timer) return;
+      const a = d6();
+      const b = d6();
+      if (calm()) {
+        land(a, b);
+        return;
+      }
+      tray.classList.remove("s06-is-rolling");
+      void tray.offsetWidth;
+      tray.classList.add("s06-is-rolling");
+      let ticks = 0;
+      timer = setInterval(() => {
+        show(d6(), d6());
+        if (++ticks >= 8) {
+          clearInterval(timer);
+          land(a, b);
+        }
+      }, 80);
+    });
+
+    tray.hidden = false;
+  }
+  function initS07(root) {
+    // 07 Aviary Field Guide: "Pick your vibe" on the player mat. The three habitat rows
+    // are a radio group; the highlighting is pure CSS (:has on the checked radio), so
+    // this only keeps the spoken status line in step and wires up the reset button.
+    // State lives in the radios and resets on reload.
+    const radios = [...root.querySelectorAll('input[name="s07-vibe"]')];
+    const status = root.querySelector(".s07-status");
+    const reset = root.querySelector(".s07-reset");
+    const cards = [...root.querySelectorAll(".s07-card")];
+    if (!radios.length || !status || !reset || !cards.length) return;
+
+    const nameOf = (card) => card.querySelector(".s07-card__name").textContent;
     const listOf = (names) =>
       names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
 
-    const update = (lowered) => {
+    const update = (cleared) => {
       const picked = radios.find((r) => r.checked);
+      reset.disabled = !picked;
       if (!picked) {
-        status.textContent = lowered
-          ? "Banner lowered. All ten games are lit again."
-          : "No banner raised yet, so all ten games are lit.";
+        status.textContent = cleared
+          ? "Habitat cleared. All ten games shown."
+          : "Pick a habitat to mark its games.";
         return;
       }
-      const names = games.filter((g) => g.classList.contains(`s01-fit-${picked.value}`)).map(nameOf);
-      status.textContent = `${picked.dataset.house} is raised. ${names.length} of ${games.length} games match: ${listOf(names)}.`;
+      const names = cards.filter((c) => c.classList.contains(`s07-fit-${picked.value}`)).map(nameOf);
+      status.textContent = `${picked.dataset.vibe}: ${listOf(names)}.`;
     };
 
     radios.forEach((r) => r.addEventListener("change", () => update(false)));
     reset.addEventListener("click", () => {
       radios.forEach((r) => (r.checked = false));
       update(true);
+      radios[0].focus();
     });
     reset.hidden = false;
     update(false);
@@ -148,7 +213,7 @@
       button.classList.remove("s03-is-rolling");
       cards.forEach((card, i) => card.classList.toggle("s03-is-picked", i === pick));
       const name = cards[pick].querySelector(".s03-card__name").textContent;
-      status.textContent = `You rolled ${pick + 1}: ${name}. It’s marked on the board below.`;
+      status.textContent = `You rolled ${pick + 1}: ${name}.`;
       cards[pick].scrollIntoView({ block: "nearest", behavior: calm() ? "auto" : "smooth" });
     };
 
@@ -176,6 +241,44 @@
     });
 
     tray.hidden = false;
+  }
+  function initS01(root) {
+    // 01 Hall of Banners: "Choose your banner" radio group. The highlighting itself is
+    // pure CSS (:has on the checked radio), so this only keeps the spoken status line
+    // in step and wires up the reset. State lives in the radios and resets on reload.
+    const radios = [...root.querySelectorAll('input[name="s01-vibe"]')];
+    const status = root.querySelector(".s01-status");
+    const reset = root.querySelector(".s01-reset");
+    const games = [...root.querySelectorAll(".s01-game")];
+    if (!radios.length || !status || !reset) return;
+
+    const nameOf = (game) => game.querySelector(".s01-game__name").textContent;
+    const listOf = (names) =>
+      names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+
+    const update = () => {
+      const picked = radios.find((r) => r.checked);
+      reset.hidden = !picked;
+      if (!picked) {
+        status.textContent = "All ten games are lit.";
+        return;
+      }
+      const names = games.filter((g) => g.classList.contains(`s01-fit-${picked.value}`)).map(nameOf);
+      // Short line on screen; the matching names are for screen readers only.
+      const more = document.createElement("span");
+      more.className = "s01-sr";
+      more.textContent = `: ${listOf(names)}`;
+      status.textContent = `${picked.dataset.house} raised: ${names.length} of ${games.length} games lit`;
+      status.append(more, ".");
+    };
+
+    radios.forEach((r) => r.addEventListener("change", update));
+    reset.addEventListener("click", () => {
+      radios.forEach((r) => (r.checked = false));
+      update();
+      radios[0].focus();
+    });
+    update();
   }
   function initS05(root) {
     // 05 Red Planet Project: the big numbers are global parameter tracks. Each gauge
@@ -244,105 +347,6 @@
       { threshold: 0.35 }
     );
     gauges.forEach((g) => observer.observe(g));
-  }
-  function initS06(root) {
-    // 06 Hex Island: "Roll for a game". Two six-sided dice; the sum lights the game on
-    // that number token (2 to 12), and a 7 brings the robber instead of a game. The
-    // tray stays hidden without JS; the roll lives in memory only and resets on reload.
-    // Dice tumble is skipped under reduced motion.
-    const tray = root.querySelector(".s06-roll");
-    const button = root.querySelector(".s06-roll__btn");
-    const status = root.querySelector(".s06-roll__status");
-    const dice = [...root.querySelectorAll(".s06-die")];
-    const tiles = [...root.querySelectorAll(".s06-tile")];
-    if (!tray || !button || !status || dice.length !== 2 || !tiles.length) return;
-
-    const calm = () =>
-      document.documentElement.classList.contains("is-thumb") ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const d6 = () => 1 + Math.floor(Math.random() * 6);
-    const show = (a, b) => {
-      dice[0].dataset.v = String(a);
-      dice[1].dataset.v = String(b);
-    };
-    let timer = 0;
-
-    const land = (a, b) => {
-      timer = 0;
-      show(a, b);
-      tray.classList.remove("s06-is-rolling");
-      const sum = a + b;
-      const seven = sum === 7;
-      tray.classList.toggle("s06-is-robbed", seven);
-      tiles.forEach((tile) => tile.classList.toggle("s06-is-picked", tile.dataset.roll === String(sum)));
-      if (seven) {
-        status.textContent = `You rolled ${a} and ${b}: 7. The robber steals your turn — roll again.`;
-        return;
-      }
-      const tile = tiles.find((t) => t.dataset.roll === String(sum));
-      const name = tile ? tile.querySelector(".s06-tile__name").textContent : "";
-      status.textContent = `You rolled ${a} and ${b}: ${sum}. Tonight the table plays ${name}.`;
-    };
-
-    button.addEventListener("click", () => {
-      if (timer) return;
-      const a = d6();
-      const b = d6();
-      if (calm()) {
-        land(a, b);
-        return;
-      }
-      tray.classList.remove("s06-is-rolling");
-      void tray.offsetWidth;
-      tray.classList.add("s06-is-rolling");
-      let ticks = 0;
-      timer = setInterval(() => {
-        show(d6(), d6());
-        if (++ticks >= 8) {
-          clearInterval(timer);
-          land(a, b);
-        }
-      }, 80);
-    });
-
-    tray.hidden = false;
-  }
-  function initS07(root) {
-    // 07 Aviary Field Guide: "Pick your vibe" on the player mat. The three habitat rows
-    // are a radio group; the highlighting is pure CSS (:has on the checked radio), so
-    // this only keeps the spoken status line in step and wires up the reset button.
-    // State lives in the radios and resets on reload.
-    const radios = [...root.querySelectorAll('input[name="s07-vibe"]')];
-    const status = root.querySelector(".s07-status");
-    const reset = root.querySelector(".s07-reset");
-    const cards = [...root.querySelectorAll(".s07-card")];
-    if (!radios.length || !status || !reset || !cards.length) return;
-
-    const nameOf = (card) => card.querySelector(".s07-card__name").textContent;
-    const listOf = (names) =>
-      names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
-
-    const update = (cleared) => {
-      const picked = radios.find((r) => r.checked);
-      reset.disabled = !picked;
-      if (!picked) {
-        status.textContent = cleared
-          ? "Habitat cleared. All ten games are shown again."
-          : "All ten games are shown. Pick a habitat to mark the ones for you.";
-        return;
-      }
-      const names = cards.filter((c) => c.classList.contains(`s07-fit-${picked.value}`)).map(nameOf);
-      status.textContent = `${picked.dataset.habitat}, ${picked.dataset.vibe}: ${names.length} of the ten match: ${listOf(names)}.`;
-    };
-
-    radios.forEach((r) => r.addEventListener("change", () => update(false)));
-    reset.addEventListener("click", () => {
-      radios.forEach((r) => (r.checked = false));
-      update(true);
-      radios[0].focus();
-    });
-    reset.hidden = false;
-    update(false);
   }
 /*INITFNS*/
 })();
